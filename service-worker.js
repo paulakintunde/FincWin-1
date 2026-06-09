@@ -1,9 +1,9 @@
 // PERF-03: bump this string on every deploy that changes static assets so
 // existing installs pick up the new files on next visit.
-const CACHE = 'fincwin-v3';
+const CACHE = 'fincwin-v4';
 const ASSETS = [
   './',
-  './index.html',
+  './app.html',
   './manifest.json',
   './js/crypto-core.js',
   './icon-180.png',

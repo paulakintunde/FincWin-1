@@ -23,14 +23,14 @@ const ROOT = path.resolve(__dirname, '..');
 // {{P}}   = path prefix  (""  for root, "../" for blog/, "../../" for blog/posts/)
 // {{BLOG}}= blog index path, optionally with class="active"
 const NAV = (p, blogHref, blogActive) => `<nav id="mainNav">
-  <a href="${p}landing.html" class="nav-logo">Finc<span>Win</span></a>
+  <a href="${p}index.html" class="nav-logo">Finc<span>Win</span></a>
   <div class="nav-links">
     <a href="${p}features.html">Features</a>
     <a href="${p}pricing.html">Pricing</a>
     <a href="${p}compare.html">Compare</a>
     <a href="${blogHref}"${blogActive ? ' class="active"' : ''}>Blog</a>
-    <a href="${p}index.html">App</a>
-    <a href="${p}index.html" class="nav-cta">Get started free</a>
+    <a href="${p}app.html">App</a>
+    <a href="${p}app.html" class="nav-cta">Get started free</a>
   </div>
 </nav>`;
 
@@ -38,8 +38,8 @@ const NAV = (p, blogHref, blogActive) => `<nav id="mainNav">
 const FOOTER = (p) => `<footer class="mkt-footer">
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-brand"><a href="${p}landing.html" class="footer-logo">Finc<span>Win</span></a><p>The personal finance dashboard for people who want clarity, not complexity.</p></div>
-      <div class="footer-col"><h4>Product</h4><a href="${p}features.html">Features</a><a href="${p}pricing.html">Pricing</a><a href="${p}compare.html">Compare</a><a href="${p}index.html">Open app</a></div>
+      <div class="footer-brand"><a href="${p}index.html" class="footer-logo">Finc<span>Win</span></a><p>The personal finance dashboard for people who want clarity, not complexity.</p></div>
+      <div class="footer-col"><h4>Product</h4><a href="${p}features.html">Features</a><a href="${p}pricing.html">Pricing</a><a href="${p}compare.html">Compare</a><a href="${p}app.html">Open app</a></div>
       <div class="footer-col"><h4>Company</h4><a href="${p}about.html">About</a><a href="${p}changelog.html">Changelog</a><a href="${p}contact.html">Contact</a></div>
       <div class="footer-col"><h4>Legal</h4><a href="${p}privacy.html">Privacy</a><a href="${p}terms.html">Terms</a><a href="${p}cookie-policy.html">Cookies</a></div>
     </div>

@@ -105,7 +105,7 @@ function addYearScript(html) {
 // ── ROOT MKT-FOOTER PAGES ─────────────────────────────────────────────────────
 console.log('\nRoot marketing pages:');
 const MKT_ROOT = [
-  'landing.html', 'about.html', 'compare.html', 'changelog.html',
+  'index.html', 'about.html', 'compare.html', 'changelog.html',
   'contact.html', 'use-cases.html', 'features.html', 'cookie-policy.html',
 ];
 for (const f of MKT_ROOT) {
