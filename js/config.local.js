@@ -1,14 +1,10 @@
 // js/config.local.js
-// ⚠️  CREDENTIALS SCRUBBED — replace with your real values before deploying.
-//     The values below are placeholders. Real keys were removed from source.
-//
-// ▶  REQUIRED ACTION: Go to Firebase Console → Project Settings → Your Web App → Config
-//    and replace each placeholder below with your actual project values.
-//    Then go to Google Cloud Console → APIs & Services → Credentials
-//    and replace googleClientId with your OAuth 2.0 Web Client ID.
-//
-// This file must NEVER be committed with real keys.
-// Add it to .gitignore and inject values at deploy time via CI secrets or env vars.
+// Firebase web config + Google OAuth client ID. These are PUBLIC identifiers,
+// not secrets — safe to commit and serve to the browser. Access is enforced by
+// firestore.rules (per-user) and the OAuth authorized-origins list, NOT by hiding these.
+// Real secrets (Lemon Squeezy / Resend / Admin) live ONLY in Vercel env vars — never here.
+// This file is intentionally committed (not gitignored): the no-build static deploy has
+// no step to inject config, so the app reads these values directly from window.__FINCWIN_CONFIG__.
 window.__FINCWIN_CONFIG__ = {
   apiKey: "AIzaSyDLw-cuS70yV0MHa9M8ov331DrniIbRR74",
   authDomain: "fincwin.firebaseapp.com",
