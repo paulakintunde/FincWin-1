@@ -36,7 +36,10 @@ def should_skip(h):
         return True
     return False
 
+# Route links: href="/features" (no file extension) -> relative .html
 HREF_RE = re.compile(r'href="(/[a-zA-Z0-9/_-]*)"')
+# Asset refs: src/href="/js/mkt.js" (absolute path to a real file) -> relative
+ASSET_RE = re.compile(r'(src|href)="(/[a-zA-Z0-9._/-]+\.[a-z0-9]+)"')
 
 def convert_file(path):
     rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
@@ -53,9 +56,17 @@ def convert_file(path):
         changes += 1
         return f'href="{relative}"'
 
+    def repl_asset(m):
+        nonlocal changes
+        attr, p = m.group(1), m.group(2)
+        relative = posixpath.relpath(p.lstrip("/"), page_dir if page_dir else ".")
+        changes += 1
+        return f'{attr}="{relative}"'
+
     with open(path, "r", encoding="utf-8", newline="") as f:
         content = f.read()
     new = HREF_RE.sub(repl, content)
+    new = ASSET_RE.sub(repl_asset, new)
     if new != content:
         with open(path, "w", encoding="utf-8", newline="") as f:
             f.write(new)
