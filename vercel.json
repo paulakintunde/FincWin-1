@@ -26,7 +26,7 @@
   "redirects": [
     { "source": "/blog/posts/ynab-alternative", "destination": "/compare/ynab-alternative", "statusCode": 301 }
   ],
-  "cleanUrls": false,
+  "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
     {
@@ -63,7 +63,7 @@
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin",  "value": "https://fincwin.com" },
+        { "key": "Access-Control-Allow-Origin",  "value": "https://www.fincwin.com" },
         { "key": "Access-Control-Allow-Methods", "value": "POST, OPTIONS" },
         { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
       ]

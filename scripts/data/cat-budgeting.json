@@ -4,7 +4,7 @@
   "CATEGORY_HEADLINE": "Budgeting guides â€” <em>plainly explained.</em>",
   "CATEGORY_DESCRIPTION": "Practical budgeting methods, envelope strategies, and category breakdowns â€” for people who want a system that actually sticks.",
   "META_DESCRIPTION": "Budgeting guides from FincWin: envelope methods, zero-based budgeting, the 50/30/20 rule, expense categories, sinking funds, and more. Practical advice, no fluff.",
-  "CANONICAL_URL": "https://fincwin.com/blog/budgeting",
+  "CANONICAL_URL": "https://www.fincwin.com/blog/budgeting",
   "POST_COUNT": "7",
 
   "SUBNAV_LINKS": "<a href=\"{{BASE}}blog/budgeting/index.html\" class=\"subnav-cat active\">Budgeting</a>\n    <a href=\"{{BASE}}blog/debt/index.html\" class=\"subnav-cat\">Debt</a>\n    <a href=\"{{BASE}}blog/savings/index.html\" class=\"subnav-cat\">Savings</a>\n    <a href=\"{{BASE}}blog/tools/index.html\" class=\"subnav-cat\">Tools &amp; Tech</a>\n    <a href=\"{{BASE}}blog/mindset/index.html\" class=\"subnav-cat\">Mindset</a>",

@@ -425,11 +425,11 @@ Output dir: `features/`. Six pages: envelope-budgeting, loan-payoff-calculator, 
   <meta property="og:url" content="{{CANONICAL_URL}}">
   <meta property="og:title" content="{{META_TITLE}}">
   <meta property="og:description" content="{{OG_DESCRIPTION}}">
-  <meta property="og:image" content="https://fincwin.com/og-image.svg">
+  <meta property="og:image" content="https://www.fincwin.com/og-image.svg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{META_TITLE}}">
   <meta name="twitter:description" content="{{OG_DESCRIPTION}}">
-  <meta name="twitter:image" content="https://fincwin.com/og-image.svg">
+  <meta name="twitter:image" content="https://www.fincwin.com/og-image.svg">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -444,7 +444,7 @@ Output dir: `features/`. Six pages: envelope-budgeting, loan-payoff-calculator, 
   "operatingSystem": "Web, iOS, Android (PWA)",
   "description": "{{META_DESCRIPTION}}",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "publisher": { "@type": "Organization", "name": "FincWin", "url": "https://fincwin.com" }
+  "publisher": { "@type": "Organization", "name": "FincWin", "url": "https://www.fincwin.com" }
 }
 </script>
   <script type="application/ld+json">
@@ -452,8 +452,8 @@ Output dir: `features/`. Six pages: envelope-budgeting, loan-payoff-calculator, 
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Home",     "item": "https://fincwin.com"},
-    {"@type": "ListItem", "position": 2, "name": "Features",  "item": "https://fincwin.com/features"},
+    {"@type": "ListItem", "position": 1, "name": "Home",     "item": "https://www.fincwin.com"},
+    {"@type": "ListItem", "position": 2, "name": "Features",  "item": "https://www.fincwin.com/features"},
     {"@type": "ListItem", "position": 3, "name": "{{FEATURE_NAME}}", "item": "{{CANONICAL_URL}}"}
   ]
 }
@@ -577,7 +577,7 @@ git commit -m "feat(templating): add feature-page template"
   "META_TITLE": "Loan Payoff Calculator — See Your Debt-Free Date | FincWin",
   "META_DESCRIPTION": "FincWin's loan payoff calculator shows the exact date you'll be debt-free using snowball or avalanche, with interest saved and month-by-month projections.",
   "OG_DESCRIPTION": "Snowball or avalanche — FincWin projects your exact debt-free date and total interest saved. Free to start.",
-  "CANONICAL_URL": "https://fincwin.com/features/loan-payoff-calculator",
+  "CANONICAL_URL": "https://www.fincwin.com/features/loan-payoff-calculator",
   "FEATURE_NAME": "Loan Payoff Calculator",
   "FEATURE_MODULE": "Loans",
   "FEATURE_HEADLINE": "Know the exact date you'll be <em>debt-free</em>",
@@ -623,7 +623,7 @@ git commit -m "feat(content): loan payoff calculator feature page"
 
 Each file uses the **identical key set** from Task 1.2 (`META_TITLE`, `META_DESCRIPTION`, `OG_DESCRIPTION`, `CANONICAL_URL`, `FEATURE_NAME`, `FEATURE_MODULE`, `FEATURE_HEADLINE`, `FEATURE_SUBHEAD`, `PROBLEM_HEADLINE`, `PROBLEM_BODY`, `HOW_IT_WORKS`, `CAPABILITIES`, `FEATURE_PLAN`, `CTA_HEADLINE`, `RELATED_FEATURES`). Authoring values per page:
 
-- [ ] **Step 1: `feature-envelope-budgeting.json`** — `FEATURE_NAME` "Envelope Budgeting", `FEATURE_MODULE` "Budgeting", `CANONICAL_URL` `https://fincwin.com/features/envelope-budgeting`, `FEATURE_PLAN` "Free & Pro". Headline: "Give every dollar <em>a job</em>". 14 categories, 5 frequencies as the core capability. Cross-link to `/blog/posts/envelope-budgeting-method` and `/features/savings-goals`.
+- [ ] **Step 1: `feature-envelope-budgeting.json`** — `FEATURE_NAME` "Envelope Budgeting", `FEATURE_MODULE` "Budgeting", `CANONICAL_URL` `https://www.fincwin.com/features/envelope-budgeting`, `FEATURE_PLAN` "Free & Pro". Headline: "Give every dollar <em>a job</em>". 14 categories, 5 frequencies as the core capability. Cross-link to `/blog/posts/envelope-budgeting-method` and `/features/savings-goals`.
 
 - [ ] **Step 2: `feature-savings-goals.json`** — `FEATURE_NAME` "Savings Goals", `FEATURE_MODULE` "Savings", canonical `.../features/savings-goals`, plan "Free & Pro". Headline: "Watch every goal <em>fill up</em>". Capabilities: named goals, progress tracking, target dates, sinking funds. Cross-link `/blog/posts/sinking-funds`, `/features/loan-payoff-calculator`.
 
@@ -708,11 +708,11 @@ Output dir: `use-cases/`. Five pages: paying-off-debt, building-savings, irregul
   <meta property="og:url" content="{{CANONICAL_URL}}">
   <meta property="og:title" content="{{META_TITLE}}">
   <meta property="og:description" content="{{OG_DESCRIPTION}}">
-  <meta property="og:image" content="https://fincwin.com/og-image.svg">
+  <meta property="og:image" content="https://www.fincwin.com/og-image.svg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{META_TITLE}}">
   <meta name="twitter:description" content="{{OG_DESCRIPTION}}">
-  <meta name="twitter:image" content="https://fincwin.com/og-image.svg">
+  <meta name="twitter:image" content="https://www.fincwin.com/og-image.svg">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -732,8 +732,8 @@ Output dir: `use-cases/`. Five pages: paying-off-debt, building-savings, irregul
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Home",      "item": "https://fincwin.com"},
-    {"@type": "ListItem", "position": 2, "name": "Use cases", "item": "https://fincwin.com/use-cases"},
+    {"@type": "ListItem", "position": 1, "name": "Home",      "item": "https://www.fincwin.com"},
+    {"@type": "ListItem", "position": 2, "name": "Use cases", "item": "https://www.fincwin.com/use-cases"},
     {"@type": "ListItem", "position": 3, "name": "{{PERSONA_LABEL}}", "item": "{{CANONICAL_URL}}"}
   ]
 }
@@ -846,7 +846,7 @@ git commit -m "feat(templating): add use-case-page template"
   "META_TITLE": "Budgeting for Paying Off Debt — FincWin",
   "META_DESCRIPTION": "A budgeting setup built for paying off debt: snowball or avalanche planning, a real debt-free date, and envelope budgeting to free up payments. Free to start.",
   "OG_DESCRIPTION": "Paying off debt? FincWin gives you a debt-free date, snowball/avalanche planning, and envelopes to find the extra payment.",
-  "CANONICAL_URL": "https://fincwin.com/use-cases/paying-off-debt",
+  "CANONICAL_URL": "https://www.fincwin.com/use-cases/paying-off-debt",
   "PERSONA_LABEL": "people paying off debt",
   "PERSONA_HEADLINE": "Know the exact date you'll be <em>debt-free</em>",
   "PERSONA_SUBHEAD": "FincWin turns scattered balances into one plan: a payoff date, the cheapest route, and the budget to get there.",
@@ -975,7 +975,7 @@ JSON-LD blocks for the head:
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://fincwin.com"},
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fincwin.com"},
     {"@type": "ListItem", "position": 2, "name": "{{PAGE_TITLE}}", "item": "{{CANONICAL_URL}}"}
   ]
 }
@@ -1039,7 +1039,7 @@ git commit -m "feat(templating): add niche-landing template"
   "META_TITLE": "The Best Offline Budget App (Works With No Internet) — FincWin",
   "META_DESCRIPTION": "FincWin is a full offline budget app — a PWA that installs to your home screen and works with no internet, no bank login, and no account. Free to start.",
   "OG_DESCRIPTION": "An offline-first budget app that works with no internet and no bank login. Installs as a PWA. Free.",
-  "CANONICAL_URL": "https://fincwin.com/offline-budget-app",
+  "CANONICAL_URL": "https://www.fincwin.com/offline-budget-app",
   "PAGE_TITLE": "Offline Budget App",
   "TARGET_KEYWORD": "offline budget app",
   "HERO_HEADLINE": "A budget app that works <em>with no internet</em>",
@@ -1157,9 +1157,9 @@ git commit -m "feat(routing): clean URLs for feature and use-case sub-pages"
 - Modify: `sitemap.xml`
 
 - [ ] **Step 1: Add 14 `<url>` entries** (6 features, 5 use-cases, 3 niche) using the existing entry format in the file. Use the clean URLs (no `.html`):
-  - `https://fincwin.com/features/{loan-payoff-calculator,envelope-budgeting,savings-goals,analytics-dashboard,google-drive-backup,ai-coach}`
-  - `https://fincwin.com/use-cases/{paying-off-debt,building-savings,irregular-income,expat-multi-currency,couples-shared-finances}`
-  - `https://fincwin.com/{offline-budget-app,no-bank-sync-budget,private-finance-app}`
+  - `https://www.fincwin.com/features/{loan-payoff-calculator,envelope-budgeting,savings-goals,analytics-dashboard,google-drive-backup,ai-coach}`
+  - `https://www.fincwin.com/use-cases/{paying-off-debt,building-savings,irregular-income,expat-multi-currency,couples-shared-finances}`
+  - `https://www.fincwin.com/{offline-budget-app,no-bank-sync-budget,private-finance-app}`
 
 - [ ] **Step 2: Validate XML well-formedness**
 

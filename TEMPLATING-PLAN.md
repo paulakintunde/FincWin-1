@@ -86,7 +86,7 @@ Footer
 {{TABLE_ROWS}}               pre-rendered table HTML
 {{RELATED_PAGES}}            pre-rendered related links HTML
 {{DATE_PUBLISHED}}           e.g. "2026-07-01"
-{{CANONICAL_URL}}            e.g. "https://fincwin.com/compare/ynab-alternative"
+{{CANONICAL_URL}}            e.g. "https://www.fincwin.com/compare/ynab-alternative"
 ```
 
 ---
@@ -351,12 +351,12 @@ Footer
 
 | Page type | File path | Canonical URL |
 |---|---|---|
-| Competitor alt | `compare/ynab-alternative.html` | `https://fincwin.com/compare/ynab-alternative` |
-| Blog post | `blog/posts/[slug].html` | `https://fincwin.com/blog/posts/[slug]` |
-| Feature page | `features/[slug].html` | `https://fincwin.com/features/[slug]` |
-| Use case page | `use-cases/[slug].html` | `https://fincwin.com/use-cases/[slug]` |
-| Blog category | `blog/[category]/index.html` | `https://fincwin.com/blog/[category]/` |
-| Niche landing | `[slug].html` | `https://fincwin.com/[slug]` |
+| Competitor alt | `compare/ynab-alternative.html` | `https://www.fincwin.com/compare/ynab-alternative` |
+| Blog post | `blog/posts/[slug].html` | `https://www.fincwin.com/blog/posts/[slug]` |
+| Feature page | `features/[slug].html` | `https://www.fincwin.com/features/[slug]` |
+| Use case page | `use-cases/[slug].html` | `https://www.fincwin.com/use-cases/[slug]` |
+| Blog category | `blog/[category]/index.html` | `https://www.fincwin.com/blog/[category]/` |
+| Niche landing | `[slug].html` | `https://www.fincwin.com/[slug]` |
 
 Add Vercel rewrites for all new clean URLs (drop `.html`).
 

@@ -116,7 +116,7 @@ npx vercel dev      # http://localhost:3000 with rewrites, CSP, and /api functio
    - `www` → **CNAME** to `cname.vercel-dns.com`.
 3. Wait for DNS to verify (minutes to a few hours). Vercel issues HTTPS automatically.
 
-> The CSP and `/api` CORS in `vercel.json` already reference `https://fincwin.com`. If you launch
+> The CSP and `/api` CORS in `vercel.json` already reference `https://www.fincwin.com`. If you launch
 > on a **different** domain, update the `connect-src`/CSP and the `Access-Control-Allow-Origin`
 > value in `vercel.json` to match, then redeploy.
 

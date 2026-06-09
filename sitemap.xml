@@ -3,55 +3,55 @@
 
   <!-- Core marketing pages -->
   <url>
-    <loc>https://fincwin.com/</loc>
+    <loc>https://www.fincwin.com/</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/features</loc>
+    <loc>https://www.fincwin.com/features</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/pricing</loc>
+    <loc>https://www.fincwin.com/pricing</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/compare</loc>
+    <loc>https://www.fincwin.com/compare</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/use-cases</loc>
+    <loc>https://www.fincwin.com/use-cases</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/about</loc>
+    <loc>https://www.fincwin.com/about</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/contact</loc>
+    <loc>https://www.fincwin.com/contact</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/changelog</loc>
+    <loc>https://www.fincwin.com/changelog</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/help</loc>
+    <loc>https://www.fincwin.com/help</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -59,19 +59,19 @@
 
   <!-- Legal pages -->
   <url>
-    <loc>https://fincwin.com/privacy</loc>
+    <loc>https://www.fincwin.com/privacy</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/terms</loc>
+    <loc>https://www.fincwin.com/terms</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/cookie-policy</loc>
+    <loc>https://www.fincwin.com/cookie-policy</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -79,31 +79,31 @@
 
   <!-- Compare / alternative pages -->
   <url>
-    <loc>https://fincwin.com/compare/mint-alternative</loc>
+    <loc>https://www.fincwin.com/compare/mint-alternative</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/compare/ynab-alternative</loc>
+    <loc>https://www.fincwin.com/compare/ynab-alternative</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/compare/monarch-alternative</loc>
+    <loc>https://www.fincwin.com/compare/monarch-alternative</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/compare/goodbudget-alternative</loc>
+    <loc>https://www.fincwin.com/compare/goodbudget-alternative</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/compare/everydollar-alternative</loc>
+    <loc>https://www.fincwin.com/compare/everydollar-alternative</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -111,7 +111,7 @@
 
   <!-- Blog index -->
   <url>
-    <loc>https://fincwin.com/blog</loc>
+    <loc>https://www.fincwin.com/blog</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -119,31 +119,31 @@
 
   <!-- Blog category pages -->
   <url>
-    <loc>https://fincwin.com/blog/budgeting</loc>
+    <loc>https://www.fincwin.com/blog/budgeting</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/debt</loc>
+    <loc>https://www.fincwin.com/blog/debt</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/savings</loc>
+    <loc>https://www.fincwin.com/blog/savings</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/tools</loc>
+    <loc>https://www.fincwin.com/blog/tools</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/mindset</loc>
+    <loc>https://www.fincwin.com/blog/mindset</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -151,115 +151,115 @@
 
   <!-- Blog posts -->
   <url>
-    <loc>https://fincwin.com/blog/posts/50-30-20-rule</loc>
+    <loc>https://www.fincwin.com/blog/posts/50-30-20-rule</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/ai-financial-coach</loc>
+    <loc>https://www.fincwin.com/blog/posts/ai-financial-coach</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/budget-categories</loc>
+    <loc>https://www.fincwin.com/blog/posts/budget-categories</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/debt-snowball-vs-avalanche</loc>
+    <loc>https://www.fincwin.com/blog/posts/debt-snowball-vs-avalanche</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/emergency-fund-guide</loc>
+    <loc>https://www.fincwin.com/blog/posts/emergency-fund-guide</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/envelope-budgeting-method</loc>
+    <loc>https://www.fincwin.com/blog/posts/envelope-budgeting-method</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/expense-categories</loc>
+    <loc>https://www.fincwin.com/blog/posts/expense-categories</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/financial-gamification</loc>
+    <loc>https://www.fincwin.com/blog/posts/financial-gamification</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/financial-health-score</loc>
+    <loc>https://www.fincwin.com/blog/posts/financial-health-score</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/import-bank-statements</loc>
+    <loc>https://www.fincwin.com/blog/posts/import-bank-statements</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/irregular-income-budgeting</loc>
+    <loc>https://www.fincwin.com/blog/posts/irregular-income-budgeting</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/loan-payoff-calculator</loc>
+    <loc>https://www.fincwin.com/blog/posts/loan-payoff-calculator</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/multi-currency-budgeting</loc>
+    <loc>https://www.fincwin.com/blog/posts/multi-currency-budgeting</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/net-worth-tracking</loc>
+    <loc>https://www.fincwin.com/blog/posts/net-worth-tracking</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/offline-personal-finance-apps</loc>
+    <loc>https://www.fincwin.com/blog/posts/offline-personal-finance-apps</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/pwa-finance-apps</loc>
+    <loc>https://www.fincwin.com/blog/posts/pwa-finance-apps</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/sinking-funds</loc>
+    <loc>https://www.fincwin.com/blog/posts/sinking-funds</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/stop-paycheck-to-paycheck</loc>
+    <loc>https://www.fincwin.com/blog/posts/stop-paycheck-to-paycheck</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/blog/posts/zero-based-budgeting</loc>
+    <loc>https://www.fincwin.com/blog/posts/zero-based-budgeting</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -267,37 +267,37 @@
 
   <!-- Feature sub-pages -->
   <url>
-    <loc>https://fincwin.com/features/loan-payoff-calculator</loc>
+    <loc>https://www.fincwin.com/features/loan-payoff-calculator</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/features/envelope-budgeting</loc>
+    <loc>https://www.fincwin.com/features/envelope-budgeting</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/features/savings-goals</loc>
+    <loc>https://www.fincwin.com/features/savings-goals</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/features/analytics-dashboard</loc>
+    <loc>https://www.fincwin.com/features/analytics-dashboard</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/features/google-drive-backup</loc>
+    <loc>https://www.fincwin.com/features/google-drive-backup</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/features/ai-coach</loc>
+    <loc>https://www.fincwin.com/features/ai-coach</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -305,31 +305,31 @@
 
   <!-- Use-case sub-pages -->
   <url>
-    <loc>https://fincwin.com/use-cases/paying-off-debt</loc>
+    <loc>https://www.fincwin.com/use-cases/paying-off-debt</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/use-cases/building-savings</loc>
+    <loc>https://www.fincwin.com/use-cases/building-savings</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/use-cases/irregular-income</loc>
+    <loc>https://www.fincwin.com/use-cases/irregular-income</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/use-cases/expat-multi-currency</loc>
+    <loc>https://www.fincwin.com/use-cases/expat-multi-currency</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/use-cases/couples-shared-finances</loc>
+    <loc>https://www.fincwin.com/use-cases/couples-shared-finances</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -337,19 +337,19 @@
 
   <!-- Niche landing pages -->
   <url>
-    <loc>https://fincwin.com/offline-budget-app</loc>
+    <loc>https://www.fincwin.com/offline-budget-app</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/no-bank-sync-budget</loc>
+    <loc>https://www.fincwin.com/no-bank-sync-budget</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fincwin.com/private-finance-app</loc>
+    <loc>https://www.fincwin.com/private-finance-app</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

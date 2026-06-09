@@ -186,7 +186,7 @@ Disallow: /admin
 Disallow: /api/
 Allow: /
 
-Sitemap: https://fincwin.com/sitemap.xml
+Sitemap: https://www.fincwin.com/sitemap.xml
 ```
 
 **C3. Pricing page missing meta description, robots tag, and canonical**
@@ -198,7 +198,7 @@ The pricing page is among the highest-value pages on the site — it receives th
 - This creates 404s or unintended redirects that pass no link equity
 
 **C5. features.html canonical is wrong**
-The features page has a canonical pointing to `https://fincwin.com/features-v4.html` but the file is `features.html`. This tells Google the canonical version is a different URL, effectively deindexing the current features page.
+The features page has a canonical pointing to `https://www.fincwin.com/features-v4.html` but the file is `features.html`. This tells Google the canonical version is a different URL, effectively deindexing the current features page.
 
 **C6. Category pages are SEO dead-ends**
 The 13 `cat-*.html` pages (cat-banking.html, cat-dining.html, etc.) are app-specific pages that:
@@ -351,8 +351,8 @@ FincWin is a static PWA with minimal framework overhead. Expected performance is
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "FincWin",
-  "url": "https://fincwin.com",
-  "logo": "https://fincwin.com/icon-512.png",
+  "url": "https://www.fincwin.com",
+  "logo": "https://www.fincwin.com/icon-512.png",
   "description": "Privacy-first personal finance dashboard. Track income, expenses, loans, and savings — free to start.",
   "contactPoint": {
     "@type": "ContactPoint",
@@ -394,7 +394,7 @@ FincWin is a static PWA with minimal framework overhead. Expected performance is
     }
   ],
   "description": "FincWin is the personal finance dashboard that keeps your financial data in your browser — income, expenses, loan payoff, savings goals, and analytics in one place.",
-  "url": "https://fincwin.com"
+  "url": "https://www.fincwin.com"
 }
 </script>
 ```

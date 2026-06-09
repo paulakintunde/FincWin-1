@@ -20,4 +20,4 @@ Disallow: /cat-transport.html
 Disallow: /cat-utilities.html
 Allow: /
 
-Sitemap: https://fincwin.com/sitemap.xml
+Sitemap: https://www.fincwin.com/sitemap.xml

@@ -4,7 +4,7 @@
   "CATEGORY_HEADLINE": "Tools &amp; Tech guides â€” <em>for privacy-first finance.</em>",
   "CATEGORY_DESCRIPTION": "Offline apps, CSV import, AI coaching, and why browser-based finance tools protect your data better than cloud-sync alternatives.",
   "META_DESCRIPTION": "Personal finance tools and tech guides from FincWin: offline finance apps, bank statement import, AI coaching, PWA security, multi-currency budgeting, and YNAB alternatives.",
-  "CANONICAL_URL": "https://fincwin.com/blog/tools",
+  "CANONICAL_URL": "https://www.fincwin.com/blog/tools",
   "POST_COUNT": "6",
 
   "SUBNAV_LINKS": "<a href=\"{{BASE}}blog/budgeting/index.html\" class=\"subnav-cat\">Budgeting</a>\n    <a href=\"{{BASE}}blog/debt/index.html\" class=\"subnav-cat\">Debt</a>\n    <a href=\"{{BASE}}blog/savings/index.html\" class=\"subnav-cat\">Savings</a>\n    <a href=\"{{BASE}}blog/tools/index.html\" class=\"subnav-cat active\">Tools &amp; Tech</a>\n    <a href=\"{{BASE}}blog/mindset/index.html\" class=\"subnav-cat\">Mindset</a>",

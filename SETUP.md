@@ -77,7 +77,7 @@ After creating each product, go to the product → **Variants** tab → copy the
 
 In each product → **Checkout** tab → **Redirect URL**, set:
 ```
-https://fincwin.com/signin?key={license_key}&plan={variant_name}
+https://www.fincwin.com/signin?key={license_key}&plan={variant_name}
 ```
 *(Lemon Squeezy replaces `{license_key}` and `{variant_name}` automatically)*
 

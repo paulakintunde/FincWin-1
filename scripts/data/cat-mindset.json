@@ -4,7 +4,7 @@
   "CATEGORY_HEADLINE": "Money mindset guides â€” <em>the behavioural side.</em>",
   "CATEGORY_DESCRIPTION": "Why you spend, how gamification helps you stick to a budget, and what your financial health score actually measures. The psychology behind better money habits.",
   "META_DESCRIPTION": "Personal finance mindset guides from FincWin: financial health scores, gamification in budgeting, stopping paycheck-to-paycheck cycles. Behavioural finance made practical.",
-  "CANONICAL_URL": "https://fincwin.com/blog/mindset",
+  "CANONICAL_URL": "https://www.fincwin.com/blog/mindset",
   "POST_COUNT": "3",
 
   "SUBNAV_LINKS": "<a href=\"{{BASE}}blog/budgeting/index.html\" class=\"subnav-cat\">Budgeting</a>\n    <a href=\"{{BASE}}blog/debt/index.html\" class=\"subnav-cat\">Debt</a>\n    <a href=\"{{BASE}}blog/savings/index.html\" class=\"subnav-cat\">Savings</a>\n    <a href=\"{{BASE}}blog/tools/index.html\" class=\"subnav-cat\">Tools &amp; Tech</a>\n    <a href=\"{{BASE}}blog/mindset/index.html\" class=\"subnav-cat active\">Mindset</a>",

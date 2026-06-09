@@ -10,11 +10,11 @@
 // This file must NEVER be committed with real keys.
 // Add it to .gitignore and inject values at deploy time via CI secrets or env vars.
 window.__FINCWIN_CONFIG__ = {
-  apiKey: "REPLACE_WITH_FIREBASE_API_KEY",
-  authDomain: "REPLACE_WITH_PROJECT_ID.firebaseapp.com",
-  projectId: "REPLACE_WITH_PROJECT_ID",
-  storageBucket: "REPLACE_WITH_PROJECT_ID.firebasestorage.app",
-  messagingSenderId: "REPLACE_WITH_SENDER_ID",
-  appId: "REPLACE_WITH_APP_ID",
-  googleClientId: "REPLACE_WITH_GOOGLE_OAUTH_CLIENT_ID.apps.googleusercontent.com"
+  apiKey: "AIzaSyDLw-cuS70yV0MHa9M8ov331DrniIbRR74",
+  authDomain: "fincwin.firebaseapp.com",
+  projectId: "fincwin",
+  storageBucket: "fincwin.firebasestorage.app",
+  messagingSenderId: "36594855417",
+  appId: "1:36594855417:web:0fd97107697550fb24a128",
+  googleClientId: "812943954808-da0enpo3g2d1c687rtu5695t9r7nd3da.apps.googleusercontent.com"
 };

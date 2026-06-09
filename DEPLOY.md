@@ -57,7 +57,7 @@ The functions are zero-dependency (Node built-ins only). `package.json` has **no
   - Security on all routes: CSP, HSTS, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, COOP.
   - **CSP is `script-src 'self'`** (no `'unsafe-inline'`): every page must use **external** scripts. Inline `<script>` and `on*=` handlers are blocked — this is why all page JS lives in `/js/*.js`.
   - Caching: HTML 1h + SWR; `/js` and `/styles` 1h + SWR (not `immutable`, because these filenames are **not** content-hashed); `/assets` immutable 1y.
-  - `/api/*` CORS limited to `https://fincwin.com`.
+  - `/api/*` CORS limited to `https://www.fincwin.com`.
 
 > **If you ever fingerprint assets** (e.g. `mkt.[hash].js`), switch `/js` and `/styles` back to `immutable, max-age=31536000` and bump the references.
 
