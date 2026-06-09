@@ -26,7 +26,7 @@
   "redirects": [
     { "source": "/blog/posts/ynab-alternative", "destination": "/compare/ynab-alternative", "statusCode": 301 }
   ],
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false,
   "headers": [
     {

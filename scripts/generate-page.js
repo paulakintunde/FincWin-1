@@ -35,6 +35,12 @@ let html      = fs.readFileSync(templatePath, 'utf8');
 const data    = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
 const partDir = path.join(__dirname, 'partials');
 
+// {{BASE}} = root-relative prefix for this page's depth so links work on any
+// host (GitHub Pages, local file://) without server-side URL rewrites.
+// e.g. out "features/ai-coach.html" → "../", "blog/posts/x.html" → "../../".
+const depth = outFile.replace(/^\.?\//, '').split('/').length - 1;
+data.BASE = '../'.repeat(depth);
+
 // 1) Inject partials: {{> name}} -> scripts/partials/name.html
 html = html.replace(/\{\{>\s*(\w+)\s*\}\}/g, (_, name) => {
   const p = path.join(partDir, name + '.html');
@@ -48,6 +54,10 @@ html = html.replace(/\{\{(\w+)\}\}/g, (_, key) => {
   if (!(key in data)) { warnings.push(key); return `{{${key}}}`; }
   return data[key];
 });
+
+// 2b) Resolve {{BASE}} that arrived inside injected data values (e.g. RELATED_*
+//     links). The step-2 pass does not re-scan text it inserted, so do it here.
+html = html.replace(/\{\{BASE\}\}/g, data.BASE);
 
 // 3) Guard: fail if any marker survived
 const leftover = html.match(/\{\{\s*>?\s*\w+\s*\}\}/g);
