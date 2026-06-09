@@ -1,4 +1,4 @@
-# FincWin — Go-Live Setup Guide
+﻿# FincWin — Go-Live Setup Guide
 
 Follow these phases in order. Each phase has a checkpoint — confirm it works before moving on.
 
@@ -38,7 +38,7 @@ Visit these URLs — all should load correctly:
 
 **5. Add a custom domain (optional but recommended)**
 - In Vercel dashboard → your project → **Settings → Domains**
-- Add `fincwin.app` (or whatever domain you own)
+- Add `fincwin.com` (or whatever domain you own)
 - Follow the DNS instructions (add an A record or CNAME at your domain registrar)
 - SSL is automatic — Vercel handles it
 
@@ -77,7 +77,7 @@ After creating each product, go to the product → **Variants** tab → copy the
 
 In each product → **Checkout** tab → **Redirect URL**, set:
 ```
-https://fincwin.app/signin?key={license_key}&plan={variant_name}
+https://fincwin.com/signin?key={license_key}&plan={variant_name}
 ```
 *(Lemon Squeezy replaces `{license_key}` and `{variant_name}` automatically)*
 

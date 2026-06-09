@@ -1,0 +1,16 @@
+{
+  "META_TITLE": "Budgeting for Expats & Multi-Currency Life — FincWin",
+  "META_DESCRIPTION": "Manage money across currencies and countries: track every currency, budget without a local bank link, and keep working offline. Free to start, private.",
+  "OG_DESCRIPTION": "Expat or multi-currency? FincWin tracks every currency, needs no local bank link, and works fully offline.",
+  "CANONICAL_URL": "https://fincwin.com/use-cases/expat-multi-currency",
+  "PERSONA_LABEL": "expats and multi-currency households",
+  "PERSONA_HEADLINE": "One budget across <em>every currency</em>",
+  "PERSONA_SUBHEAD": "Income here, rent there, savings somewhere else — FincWin tracks it all in any currency, with no local bank link required.",
+  "SITUATION_HEADLINE": "Most budget apps assume one country and one currency",
+  "SITUATION_BODY": "<p>Move abroad or earn across borders and the usual apps break: they want a local bank, a single currency, and a home address that matches.</p><p>FincWin makes none of those assumptions. Add accounts in any currency, budget without linking a bank, and keep working even on patchy travel connections.</p>",
+  "HOW_IT_HELPS": "<li><span class=\"li-icon\">→</span><span><strong>Full multi-currency:</strong> track balances and budgets in any currency.</span></li>\n    <li><span class=\"li-icon\">→</span><span><strong>No local bank required:</strong> add transactions manually or by CSV.</span></li>\n    <li><span class=\"li-icon\">→</span><span><strong>Works offline:</strong> a full PWA that keeps going on the move.</span></li>\n    <li><span class=\"li-icon\">→</span><span><strong>Net worth across borders:</strong> see your whole position in one view.</span></li>",
+  "HOWTO_STEPS_JSON": "[{\"@type\":\"HowToStep\",\"name\":\"Add currencies\",\"text\":\"Set up accounts in each currency you use.\"},{\"@type\":\"HowToStep\",\"name\":\"Budget without a bank link\",\"text\":\"Enter income and expenses manually or via CSV.\"},{\"@type\":\"HowToStep\",\"name\":\"Track net worth\",\"text\":\"See your combined position across currencies.\"},{\"@type\":\"HowToStep\",\"name\":\"Use it anywhere\",\"text\":\"Run FincWin offline while you travel.\"}]",
+  "USER_QUOTE": "Finally a budget that doesn't assume I live in one country with one bank and one currency.",
+  "CTA_HEADLINE": "Budget across borders <em>for free.</em>",
+  "RELEVANT_FEATURES": "<a href=\"/blog/posts/multi-currency-budgeting\" class=\"related-link\"><span>Budgeting</span><p>Multi-Currency Budgeting</p></a>\n    <a href=\"/features/analytics-dashboard\" class=\"related-link\"><span>Feature</span><p>Analytics Dashboard</p></a>\n    <a href=\"/compare/mint-alternative\" class=\"related-link\"><span>Compare</span><p>Best Mint Alternative</p></a>\n    <a href=\"/blog/posts/offline-personal-finance-apps\" class=\"related-link\"><span>Tools &amp; Tech</span><p>Offline Finance Apps</p></a>"
+}

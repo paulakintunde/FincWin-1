@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookie Policy — FincWin</title>
+  <meta name="description" content="FincWin Cookie Policy. We use only essential cookies. No tracking, no advertising cookies.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://fincwin.com/cookie-policy">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sage: #5a6e3f; --sage-lt: #dce8d4; --sage-dk: #3d4d2b;
+      --ink: #111111; --muted: #6b7280; --faint: #f5f4f0;
+      --white: #ffffff; --border: rgba(0,0,0,.08);
+      --sans: 'Hanken Grotesk', sans-serif; --serif: 'Instrument Serif', serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); font-weight: 300; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 48px; background: rgba(255,255,255,.85); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent; transition: border-color .3s;
+    }
+    nav.scrolled { border-color: var(--border); }
+    .nav-logo { font-size: 17px; font-weight: 500; letter-spacing: -.3px; color: var(--ink); text-decoration: none; }
+    .nav-logo span { color: var(--sage); }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta { font-size: 13px; font-weight: 500; color: var(--white) !important; background: var(--ink); padding: 9px 20px; border-radius: 50px; transition: background .2s !important; }
+    .nav-cta:hover { background: var(--sage) !important; }
+
+    .page-wrap { max-width: 720px; margin: 0 auto; padding: 160px 48px 100px; }
+
+    .page-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 24px; }
+    .page-title { font-family: var(--serif); font-size: clamp(36px, 5vw, 60px); font-weight: 400; line-height: 1.1; color: var(--ink); margin-bottom: 16px; }
+    .page-title em { font-style: italic; color: var(--sage); }
+    .page-date { font-size: 13px; color: var(--muted); margin-bottom: 64px; }
+
+    .policy-section { margin-bottom: 56px; }
+    .policy-section h2 { font-family: var(--serif); font-size: 24px; font-weight: 400; color: var(--ink); margin-bottom: 16px; }
+    .policy-section p { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
+    .policy-section ul { list-style: none; margin: 16px 0; display: flex; flex-direction: column; gap: 10px; }
+    .policy-section ul li { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.65; display: flex; align-items: flex-start; gap: 10px; }
+    .policy-section ul li::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--sage); flex-shrink: 0; margin-top: 9px;
+    }
+    .policy-section strong { color: var(--ink); font-weight: 500; }
+    .policy-section a { color: var(--sage); text-decoration: none; }
+    .policy-section a:hover { text-decoration: underline; }
+
+    .callout {
+      background: var(--faint); border-left: 3px solid var(--sage);
+      border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 24px 0;
+      font-size: 14px; font-weight: 400; color: var(--ink); line-height: 1.6;
+    }
+
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    th { text-align: left; padding: 10px 14px; background: var(--faint); font-weight: 500; color: var(--ink); border-bottom: 1px solid var(--border); }
+    td { padding: 10px 14px; color: var(--muted); font-weight: 300; border-bottom: 1px solid var(--border); vertical-align: top; }
+
+    .divider { height: 1px; background: var(--border); margin: 56px 0; }
+
+    footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.06); padding: 56px 48px 36px; }
+    .footer-inner { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: start; }
+    .footer-brand .nav-logo { color: white; font-size: 16px; }
+    .footer-brand .nav-logo span { color: #a8c48a; }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,.3); margin-top: 10px; line-height: 1.5; max-width: 240px; }
+    .footer-cols { display: flex; gap: 56px; }
+    .footer-cols > div { display: flex; flex-direction: column; gap: 10px; }
+    .footer-cols h4 { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.25); margin-bottom: 4px; }
+    .footer-cols a { font-size: 13px; color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
+    .footer-cols a:hover { color: rgba(255,255,255,.7); }
+    .footer-bottom { max-width: 1060px; margin: 36px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06); font-size: 12px; color: rgba(255,255,255,.2); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-copy { font-size: 12px; }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
+    .footer-legal a:hover { color: rgba(255,255,255,.7); }
+
+    @media (max-width: 768px) {
+      nav { padding: 18px 24px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .page-wrap { padding: 120px 24px 80px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+      .footer-cols { gap: 32px; flex-wrap: wrap; }
+      footer { padding: 48px 24px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="mainNav">
+    <a href="/" class="nav-logo">Finc<span>Win</span></a>
+    <div class="nav-links">
+      <a href="/features">Features</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/compare">Compare</a>
+      <a href="/use-cases">Use cases</a>
+      <a href="/blog">Blog</a>
+      <a href="/app">App</a>
+      <a href="/app" class="nav-cta">Get started free</a>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+    <p class="page-eyebrow">Legal</p>
+    <h1 class="page-title">Cookie <em>Policy</em></h1>
+    <p class="page-date">Effective date: June 1, 2026 &nbsp;·&nbsp; FincWin</p>
+
+    <div class="callout">
+      The short version: FincWin uses only essential cookies required to keep the app running. No advertising cookies. No cross-site tracking. No third-party analytics dropped on your device.
+    </div>
+
+    <div class="policy-section">
+      <h2>What are cookies?</h2>
+      <p>Cookies are small text files a website stores in your browser. They allow sites to remember information between page loads and sessions. Some cookies are necessary for basic functionality; others are used for analytics or advertising.</p>
+      <p>FincWin only uses the first kind.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="policy-section">
+      <h2>Cookies FincWin uses</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Purpose</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Session token</strong></td>
+            <td>Keeps you signed in to your FincWin account across page refreshes.</td>
+            <td>Session / 30 days</td>
+          </tr>
+          <tr>
+            <td><strong>Licence status</strong></td>
+            <td>Stores your verified Pro or Lifetime licence locally so the app doesn't re-check on every load.</td>
+            <td>1 year</td>
+          </tr>
+          <tr>
+            <td><strong>Theme preference</strong></td>
+            <td>Remembers your chosen colour theme (light, dark, or custom) so it persists between visits.</td>
+            <td>1 year</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>All of the above are stored in <strong>localStorage</strong> or <strong>sessionStorage</strong>, not as traditional HTTP cookies. They remain on your device and are never sent to a third party.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="policy-section">
+      <h2>What FincWin does not use</h2>
+      <ul>
+        <li><strong>Advertising cookies</strong> — we run no ad network and drop no advertising identifiers.</li>
+        <li><strong>Cross-site tracking cookies</strong> — nothing on FincWin follows you to other websites.</li>
+        <li><strong>Analytics cookies</strong> — we do not use Google Analytics, Hotjar, or similar third-party session-recording tools.</li>
+        <li><strong>Social media pixels</strong> — no Facebook, TikTok, or LinkedIn tracking pixels are loaded on this site.</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="policy-section">
+      <h2>Managing your preferences</h2>
+      <p>Because we only use strictly necessary storage, there is no cookie consent banner — none is legally required for essential functionality under GDPR and similar regulations.</p>
+      <p>You can clear all locally stored data at any time from your browser settings, or from within the FincWin app under <strong>Settings → Data → Clear all data</strong>. This will reset the app to its initial state.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="policy-section">
+      <h2>Contact</h2>
+      <p>Questions about this policy? Email us at <a href="mailto:privacy@fincwin.com">privacy@fincwin.com</a>. We respond personally within 2 business days.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo">Finc<span>Win</span></a>
+        <p>The personal finance dashboard for people who want clarity, not complexity.</p>
+      </div>
+      <div class="footer-cols">
+        <div>
+          <h4>Product</h4>
+          <a href="/features">Features</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/compare">Compare</a>
+          <a href="/use-cases">Use cases</a>
+          <a href="/app">Open app</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="/about">About</a>
+          <a href="/changelog">Changelog</a>
+          <a href="/contact">Contact</a>
+        </div>
+        <div>
+          <h4>Learn</h4>
+          <a href="/blog">Blog</a>
+          <a href="/help">Help guide</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p>
+      <div class="footer-legal">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/cookie-policy">Cookies</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
+  </script>
+  <script>document.querySelectorAll('.copy-year').forEach(function(e){e.textContent=new Date().getFullYear();});</script>
+<script src="/js/mkt.js" defer></script>
+</body>
+</html>

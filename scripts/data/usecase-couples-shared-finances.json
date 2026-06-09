@@ -1,0 +1,16 @@
+{
+  "META_TITLE": "Budgeting for Couples & Shared Finances — FincWin",
+  "META_DESCRIPTION": "Run money together: shared categories, a single clear budget, and a backup file you both control via your own Google Drive. Free to start, private.",
+  "OG_DESCRIPTION": "Couples budgeting without the awkwardness — shared categories, one clear plan, and a backup file you both own.",
+  "CANONICAL_URL": "https://fincwin.com/use-cases/couples-shared-finances",
+  "PERSONA_LABEL": "couples sharing finances",
+  "PERSONA_HEADLINE": "Run your money <em>together</em>",
+  "PERSONA_SUBHEAD": "Shared categories, one honest picture of where you both stand, and a backup file you each control — no joint account required.",
+  "SITUATION_HEADLINE": "Two people, two views, one very fuzzy budget",
+  "SITUATION_BODY": "<p>When finances are shared but tools aren't, you end up with two half-pictures and a lot of ‘did you pay that?’. Most apps assume one account and one user.</p><p>FincWin gives you one shared budget you can both see, with a backup that lives in your own Google Drive so either partner can restore it.</p>",
+  "HOW_IT_HELPS": "<li><span class=\"li-icon\">→</span><span><strong>Shared categories:</strong> agree the plan once and track against it together.</span></li>\n    <li><span class=\"li-icon\">→</span><span><strong>One clear picture:</strong> both partners see the same numbers, no surprises.</span></li>\n    <li><span class=\"li-icon\">→</span><span><strong>Backup you both own:</strong> sync via your own Google Drive, restore on either device.</span></li>\n    <li><span class=\"li-icon\">→</span><span><strong>No joint account needed:</strong> works however you split the bills.</span></li>",
+  "HOWTO_STEPS_JSON": "[{\"@type\":\"HowToStep\",\"name\":\"Agree your categories\",\"text\":\"Set up shared envelopes for joint spending.\"},{\"@type\":\"HowToStep\",\"name\":\"Track together\",\"text\":\"Log shared income and expenses in one budget.\"},{\"@type\":\"HowToStep\",\"name\":\"Back up to Drive\",\"text\":\"Save the file to a Google Drive you both can reach.\"},{\"@type\":\"HowToStep\",\"name\":\"Restore anywhere\",\"text\":\"Either partner can open the budget on their device.\"}]",
+  "USER_QUOTE": "Seeing the same numbers ended the ‘did you pay that?’ conversations almost overnight.",
+  "CTA_HEADLINE": "Get on the <em>same page</em> about money.",
+  "RELEVANT_FEATURES": "<a href=\"/features/google-drive-backup\" class=\"related-link\"><span>Feature</span><p>Google Drive Backup</p></a>\n    <a href=\"/features/envelope-budgeting\" class=\"related-link\"><span>Feature</span><p>Envelope Budgeting</p></a>\n    <a href=\"/blog/posts/budget-categories\" class=\"related-link\"><span>Budgeting</span><p>Budget Categories</p></a>\n    <a href=\"/features/savings-goals\" class=\"related-link\"><span>Feature</span><p>Savings Goals</p></a>"
+}

@@ -1,4 +1,4 @@
-# FincWin Integration Plan
+﻿# FincWin Integration Plan
 
 ## 1. Architecture Overview
 
@@ -172,7 +172,7 @@ https://fincwin.lemonsqueezy.com/checkout/buy/{VARIANT_ID}?checkout[custom][user
 
 After purchase, configure the Lemon Squeezy webhook to redirect to:
 ```
-https://fincwin.app/signin.html?key={license_key}&plan={variant_name}
+https://fincwin.com/signin.html?key={license_key}&plan={variant_name}
 ```
 
 ---
@@ -223,7 +223,7 @@ fw_last_validated     Number    Unix timestamp of last /api/validate call
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "https://fincwin.app" },
+        { "key": "Access-Control-Allow-Origin", "value": "https://fincwin.com" },
         { "key": "Access-Control-Allow-Methods", "value": "POST, OPTIONS" }
       ]
     }
@@ -296,7 +296,7 @@ export default async function handler(req, res) {
 - PIN plaintext is never stored.
 
 ### CORS
-- API endpoints restrict `Access-Control-Allow-Origin` to `https://fincwin.app` only. Local development uses a separate origin whitelist in a dev environment variable.
+- API endpoints restrict `Access-Control-Allow-Origin` to `https://fincwin.com` only. Local development uses a separate origin whitelist in a dev environment variable.
 
 ### Rate limiting
 - Implement basic rate limiting on `/api/activate` (max 5 activations per IP per hour) to prevent brute-force key testing. Vercel Edge Middleware or a simple in-memory counter works for low traffic.

@@ -1,0 +1,17 @@
+{
+  "META_TITLE": "Loan Payoff Calculator — See Your Debt-Free Date | FincWin",
+  "META_DESCRIPTION": "FincWin's loan payoff calculator shows the exact date you'll be debt-free using snowball or avalanche, with interest saved and month-by-month projections.",
+  "OG_DESCRIPTION": "Snowball or avalanche — FincWin projects your exact debt-free date and total interest saved. Free to start.",
+  "CANONICAL_URL": "https://fincwin.com/features/loan-payoff-calculator",
+  "FEATURE_NAME": "Loan Payoff Calculator",
+  "FEATURE_MODULE": "Loans",
+  "FEATURE_HEADLINE": "Know the exact date you'll be <em>debt-free</em>",
+  "FEATURE_SUBHEAD": "Add your loans once. FincWin projects your payoff date, total interest, and the fastest route out — snowball or avalanche.",
+  "PROBLEM_HEADLINE": "Most people have no idea when their debt ends",
+  "PROBLEM_BODY": "<p>You make payments every month, but the finish line is invisible. Spreadsheets go stale, and bank apps only show this month's minimum — not what happens if you pay $50 more.</p><p>FincWin turns your loans into a clear timeline: a real date, a real number, and the order to attack them in.</p>",
+  "HOW_IT_WORKS": "<li><strong>Add each loan</strong> — balance, interest rate, and minimum payment. Takes about a minute per loan.</li>\n    <li><strong>Pick a strategy</strong> — snowball (smallest balance first, for momentum) or avalanche (highest rate first, for lowest cost).</li>\n    <li><strong>Set your extra payment</strong> — any amount above the minimums. Watch the debt-free date move earlier instantly.</li>\n    <li><strong>Track it on your dashboard</strong> — progress updates automatically as you log payments.</li>",
+  "CAPABILITIES": "<li><span class=\"li-icon\">✓</span><span><strong>Snowball &amp; avalanche</strong> side by side so you can compare cost vs momentum.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Exact payoff date</strong> recalculated every time you change a payment.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Total interest saved</strong> versus paying minimums only.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Month-by-month schedule</strong> for every loan.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Multi-currency</strong> — works for any currency, any country.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Offline</strong> — runs fully in your browser, no bank login.</span></li>",
+  "FEATURE_PLAN": "Free & Pro",
+  "CTA_HEADLINE": "See your debt-free date in <em>two minutes.</em>",
+  "RELATED_FEATURES": "<a href=\"/features/savings-goals\" class=\"related-link\"><span>Feature</span><p>Savings Goals</p></a>\n    <a href=\"/features/analytics-dashboard\" class=\"related-link\"><span>Feature</span><p>Analytics Dashboard</p></a>\n    <a href=\"/blog/posts/debt-snowball-vs-avalanche\" class=\"related-link\"><span>Debt</span><p>Debt Snowball vs Avalanche</p></a>\n    <a href=\"/use-cases/paying-off-debt\" class=\"related-link\"><span>Use case</span><p>Paying Off Debt</p></a>"
+}

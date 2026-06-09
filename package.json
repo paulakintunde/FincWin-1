@@ -1,6 +1,13 @@
 {
-  "type": "module",
-  "dependencies": {
+  "devDependencies": {
+    "vitest": "^1.6.1",
     "playwright": "^1.60.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "sync-chrome": "node scripts/sync-chrome.js",
+    "build:pages": "node scripts/build-all.js",
+    "dev": "node server.js"
   }
 }

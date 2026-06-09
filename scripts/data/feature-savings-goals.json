@@ -1,0 +1,17 @@
+{
+  "META_TITLE": "Savings Goals — Track Every Goal to the Finish | FincWin",
+  "META_DESCRIPTION": "Create named savings goals with target amounts and dates, track progress, and run sinking funds — all in FincWin. Free to start, private, offline.",
+  "OG_DESCRIPTION": "Named savings goals with progress bars, target dates and sinking funds. Free, private, offline.",
+  "CANONICAL_URL": "https://fincwin.com/features/savings-goals",
+  "FEATURE_NAME": "Savings Goals",
+  "FEATURE_MODULE": "Savings",
+  "FEATURE_HEADLINE": "Watch every goal <em>fill up</em>",
+  "FEATURE_SUBHEAD": "Name your goals, set a target and a date, and watch each one progress. FincWin keeps every goal visible and on track.",
+  "PROBLEM_HEADLINE": "Saving without a target rarely sticks",
+  "PROBLEM_BODY": "<p>“Save more” isn't a plan. Without a named goal, an amount and a date, money slips back into everyday spending.</p><p>FincWin gives each goal its own envelope, progress bar and timeline — so saving feels like progress, not deprivation.</p>",
+  "HOW_IT_WORKS": "<li><strong>Name the goal</strong> — Emergency fund, new laptop, holiday, deposit.</li>\n    <li><strong>Set target &amp; date</strong> — FincWin works out the monthly amount needed.</li>\n    <li><strong>Fund it</strong> — assign money each month, manually or as a sinking fund.</li>\n    <li><strong>Track progress</strong> — every goal shows percentage complete and time remaining.</li>",
+  "CAPABILITIES": "<li><span class=\"li-icon\">✓</span><span><strong>Named goals</strong> with individual progress tracking.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Target dates</strong> with auto-calculated monthly contributions.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Sinking funds</strong> for irregular, recurring expenses.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Dashboard view</strong> of every goal at a glance.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Multi-currency</strong> goals supported.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Offline &amp; private</strong> — no account required.</span></li>",
+  "FEATURE_PLAN": "Free & Pro",
+  "CTA_HEADLINE": "Set your first <em>savings goal</em> now.",
+  "RELATED_FEATURES": "<a href=\"/features/envelope-budgeting\" class=\"related-link\"><span>Feature</span><p>Envelope Budgeting</p></a>\n    <a href=\"/features/loan-payoff-calculator\" class=\"related-link\"><span>Feature</span><p>Loan Payoff Calculator</p></a>\n    <a href=\"/blog/posts/sinking-funds\" class=\"related-link\"><span>Savings</span><p>How Sinking Funds Work</p></a>\n    <a href=\"/use-cases/building-savings\" class=\"related-link\"><span>Use case</span><p>Building Savings</p></a>"
+}

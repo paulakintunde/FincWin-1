@@ -1,0 +1,21 @@
+[
+  { "template": "competitor-alt", "data": "scripts/data/mint-alt.json",        "out": "compare/mint-alternative.html" },
+  { "template": "competitor-alt", "data": "scripts/data/ynab-alt.json",        "out": "compare/ynab-alternative.html" },
+  { "template": "competitor-alt", "data": "scripts/data/monarch-alt.json",     "out": "compare/monarch-alternative.html" },
+  { "template": "competitor-alt", "data": "scripts/data/goodbudget-alt.json",  "out": "compare/goodbudget-alternative.html" },
+  { "template": "competitor-alt", "data": "scripts/data/everydollar-alt.json", "out": "compare/everydollar-alternative.html" },
+  { "template": "feature-page", "data": "scripts/data/feature-loan-payoff-calculator.json", "out": "features/loan-payoff-calculator.html" },
+  { "template": "feature-page", "data": "scripts/data/feature-envelope-budgeting.json",     "out": "features/envelope-budgeting.html" },
+  { "template": "feature-page", "data": "scripts/data/feature-savings-goals.json",          "out": "features/savings-goals.html" },
+  { "template": "feature-page", "data": "scripts/data/feature-analytics-dashboard.json",    "out": "features/analytics-dashboard.html" },
+  { "template": "feature-page", "data": "scripts/data/feature-google-drive-backup.json",    "out": "features/google-drive-backup.html" },
+  { "template": "feature-page", "data": "scripts/data/feature-ai-coach.json",               "out": "features/ai-coach.html" },
+  { "template": "use-case-page", "data": "scripts/data/usecase-paying-off-debt.json",          "out": "use-cases/paying-off-debt.html" },
+  { "template": "use-case-page", "data": "scripts/data/usecase-building-savings.json",         "out": "use-cases/building-savings.html" },
+  { "template": "use-case-page", "data": "scripts/data/usecase-irregular-income.json",         "out": "use-cases/irregular-income.html" },
+  { "template": "use-case-page", "data": "scripts/data/usecase-expat-multi-currency.json",     "out": "use-cases/expat-multi-currency.html" },
+  { "template": "use-case-page", "data": "scripts/data/usecase-couples-shared-finances.json",  "out": "use-cases/couples-shared-finances.html" },
+  { "template": "niche-landing", "data": "scripts/data/niche-offline-budget-app.json",  "out": "offline-budget-app.html" },
+  { "template": "niche-landing", "data": "scripts/data/niche-no-bank-sync-budget.json", "out": "no-bank-sync-budget.html" },
+  { "template": "niche-landing", "data": "scripts/data/niche-private-finance-app.json", "out": "private-finance-app.html" }
+]

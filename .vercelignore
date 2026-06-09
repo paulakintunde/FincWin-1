@@ -1,0 +1,36 @@
+# ─────────────────────────────────────────────────────────────
+# Files excluded from the Vercel deployment.
+# The site ships as committed static HTML/CSS/JS + /api functions.
+# Everything below is build-time source or local tooling — not served.
+# ─────────────────────────────────────────────────────────────
+
+# Local dev server (production uses Vercel's static + serverless runtime)
+server.js
+
+# Templating SOURCE — generated pages are already committed and served;
+# the generator, templates, data and partials are not needed at runtime.
+scripts/
+
+# Tests & test tooling
+tests/
+playwright.config.*
+vitest.config.*
+
+# One-off audit / verification scripts
+*.mjs
+
+# Planning & internal documentation
+docs/
+CONTENT-STRATEGY.md
+STRATEGY-GUIDE.md
+TEMPLATING-PLAN.md
+FLOWCHART.md
+INTEGRATION.md
+SETUP.md
+
+# Backend config that is not served over HTTP
+firestore.rules
+.env.example
+
+# Local agent / editor config
+.claude/

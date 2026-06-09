@@ -1,661 +1,1107 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Features — FincWin</title>
-  <meta name="description" content="Every tool you need to understand your money. Budget envelopes, loan payoff tracking, spending heatmaps, multi-currency support, and more.">
+  <title>Free Personal Finance App Features — FincWin</title>
+  <meta name="description" content="Every tool FincWin has — explained. Budget envelopes, loan payoff calculator, savings goals, AI Coach, gamification, multi-currency, Google Drive sync, and 120+ more features.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fincwin.com/features">
+  <link rel="alternate" hreflang="en" href="https://fincwin.com/features">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fincwin.com/features">
+  <meta property="og:title" content="Free Personal Finance App Features — FincWin">
+  <meta property="og:description" content="Budget envelopes, loan payoff, savings goals, AI Coach, gamification, multi-currency. 120+ features. No bank login. Free to start.">
+  <meta property="og:image" content="https://fincwin.com/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Personal Finance App Features — FincWin">
+  <meta name="twitter:description" content="Budget envelopes, loan payoff, savings goals, AI Coach, gamification, multi-currency. 120+ features. Free to start.">
+  <meta name="twitter:image" content="https://fincwin.com/og-image.svg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "FincWin",
+    "operatingSystem": "Web, iOS, Android (PWA)",
+    "applicationCategory": "FinanceApplication",
+    "offers": [
+      { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Pro", "price": "39", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Lifetime", "price": "149", "priceCurrency": "USD" }
+    ],
+    "description": "FincWin is the personal finance dashboard that keeps your financial data in your browser — income, expenses, loan payoff, savings goals, and analytics in one place. No bank login required.",
+    "url": "https://fincwin.com"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fincwin.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Features", "item": "https://fincwin.com/features" }
+    ]
+  }
+  </script>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/mkt.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --sage:    #5a6e3f;
-      --sage-lt: #dce8d4;
-      --sage-dk: #3d4d2b;
-      --ink:     #111111;
-      --muted:   #6b7280;
-      --faint:   #f5f4f0;
-      --white:   #ffffff;
-      --border:  rgba(0,0,0,.08);
-      --r: 10px;
-      --sans: 'Hanken Grotesk', sans-serif;
-      --serif: 'Instrument Serif', serif;
-    }
-
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--sans);
-      font-weight: 300;
-      color: var(--ink);
-      background: var(--white);
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 48px;
-      background: rgba(255,255,255,.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color .3s;
-    }
-    nav.scrolled { border-color: var(--border); }
-    .nav-logo {
-      font-size: 17px; font-weight: 500; letter-spacing: -.3px;
-      color: var(--ink); text-decoration: none;
-    }
-    .nav-logo span { color: var(--sage); }
-    .nav-links { display: flex; align-items: center; gap: 32px; }
-    .nav-links a {
-      font-size: 13px; font-weight: 400; color: var(--muted);
-      text-decoration: none; transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-links a.active { color: var(--ink); font-weight: 500; }
-    .nav-cta {
-      font-size: 13px; font-weight: 500; color: var(--white) !important;
-      background: var(--ink); padding: 9px 20px; border-radius: 50px;
-      transition: background .2s !important;
-    }
-    .nav-cta:hover { background: var(--sage) !important; color: var(--white) !important; }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 72vh;
+    .feat-hero {
+      min-height: 68vh;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center;
-      padding: 160px 24px 80px;
-      background: var(--white);
-      position: relative; overflow: hidden;
+      text-align: center; padding: 140px 24px 80px; position: relative; overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(90,110,63,.07) 0%, transparent 70%);
+    .feat-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(90,110,63,.08) 0%, transparent 65%);
       pointer-events: none;
     }
-    .hero-eyebrow {
-      font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--sage); margin-bottom: 32px;
-      opacity: 0; animation: fadeUp .6s .1s forwards;
+    .feat-hero .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 28px; opacity: 0; animation: fadeUp .6s .1s forwards; }
+    .feat-hero h1 { font-family: var(--serif); font-size: clamp(38px, 6vw, 76px); font-weight: 400; line-height: 1.06; color: var(--ink); max-width: 800px; opacity: 0; animation: fadeUp .7s .2s forwards; }
+    .feat-hero h1 em { font-style: italic; color: var(--sage); }
+    .feat-hero-sub { margin-top: 22px; font-size: clamp(15px, 1.8vw, 19px); font-weight: 300; color: var(--muted); max-width: 520px; line-height: 1.65; opacity: 0; animation: fadeUp .7s .35s forwards; }
+    .feat-hero-stats { margin-top: 48px; display: flex; gap: 48px; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fadeUp .7s .5s forwards; }
+    .feat-hero-stat { text-align: center; }
+    .feat-hero-stat-n { font-family: var(--serif); font-size: 40px; color: var(--sage); line-height: 1; }
+    .feat-hero-stat-l { font-size: 12px; font-weight: 400; color: var(--muted); margin-top: 6px; }
+    .feat-search-wrap { margin-top: 40px; width: 100%; max-width: 480px; position: relative; opacity: 0; animation: fadeUp .7s .6s forwards; }
+    .feat-search {
+      width: 100%; padding: 14px 20px 14px 48px;
+      border-radius: 50px; border: 1.5px solid var(--border);
+      font-family: var(--sans); font-size: 14px; color: var(--ink); background: var(--white);
+      outline: none; transition: border-color .2s;
     }
-    .hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(40px, 6vw, 80px);
-      font-weight: 400; line-height: 1.05; letter-spacing: -.5px;
-      color: var(--ink); max-width: 820px;
-      opacity: 0; animation: fadeUp .7s .2s forwards;
-    }
-    .hero h1 em { font-style: italic; color: var(--sage); }
-    .hero-sub {
-      margin-top: 28px;
-      font-size: clamp(16px, 2vw, 19px); font-weight: 300;
-      color: var(--muted); max-width: 500px; line-height: 1.6;
-      opacity: 0; animation: fadeUp .7s .35s forwards;
-    }
-    .hero-actions {
-      margin-top: 44px;
-      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
-      opacity: 0; animation: fadeUp .7s .5s forwards;
-    }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 32px; border-radius: 50px;
-      background: var(--ink); color: var(--white);
-      font-family: var(--sans); font-size: 14px; font-weight: 500;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: background .2s, transform .15s;
-    }
-    .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
-    .btn-ghost {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 28px; border-radius: 50px;
-      background: transparent; color: var(--ink);
-      font-family: var(--sans); font-size: 14px; font-weight: 400;
-      text-decoration: none; border: 1px solid var(--border); cursor: pointer;
-      transition: border-color .2s, transform .15s;
-    }
-    .btn-ghost:hover { border-color: var(--ink); transform: translateY(-1px); }
+    .feat-search:focus { border-color: var(--sage); }
+    .feat-search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
 
-    /* ── SHARED SECTION ── */
-    section { padding: 100px 48px; }
-    .section-inner { max-width: 1060px; margin: 0 auto; }
-    .section-label {
-      font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--sage); margin-bottom: 20px;
+    .module-nav {
+      position: sticky; top: 61px; z-index: 90;
+      background: rgba(255,255,255,.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border); padding: 0;
+      overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
     }
-    h2 {
-      font-family: var(--serif);
-      font-size: clamp(32px, 4.5vw, 56px);
-      font-weight: 400; line-height: 1.1; letter-spacing: -.3px;
-      color: var(--ink);
+    .module-nav::-webkit-scrollbar { display: none; }
+    .module-nav-inner { display: flex; max-width: 1060px; margin: 0 auto; padding: 0 48px; }
+    .module-tab {
+      font-family: var(--sans); font-size: 13px; font-weight: 400; color: var(--muted);
+      padding: 16px 20px; border-bottom: 2px solid transparent;
+      text-decoration: none; white-space: nowrap; transition: color .2s, border-color .2s;
+      background: none; border-top: none; border-left: none; border-right: none; cursor: pointer;
     }
-    h2 em { font-style: italic; color: var(--sage); }
-    .section-sub {
-      margin-top: 20px; font-size: 17px; font-weight: 300;
-      color: var(--muted); max-width: 520px; line-height: 1.6;
-    }
+    .module-tab:hover { color: var(--ink); }
+    .module-tab.active { color: var(--sage); font-weight: 500; border-bottom-color: var(--sage); }
 
-    /* ── FEATURE GRID ── */
-    .feature-grid-section { background: var(--faint); }
-    .feature-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 2px; margin-top: 56px;
-      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
-    }
-    .feature-block {
-      background: var(--white);
-      padding: 40px 36px;
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      transition: background .2s;
-    }
-    .feature-block:hover { background: #fafaf8; }
-    .feature-block:nth-child(3n) { border-right: none; }
-    .feature-block:nth-child(4), .feature-block:nth-child(5), .feature-block:nth-child(6) { border-bottom: none; }
-    .feature-icon {
-      width: 44px; height: 44px; background: var(--sage-lt);
-      border-radius: 10px; display: flex; align-items: center; justify-content: center;
-      margin-bottom: 20px;
-    }
-    .feature-block h3 {
-      font-family: var(--serif);
-      font-size: 20px; font-weight: 400; color: var(--ink);
-      margin-bottom: 10px; line-height: 1.2;
-    }
-    .feature-block p {
-      font-size: 14px; font-weight: 300; color: var(--muted);
-      line-height: 1.65;
-    }
+    .module-section { padding: 96px 48px; scroll-margin-top: 110px; }
+    .module-section:nth-child(even) { background: var(--faint); }
+    .module-inner { max-width: 1060px; margin: 0 auto; }
+    .module-header { margin-bottom: 64px; }
+    .module-header h2 { font-family: var(--serif); font-size: clamp(30px, 4vw, 52px); font-weight: 400; line-height: 1.1; color: var(--ink); max-width: 680px; }
+    .module-header h2 em { font-style: italic; color: var(--sage); }
+    .module-header-inv h2 { color: var(--white); }
+    .module-header-inv h2 em { color: #a8c48a; }
+    .module-sub { margin-top: 18px; font-size: 17px; font-weight: 300; color: var(--muted); max-width: 560px; line-height: 1.7; }
+    .module-sub-inv { color: rgba(255,255,255,.45); }
 
-    /* ── DEEP DIVE ROWS ── */
-    .deep-dive { background: var(--white); }
-    .deep-dive.alt { background: var(--faint); }
-    .dive-row {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center;
-    }
-    .dive-row.reverse { direction: rtl; }
-    .dive-row.reverse > * { direction: ltr; }
-    .dive-content .section-label { margin-bottom: 16px; }
-    .dive-content h2 { font-size: clamp(28px, 3.5vw, 44px); }
-    .dive-content p {
-      font-size: 15px; font-weight: 300; color: var(--muted);
-      line-height: 1.7; margin-top: 16px;
-    }
-    .dive-content .detail-list {
-      margin-top: 24px; list-style: none;
-      display: flex; flex-direction: column; gap: 12px;
-    }
-    .dive-content .detail-list li {
-      font-size: 14px; font-weight: 300; color: var(--muted);
-      display: flex; align-items: flex-start; gap: 10px; line-height: 1.4;
-    }
-    .dive-content .detail-list li::before {
-      content: '';
-      width: 14px; height: 14px; flex-shrink: 0; margin-top: 1px;
-      background: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235a6e3f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
-    }
-    .dive-content .cta-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 14px; font-weight: 500; color: var(--sage);
-      text-decoration: none; margin-top: 28px;
-      transition: color .2s;
-    }
-    .dive-content .cta-link:hover { color: var(--sage-dk); }
+    .feat-spotlight { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-bottom: 64px; }
+    .feat-spotlight.reverse { direction: rtl; }
+    .feat-spotlight.reverse > * { direction: ltr; }
+    .spotlight-content h3 { font-family: var(--serif); font-size: clamp(24px, 3vw, 38px); font-weight: 400; line-height: 1.15; color: var(--ink); margin-bottom: 16px; }
+    .spotlight-content h3 em { font-style: italic; color: var(--sage); }
+    .spotlight-content h3.inv { color: var(--white); }
+    .spotlight-content h3.inv em { color: #a8c48a; }
+    .spotlight-content p { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 20px; }
+    .spotlight-content p.inv { color: rgba(255,255,255,.45); }
 
-    /* Mock UI panels */
-    .dive-visual {
-      background: white; border-radius: 16px;
-      border: 1px solid var(--border);
-      padding: 28px; min-height: 300px;
-      box-shadow: 0 8px 40px rgba(0,0,0,.06);
-    }
-    .visual-title {
-      font-size: 11px; font-weight: 600; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
-    }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feature-item { padding: 20px; background: var(--white); border-radius: 12px; border: 1px solid var(--border); }
+    .feature-item.dark-bg { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.08); }
+    .feature-item-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .feature-item-title.inv { color: var(--white); }
+    .feature-item-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
+    .feature-item p { font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.6; }
+    .feature-item p.inv { color: rgba(255,255,255,.38); }
+    .pro-tag { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; background: var(--sage); color: var(--white); padding: 2px 6px; border-radius: 20px; }
 
-    /* Envelope mock */
-    .env-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .env-card { background: var(--faint); border-radius: 8px; padding: 14px; }
-    .env-label { font-size: 10px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; color: var(--muted); }
-    .env-amount { font-size: 18px; font-weight: 200; color: var(--ink); margin: 4px 0; }
-    .env-bar { height: 3px; background: #e5e7eb; border-radius: 2px; margin-top: 8px; }
-    .env-bar-fill { height: 100%; border-radius: 2px; }
-    .env-note { font-size: 10px; color: var(--muted); margin-top: 5px; }
+    /* App-style screen mockups */
+    .app-screen {
+      background: #f0f0f6;
+      border: 1px solid #dddde8;
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 8px 48px rgba(0,0,0,.08);
+      font-family: var(--sans);
+    }
+    .app-screen-dark {
+      background: #1a1a2e;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 8px 48px rgba(0,0,0,.3);
+      font-family: var(--sans);
+    }
+    .app-card {
+      background: #ffffff;
+      border: 1px solid #e4e4ee;
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .app-card-over {
+      background: #fff5f7;
+      border: 1px solid #f5c6cc;
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .app-bar-track { height: 5px; background: #e4e4ee; border-radius: 3px; overflow: hidden; }
+    .app-bar-fill { height: 100%; background: #6b1a30; border-radius: 3px; }
+    .app-bar-blue { height: 100%; background: #3b82f6; border-radius: 3px; }
+    .app-pct-badge { background: #eaf5e0; color: #4a6b28; font-size: 9px; font-weight: 700; border-radius: 10px; padding: 1px 6px; }
+    .app-pct-badge-red { background: #fee2e2; color: #dc2626; font-size: 9px; font-weight: 700; border-radius: 10px; padding: 1px 6px; }
+    .app-status-ok { font-size: 10px; color: #4a6b28; display: flex; align-items: center; gap: 3px; }
+    .app-status-warn { font-size: 10px; color: #d97706; display: flex; align-items: center; gap: 3px; }
+    .app-status-over { font-size: 10px; color: #dc2626; display: flex; align-items: center; gap: 3px; }
+    .app-cat-label { font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+    .app-amount-lg { font-size: 20px; font-weight: 400; color: #1a1a2e; line-height: 1.1; }
+    .app-amount-lg-red { font-size: 20px; font-weight: 400; color: #dc2626; line-height: 1.1; }
+    .app-cap-label { font-size: 11px; color: #aaa; }
+    .app-roll-label { display: flex; align-items: center; gap: 3px; font-size: 9px; color: #aaa; cursor: pointer; }
+    .app-roll-label input[type=checkbox] { width: 10px; height: 10px; }
+    .app-btn-ghost { background: white; border: 1px solid #dddde8; border-radius: 6px; padding: 5px 10px; font-size: 11px; cursor: pointer; font-family: var(--sans); color: #444; }
+    .app-btn-dark { background: #1a1a2e; color: white; border: none; border-radius: 6px; padding: 6px 12px; font-size: 11px; cursor: pointer; font-family: var(--sans); display: flex; align-items: center; gap: 4px; }
+    .app-btn-blue { background: white; color: #3b6ea0; border: 1px solid #c8d8e8; border-radius: 6px; padding: 5px 10px; font-size: 11px; cursor: pointer; font-family: var(--sans); display: flex; align-items: center; gap: 4px; }
+    .app-type-badge { background: #f0f0f0; color: #555; font-size: 10px; font-weight: 500; border-radius: 4px; padding: 2px 6px; }
+    .app-return-badge { background: #f0f0f0; color: #555; font-size: 10px; font-weight: 500; border-radius: 4px; padding: 2px 6px; }
 
-    /* Loan mock */
-    .loan-mock { display: flex; flex-direction: column; gap: 14px; }
-    .loan-item { background: var(--faint); border-radius: 10px; padding: 18px; }
-    .loan-name { font-size: 14px; font-weight: 500; color: var(--ink); }
-    .loan-meta { font-size: 12px; color: var(--muted); margin-top: 3px; }
-    .loan-bar { height: 6px; background: #e5e7eb; border-radius: 3px; margin: 12px 0 8px; }
-    .loan-bar-fill { height: 100%; border-radius: 3px; background: var(--sage); }
-    .loan-stats { display: flex; gap: 20px; }
-    .loan-stat-label { font-size: 10px; color: var(--muted); margin-bottom: 2px; }
-    .loan-stat-val { font-size: 13px; font-weight: 500; color: var(--ink); }
-    .loan-stat-val.accent { color: var(--sage); }
+    /* security / comparison / directory */
+    .ui-mock {
+      background: var(--white); border: 1px solid var(--border); border-radius: 16px;
+      padding: 22px; box-shadow: 0 8px 48px rgba(0,0,0,.07);
+    }
+    .ui-mock.dark-mock { background: #1a1a1a; border-color: rgba(255,255,255,.1); }
+    .mock-topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+    .mock-topbar.dark { border-bottom-color: rgba(255,255,255,.08); }
+    .mock-title-sm { font-size: 12px; font-weight: 600; color: var(--ink); }
+    .mock-title-sm.inv { color: var(--white); }
+    .mock-badge-sm { font-size: 10px; background: var(--sage-lt); color: var(--sage); padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+    .sec-items { display: flex; flex-direction: column; gap: 10px; }
+    .sec-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--faint); border-radius: 8px; font-size: 13px; }
+    .sec-item-icon { color: var(--sage); flex-shrink: 0; }
+    .sec-item-text { flex: 1; }
+    .sec-item-title { font-weight: 500; color: var(--ink); font-size: 13px; }
+    .sec-item-sub { font-size: 11px; color: var(--muted); }
+    .sec-item-badge { font-size: 10px; font-weight: 600; background: var(--sage-lt); color: var(--sage); padding: 2px 8px; border-radius: 20px; }
 
-    /* Heatmap mock */
-    .heatmap-mock { }
-    .heatmap-days {
-      display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 8px;
-    }
-    .hday {
-      aspect-ratio: 1; border-radius: 3px;
-      font-size: 8px; display: flex; align-items: center; justify-content: center;
-      color: rgba(0,0,0,.3); font-weight: 500;
-    }
-    .hday.l0 { background: #eef2e8; }
-    .hday.l1 { background: #c5d9b0; color: rgba(0,0,0,.5); }
-    .hday.l2 { background: #8aaf6a; color: white; }
-    .hday.l3 { background: #5a6e3f; color: white; }
-    .hday.l4 { background: #3d4d2b; color: white; }
-    .hday.empty { background: transparent; }
-    .heatmap-legend { display: flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 10px; color: var(--muted); }
-    .hlegend { width: 10px; height: 10px; border-radius: 2px; }
+    .compare-section { padding: 96px 48px; background: var(--faint); }
+    .compare-inner { max-width: 1060px; margin: 0 auto; }
+    .compare-header { text-align: center; margin-bottom: 52px; }
+    .compare-header h2 { font-family: var(--serif); font-size: clamp(28px, 4vw, 50px); font-weight: 400; color: var(--ink); }
+    .compare-header h2 em { font-style: italic; color: var(--sage); }
+    .compare-header p { margin-top: 16px; font-size: 16px; color: var(--muted); }
+    .compare-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); }
+    .compare-table th { padding: 18px 20px; text-align: center; font-size: 13px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--border); background: var(--faint); }
+    .compare-table th.fw-col { background: rgba(90,110,63,.08); color: var(--sage); }
+    .compare-table th.feat-col { text-align: left; }
+    .compare-table td { padding: 14px 20px; font-size: 13px; color: var(--muted); border-bottom: 1px solid rgba(0,0,0,.04); text-align: center; }
+    .compare-table td.feat-col { text-align: left; font-weight: 400; color: var(--ink); }
+    .compare-table td.fw-col { background: rgba(90,110,63,.03); }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr.cat-row td { background: var(--faint); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); padding: 10px 20px; }
+    .check-y { color: var(--sage); font-weight: 600; }
+    .check-n { color: #e5e7eb; }
+    .check-p { color: var(--muted); font-size: 11px; }
 
-    /* ── CTA STRIP ── */
-    .cta-strip {
-      background: var(--ink);
-      padding: 120px 48px;
-      text-align: center;
-    }
-    .cta-strip h2 { color: white; }
-    .cta-strip h2 em { color: #a8c48a; }
-    .cta-strip p { color: rgba(255,255,255,.45); margin: 20px auto 44px; max-width: 440px; font-size: 17px; font-weight: 300; line-height: 1.6; }
-    .cta-strip .btn-primary { background: white; color: var(--ink); }
-    .cta-strip .btn-primary:hover { background: var(--sage-lt); }
+    .directory { padding: 96px 48px; }
+    .directory-inner { max-width: 1060px; margin: 0 auto; }
+    .directory-header { text-align: center; margin-bottom: 56px; }
+    .directory-header h2 { font-family: var(--serif); font-size: clamp(28px, 4vw, 48px); font-weight: 400; color: var(--ink); }
+    .directory-header h2 em { font-style: italic; color: var(--sage); }
+    .dir-cat { margin-bottom: 48px; }
+    .dir-cat-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 20px; }
+    .dir-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 24px; }
+    .dir-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--muted); padding: 6px 0; }
+    .dir-item::before { content: '—'; color: var(--sage-lt); flex-shrink: 0; margin-top: 0; }
+    .dir-item span { line-height: 1.5; }
+    .dir-item .dir-pro { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--sage); margin-left: 4px; opacity: .7; }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--ink);
-      border-top: 1px solid rgba(255,255,255,.06);
-      padding: 56px 48px 36px;
-    }
-    .footer-inner {
-      max-width: 1060px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 60px; align-items: start;
-    }
-    .footer-brand .nav-logo { color: white; font-size: 16px; }
-    .footer-brand .nav-logo span { color: #a8c48a; }
-    .footer-brand p { font-size: 13px; color: rgba(255,255,255,.3); margin-top: 10px; line-height: 1.5; max-width: 240px; }
-    .footer-cols { display: flex; gap: 56px; }
-    .footer-cols > div { display: flex; flex-direction: column; gap: 10px; }
-    .footer-cols h4 { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.25); margin-bottom: 4px; }
-    .footer-cols a { font-size: 13px; color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
-    .footer-cols a:hover { color: rgba(255,255,255,.7); }
-    .footer-bottom { max-width: 1060px; margin: 36px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06); font-size: 12px; color: rgba(255,255,255,.2); }
+    .feat-cta-strip { background: var(--ink); padding: 80px 48px; text-align: center; }
+    .feat-cta-inner { max-width: 560px; margin: 0 auto; }
+    .feat-cta-strip h2 { font-family: var(--serif); font-size: clamp(28px, 4vw, 48px); font-weight: 400; color: var(--white); margin-bottom: 16px; }
+    .feat-cta-strip h2 em { font-style: italic; color: #a8c48a; }
+    .feat-cta-strip p { font-size: 16px; color: rgba(255,255,255,.45); margin-bottom: 36px; line-height: 1.7; }
+    .feat-cta-pair { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .reveal {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      nav { padding: 18px 24px; }
-      .nav-links a:not(.nav-cta) { display: none; }
-      section { padding: 72px 24px; }
+      .feat-spotlight { grid-template-columns: 1fr; gap: 40px; }
+      .feat-spotlight.reverse { direction: ltr; }
+      .feature-grid { grid-template-columns: 1fr 1fr; }
+      .dir-list { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .module-nav-inner { padding: 0 20px; }
+      .module-section { padding: 72px 20px; }
+      .compare-section { padding: 72px 20px; }
+      .directory { padding: 72px 20px; }
+      .feat-cta-strip { padding: 64px 20px; }
       .feature-grid { grid-template-columns: 1fr; }
-      .feature-block { border-right: none; border-bottom: 1px solid var(--border); }
-      .feature-block:nth-child(4), .feature-block:nth-child(5) { border-bottom: 1px solid var(--border); }
-      .feature-block:last-child { border-bottom: none; }
-      .dive-row, .dive-row.reverse { grid-template-columns: 1fr; direction: ltr; gap: 40px; }
-      .footer-inner { grid-template-columns: 1fr; gap: 40px; }
-      .footer-cols { gap: 32px; flex-wrap: wrap; }
-      .cta-strip { padding: 80px 24px; }
-      footer { padding: 48px 24px 28px; }
+      .dir-list { grid-template-columns: 1fr; }
+      .compare-table { font-size: 12px; }
+      .compare-table th, .compare-table td { padding: 12px 14px; }
+    }
+    @media (max-width: 600px) {
+      .feat-hero { padding: 120px 20px 60px; }
+      .feat-hero-stats { gap: 24px; }
     }
   </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "FincWin Features",
+  "description": "120+ features across 8 core modules: Budget, Loans, Savings, Investments, AI Coach, Gamification, Security, and Sync.",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Budget tracking across 14 categories" },
+    { "@type": "ListItem", "position": 2, "name": "Debt snowball and avalanche loan payoff calculator" },
+    { "@type": "ListItem", "position": 3, "name": "Savings goals with deadline tracking" },
+    { "@type": "ListItem", "position": 4, "name": "AI financial coach (Anthropic Claude / OpenAI GPT-4)" },
+    { "@type": "ListItem", "position": 5, "name": "AES-256 local encryption with PIN and biometric unlock" },
+    { "@type": "ListItem", "position": 6, "name": "Offline-first PWA — works without internet" },
+    { "@type": "ListItem", "position": 7, "name": "Google Drive encrypted backup and sync" },
+    { "@type": "ListItem", "position": 8, "name": "Multi-currency support with live exchange rates" },
+    { "@type": "ListItem", "position": 9, "name": "Financial health score with gamification and achievements" },
+    { "@type": "ListItem", "position": 10, "name": "CSV bank statement import (no bank login required)" }
+  ]
+}
+</script>
 </head>
 <body>
 
-  <nav id="nav">
-    <a href="landing.html" class="nav-logo">Finc<span>Win</span></a>
-    <div class="nav-links">
-      <a href="features.html" class="active">Features</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="index.html">App</a>
-      <a href="signin.html" class="nav-cta">Sign in</a>
+<nav id="mainNav">
+  <a href="/" class="nav-logo">Finc<span>Win</span></a>
+  <div class="nav-links">
+    <a href="/features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/compare">Compare</a>
+    <a href="/use-cases">Use cases</a>
+    <a href="/blog">Blog</a>
+    <a href="/app">App</a>
+    <a href="/app" class="nav-cta">Get started free</a>
+  </div>
+</nav>
+
+<section class="feat-hero">
+  <div class="eyebrow">Everything FincWin can do</div>
+  <h1>Every tool you need.<br><em>None you don't.</em></h1>
+  <p class="feat-hero-sub">From envelope budgeting to AI coaching — FincWin's full feature set, explained. Free to start. Upgrade when you want more.</p>
+  <div class="feat-hero-stats">
+    <div class="feat-hero-stat">
+      <div class="feat-hero-stat-n">120+</div>
+      <div class="feat-hero-stat-l">features</div>
     </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <p class="hero-eyebrow">What FincWin does</p>
-    <h1>Every number you need.<br><em>Nothing you don't.</em></h1>
-    <p class="hero-sub">No clutter, no bloat. Just the tools that actually tell you where your money is going — and where it could go.</p>
-    <div class="hero-actions">
-      <a href="index.html" class="btn-primary">Try it free &nbsp;→</a>
-      <a href="pricing.html" class="btn-ghost">View pricing</a>
+    <div class="feat-hero-stat">
+      <div class="feat-hero-stat-n">8</div>
+      <div class="feat-hero-stat-l">core modules</div>
     </div>
-  </section>
+    <div class="feat-hero-stat">
+      <div class="feat-hero-stat-n">40+</div>
+      <div class="feat-hero-stat-l">achievements</div>
+    </div>
+    <div class="feat-hero-stat">
+      <div class="feat-hero-stat-n">14</div>
+      <div class="feat-hero-stat-l">budget categories</div>
+    </div>
+  </div>
+  <div class="feat-search-wrap">
+    <svg class="feat-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" class="feat-search" id="featureSearch" placeholder="Search features…" aria-label="Search features">
+  </div>
+</section>
 
-  <!-- FEATURE GRID -->
-  <section class="feature-grid-section">
-    <div class="section-inner">
-      <p class="section-label reveal">Six core tools</p>
-      <h2 class="reveal">Built for people who want<br><em>the whole picture.</em></h2>
-      <p class="section-sub reveal">Each feature was built around a real problem — not to pad a feature list.</p>
-      <div class="feature-grid reveal">
+<nav class="module-nav" id="moduleNav" aria-label="Feature modules">
+  <div class="module-nav-inner">
+    <button class="module-tab active" data-module="budget">Budget</button>
+    <button class="module-tab" data-module="loans">Loans</button>
+    <button class="module-tab" data-module="savings">Savings</button>
+    <button class="module-tab" data-module="investments">Investments</button>
+    <button class="module-tab" data-module="ai">AI Coach</button>
+    <button class="module-tab" data-module="gamification">Gamification</button>
+    <button class="module-tab" data-module="security">Security</button>
+    <button class="module-tab" data-module="sync">Sync &amp; Data</button>
+    <button class="module-tab" data-module="compare">Compare</button>
+  </div>
+</nav>
 
-        <!-- 1 Budget Envelopes -->
-        <div class="feature-block">
-          <div class="feature-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a6e3f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="5" width="20" height="14" rx="2"/><polyline points="2,5 12,13 22,5"/>
-            </svg>
-          </div>
-          <h3>Budget Envelopes</h3>
-          <p>Allocate money to 14 life categories before you spend it. Watch each envelope fill in real time so you never overshoot a budget.</p>
+<!-- ══ BUDGET ════════════════════════════════════════════════════ -->
+<section class="module-section" id="budget">
+  <div class="module-inner">
+    <div class="module-header">
+      <span class="section-label">Budget module</span>
+      <h2>Know exactly <em>where</em> every dollar goes.</h2>
+      <p class="module-sub">The envelope method — one of the most proven budgeting systems in the world — built into a dashboard that updates as you spend. No spreadsheets. No guesswork.</p>
+    </div>
+
+    <div class="feat-spotlight">
+      <div class="spotlight-content">
+        <h3>14 spending envelopes,<br><em>ready on day one.</em></h3>
+        <p>Housing, food, transport, healthcare, subscriptions, entertainment — all 14 categories are pre-configured. Add your monthly cap and start logging. Each envelope fills as spending is recorded, turning an abstract "budget" into something visual and immediate.</p>
+        <p>Set a warning threshold (default 80%) and FincWin highlights envelopes that are close to the edge — before you overspend, not after.</p>
+      </div>
+
+      <!-- Budget Envelopes app-accurate mockup -->
+      <div class="app-screen">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #e4e4ee;">
+          <span style="font-size:13px;font-weight:600;color:#1a1a2e;display:flex;align-items:center;gap:6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            Budget Envelopes
+          </span>
+          <button style="font-size:10px;color:#666;background:white;border:1px solid #dddde8;border-radius:20px;padding:3px 10px;cursor:pointer;display:flex;align-items:center;gap:4px;">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Edit All
+          </button>
         </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;">
 
-        <!-- 2 Expense Tracker -->
-        <div class="feature-block">
-          <div class="feature-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a6e3f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-            </svg>
+          <!-- BANKING -->
+          <div class="app-card">
+            <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+              <span class="app-cat-label" style="color:#4a6b28;">BANKING</span>
+              <span style="font-size:9px;color:#bbb;">edit</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:5px;">
+              <span class="app-amount-lg">$12.00</span>
+              <span class="app-cap-label">/ $100.00</span>
+            </div>
+            <div class="app-bar-track" style="margin-bottom:5px;"><div class="app-bar-fill" style="width:12%"></div></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+              <span class="app-pct-badge">12%</span>
+              <label class="app-roll-label"><input type="checkbox"> Roll unused</label>
+            </div>
+            <div class="app-status-ok">✓ On pace · $88.00 left</div>
           </div>
-          <h3>Expense Tracker</h3>
-          <p>Log one-time or recurring costs at monthly, weekly, biweekly, quarterly, or yearly frequencies. One entry, complete picture.</p>
-        </div>
 
-        <!-- 3 Loan Payoff -->
-        <div class="feature-block">
-          <div class="feature-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a6e3f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-            </svg>
+          <!-- TELECOM -->
+          <div class="app-card">
+            <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+              <span class="app-cat-label" style="color:#c0392b;">TELECOM</span>
+              <span style="font-size:9px;color:#bbb;">edit</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:5px;">
+              <span class="app-amount-lg">$95.00</span>
+              <span class="app-cap-label">/ $150.00</span>
+            </div>
+            <div class="app-bar-track" style="margin-bottom:5px;"><div class="app-bar-fill" style="width:63%"></div></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+              <span class="app-pct-badge">63%</span>
+              <label class="app-roll-label"><input type="checkbox"> Roll unused</label>
+            </div>
+            <div class="app-status-warn">⚡ Hits cap around day 13</div>
           </div>
-          <h3>Loan Payoff</h3>
-          <p>Full amortisation schedule, exact payoff date, and interest saved when you make extra payments. Model avalanche or snowball strategies.</p>
-        </div>
 
-        <!-- 4 Spending Heatmap -->
-        <div class="feature-block">
-          <div class="feature-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a6e3f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-            </svg>
+          <!-- HOUSING -->
+          <div class="app-card">
+            <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+              <span class="app-cat-label" style="color:#c0392b;">HOUSING</span>
+              <span style="font-size:9px;color:#bbb;">edit</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:5px;">
+              <span class="app-amount-lg">$850.00</span>
+              <span class="app-cap-label">/ $1,500.00</span>
+            </div>
+            <div class="app-bar-track" style="margin-bottom:5px;"><div class="app-bar-fill" style="width:57%"></div></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+              <span class="app-pct-badge">57%</span>
+              <label class="app-roll-label"><input type="checkbox"> Roll unused</label>
+            </div>
+            <div class="app-status-warn">⚡ Hits cap around day 14</div>
           </div>
-          <h3>Spending Heatmap</h3>
-          <p>Calendar heat-map that shows daily spend intensity across the month. Spot the days you overspend — and the patterns that cause it.</p>
-        </div>
 
-        <!-- 5 Multi-Currency -->
-        <div class="feature-block">
-          <div class="feature-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a6e3f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-            </svg>
+          <!-- FOOD/MEALS overspent -->
+          <div class="app-card-over">
+            <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+              <span class="app-cat-label" style="color:#dc2626;">FOOD/MEALS</span>
+              <span style="font-size:9px;color:#bbb;">edit</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:5px;">
+              <span class="app-amount-lg-red">$595.00</span>
+              <span class="app-cap-label">/ $400.00</span>
+            </div>
+            <div style="height:5px;background:#f5c6cc;border-radius:3px;overflow:hidden;margin-bottom:5px;"><div style="width:100%;height:100%;background:#dc2626;border-radius:3px;"></div></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+              <span class="app-pct-badge-red">100%</span>
+              <label class="app-roll-label"><input type="checkbox"> Roll unused</label>
+            </div>
+            <div class="app-status-over">⚡ Hits cap around day 5</div>
           </div>
-          <h3>Multi-Currency</h3>
-          <p>Log expenses in any currency and see your totals converted to your home currency. Ideal for frequent travellers and remote workers.</p>
-        </div>
 
-        <!-- 6 PIN Lock -->
-        <div class="feature-block">
-          <div class="feature-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a6e3f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-            </svg>
+          <!-- HEALTH -->
+          <div class="app-card">
+            <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+              <span class="app-cat-label" style="color:#c0392b;">HEALTH</span>
+              <span style="font-size:9px;color:#bbb;">edit</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:5px;">
+              <span class="app-amount-lg">$680.00</span>
+              <span class="app-cap-label">/ $900.00</span>
+            </div>
+            <div class="app-bar-track" style="margin-bottom:5px;"><div class="app-bar-fill" style="width:76%"></div></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+              <span class="app-pct-badge">76%</span>
+              <label class="app-roll-label"><input type="checkbox"> Roll unused</label>
+            </div>
+            <div class="app-status-warn">⚡ Hits cap around day 11</div>
           </div>
-          <h3>PIN Lock</h3>
-          <p>Offline security baked in. Set a PIN and your financial data never leaves your device — not to our servers, not to anyone.</p>
-        </div>
 
+          <!-- AUTO -->
+          <div class="app-card">
+            <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+              <span class="app-cat-label" style="color:#c0392b;">AUTO</span>
+              <span style="font-size:9px;color:#bbb;">edit</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:5px;">
+              <span class="app-amount-lg">$245.00</span>
+              <span class="app-cap-label">/ $400.00</span>
+            </div>
+            <div class="app-bar-track" style="margin-bottom:5px;"><div class="app-bar-fill" style="width:61%"></div></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+              <span class="app-pct-badge">61%</span>
+              <label class="app-roll-label"><input type="checkbox"> Roll unused</label>
+            </div>
+            <div class="app-status-warn">⚡ Hits cap around day 13</div>
+          </div>
+
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- DEEP DIVE: ENVELOPES -->
-  <section class="deep-dive">
-    <div class="section-inner">
-      <div class="dive-row reveal">
-        <div class="dive-content">
-          <p class="section-label">Budget Envelopes</p>
-          <h2>Spend what you<br><em>planned to spend.</em></h2>
-          <p>The envelope method is the oldest budgeting system on earth — because it works. FincWin digitises it without the faff. Before the month starts, assign an amount to each of 14 categories. As you log expenses, the envelope fills. When it's full, you know.</p>
-          <ul class="detail-list">
-            <li>14 built-in categories: housing, food, auto, telecom, healthcare, entertainment, subscriptions, and more</li>
-            <li>Real-time spend percentage with colour-coded warnings</li>
-            <li>Surplus rollover — see what you underspent last month</li>
-            <li>Projected overspend alerts based on current pace</li>
-          </ul>
-          <a href="index.html" class="cta-link">Open the envelope view &nbsp;→</a>
-        </div>
-        <div class="dive-visual">
-          <div class="visual-title">Budget Envelopes — Jun 2026</div>
-          <div class="env-grid">
-            <div class="env-card">
-              <div class="env-label">Housing</div>
-              <div class="env-amount">$850 <span style="font-size:12px;color:#9ca3af;">/ $1,500</span></div>
-              <div class="env-bar"><div class="env-bar-fill" style="width:57%;background:#5a6e3f"></div></div>
-              <div class="env-note">57% · On pace</div>
-            </div>
-            <div class="env-card">
-              <div class="env-label">Telecom</div>
-              <div class="env-amount">$95 <span style="font-size:12px;color:#9ca3af;">/ $150</span></div>
-              <div class="env-bar"><div class="env-bar-fill" style="width:63%;background:#b7791f"></div></div>
-              <div class="env-note" style="color:#b7791f;">63% · Cap day 8</div>
-            </div>
-            <div class="env-card">
-              <div class="env-label">Food & Meals</div>
-              <div class="env-amount">$186 <span style="font-size:12px;color:#9ca3af;">/ $350</span></div>
-              <div class="env-bar"><div class="env-bar-fill" style="width:53%;background:#5a6e3f"></div></div>
-              <div class="env-note">53% · On pace</div>
-            </div>
-            <div class="env-card">
-              <div class="env-label">Entertainment</div>
-              <div class="env-amount">$14 <span style="font-size:12px;color:#9ca3af;">/ $80</span></div>
-              <div class="env-bar"><div class="env-bar-fill" style="width:18%;background:#5a6e3f"></div></div>
-              <div class="env-note">18% · Well under</div>
-            </div>
-            <div class="env-card">
-              <div class="env-label">Healthcare</div>
-              <div class="env-amount">$0 <span style="font-size:12px;color:#9ca3af;">/ $120</span></div>
-              <div class="env-bar"><div class="env-bar-fill" style="width:0%;background:#5a6e3f"></div></div>
-              <div class="env-note">0% · Not yet spent</div>
-            </div>
-            <div class="env-card">
-              <div class="env-label">Auto</div>
-              <div class="env-amount">$245 <span style="font-size:12px;color:#9ca3af;">/ $400</span></div>
-              <div class="env-bar"><div class="env-bar-fill" style="width:61%;background:#b7791f"></div></div>
-              <div class="env-note" style="color:#b7791f;">61% · Watch this</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="feature-grid">
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>5 payment frequencies</div><p>Weekly, biweekly, monthly, quarterly, and annual — every real-world billing cycle covered.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Bulk-add bills</div><p>Enter all your recurring bills in one session. Name, amount, category, frequency — done in minutes.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Pay-all action</div><p>Mark all items in a period as paid with one tap. Useful at month end or after payday.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Overspend alerts</div><p>Visual warnings at 80% (amber) and 100% (red) so you catch overruns before they happen.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Spending heatmap <span class="pro-tag">Pro</span></div><p>See which days and categories accumulate the most spending — patterns become obvious fast.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Smart insights <span class="pro-tag">Pro</span></div><p>Automated observations: "Your food spending is 20% higher than your 3-month average."</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Monthly rollover view</div><p>Step back through any past month to review what you spent and how envelopes filled over time.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Category deep-dive pages</div><p>Each of the 14 categories has its own detail page with history, tips, and sub-tracking.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Net cash flow</div><p>Income minus total expenses, updated live. The single number that tells you how the month is going.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- DEEP DIVE: LOAN TRACKER -->
-  <section class="deep-dive alt">
-    <div class="section-inner">
-      <div class="dive-row reverse reveal">
-        <div class="dive-content">
-          <p class="section-label">Loan Payoff Tracker</p>
-          <h2>Know the <em>exact date</em><br>you become debt-free.</h2>
-          <p>Most people pay their minimum and hope for the best. The loan tracker shows you what happens when you pay an extra $50, $100, or $200 per month — in months saved and dollars not wasted on interest.</p>
-          <ul class="detail-list">
-            <li>Full amortisation schedule: see every payment's principal vs. interest split</li>
-            <li>Extra payment modelling — drag and drop to see payoff date shift</li>
-            <li>Avalanche and snowball strategy comparison</li>
-            <li>DTI (debt-to-income) ratio indicator shown on dashboard</li>
-            <li>Payoff date countdown visible from the main dashboard</li>
-          </ul>
-          <a href="index.html" class="cta-link">See your payoff date &nbsp;→</a>
-        </div>
-        <div class="dive-visual">
-          <div class="visual-title">Active Loans</div>
-          <div class="loan-mock">
-            <div class="loan-item">
-              <div class="loan-name">Car Loan — Toyota</div>
-              <div class="loan-meta">6.4% APR &nbsp;·&nbsp; $380/mo minimum</div>
-              <div class="loan-bar"><div class="loan-bar-fill" style="width:52%"></div></div>
-              <div class="loan-stats">
-                <div><div class="loan-stat-label">Balance</div><div class="loan-stat-val">$11,200</div></div>
-                <div><div class="loan-stat-label">Payoff date</div><div class="loan-stat-val">Mar 2028</div></div>
-                <div><div class="loan-stat-label">With +$100</div><div class="loan-stat-val accent">Aug 2027</div></div>
+<!-- ══ LOANS ═════════════════════════════════════════════════════ -->
+<section class="module-section" id="loans">
+  <div class="module-inner">
+    <div class="module-header">
+      <span class="section-label">Loans module <span class="pro-tag">Pro</span></span>
+      <h2>Your debt, with <em>a finish line.</em></h2>
+      <p class="module-sub">Track every loan in one place, model payoff strategies, and get an exact date when each debt disappears. The difference between a payment and a plan is a calendar year you can believe in.</p>
+    </div>
+
+    <div class="feat-spotlight reverse">
+      <div class="spotlight-content">
+        <h3>The payoff date that <em>moves</em> when you do.</h3>
+        <p>Enter your current balance, interest rate, and minimum payment. FincWin calculates your payoff date. Then add $50 extra per month — watch it jump forward. Add $200 — see it move again. The calculator turns an abstract "I want to be debt free" into a date you can plan around.</p>
+        <p>Model the avalanche (highest interest first) or snowball (smallest balance first) method and compare which one clears your full debt stack faster.</p>
+      </div>
+
+      <!-- Loan card app-accurate mockup -->
+      <div class="app-screen">
+        <div style="font-size:11px;font-weight:600;color:#888;letter-spacing:.5px;margin-bottom:12px;">Active Loans &amp; Payment Tracking</div>
+        <div class="app-card" style="padding:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+            <div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px;">
+              <span style="font-size:14px;font-weight:600;color:#1a1a2e;">Mortgage — Final Years</span>
+              <span style="font-size:10px;color:#d97706;font-weight:600;display:flex;align-items:center;gap:2px;">⚡ Highest rate</span>
+              <span style="font-size:10px;color:#bbb;">#1</span>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:8px;">
+              <div style="font-size:20px;color:#1a1a2e;font-weight:400;display:flex;align-items:center;gap:4px;">$42,000.00
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
               </div>
-            </div>
-            <div class="loan-item">
-              <div class="loan-name">Student Loan — Federal</div>
-              <div class="loan-meta">4.5% APR &nbsp;·&nbsp; $220/mo minimum</div>
-              <div class="loan-bar"><div class="loan-bar-fill" style="width:71%"></div></div>
-              <div class="loan-stats">
-                <div><div class="loan-stat-label">Balance</div><div class="loan-stat-val">$8,400</div></div>
-                <div><div class="loan-stat-label">Payoff date</div><div class="loan-stat-val">Jan 2027</div></div>
-                <div><div class="loan-stat-label">Interest saved</div><div class="loan-stat-val accent">+$612</div></div>
-              </div>
+              <div style="font-size:11px;color:#dc2626;font-weight:500;">Payoff: Dec 2030</div>
             </div>
           </div>
+          <div style="font-size:11px;color:#aaa;margin-bottom:10px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span>&#9830; 3.25% APR</span><span>&#9830; Min $850.00/mo</span><span>&#9830; 0/0 paid</span>
+          </div>
+          <div style="font-size:11px;color:#666;margin-bottom:5px;">Paid $238,000.00 of $280,000.00</div>
+          <div style="height:8px;background:#e4e4ee;border-radius:4px;overflow:hidden;margin-bottom:5px;">
+            <div style="width:85%;height:100%;background:#6b1a30;border-radius:4px;"></div>
+          </div>
+          <div style="text-align:right;font-size:11px;color:#888;margin-bottom:14px;">85%</div>
+          <div style="font-size:11px;font-weight:600;color:#888;margin-bottom:10px;">Payment History</div>
+          <div style="display:flex;gap:7px;flex-wrap:wrap;">
+            <button class="app-btn-dark">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Edit Loan
+            </button>
+            <button class="app-btn-ghost">+ Log Month</button>
+            <button class="app-btn-ghost" style="display:flex;align-items:center;gap:4px;">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Calculator
+            </button>
+            <button class="app-btn-blue">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Generate Schedule
+            </button>
+          </div>
+        </div>
+        <div style="margin-top:10px;background:rgba(90,110,63,.07);border-radius:8px;padding:10px 12px;border:1px solid rgba(90,110,63,.14);">
+          <div style="font-size:10px;font-weight:600;color:#5a6e3f;margin-bottom:3px;">+ $200/mo extra payment modelled</div>
+          <div style="font-size:12px;color:#1a1a2e;">New payoff: <strong>Aug 2028</strong> — saves 2.3 yrs &amp; $4,200 interest</div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- DEEP DIVE: HEATMAP -->
-  <section class="deep-dive">
-    <div class="section-inner">
-      <div class="dive-row reveal">
-        <div class="dive-content">
-          <p class="section-label">Spending Heatmap</p>
-          <h2>See the days that<br><em>cost you most.</em></h2>
-          <p>Numbers in a table don't show patterns. A heat-map does. The calendar view lights up the days you spent heavily — so you can spot whether it's every Friday, every payday, or every time a subscription renews.</p>
-          <ul class="detail-list">
-            <li>Daily spend intensity colour-coded across the full month</li>
-            <li>Hover any day to see a breakdown of what you spent</li>
-            <li>Navigate backward through months to compare patterns</li>
-            <li>Instant visual for high-spend vs. low-spend periods</li>
-          </ul>
-          <a href="index.html" class="cta-link">View your heatmap &nbsp;→</a>
+    <div class="feature-grid">
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Multiple loan tracking</div><p>Track car loans, student loans, personal loans, credit cards — any debt you're paying down.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Avalanche &amp; snowball methods</div><p>Model both strategies and compare total interest paid and time to full payoff.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Extra payment modelling</div><p>Adjust extra monthly payments to see how they compress your payoff date and reduce interest.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Total interest projection</div><p>See exactly how much interest you'll pay at minimum vs. accelerated rates.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Debt-to-income tracking</div><p>Monthly debt payments as a percentage of income — a key factor in your financial health score.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Minimum payment summary</div><p>Total minimum payments across all loans at a glance — critical for cash flow planning.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SAVINGS ═══════════════════════════════════════════════════ -->
+<section class="module-section" id="savings">
+  <div class="module-inner">
+    <div class="module-header">
+      <span class="section-label">Savings module</span>
+      <h2>Goals that <em>stay visible</em> until they're done.</h2>
+      <p class="module-sub">Name what you're saving for. Give it a target and a date. Log contributions as they happen. The progress bar does the rest — turning an intention into a measurable fact.</p>
+    </div>
+
+    <div class="feat-spotlight">
+      <div class="spotlight-content">
+        <h3>See <em>every goal</em> advancing at once.</h3>
+        <p>Whether you have one savings goal on the free plan or fifteen on Pro, each one has a name, a target, a current balance, and a progress fill. You can set a contribution amount and an auto-transfer day — FincWin tracks whether you're on track for your deadline.</p>
+        <p>Goals that are behind schedule are flagged. Goals that are complete trigger a celebration. Nothing falls out of sight.</p>
+      </div>
+
+      <!-- Savings goal cards app-accurate mockup -->
+      <div class="app-screen">
+        <div style="font-size:11px;font-weight:600;color:#888;letter-spacing:.5px;margin-bottom:12px;">Savings Goals</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+
+          <!-- Retirement Supplement -->
+          <div class="app-card" style="position:relative;">
+            <button style="position:absolute;top:8px;right:8px;background:none;border:none;font-size:13px;color:#ccc;cursor:pointer;line-height:1;">×</button>
+            <div style="font-size:10px;color:#d97706;font-weight:700;letter-spacing:.5px;margin-bottom:6px;">&#9734; 5.2% P.A. INTEREST</div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px;">
+              <span style="font-size:20px;color:#1a1a2e;font-weight:400;">$45,000.00</span>
+              <span style="font-size:12px;font-weight:700;color:#4a6b28;">90%</span>
+            </div>
+            <div style="height:5px;background:#e4e4ee;border-radius:3px;overflow:hidden;margin-bottom:6px;">
+              <div class="app-bar-blue" style="width:90%;"></div>
+            </div>
+            <div style="font-size:10px;color:#888;margin-bottom:1px;">of $50,000.00 goal · Oct 2026 est.</div>
+            <div style="font-size:10px;color:#888;margin-bottom:10px;">$1,500.00/mo · Interest: $195.00/mo</div>
+            <div style="display:flex;gap:5px;">
+              <button class="app-btn-ghost" style="flex:1;padding:4px 4px;font-size:10px;">+ Deposit</button>
+              <button class="app-btn-ghost" style="flex:1;padding:4px 4px;font-size:10px;">− Withdraw</button>
+              <button class="app-btn-ghost" style="flex:1;padding:4px 4px;font-size:10px;">Edit</button>
+            </div>
+          </div>
+
+          <!-- Travel Fund -->
+          <div class="app-card" style="position:relative;">
+            <button style="position:absolute;top:8px;right:8px;background:none;border:none;font-size:13px;color:#ccc;cursor:pointer;line-height:1;">×</button>
+            <div style="font-size:10px;color:#d97706;font-weight:700;letter-spacing:.5px;margin-bottom:6px;">&#9734; 3.8% P.A. INTEREST</div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px;">
+              <span style="font-size:20px;color:#1a1a2e;font-weight:400;">$8,500.00</span>
+              <span style="font-size:12px;font-weight:700;color:#4a6b28;">71%</span>
+            </div>
+            <div style="height:5px;background:#e4e4ee;border-radius:3px;overflow:hidden;margin-bottom:6px;">
+              <div class="app-bar-blue" style="width:71%;"></div>
+            </div>
+            <div style="font-size:10px;color:#888;margin-bottom:1px;">of $12,000.00 goal · Mar 2027 est.</div>
+            <div style="font-size:10px;color:#888;margin-bottom:10px;">$400.00/mo · Interest: $26.92/mo</div>
+            <div style="display:flex;gap:5px;">
+              <button class="app-btn-ghost" style="flex:1;padding:4px 4px;font-size:10px;">+ Deposit</button>
+              <button class="app-btn-ghost" style="flex:1;padding:4px 4px;font-size:10px;">− Withdraw</button>
+              <button class="app-btn-ghost" style="flex:1;padding:4px 4px;font-size:10px;">Edit</button>
+            </div>
+          </div>
+
         </div>
-        <div class="dive-visual">
-          <div class="visual-title">June 2026 — Spending Intensity</div>
-          <div style="font-size:10px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:6px;">
-            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Unlimited goals <span class="pro-tag">Pro</span></div><p>1 goal on Free. Upgrade to Pro for unlimited goals — emergency fund, holiday, deposit, car, anything.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Deadline tracking</div><p>Set a target date per goal. FincWin calculates whether your current contribution pace will get you there.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Auto-transfer day</div><p>Log which day of the month you transfer to savings. FincWin tracks contributions automatically.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Interest rate estimate</div><p>Add an interest rate to your goal and FincWin factors it into the projected completion date.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Goal completion celebration</div><p>When you hit 100%, FincWin marks the goal complete with a confetti celebration. Small things matter.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Total savings summary</div><p>All goals aggregated: total saved, estimated interest earned, monthly contribution total.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ INVESTMENTS ═══════════════════════════════════════════════ -->
+<section class="module-section" id="investments">
+  <div class="module-inner">
+    <div class="module-header">
+      <span class="section-label">Investments module <span class="pro-tag">Pro</span></span>
+      <h2>Your portfolio,<br><em>inside your net worth.</em></h2>
+      <p class="module-sub">Log your investments the same way you log everything else — manually, privately, offline-first. See how your portfolio contributes to your overall financial health score.</p>
+    </div>
+    <div class="feat-spotlight reverse">
+      <div class="spotlight-content">
+        <h3>6 asset types,<br><em>one clear picture.</em></h3>
+        <p>Stocks, index funds, bonds, crypto, real estate, and other investments. Log monthly contributions and current values. FincWin weights your investment portfolio at 50% of its value toward your savings buffer score — recognising that investments are real wealth, just less liquid than cash.</p>
+        <p>Consistent investment logging across 3 months unlocks the "Consistent Investor" achievement and contributes to your Health Score's savings component.</p>
+      </div>
+
+      <!-- Investment cards app-accurate mockup -->
+      <div class="app-screen">
+        <div style="font-size:11px;font-weight:600;color:#888;letter-spacing:.5px;margin-bottom:12px;">Investment Portfolio</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+
+          <!-- S&P 500 ETF -->
+          <div class="app-card" style="position:relative;">
+            <button style="position:absolute;top:8px;right:8px;background:none;border:none;font-size:13px;color:#ccc;cursor:pointer;line-height:1;">×</button>
+            <div style="font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:6px;padding-right:16px;">S&amp;P 500 ETF</div>
+            <div style="display:flex;gap:5px;margin-bottom:8px;flex-wrap:wrap;">
+              <span class="app-type-badge">Brokerage</span>
+              <span class="app-return-badge">39.1% p.a.</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;">
+              <span style="font-size:18px;color:#1a1a2e;font-weight:400;">$124,600.00</span>
+              <span style="font-size:12px;font-weight:700;color:#4a6b28;">+39.1%</span>
+            </div>
+            <div style="font-size:10px;color:#888;margin-bottom:1px;">Invested: $89,600.00</div>
+            <div style="font-size:10px;color:#888;margin-bottom:1px;">G/L: <span style="color:#4a6b28;font-weight:600;">+$35,000.00</span></div>
+            <div style="font-size:10px;color:#bbb;margin-bottom:1px;">Updated 2026-06-08</div>
+            <div style="font-size:10px;color:#bbb;font-style:italic;margin-bottom:10px;">Core holding — DCA monthly</div>
+            <button class="app-btn-ghost" style="width:100%;text-align:center;">Edit</button>
           </div>
-          <div class="heatmap-days">
-            <div class="hday empty"></div>
-            <div class="hday l1">2</div>
-            <div class="hday l0">3</div>
-            <div class="hday l3">4</div>
-            <div class="hday l1">5</div>
-            <div class="hday l4">6</div>
-            <div class="hday l2">7</div>
-            <div class="hday l0">8</div>
-            <div class="hday l1">9</div>
-            <div class="hday l0">10</div>
-            <div class="hday l1">11</div>
-            <div class="hday l2">12</div>
-            <div class="hday l4">13</div>
-            <div class="hday l3">14</div>
-            <div class="hday l0">15</div>
-            <div class="hday l0">16</div>
-            <div class="hday l1">17</div>
-            <div class="hday l0">18</div>
-            <div class="hday l2">19</div>
-            <div class="hday l4">20</div>
-            <div class="hday l1">21</div>
-            <div class="hday l0">22</div>
-            <div class="hday l0">23</div>
-            <div class="hday l1">24</div>
-            <div class="hday l3">25</div>
-            <div class="hday l2">26</div>
-            <div class="hday l4">27</div>
-            <div class="hday l1">28</div>
-            <div class="hday l0">29</div>
-            <div class="hday l0">30</div>
+
+          <!-- Tech Growth ETF -->
+          <div class="app-card" style="position:relative;">
+            <button style="position:absolute;top:8px;right:8px;background:none;border:none;font-size:13px;color:#ccc;cursor:pointer;line-height:1;">×</button>
+            <div style="font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:6px;padding-right:16px;">Tech Growth ETF</div>
+            <div style="display:flex;gap:5px;margin-bottom:8px;flex-wrap:wrap;">
+              <span class="app-type-badge">ETF</span>
+              <span class="app-return-badge">27.6% p.a.</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;">
+              <span style="font-size:18px;color:#1a1a2e;font-weight:400;">$46,075.00</span>
+              <span style="font-size:12px;font-weight:700;color:#4a6b28;">+27.6%</span>
+            </div>
+            <div style="font-size:10px;color:#888;margin-bottom:1px;">Invested: $36,100.00</div>
+            <div style="font-size:10px;color:#888;margin-bottom:1px;">G/L: <span style="color:#4a6b28;font-weight:600;">+$9,975.00</span></div>
+            <div style="font-size:10px;color:#bbb;margin-bottom:12px;">Updated 2026-06-08</div>
+            <button class="app-btn-ghost" style="width:100%;text-align:center;">Edit</button>
           </div>
-          <div class="heatmap-legend">
-            <span>Less</span>
-            <div class="hlegend" style="background:#eef2e8;"></div>
-            <div class="hlegend" style="background:#c5d9b0;"></div>
-            <div class="hlegend" style="background:#8aaf6a;"></div>
-            <div class="hlegend" style="background:#5a6e3f;"></div>
-            <div class="hlegend" style="background:#3d4d2b;"></div>
-            <span>More</span>
+
+        </div>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid #e4e4ee;display:flex;justify-content:space-between;font-size:11px;color:#888;">
+          <span>Total portfolio value</span>
+          <span style="font-weight:700;color:#4a6b28;">$170,675.00</span>
+        </div>
+      </div>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>6 investment types</div><p>Stocks, index funds, bonds, crypto, real estate, and other. Every major asset class covered.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Monthly contribution log</div><p>Track how much you're adding each month — builds toward the Consistent Investor achievement.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Portfolio toward Health Score</div><p>Investments are factored into your savings buffer component of the 0–100 health score.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Portfolio Pro achievement</div><p>Log all 6 investment types in a single month to unlock the "Portfolio Pro" badge (200 XP).</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Net worth overview</div><p>Investments aggregate into your total net worth view alongside savings balances and debt.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Income diversity signal</div><p>Multiple revenue streams unlock the Income Diversity component (5 points) of your health score.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AI COACH ══════════════════════════════════════════════════ -->
+<section class="module-section" id="ai" style="background:var(--ink)">
+  <div class="module-inner">
+    <div class="module-header module-header-inv">
+      <span class="section-label-inv">AI Coach module <span class="pro-tag">Pro</span></span>
+      <h2 style="font-family:var(--serif);font-size:clamp(30px,4vw,52px);font-weight:400;line-height:1.1;color:var(--white);max-width:680px;">Ask anything<br>about <em style="font-style:italic;color:#a8c48a">your money.</em></h2>
+      <p class="module-sub module-sub-inv" style="max-width:560px">The AI Coach is powered by your own API key (OpenAI or Anthropic) — meaning FincWin never routes your financial conversations through its own servers. You control the cost. You control the model. Your data stays yours.</p>
+    </div>
+
+    <div class="feat-spotlight" style="margin-bottom:48px">
+      <div class="spotlight-content">
+        <h3 class="inv" style="font-family:var(--serif);font-size:clamp(22px,3vw,36px);font-weight:400;line-height:1.15;color:var(--white);margin-bottom:16px;">Bring your own API key.<br><em style="font-style:italic;color:#a8c48a">We don't see the conversation.</em></h3>
+        <p class="inv">Your questions, your financial context, and the AI's responses pass directly between your browser and the AI provider you choose. FincWin acts as the interface — not the intermediary. There's no FincWin server reading your salary or your debt balance.</p>
+        <p class="inv">Use Claude, GPT-4, or any compatible model. Pay the provider directly at API rates — typically a fraction of a cent per question.</p>
+      </div>
+      <div class="ui-mock dark-mock">
+        <div class="mock-topbar dark">
+          <span class="mock-title-sm inv">AI Coach</span>
+          <span style="font-size:11px;color:rgba(255,255,255,.35)">Powered by your API key</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:rgba(255,255,255,.06);border-radius:10px 10px 2px 10px;padding:12px 14px;font-size:13px;color:rgba(255,255,255,.7);line-height:1.55;">If I add $200/month to my mortgage, how much faster do I pay it off?</div>
+          <div style="background:rgba(90,110,63,.15);border-radius:2px 10px 10px 10px;padding:12px 14px;font-size:13px;color:rgba(255,255,255,.8);line-height:1.65;border-left:2px solid #a8c48a;">Based on your $42,000 balance at 3.25% APR, adding $200/month to your $850 minimum cuts payoff from Dec 2030 to <strong style="color:#a8c48a">Aug 2028</strong> — saving 2.3 years and approx. $4,200 in interest.</div>
+          <div style="background:rgba(255,255,255,.06);border-radius:10px 10px 2px 10px;padding:12px 14px;font-size:13px;color:rgba(255,255,255,.7);line-height:1.55;">What should I redirect that $850 to once it's paid off?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-item dark-bg"><div class="feature-item-title inv"><div class="feature-item-dot"></div>Natural language questions</div><p class="inv">Ask in plain English. "Where am I spending most?" "Am I on track for my emergency fund?" "What's my debt-to-income ratio?"</p></div>
+      <div class="feature-item dark-bg"><div class="feature-item-title inv"><div class="feature-item-dot"></div>Context-aware responses</div><p class="inv">The AI understands your actual FincWin data — balances, categories, goals — not generic advice.</p></div>
+      <div class="feature-item dark-bg"><div class="feature-item-title inv"><div class="feature-item-dot"></div>OpenAI &amp; Anthropic support</div><p class="inv">Use GPT-4, GPT-4o, Claude 3.5 Sonnet, or any compatible model. Switch any time.</p></div>
+      <div class="feature-item dark-bg"><div class="feature-item-title inv"><div class="feature-item-dot"></div>No data leaves to FincWin</div><p class="inv">API calls go directly from your browser to the AI provider. FincWin never intercepts the conversation.</p></div>
+      <div class="feature-item dark-bg"><div class="feature-item-title inv"><div class="feature-item-dot"></div>Spending analysis insights</div><p class="inv">Ask the coach to identify patterns, unusual months, or categories trending higher than your average.</p></div>
+      <div class="feature-item dark-bg"><div class="feature-item-title inv"><div class="feature-item-dot"></div>Budget recommendations</div><p class="inv">The coach can suggest cap adjustments based on your spending history and cash flow situation.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GAMIFICATION ══════════════════════════════════════════════ -->
+<section class="module-section" id="gamification">
+  <div class="module-inner">
+    <div class="module-header">
+      <span class="section-label">Gamification module <span class="pro-tag">Pro</span></span>
+      <h2>Good habits, <em>rewarded.</em></h2>
+      <p class="module-sub">XP, levels, achievements, and a 0–100 financial health score that measures what actually matters. Gamification only works when the things being rewarded are the right things — so every badge in FincWin maps to a real financial behaviour.</p>
+    </div>
+    <div class="feat-spotlight reverse">
+      <div class="spotlight-content">
+        <h3>A health score that measures <em>real progress.</em></h3>
+        <p>The Health Score is calculated from 6 weighted components: cash flow (25 pts), debt-to-income ratio (25 pts), payment rate (20 pts), debt load (15 pts), savings buffer (10 pts), and income diversity (5 pts). Every number comes from your actual FincWin data.</p>
+        <p>Tiers run from Beginner through Building, Stable, Strong, Elite, and Perfect. Each tier has a colour and a story — and the score only moves when your real finances move.</p>
+      </div>
+
+      <!-- Dashboard header app-accurate mockup -->
+      <div class="app-screen" style="padding:0;overflow:hidden;">
+        <!-- Top dashboard area -->
+        <div style="padding:20px 18px 14px;text-align:center;background:#f0f0f6;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:5px;">JUN 2026</div>
+          <div style="font-size:36px;font-weight:400;color:#2d5016;font-family:Georgia,serif;line-height:1.1;margin-bottom:7px;">$7,820.00</div>
+          <div style="font-size:10px;color:#888;margin-bottom:10px;">Income $10,520.00 &nbsp;·&nbsp; Expenses $2,700.00 &nbsp;·&nbsp; Pending $866.00</div>
+          <div style="display:flex;justify-content:center;gap:5px;flex-wrap:wrap;">
+            <span style="background:#eaf5e0;color:#4a6b28;font-size:9px;font-weight:700;border-radius:20px;padding:3px 9px;display:flex;align-items:center;gap:3px;">&#9650; $576 vs May</span>
+            <span style="background:#fff7e0;color:#b45309;font-size:9px;font-weight:700;border-radius:20px;padding:3px 9px;">32% bills pending</span>
+            <span style="background:#eaf5e0;color:#4a6b28;font-size:9px;font-weight:700;border-radius:20px;padding:3px 9px;">Health 89/100</span>
+            <span style="background:#fff0e8;color:#c2410c;font-size:9px;font-weight:700;border-radius:20px;padding:3px 9px;">&#128293; 2</span>
           </div>
-          <div style="margin-top:16px;padding:12px;background:var(--faint);border-radius:8px;">
-            <div style="font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">Jun 6 — Heavy spend day</div>
-            <div style="font-size:13px;color:var(--ink);">$284 &nbsp;·&nbsp; Groceries $86, Insurance $148, Gas $50</div>
+        </div>
+        <!-- Stats row -->
+        <div style="background:white;border-top:1px solid #e4e4ee;padding:10px 12px 8px;">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:10px;">
+            <div style="text-align:center;padding:6px 4px;border-right:1px solid #f4f4f4;">
+              <div style="font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#aaa;margin-bottom:3px;">INCOME</div>
+              <div style="font-size:12px;font-weight:500;color:#1a1a2e;">$10,520</div>
+              <div style="font-size:9px;color:#4a6b28;">&#9650; $10.00</div>
+            </div>
+            <div style="text-align:center;padding:6px 4px;border-right:1px solid #f4f4f4;">
+              <div style="font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#aaa;margin-bottom:3px;">EXPENSES</div>
+              <div style="font-size:12px;font-weight:500;color:#1a1a2e;">$2,700</div>
+              <div style="font-size:9px;color:#dc2626;">&#9660; $566.00</div>
+            </div>
+            <div style="text-align:center;padding:6px 4px;border-right:1px solid #f4f4f4;">
+              <div style="font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#aaa;margin-bottom:3px;">SAVINGS</div>
+              <div style="font-size:12px;font-weight:500;color:#1a1a2e;">$53,500</div>
+              <div style="font-size:9px;color:#888;">0/2 goals met</div>
+            </div>
+            <div style="text-align:center;padding:6px 4px;">
+              <div style="font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#aaa;margin-bottom:3px;">NET WORTH</div>
+              <div style="font-size:12px;font-weight:500;color:#2d5016;">$208,175</div>
+              <div style="font-size:9px;color:#888;">$252k assets</div>
+            </div>
+          </div>
+          <!-- XP bar -->
+          <div style="border-top:1px solid #f4f4f4;padding-top:8px;">
+            <div style="display:flex;justify-content:space-between;font-size:9px;color:#aaa;margin-bottom:4px;"><span>Budgeter · 1640/2000 XP</span><span>8/35</span></div>
+            <div style="height:4px;background:#e4e4ee;border-radius:2px;overflow:hidden;margin-bottom:7px;">
+              <div style="width:82%;height:100%;background:#5a6e3f;border-radius:2px;"></div>
+            </div>
+            <div style="display:flex;gap:4px;flex-wrap:wrap;">
+              <span style="background:#fff7e0;border:1.5px solid #d97706;color:#b45309;font-size:9px;font-weight:700;border-radius:5px;padding:2px 6px;">&#128200; +300 XP</span>
+              <span style="background:#eef2f8;border:1.5px solid #5b7fa8;color:#3b5c80;font-size:9px;font-weight:700;border-radius:5px;padding:2px 6px;">&#128197; +150 XP</span>
+              <span style="background:#eef2f8;border:1.5px solid #5b7fa8;color:#3b5c80;font-size:9px;font-weight:700;border-radius:5px;padding:2px 6px;">&#128260; +150 XP</span>
+              <span style="background:#fef0f0;border:1.5px solid #dc2626;color:#dc2626;font-size:9px;font-weight:700;border-radius:5px;padding:2px 6px;">&#10005; −75 XP</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- CTA STRIP -->
-  <section class="cta-strip">
-    <div class="section-inner reveal">
-      <p class="section-label" style="color:rgba(255,255,255,.3);">Ready?</p>
-      <h2>Start free.<br><em>No account required.</em></h2>
-      <p>Open FincWin in your browser and start tracking today. Your data stays on your device from the very first entry.</p>
-      <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
-        <a href="index.html" class="btn-primary">Open the app &nbsp;→</a>
-        <a href="pricing.html" class="btn-ghost" style="border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.6);">View pricing</a>
-      </div>
+    <div class="feature-grid">
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>40+ achievements</div><p>From "First Bill Paid" to "Debt Free" to "Perfect Score" — every badge maps to a real financial action.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>XP &amp; 10 levels</div><p>Earn XP from financial behaviours. Climb from Beginner (Level 1) to Wealth Architect (Level 10).</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Category badges</div><p>Stay within cap in a single category for 3 consecutive months — unlock that category's badge.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Monthly streaks</div><p>3-month and 6-month positive cash flow streaks unlock rare achievements and bonus XP.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Legendary tiers</div><p>"Debt Free" and "Perfect Score" are legendary rarity — the two hardest achievements to unlock.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Health score algorithm</div><p>Transparent, documented scoring formula. No black box — you always know what moves the number.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="landing.html" class="nav-logo">Finc<span>Win</span></a>
-        <p>Personal finance clarity, offline and private.</p>
+<!-- ══ SECURITY ══════════════════════════════════════════════════ -->
+<section class="module-section" id="security">
+  <div class="module-inner">
+    <div class="module-header">
+      <span class="section-label">Security module</span>
+      <h2>Your data, <em>locked to you.</em></h2>
+      <p class="module-sub">PIN lock, AES-256 passphrase encryption, biometric unlock, auto-lock on inactivity. Security features available on all plans — because protecting your financial data shouldn't be a premium feature.</p>
+    </div>
+    <div class="feat-spotlight">
+      <div class="spotlight-content">
+        <h3>Encrypted at rest.<br><em>Never transmitted.</em></h3>
+        <p>When you enable passphrase encryption, your entire financial data store is encrypted using AES-256-GCM with a key derived from your passphrase via PBKDF2 (310,000 iterations). The key is never stored — it's derived fresh from your passphrase each session.</p>
+        <p>The PIN lock uses a separate session key mechanism — meaning one 6-digit PIN per browser tab session, with auto-lock after your configured inactivity period.</p>
       </div>
-      <div class="footer-cols">
-        <div>
-          <h4>Product</h4>
-          <a href="features.html">Features</a>
-          <a href="features-v2.html">All Features</a><a href="help.html">User Guide</a>
-          <a href="pricing.html">Pricing</a>
-          <a href="index.html">Open App</a>
+      <div class="ui-mock">
+        <div class="mock-topbar">
+          <span class="mock-title-sm">Security Settings</span>
+          <span class="mock-badge-sm" style="background:rgba(90,110,63,.12);color:var(--sage)">All active</span>
         </div>
-        <div>
-          <h4>Account</h4>
-          <a href="signin.html">Sign In</a>
-          <a href="account.html">My Account</a>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
+        <div class="sec-items">
+          <div class="sec-item"><div class="sec-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><div class="sec-item-text"><div class="sec-item-title">PIN Lock</div><div class="sec-item-sub">6-digit PIN · Session token</div></div><span class="sec-item-badge">On</span></div>
+          <div class="sec-item"><div class="sec-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="sec-item-text"><div class="sec-item-title">AES-256 Encryption</div><div class="sec-item-sub">PBKDF2 key derivation</div></div><span class="sec-item-badge">On</span></div>
+          <div class="sec-item"><div class="sec-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3z"/><path d="M12 14c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z"/></svg></div><div class="sec-item-text"><div class="sec-item-title">Biometric Unlock</div><div class="sec-item-sub">WebAuthn where available</div></div><span class="sec-item-badge">On</span></div>
+          <div class="sec-item"><div class="sec-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="sec-item-text"><div class="sec-item-title">Auto-lock</div><div class="sec-item-sub">After 10 min inactivity</div></div><span class="sec-item-badge">On</span></div>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">© 2026 FincWin. All rights reserved.</div>
-  </footer>
+    <div class="feature-grid">
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>6-digit PIN</div><p>One PIN unlock per browser session. Tab close clears the session token — re-enter on next visit.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>AES-256-GCM encryption</div><p>Industry-standard symmetric encryption. Your data is ciphertext without the passphrase key.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Biometric unlock</div><p>Where WebAuthn is available (most modern phones and laptops), use fingerprint or face unlock.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Auto-lock on inactivity</div><p>Configurable inactivity timeout. Pointer and keyboard activity resets the timer.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Cross-tab sync warning</div><p>If your data is saved in another tab, the current tab warns you before you risk a conflict.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Vault Keeper achievement</div><p>Enable both PIN lock and passphrase encryption to unlock the rare-tier Vault Keeper badge.</p></div>
+    </div>
+  </div>
+</section>
 
-  <script>
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
-    });
-    const reveals = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(el => io.observe(el));
-  </script>
+<!-- ══ SYNC & DATA ═══════════════════════════════════════════════ -->
+<section class="module-section" id="sync">
+  <div class="module-inner">
+    <div class="module-header">
+      <span class="section-label">Sync &amp; Data module</span>
+      <h2>Offline-first. <em>Backed up when you want.</em></h2>
+      <p class="module-sub">FincWin works entirely offline — no account required to use the app. When you want to back up or move devices, encrypted Google Drive sync and JSON export keep your data safe on your terms.</p>
+    </div>
+    <div class="feature-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Offline-first PWA</div><p>Installs on any device, works without internet. Your data is local — always available.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Google Drive backup <span class="pro-tag">Pro</span></div><p>Encrypted backup to your own Drive. FincWin can't read it — only your device can decrypt it.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>CSV bank import <span class="pro-tag">Pro</span></div><p>Import transactions from any bank's CSV export. Map columns once and FincWin handles the rest.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>JSON export</div><p>Full data export at any time. Your data in a readable format — no lock-in, ever.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Multi-currency <span class="pro-tag">Pro</span></div><p>Live exchange rates via open API. Track expenses in any currency — converted to your base currency.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>PWA install badge</div><p>Install FincWin to your home screen (Android, iOS, desktop) for a native-app experience.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Demo profile</div><p>Explore FincWin fully loaded with realistic demo data — no setup required before trying.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Undo system</div><p>Most destructive actions (delete, edit, archive) are undoable within a short window.</p></div>
+      <div class="feature-item"><div class="feature-item-title"><div class="feature-item-dot"></div>Multiple themes</div><p>6 visual themes including Dark mode, Light Glass, and more. Saved to your device preferences.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COMPARISON TABLE ══════════════════════════════════════════ -->
+<section class="compare-section" id="compare">
+  <div class="compare-inner">
+    <div class="compare-header">
+      <span class="section-label">How FincWin compares</span>
+      <h2>Privacy-first budgeting,<br><em>on your terms.</em></h2>
+      <p>No app is right for everyone. Here's an honest look at where FincWin fits — and where it doesn't.</p>
+    </div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th class="feat-col"></th>
+          <th class="fw-col">FincWin Pro</th>
+          <th>YNAB</th>
+          <th>Mint (defunct)</th>
+          <th>Monarch Money</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="cat-row"><td colspan="5">Pricing</td></tr>
+        <tr><td class="feat-col">Price</td><td class="fw-col check-y">$39/year (or $149 lifetime)</td><td>$109/year</td><td>Free (discontinued)</td><td>$100/year</td></tr>
+        <tr><td class="feat-col">Free plan</td><td class="fw-col check-y">✓ Permanent free tier</td><td class="check-n">34-day trial only</td><td class="check-n">—</td><td class="check-n">—</td></tr>
+        <tr><td class="feat-col">Lifetime option</td><td class="fw-col check-y">✓ $149 one-time</td><td class="check-n">✗</td><td class="check-n">—</td><td class="check-n">✗</td></tr>
+        <tr class="cat-row"><td colspan="5">Privacy &amp; Data</td></tr>
+        <tr><td class="feat-col">Financial data location</td><td class="fw-col check-y">✓ Local storage only</td><td class="check-p">Cloud</td><td class="check-p">Cloud (sold data)</td><td class="check-p">Cloud</td></tr>
+        <tr><td class="feat-col">Works fully offline</td><td class="fw-col check-y">✓ Complete offline use</td><td class="check-p">Limited</td><td class="check-n">✗</td><td class="check-n">✗</td></tr>
+        <tr><td class="feat-col">No account to use core app</td><td class="fw-col check-y">✓</td><td class="check-n">✗ Account required</td><td class="check-n">✗</td><td class="check-n">✗</td></tr>
+        <tr><td class="feat-col">Encrypted local backup</td><td class="fw-col check-y">✓ AES-256 via Drive</td><td class="check-n">✗</td><td class="check-n">—</td><td class="check-n">✗</td></tr>
+        <tr class="cat-row"><td colspan="5">Features</td></tr>
+        <tr><td class="feat-col">Envelope budgeting</td><td class="fw-col check-y">✓ 14 categories</td><td class="check-y">✓</td><td class="check-n">✗</td><td class="check-p">Partial</td></tr>
+        <tr><td class="feat-col">Loan payoff calculator</td><td class="fw-col check-y">✓ With extra-payment model</td><td class="check-n">✗</td><td class="check-p">Basic</td><td class="check-p">Basic</td></tr>
+        <tr><td class="feat-col">AI financial coach</td><td class="fw-col check-y">✓ BYOK (your API key)</td><td class="check-n">✗</td><td class="check-n">—</td><td class="check-p">Built-in (cloud)</td></tr>
+        <tr><td class="feat-col">Gamification &amp; XP</td><td class="fw-col check-y">✓ 40+ achievements</td><td class="check-n">✗</td><td class="check-n">—</td><td class="check-n">✗</td></tr>
+        <tr><td class="feat-col">Financial health score</td><td class="fw-col check-y">✓ 0–100, 6 components</td><td class="check-n">✗</td><td class="check-n">—</td><td class="check-p">Credit score only</td></tr>
+        <tr><td class="feat-col">Multi-currency</td><td class="fw-col check-y">✓ Live exchange rates</td><td class="check-p">Limited</td><td class="check-n">✗</td><td class="check-n">✗</td></tr>
+        <tr><td class="feat-col">PWA / installable</td><td class="fw-col check-y">✓ All platforms</td><td class="check-p">Partial</td><td class="check-n">—</td><td class="check-n">✗</td></tr>
+        <tr><td class="feat-col">Bank sync</td><td class="fw-col check-p">CSV import (no live sync)</td><td class="check-y">✓ Live bank sync</td><td class="check-y">✓ (discontinued)</td><td class="check-y">✓ Live bank sync</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:20px;font-size:12px;color:var(--muted);text-align:center">FincWin intentionally does not offer live bank sync — connecting to banking APIs requires sharing credentials and introduces a third-party data intermediary. CSV import keeps financial data local.</p>
+  </div>
+</section>
+
+<!-- ══ FULL FEATURE DIRECTORY ════════════════════════════════════ -->
+<section class="directory" id="all-features">
+  <div class="directory-inner">
+    <div class="directory-header">
+      <span class="section-label">Complete feature list</span>
+      <h2>Everything FincWin <em>does.</em></h2>
+    </div>
+
+    <div class="dir-cat">
+      <div class="dir-cat-title">Budget &amp; Expenses</div>
+      <div class="dir-list">
+        <div class="dir-item"><span>14 pre-built spending categories</span></div>
+        <div class="dir-item"><span>5 payment frequencies (weekly–annual)</span></div>
+        <div class="dir-item"><span>Per-category monthly caps</span></div>
+        <div class="dir-item"><span>Real-time envelope fill progress</span></div>
+        <div class="dir-item"><span>Overspend alerts at 80% + 100%</span></div>
+        <div class="dir-item"><span>Bulk-add bills in one session</span></div>
+        <div class="dir-item"><span>Pay-all one-tap action</span></div>
+        <div class="dir-item"><span>Monthly rollover / archive view</span></div>
+        <div class="dir-item"><span>Net cash flow (income − expenses)</span></div>
+        <div class="dir-item"><span>Spending heatmap <span class="dir-pro">Pro</span></span></div>
+        <div class="dir-item"><span>Smart spending insights <span class="dir-pro">Pro</span></span></div>
+        <div class="dir-item"><span>Category deep-dive pages</span></div>
+        <div class="dir-item"><span>Notes on individual expenses</span></div>
+        <div class="dir-item"><span>Receipt image attachments</span></div>
+        <div class="dir-item"><span>Tag filtering</span></div>
+      </div>
+    </div>
+
+    <div class="dir-cat">
+      <div class="dir-cat-title">Loans &amp; Debt <span class="dir-pro">Pro</span></div>
+      <div class="dir-list">
+        <div class="dir-item"><span>Multiple loan tracking</span></div>
+        <div class="dir-item"><span>Snowball payoff method</span></div>
+        <div class="dir-item"><span>Avalanche payoff method</span></div>
+        <div class="dir-item"><span>Extra payment modelling</span></div>
+        <div class="dir-item"><span>Exact payoff date calculation</span></div>
+        <div class="dir-item"><span>Total interest projection</span></div>
+        <div class="dir-item"><span>Minimum payment tracker</span></div>
+        <div class="dir-item"><span>Debt-to-income ratio display</span></div>
+        <div class="dir-item"><span>Payment history per loan</span></div>
+      </div>
+    </div>
+
+    <div class="dir-cat">
+      <div class="dir-cat-title">Savings Goals</div>
+      <div class="dir-list">
+        <div class="dir-item"><span>1 goal on Free / unlimited on Pro</span></div>
+        <div class="dir-item"><span>Named goals with target amounts</span></div>
+        <div class="dir-item"><span>Deadline tracking (on-track / behind)</span></div>
+        <div class="dir-item"><span>Monthly contribution logging</span></div>
+        <div class="dir-item"><span>Auto-transfer day scheduling</span></div>
+        <div class="dir-item"><span>Interest rate estimate</span></div>
+        <div class="dir-item"><span>Projected completion date</span></div>
+        <div class="dir-item"><span>Goal completion celebration</span></div>
+        <div class="dir-item"><span>Total savings summary view</span></div>
+      </div>
+    </div>
+
+    <div class="dir-cat">
+      <div class="dir-cat-title">Investments <span class="dir-pro">Pro</span></div>
+      <div class="dir-list">
+        <div class="dir-item"><span>6 asset types (stocks, funds, bonds, crypto, real estate, other)</span></div>
+        <div class="dir-item"><span>Monthly contribution tracking</span></div>
+        <div class="dir-item"><span>Portfolio value summary</span></div>
+        <div class="dir-item"><span>Contribution to net worth</span></div>
+        <div class="dir-item"><span>Feeds into health score savings component</span></div>
+        <div class="dir-item"><span>Consistent Investor achievement tracking</span></div>
+      </div>
+    </div>
+
+    <div class="dir-cat">
+      <div class="dir-cat-title">AI Coach <span class="dir-pro">Pro</span></div>
+      <div class="dir-list">
+        <div class="dir-item"><span>Natural language financial questions</span></div>
+        <div class="dir-item"><span>Context-aware (reads your FincWin data)</span></div>
+        <div class="dir-item"><span>OpenAI GPT-4 / GPT-4o support</span></div>
+        <div class="dir-item"><span>Anthropic Claude support</span></div>
+        <div class="dir-item"><span>Bring-your-own API key</span></div>
+        <div class="dir-item"><span>Direct browser-to-provider calls (no FincWin relay)</span></div>
+        <div class="dir-item"><span>Spending pattern analysis</span></div>
+        <div class="dir-item"><span>Budget cap recommendations</span></div>
+      </div>
+    </div>
+
+    <div class="dir-cat">
+      <div class="dir-cat-title">Gamification &amp; Health <span class="dir-pro">Pro</span></div>
+      <div class="dir-list">
+        <div class="dir-item"><span>40+ achievements across 6 categories</span></div>
+        <div class="dir-item"><span>XP point system</span></div>
+        <div class="dir-item"><span>10 named levels (Beginner → Wealth Architect)</span></div>
+        <div class="dir-item"><span>Category-specific badges (14 categories × badge)</span></div>
+        <div class="dir-item"><span>3-month and 6-month streak achievements</span></div>
+        <div class="dir-item"><span>Legendary-tier "Debt Free" and "Perfect Score" achievements</span></div>
+        <div class="dir-item"><span>0–100 financial health score</span></div>
+        <div class="dir-item"><span>6-component score breakdown</span></div>
+        <div class="dir-item"><span>6 health tiers (Beginner → Perfect)</span></div>
+        <div class="dir-item"><span>3-month rolling average for stability</span></div>
+      </div>
+    </div>
+
+    <div class="dir-cat">
+      <div class="dir-cat-title">Security &amp; Privacy</div>
+      <div class="dir-list">
+        <div class="dir-item"><span>6-digit PIN lock</span></div>
+        <div class="dir-item"><span>Session token (one PIN per tab session)</span></div>
+        <div class="dir-item"><span>AES-256-GCM passphrase encryption</span></div>
+        <div class="dir-item"><span>PBKDF2 key derivation (310,000 iterations)</span></div>
+        <div class="dir-item"><span>Biometric unlock (WebAuthn)</span></div>
+        <div class="dir-item"><span>Configurable inactivity auto-lock</span></div>
+        <div class="dir-item"><span>Cross-tab sync conflict warning</span></div>
+        <div class="dir-item"><span>All financial data in local storage — never transmitted</span></div>
+      </div>
+    </div>
+
+    <div class="dir-cat">
+      <div class="dir-cat-title">Sync, Data &amp; Platform</div>
+      <div class="dir-list">
+        <div class="dir-item"><span>Offline-first PWA</span></div>
+        <div class="dir-item"><span>Installable on Android, iOS, desktop</span></div>
+        <div class="dir-item"><span>Google Drive backup (encrypted) <span class="dir-pro">Pro</span></span></div>
+        <div class="dir-item"><span>CSV bank statement import <span class="dir-pro">Pro</span></span></div>
+        <div class="dir-item"><span>JSON full data export</span></div>
+        <div class="dir-item"><span>Multi-currency + live exchange rates <span class="dir-pro">Pro</span></span></div>
+        <div class="dir-item"><span>6 visual themes including dark mode</span></div>
+        <div class="dir-item"><span>Demo profile with realistic data</span></div>
+        <div class="dir-item"><span>Undo system for destructive actions</span></div>
+        <div class="dir-item"><span>Desktop app via Tauri (Lifetime — coming)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="feat-cta-strip">
+  <div class="feat-cta-inner">
+    <span class="section-label-inv">Ready to start?</span>
+    <h2>Free to try. <em>Built to keep.</em></h2>
+    <p>Start with the free plan — no card, no expiry. Upgrade when the features make sense for where you are.</p>
+    <div class="feat-cta-pair">
+      <a href="/app" class="btn-primary">Get started free →</a>
+      <a href="/pricing" class="btn-ghost-inv">View pricing</a>
+    </div>
+  </div>
+</div>
+
+<footer class="mkt-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><a href="/" class="footer-logo">Finc<span>Win</span></a><p>The personal finance dashboard for people who want clarity, not complexity.</p></div>
+      <div class="footer-col"><h4>Product</h4><a href="/features">Features</a><a href="/pricing">Pricing</a><a href="/compare">Compare</a><a href="/use-cases">Use cases</a><a href="/app">Open app</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about">About</a><a href="/changelog">Changelog</a><a href="/contact">Contact</a></div>
+      
+      <div class="footer-col"><h4>Learn</h4><a href="/blog">Blog</a><a href="/help">Help guide</a></div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom"><p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookie-policy">Cookies</a></div></div>
+  </div>
+</footer>
+
+
+
+<script src="/js/features.js" defer></script>
+<script src="/js/mkt.js" defer></script>
 </body>
 </html>
+
+
+

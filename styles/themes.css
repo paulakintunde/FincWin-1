@@ -53,8 +53,11 @@ body[data-design="glass"] .aurora-layer { display: block; }
 @media (prefers-reduced-motion: reduce) { .aurora-blob { animation: none; } }
 
 /* ── z-index content layer (Glass) ── */
-body[data-design="glass"] .topbar,
-body[data-design="glass"] .tab-bar,
+/* NOTE: do NOT set position here for .topbar/.tab-bar — they rely on
+   position:sticky from layout.css to stay fixed to the top on scroll.
+   Overriding to position:relative previously broke sticky in glass only.
+   z-index applies to sticky elements, so raising them above the aurora
+   layer (z-index:0) needs only z-index, not a position change. */
 body[data-design="glass"] .main,
 body[data-design="glass"] #lockScreen {
   position: relative; z-index: 1;

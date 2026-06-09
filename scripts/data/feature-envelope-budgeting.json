@@ -1,0 +1,17 @@
+{
+  "META_TITLE": "Envelope Budgeting — Give Every Dollar a Job | FincWin",
+  "META_DESCRIPTION": "FincWin's envelope budgeting gives every dollar a job across 14 categories and 5 frequencies — so you always know what's safe to spend. Free to start.",
+  "OG_DESCRIPTION": "Real envelope budgeting: 14 categories, 5 frequencies, and a clear safe-to-spend number. Free, private, offline.",
+  "CANONICAL_URL": "https://fincwin.com/features/envelope-budgeting",
+  "FEATURE_NAME": "Envelope Budgeting",
+  "FEATURE_MODULE": "Budgeting",
+  "FEATURE_HEADLINE": "Give every dollar <em>a job</em>",
+  "FEATURE_SUBHEAD": "Assign your income to categories before you spend it. FincWin tracks each envelope so you always know what's left.",
+  "PROBLEM_HEADLINE": "Spending categories tell you the past, not the plan",
+  "PROBLEM_BODY": "<p>Most apps show you where money went after it's gone. That's a report, not a budget. By the time you see the overspend, it already happened.</p><p>Envelope budgeting flips it: you decide where each dollar goes first, then spend against the plan. FincWin keeps every envelope live as you go.</p>",
+  "HOW_IT_WORKS": "<li><strong>Set your income</strong> — your monthly take-home becomes the pool you assign from.</li>\n    <li><strong>Create envelopes</strong> — Housing, Food, Transport, Subscriptions and more, across 14 categories.</li>\n    <li><strong>Choose a frequency</strong> — weekly, fortnightly, monthly, quarterly or yearly caps per envelope.</li>\n    <li><strong>Spend against the plan</strong> — each envelope shows what's left in real time.</li>",
+  "CAPABILITIES": "<li><span class=\"li-icon\">✓</span><span><strong>14 categories</strong> covering every part of a real budget.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>5 frequencies</strong> — match caps to how your bills actually land.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Safe-to-spend</strong> figure updated as you log expenses.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Rollover control</strong> for envelopes you want to carry forward.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Multi-currency</strong> — budget in any currency.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Offline &amp; private</strong> — data stays in your browser.</span></li>",
+  "FEATURE_PLAN": "Free & Pro",
+  "CTA_HEADLINE": "Start your first <em>budget</em> today.",
+  "RELATED_FEATURES": "<a href=\"/features/savings-goals\" class=\"related-link\"><span>Feature</span><p>Savings Goals</p></a>\n    <a href=\"/features/analytics-dashboard\" class=\"related-link\"><span>Feature</span><p>Analytics Dashboard</p></a>\n    <a href=\"/blog/posts/envelope-budgeting-method\" class=\"related-link\"><span>Budgeting</span><p>The Envelope Budgeting Method</p></a>\n    <a href=\"/use-cases/building-savings\" class=\"related-link\"><span>Use case</span><p>Building Savings</p></a>"
+}

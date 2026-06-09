@@ -697,7 +697,7 @@ function clearReceipt(){
   closeReceiptModal();renderExpenses();showToast('✓ Receipt removed');
 }
 
-function openImport(){const _im2=document.getElementById('importModal');_im2.classList.add('open');trapFocus(_im2);}
+function openImport(){if(typeof requirePlan==='function'&&!requirePlan('pro','CSV Bank Import'))return;const _im2=document.getElementById('importModal');_im2.classList.add('open');trapFocus(_im2);}
 function closeImport(){const _im2=document.getElementById('importModal');releaseTrap(_im2);_im2.classList.remove('open');}
 function validateImport(p){
   if(!p||typeof p!=='object')return false;

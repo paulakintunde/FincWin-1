@@ -1,0 +1,14 @@
+/* Shared design tokens for auth pages (signin.html, account.html) */
+:root {
+  --sage:    #5a6e3f;
+  --sage-lt: #dce8d4;
+  --sage-dk: #3d4d2b;
+  --ink:     #111111;
+  --muted:   #6b7280;
+  --faint:   #f5f4f0;
+  --white:   #ffffff;
+  --border:  rgba(0,0,0,.09);
+  --danger:  #dc2626;
+  --sans:   'Hanken Grotesk', sans-serif;
+  --serif:  'Instrument Serif', serif;
+}

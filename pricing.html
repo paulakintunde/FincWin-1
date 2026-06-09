@@ -1,10 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pricing — FincWin</title>
-  <meta name="description" content="Simple, one-time pricing. No subscriptions. Starter $49, Pro $89, Lifetime $149. Own it forever.">
+  <title>FincWin Pricing — Free, Pro $39/yr, Lifetime $149 · YNAB Alternative</title>
+  <meta name="description" content="FincWin is free to start — no card required. Pro is $39/year. Lifetime is $149 once. A cheaper YNAB alternative with no bank login and no data sharing.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fincwin.com/pricing">
+  <link rel="alternate" hreflang="en" href="https://fincwin.com/pricing">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fincwin.com/pricing">
+  <meta property="og:title" content="FincWin Pricing — Free, Pro $39/yr, Lifetime $149">
+  <meta property="og:description" content="Free forever. Pro from $39/year. Lifetime for $149 — one payment, every feature, no renewals. 30-day refund guarantee.">
+  <meta property="og:image" content="https://fincwin.com/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FincWin Pricing — Free, Pro $39/yr, Lifetime $149">
+  <meta name="twitter:description" content="Free forever. Pro from $39/year. Lifetime for $149 — one payment, every feature, no renewals.">
+  <meta name="twitter:image" content="https://fincwin.com/og-image.svg">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +33,6 @@
       --faint:   #f5f4f0;
       --white:   #ffffff;
       --border:  rgba(0,0,0,.08);
-      --r: 10px;
       --sans: 'Hanken Grotesk', sans-serif;
       --serif: 'Instrument Serif', serif;
     }
@@ -33,12 +44,12 @@
       -webkit-font-smoothing: antialiased; overflow-x: hidden;
     }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 22px 48px;
-      background: rgba(255,255,255,.85); backdrop-filter: blur(12px);
+      background: rgba(255,255,255,.85); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
       border-bottom: 1px solid transparent; transition: border-color .3s;
     }
     nav.scrolled { border-color: var(--border); }
@@ -48,13 +59,17 @@
     .nav-links a { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; transition: color .2s; }
     .nav-links a:hover { color: var(--ink); }
     .nav-links a.active { color: var(--ink); font-weight: 500; }
-    .nav-cta { font-size: 13px; font-weight: 500; color: var(--white) !important; background: var(--ink); padding: 9px 20px; border-radius: 50px; transition: background .2s !important; }
+    .nav-cta {
+      font-size: 13px; font-weight: 500; color: var(--white) !important;
+      background: var(--ink); padding: 9px 20px; border-radius: 50px;
+      transition: background .2s !important;
+    }
     .nav-cta:hover { background: var(--sage) !important; }
 
-    /* HERO */
+    /* ── HERO ── */
     .hero {
-      min-height: 60vh; display: flex; flex-direction: column; align-items: center;
-      justify-content: center; text-align: center; padding: 160px 24px 80px;
+      min-height: 52vh; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; text-align: center; padding: 160px 24px 72px;
       position: relative; overflow: hidden;
     }
     .hero::before {
@@ -69,59 +84,111 @@
     }
     .hero h1 {
       font-family: var(--serif);
-      font-size: clamp(40px, 6vw, 76px); font-weight: 400; line-height: 1.05;
-      color: var(--ink); max-width: 760px;
+      font-size: clamp(34px, 5vw, 62px); font-weight: 400; line-height: 1.1;
+      color: var(--ink); max-width: 800px;
       opacity: 0; animation: fadeUp .7s .2s forwards;
     }
     .hero h1 em { font-style: italic; color: var(--sage); }
     .hero-sub {
-      margin-top: 24px; font-size: clamp(16px, 2vw, 19px); font-weight: 300;
-      color: var(--muted); max-width: 480px; line-height: 1.6;
+      margin-top: 24px; font-size: clamp(15px, 1.8vw, 18px); font-weight: 300;
+      color: var(--muted); max-width: 480px; line-height: 1.65;
       opacity: 0; animation: fadeUp .7s .35s forwards;
     }
 
-    /* SHARED */
+    /* ── SHARED ── */
     section { padding: 100px 48px; }
     .section-inner { max-width: 1060px; margin: 0 auto; }
-    .section-label { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 20px; }
+    .section-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 20px;
+    }
+    .section-label-inv { color: rgba(255,255,255,.3); }
     h2 { font-family: var(--serif); font-size: clamp(32px, 4vw, 52px); font-weight: 400; line-height: 1.1; color: var(--ink); }
     h2 em { font-style: italic; color: var(--sage); }
 
-    /* PRICING CARDS */
+    /* ── BILLING TOGGLE ── */
+    .billing-toggle-wrap {
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px; margin-bottom: 44px;
+    }
+    .billing-toggle {
+      display: flex; align-items: center;
+      background: white; border: 1px solid var(--border);
+      border-radius: 10px; padding: 4px; gap: 2px;
+    }
+    .btog-opt {
+      padding: 8px 20px; border-radius: 8px; border: none; background: none;
+      font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--muted);
+      cursor: pointer; transition: background .15s, color .15s;
+    }
+    .btog-opt.active { background: var(--ink); color: white; }
+    .btog-save {
+      display: inline-flex; align-items: center;
+      background: var(--sage-lt); color: var(--sage-dk);
+      font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 20px; transition: opacity .2s;
+    }
+
+    /* ── PRICING CARDS ── */
     .pricing-section { background: var(--faint); }
     .pricing-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 16px; margin-top: 56px; align-items: start;
+      gap: 16px; align-items: start;
     }
     .price-card {
       background: white; border-radius: 16px; border: 1px solid var(--border);
-      padding: 40px 36px; position: relative; transition: transform .2s, box-shadow .2s;
+      padding: 40px 36px; position: relative;
+      transition: transform .2s, box-shadow .2s;
     }
     .price-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.08); }
     .price-card.featured {
       background: var(--ink); border-color: var(--ink); transform: scale(1.03);
     }
     .price-card.featured:hover { transform: scale(1.03) translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,.2); }
+
     .price-badge {
       position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
       background: var(--sage); color: white;
       font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
-      padding: 4px 14px; border-radius: 20px;
+      padding: 4px 14px; border-radius: 20px; white-space: nowrap;
     }
-    .price-plan { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+    .price-plan {
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
+    }
     .price-card.featured .price-plan { color: rgba(255,255,255,.4); }
-    .price-amount { font-family: var(--serif); font-size: 52px; font-weight: 400; color: var(--ink); line-height: 1; letter-spacing: -1px; }
+
+    .price-was {
+      font-size: 13px; color: var(--muted); text-decoration: line-through;
+      margin-bottom: 2px;
+    }
+    .price-amount {
+      font-family: var(--serif); font-size: 52px; font-weight: 400;
+      color: var(--ink); line-height: 1; letter-spacing: -1px;
+    }
     .price-card.featured .price-amount { color: white; }
-    .price-amount sup { font-family: var(--sans); font-size: 22px; font-weight: 300; vertical-align: super; }
-    .price-was { font-size: 13px; color: var(--muted); margin-top: 4px; text-decoration: line-through; }
-    .price-card.featured .price-was { color: rgba(255,255,255,.3); }
+    .price-amount sup {
+      font-family: var(--sans); font-size: 22px; font-weight: 300; vertical-align: super;
+    }
+    .price-cents { font-family: var(--serif); font-size: 30px; letter-spacing: 0; }
+
+    .price-tagline { font-size: 13px; color: var(--sage); font-weight: 500; margin-top: 8px; }
+    .price-card.featured .price-tagline { color: #a8c48a; }
+
     .price-period { font-size: 13px; color: var(--muted); margin-top: 4px; }
     .price-card.featured .price-period { color: rgba(255,255,255,.4); }
+
     .price-divider { height: 1px; background: var(--border); margin: 28px 0; }
     .price-card.featured .price-divider { background: rgba(255,255,255,.1); }
+
     .price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .price-features li { font-size: 13px; font-weight: 300; color: var(--muted); display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; }
+    .price-features li {
+      font-size: 13px; font-weight: 300; color: var(--muted);
+      display: flex; align-items: flex-start; gap: 10px; line-height: 1.4;
+    }
     .price-card.featured .price-features li { color: rgba(255,255,255,.55); }
+
+    /* check — included */
     .price-features li::before {
       content: ''; width: 14px; height: 14px; flex-shrink: 0; margin-top: 1px;
       background: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235a6e3f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
@@ -129,22 +196,37 @@
     .price-card.featured .price-features li::before {
       background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a8c48a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
     }
-    .price-features li.dim::before {
-      background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23d1d5db' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E");
-    }
-    .price-features li.dim { opacity: .4; }
-    .price-cta {
-      display: block; width: 100%; margin-top: 32px; padding: 14px; border-radius: 50px;
-      text-align: center; font-family: var(--sans); font-size: 14px; font-weight: 500;
-      text-decoration: none; cursor: pointer; border: none; transition: background .2s, transform .15s;
-    }
-    .price-cta-outline { background: transparent; color: var(--ink); border: 1px solid var(--border); }
-    .price-cta-outline:hover { border-color: var(--ink); transform: translateY(-1px); }
-    .price-cta-inv { background: white; color: var(--ink); }
-    .price-cta-inv:hover { background: var(--faint); transform: translateY(-1px); }
-    .pricing-note { text-align: center; margin-top: 28px; font-size: 13px; color: var(--muted); }
 
-    /* COMPARISON TABLE */
+    /* lock — gated feature (Free tier) */
+    .price-features li.locked { opacity: .38; }
+    .price-features li.locked::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='18' height='11' x='3' y='11' rx='2'/%3E%3Cpath d='M7 11V7a5 5 0 0 1 10 0v4'/%3E%3C/svg%3E");
+    }
+
+    .price-cta {
+      display: block; width: 100%; margin-top: 32px; padding: 14px;
+      border-radius: 50px; text-align: center;
+      font-family: var(--sans); font-size: 14px; font-weight: 500;
+      text-decoration: none; border: 1px solid transparent;
+      transition: background .2s, border-color .2s, transform .15s;
+    }
+    .price-cta-outline { background: transparent; color: var(--ink); border-color: var(--border); }
+    .price-cta-outline:hover { border-color: var(--ink); transform: translateY(-1px); }
+    .price-cta-inv { background: white; color: var(--ink); border-color: white; }
+    .price-cta-inv:hover { background: var(--faint); border-color: var(--faint); transform: translateY(-1px); }
+
+    /* Break-even + trust line */
+    .breakeven-note {
+      text-align: center; margin-top: 28px;
+      font-size: 13px; color: var(--muted);
+    }
+    .breakeven-note strong { color: var(--ink); font-weight: 500; }
+    .pricing-trust {
+      text-align: center; margin-top: 10px;
+      font-size: 12px; color: var(--muted); line-height: 1.8;
+    }
+
+    /* ── COMPARISON TABLE ── */
     .comparison-section { background: var(--white); }
     .compare-table {
       width: 100%; border-collapse: collapse; margin-top: 48px;
@@ -166,13 +248,16 @@
     .compare-table tr:last-child td { border-bottom: none; }
     .compare-table tr:hover td { background: var(--faint); }
     .compare-table tr:hover td.highlight { background: rgba(17,17,17,.04); }
-    .check { color: var(--sage); font-size: 16px; font-weight: 600; }
-    .cross { color: #d1d5db; font-size: 16px; }
+    .check { color: var(--sage); font-size: 15px; font-weight: 600; }
+    .cross { color: #d1d5db; font-size: 15px; }
     .row-label { font-weight: 400; color: var(--ink); }
 
-    /* FAQ */
+    /* ── FAQ ── */
     .faq-section { background: var(--faint); }
-    .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 2px; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .faq-list {
+      margin-top: 48px; display: flex; flex-direction: column; gap: 2px;
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    }
     .faq-item { background: white; border-bottom: 1px solid var(--border); }
     .faq-item:last-child { border-bottom: none; }
     .faq-question {
@@ -193,17 +278,25 @@
     }
     .faq-item.open .faq-answer { display: block; }
 
-    /* BOTTOM CTA */
+    /* ── BOTTOM CTA ── */
     .bottom-cta { background: var(--ink); padding: 120px 48px; text-align: center; }
     .bottom-cta h2 { color: white; }
     .bottom-cta h2 em { color: #a8c48a; }
-    .bottom-cta p { color: rgba(255,255,255,.45); margin: 20px auto 44px; max-width: 440px; font-size: 17px; font-weight: 300; line-height: 1.6; }
-    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 50px; background: var(--ink); color: var(--white); font-family: var(--sans); font-size: 14px; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: background .2s, transform .15s; }
-    .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
-    .bottom-cta .btn-primary { background: white; color: var(--ink); }
-    .bottom-cta .btn-primary:hover { background: var(--sage-lt); }
+    .bottom-cta p {
+      color: rgba(255,255,255,.45); margin: 20px auto 44px;
+      max-width: 440px; font-size: 17px; font-weight: 300; line-height: 1.6;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 50px;
+      background: white; color: var(--ink);
+      font-family: var(--sans); font-size: 14px; font-weight: 500;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--sage-lt); transform: translateY(-1px); }
 
-    /* FOOTER */
+    /* ── FOOTER ── */
     footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.06); padding: 56px 48px 36px; }
     .footer-inner { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: start; }
     .footer-brand .nav-logo { color: white; font-size: 16px; }
@@ -214,7 +307,11 @@
     .footer-cols h4 { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.25); margin-bottom: 4px; }
     .footer-cols a { font-size: 13px; color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
     .footer-cols a:hover { color: rgba(255,255,255,.7); }
-    .footer-bottom { max-width: 1060px; margin: 36px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06); font-size: 12px; color: rgba(255,255,255,.2); }
+    .footer-bottom { max-width: 1060px; margin: 36px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06); font-size: 12px; color: rgba(255,255,255,.2);   display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-copy { font-size: 12px; }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
+    .footer-legal a:hover { color: rgba(255,255,255,.7); }
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
@@ -226,6 +323,7 @@
       section { padding: 72px 24px; }
       .pricing-grid { grid-template-columns: 1fr; }
       .price-card.featured { transform: none; }
+      .price-card.featured:hover { transform: translateY(-4px); }
       .compare-table th, .compare-table td { padding: 12px 14px; font-size: 12px; }
       .footer-inner { grid-template-columns: 1fr; gap: 40px; }
       .footer-cols { gap: 32px; flex-wrap: wrap; }
@@ -233,95 +331,200 @@
       footer { padding: 48px 24px 28px; }
     }
   </style>
+  <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "FincWin Personal Finance Dashboard",
+  "description": "Offline-first personal finance app with budget tracking, debt payoff calculator, savings goals, and AI coaching. No bank login required.",
+  "brand": { "@type": "Brand", "name": "FincWin" },
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Free Plan",
+      "price": "0.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://fincwin.com/pricing"
+    },
+    {
+      "@type": "Offer",
+      "name": "Pro Annual",
+      "price": "39.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "priceValidUntil": "2026-12-31",
+      "url": "https://fincwin.com/pricing"
+    },
+    {
+      "@type": "Offer",
+      "name": "Lifetime",
+      "price": "149.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://fincwin.com/pricing"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is FincWin really free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The free plan is permanent — no trial, no expiry, no credit card required. You get the core dashboard, 90-day expense history, 14 budget categories, and CSV export forever."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where is my financial data stored?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All your financial data stays on your device in your browser's local storage. FincWin never transmits your budgets, expenses, loans, or savings to its servers. The optional Google Drive backup encrypts your data with AES-256 before upload, making it unreadable to anyone but you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the Lifetime plan include?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Lifetime plan is a one-time payment of $149 that includes everything in Pro plus all future features at no extra cost, early beta access, the upcoming desktop app (Tauri), and unlimited custom budget categories. No renewals, ever."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a refund policy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. FincWin offers a 30-day no-questions-asked refund on all paid plans."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fincwin.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://fincwin.com/pricing" }
+  ]
+}
+</script>
 </head>
 <body>
 
-  <nav id="nav">
-    <a href="landing.html" class="nav-logo">Finc<span>Win</span></a>
-    <div class="nav-links">
-      <a href="features.html">Features</a>
-      <a href="pricing.html" class="active">Pricing</a>
-      <a href="index.html">App</a>
-      <a href="signin.html" class="nav-cta">Sign in</a>
-    </div>
-  </nav>
+  <nav id="mainNav">
+  <a href="/" class="nav-logo">Finc<span>Win</span></a>
+  <div class="nav-links">
+    <a href="/features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/compare">Compare</a>
+    <a href="/use-cases">Use cases</a>
+    <a href="/blog">Blog</a>
+    <a href="/app">App</a>
+    <a href="/app" class="nav-cta">Get started free</a>
+  </div>
+</nav>
 
   <!-- HERO -->
   <section class="hero">
     <p class="hero-eyebrow">Pricing</p>
-    <h1>Simple pricing.<br><em>No subscriptions.</em></h1>
-    <p class="hero-sub">Pay once, own it forever. No annual renewals, no quiet price hikes, no upsells six months in.</p>
+    <h1>Simple annual billing.<br>No surprise upsells.<br>Or buy Lifetime and never pay again.</h1>
+    <p class="hero-sub">FincWin is free to use. You only pay to unlock more of it.</p>
   </section>
 
   <!-- PRICING CARDS -->
   <section class="pricing-section">
     <div class="section-inner">
+
+      <div class="billing-toggle-wrap">
+        <div class="billing-toggle">
+          <button type="button" class="btog-opt active" data-period="annual">Annual</button>
+          <button type="button" class="btog-opt" data-period="monthly">Monthly</button>
+        </div>
+        <span class="btog-save" id="btog-save-pill">Save 35%</span>
+      </div>
+
       <div class="pricing-grid reveal">
 
-        <!-- Starter -->
+        <!-- FREE -->
         <div class="price-card">
-          <div class="price-plan">Starter</div>
-          <div class="price-amount"><sup>$</sup>49</div>
-          <div class="price-was">Was $69</div>
-          <div class="price-period">One-time &nbsp;·&nbsp; 1 device</div>
+          <div class="price-plan">Free</div>
+          <div class="price-amount"><sup>$</sup>0</div>
+          <div class="price-tagline">Try it free</div>
+          <div class="price-period">No card required. No expiry.</div>
           <div class="price-divider"></div>
           <ul class="price-features">
-            <li>Monthly expense tracking</li>
-            <li>Budget envelopes (all 14 categories)</li>
-            <li>Income & revenue tracker</li>
-            <li>Due date calendar</li>
-            <li>Spending heatmap</li>
-            <li>Local data storage</li>
-            <li class="dim">AI Coach</li>
-            <li class="dim">Google Drive sync</li>
-            <li class="dim">Multi-device (up to 3)</li>
+            <li>Core financial dashboard</li>
+            <li>Expense tracking (90-day history)</li>
+            <li>Budget categories</li>
+            <li>Income &amp; bill tracker</li>
+            <li>Local PIN lock</li>
+            <li>1 savings goal</li>
+            <li>Demo profile &amp; sample data</li>
+            <li class="locked">Google Drive encrypted sync</li>
+            <li class="locked">CSV bank statement import</li>
+            <li class="locked">Loan payoff calculator</li>
+            <li class="locked">Unlimited savings goals</li>
+            <li class="locked">Analytics &amp; forecasting</li>
+            <li class="locked">AI Financial Coach</li>
           </ul>
-          <a href="signin.html#register" class="price-cta price-cta-outline">Get Starter — $49</a>
+          <a href="/app" class="price-cta price-cta-outline">Get started free</a>
         </div>
 
-        <!-- Pro — featured -->
+        <!-- PRO — featured -->
         <div class="price-card featured">
           <div class="price-badge">Most popular</div>
           <div class="price-plan">Pro</div>
-          <div class="price-amount"><sup>$</sup>89</div>
-          <div class="price-was">Was $120</div>
-          <div class="price-period">One-time &nbsp;·&nbsp; 3 devices</div>
+          <div class="price-amount" id="pro-amount"><sup>$</sup>39</div>
+          <div class="price-tagline" id="pro-tagline">Full access, billed annually</div>
+          <div class="price-period" id="pro-period">Or $4.99/month. Cancel anytime.</div>
           <div class="price-divider"></div>
           <ul class="price-features">
-            <li>Everything in Starter</li>
-            <li>AI Financial Coach</li>
+            <li>Everything in Free</li>
+            <li>Unlimited history &amp; savings goals</li>
             <li>Google Drive encrypted backup</li>
-            <li>Loan paydown calculator</li>
-            <li>Savings goal tracker</li>
-            <li>Analytics & forecasting</li>
-            <li>CSV bank import</li>
-            <li>3-device activation</li>
+            <li>CSV bank statement import</li>
+            <li>Loan payoff calculator</li>
+            <li>Analytics &amp; forecasting</li>
+            <li>Full gamification suite (XP, streaks, health score)</li>
+            <li>AI Financial Coach (your own API key)</li>
           </ul>
-          <a href="signin.html#register" class="price-cta price-cta-inv">Get Pro — $89</a>
+          <a href="signin.html#register" class="price-cta price-cta-inv" id="pro-cta">Get Pro — $39/yr</a>
         </div>
 
-        <!-- Lifetime -->
+        <!-- LIFETIME -->
         <div class="price-card">
           <div class="price-plan">Lifetime</div>
-          <div class="price-amount"><sup>$</sup>149</div>
           <div class="price-was">Was $200</div>
-          <div class="price-period">One-time &nbsp;·&nbsp; 5 devices</div>
+          <div class="price-amount"><sup>$</sup>149</div>
+          <div class="price-tagline">Pay once, own it forever</div>
+          <div class="price-period">One payment. All future features. No renewals.</div>
           <div class="price-divider"></div>
           <ul class="price-features">
             <li>Everything in Pro</li>
-            <li>5-device activation</li>
             <li>All future features included</li>
-            <li>Priority support</li>
-            <li>Custom categories (unlimited)</li>
-            <li>Early access to new features</li>
+            <li>Early access to new releases</li>
             <li>Desktop app (Tauri) when released</li>
+            <li>Custom categories (unlimited)</li>
             <li>Lifetime updates — no renewals ever</li>
           </ul>
-          <a href="signin.html#register" class="price-cta price-cta-outline">Get Lifetime — $149</a>
+          <a href="signin.html#register" class="price-cta price-cta-outline">Get Lifetime</a>
         </div>
 
       </div>
-      <p class="pricing-note reveal">All plans include a 30-day refund — no questions asked &nbsp;·&nbsp; Secure payment via Lemon Squeezy</p>
+
+      <p class="breakeven-note reveal"><strong>Lifetime pays for itself in under 4 years.</strong> After that, it's free forever.</p>
+      <p class="pricing-trust reveal">All plans include a 30-day refund — no questions asked &nbsp;·&nbsp; Secure payment via Lemon Squeezy &nbsp;·&nbsp; Your data never touches our servers</p>
+
     </div>
   </section>
 
@@ -334,23 +537,17 @@
         <thead>
           <tr>
             <th>Feature</th>
-            <th>Starter</th>
+            <th>Free</th>
             <th class="highlight">Pro</th>
             <th>Lifetime</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="row-label">Devices</td>
-            <td>1</td>
-            <td class="highlight">3</td>
-            <td>5</td>
-          </tr>
-          <tr>
-            <td class="row-label">Expense frequencies</td>
-            <td>Monthly only</td>
-            <td class="highlight">All 5 frequencies</td>
-            <td>All 5 frequencies</td>
+            <td class="row-label">Expense history</td>
+            <td>90 days</td>
+            <td class="highlight">Unlimited</td>
+            <td>Unlimited</td>
           </tr>
           <tr>
             <td class="row-label">Budget categories</td>
@@ -359,22 +556,10 @@
             <td>Unlimited (custom)</td>
           </tr>
           <tr>
-            <td class="row-label">AI Financial Coach</td>
-            <td class="cross">—</td>
-            <td class="highlight"><span class="check">✓</span></td>
-            <td><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td class="row-label">Loan payoff tracker</td>
-            <td class="cross">—</td>
-            <td class="highlight"><span class="check">✓</span></td>
-            <td><span class="check">✓</span></td>
-          </tr>
-          <tr>
-            <td class="row-label">Spending heatmap</td>
-            <td><span class="check">✓</span></td>
-            <td class="highlight"><span class="check">✓</span></td>
-            <td><span class="check">✓</span></td>
+            <td class="row-label">Savings goals</td>
+            <td>1</td>
+            <td class="highlight">Unlimited</td>
+            <td>Unlimited</td>
           </tr>
           <tr>
             <td class="row-label">Google Drive backup</td>
@@ -383,16 +568,46 @@
             <td><span class="check">✓</span></td>
           </tr>
           <tr>
-            <td class="row-label">Future updates</td>
-            <td>Minor only</td>
-            <td class="highlight">Major included</td>
-            <td>All, forever</td>
+            <td class="row-label">CSV bank import</td>
+            <td class="cross">—</td>
+            <td class="highlight"><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
           </tr>
           <tr>
-            <td class="row-label">Priority support</td>
+            <td class="row-label">Loan payoff calculator</td>
             <td class="cross">—</td>
-            <td class="highlight"><span class="cross">—</span></td>
+            <td class="highlight"><span class="check">✓</span></td>
             <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Analytics &amp; forecasting</td>
+            <td class="cross">—</td>
+            <td class="highlight"><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Gamification (XP, streaks)</td>
+            <td class="cross">—</td>
+            <td class="highlight"><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">AI Financial Coach</td>
+            <td class="cross">—</td>
+            <td class="highlight"><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">All future features</td>
+            <td class="cross">—</td>
+            <td class="cross">—</td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Desktop app (Tauri)</td>
+            <td class="cross">—</td>
+            <td class="cross">—</td>
+            <td>When released</td>
           </tr>
         </tbody>
       </table>
@@ -407,43 +622,51 @@
       <div class="faq-list reveal">
 
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            What is a licence key?
+          <button type="button" class="faq-question">
+            What is a licence key and how does it work?
             <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-answer">A licence key is a unique code that unlocks your paid features. After purchase via Lemon Squeezy, you'll receive a key by email in the format XXXX-XXXX-XXXX-XXXX. Enter it on the Sign In page or in Account settings to activate FincWin on your device. You'll only need to do this once per device.</div>
+          <div class="faq-answer">A licence key is a unique code (XXXX-XXXX-XXXX-XXXX) you receive by email after purchasing Pro or Lifetime via Lemon Squeezy. Enter it on the Sign In page or in Account settings to unlock paid features on your device. You'll only need to do this once per device. The Free plan needs no key at all.</div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            Can I switch plans later?
+          <button type="button" class="faq-question">
+            Can I upgrade from Free to Pro, or from Pro to Lifetime?
             <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-answer">Yes. If you start on Starter and want to upgrade to Pro or Lifetime, contact support and we'll apply a credit for what you already paid. You'll only pay the difference. Downgrades aren't possible, but you'd keep your current plan until it expires (which for one-time purchases means forever).</div>
+          <div class="faq-answer">Yes. Going from Free to Pro means purchasing a Pro key — your data carries over automatically. Upgrading from Pro to Lifetime: contact us and we'll credit the remaining months on your annual plan. You pay the difference only. The Free plan is always available with no time limit regardless of whether you hold a paid key.</div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
+          <button type="button" class="faq-question">
+            What's the real difference between annual Pro and Lifetime?
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">Pro at $39/yr gives you all current features, with your price locked in as long as you renew. Lifetime at $149 is a single payment — it includes everything in Pro plus all future features, priority support, and the upcoming desktop app. At $39/yr, Lifetime pays for itself in under four years. After that, it costs you nothing.</div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-question">
             Is my financial data safe?
             <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-answer">Your financial data never leaves your device. Everything — budgets, expenses, loan details, savings goals — is stored in your browser's localStorage. We have no server that holds your financial records. The only thing we store on our side is your email address (if you create an account) and your licence key for validation purposes.</div>
+          <div class="faq-answer">Your <strong>financial data</strong> — budgets, expenses, loan details, savings goals — never leaves your device. It lives in your browser's local storage only and is not transmitted to FincWin or any backend. If you enable Google Drive backup, that data is encrypted on your device before it reaches Drive, so neither Google nor we can read it. We do use external storage (Google's cloud) to manage your account: it stores your email address, licence key, display name, and plan — nothing financial. This is what allows your licence to be restored automatically on a new device.</div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
+          <button type="button" class="faq-question">
             What happens if I lose my licence key?
             <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-answer">Email us at support@fincwin.app with your purchase email and we'll retrieve your key immediately. If you have a FincWin account, you can also find your key under Account → Licence. Keys are permanent — we never expire them or charge renewal fees.</div>
+          <div class="faq-answer">Email us at support@fincwin.com with your purchase email and we'll retrieve your key straight away. If you have a FincWin account, you can also find your key under Account → Licence. Keys never expire — we don't charge renewal fees on Lifetime plans, and Annual plans renew the key automatically.</div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
+          <button type="button" class="faq-question">
             Do you offer refunds?
             <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-answer">Yes — 30 days, no questions asked. If FincWin isn't right for you within 30 days of purchase, email us and we'll process a full refund. After 30 days, refunds are at our discretion but we're reasonable people — if something isn't working, reach out and we'll find a solution.</div>
+          <div class="faq-answer">Yes — 30 days, no questions asked. If FincWin isn't right for you within 30 days of purchase, email us and we'll process a full refund. After 30 days, refunds are at our discretion — but we're reasonable people. If something isn't working, reach out and we'll find a solution.</div>
         </div>
 
       </div>
@@ -453,10 +676,10 @@
   <!-- BOTTOM CTA -->
   <section class="bottom-cta">
     <div class="section-inner reveal">
-      <p class="section-label" style="color:rgba(255,255,255,.3);">Still deciding?</p>
-      <h2>Try the app free.<br><em>No account needed.</em></h2>
-      <p>The full budgeting core — envelopes, expense tracking, heatmap — is yours without buying anything. Upgrade when you're ready.</p>
-      <a href="index.html" class="btn-primary">Open FincWin free &nbsp;→</a>
+      <p class="section-label section-label-inv">Start for free</p>
+      <h2>Your next paycheck<br><em>deserves a plan.</em></h2>
+      <p>The core dashboard — envelopes, expense tracking, income tracker — is yours without buying anything. Upgrade to Pro when you're ready.</p>
+      <a href="/app" class="btn-primary">Open FincWin free &nbsp;→</a>
     </div>
   </section>
 
@@ -464,48 +687,36 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-brand">
-        <a href="landing.html" class="nav-logo">Finc<span>Win</span></a>
-        <p>Personal finance clarity, offline and private.</p>
+        <a href="/" class="nav-logo">Finc<span>Win</span></a>
+        <p>The personal finance dashboard for people who want clarity, not complexity.</p>
       </div>
       <div class="footer-cols">
         <div>
           <h4>Product</h4>
-          <a href="features.html">Features</a>
-          <a href="features-v2.html">All Features</a><a href="help.html">User Guide</a>
-          <a href="pricing.html">Pricing</a>
-          <a href="index.html">Open App</a>
+          <a href="/features">Features</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/compare">Compare</a>
+          <a href="/use-cases">Use cases</a>
+          <a href="/app">Open app</a>
         </div>
         <div>
-          <h4>Account</h4>
-          <a href="signin.html">Sign In</a>
-          <a href="account.html">My Account</a>
+          <h4>Company</h4>
+          <a href="/about">About</a>
+          <a href="/changelog">Changelog</a>
+          <a href="/contact">Contact</a>
         </div>
         <div>
-          <h4>Legal</h4>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
+          <h4>Learn</h4>
+          <a href="/blog">Blog</a>
+          <a href="/help">Help guide</a>
         </div>
+        
       </div>
     </div>
-    <div class="footer-bottom">© 2026 FincWin. All rights reserved.</div>
+    <div class="footer-bottom"><p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookie-policy">Cookies</a></div></div>
   </footer>
 
-  <script>
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
-
-    function toggleFaq(btn) {
-      const item = btn.closest('.faq-item');
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
-    }
-
-    const reveals = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(el => io.observe(el));
-  </script>
+  <script src="/js/mkt.js" defer></script>
+  <script src="/js/pricing.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,20 @@
+{
+  "META_TITLE": "The Best Offline Budget App (Works With No Internet) — FincWin",
+  "META_DESCRIPTION": "FincWin is a full offline budget app — a PWA that installs to your home screen and works with no internet, no bank login, and no account. Free to start.",
+  "OG_DESCRIPTION": "An offline-first budget app that works with no internet and no bank login. Installs as a PWA. Free.",
+  "CANONICAL_URL": "https://fincwin.com/offline-budget-app",
+  "PAGE_TITLE": "Offline Budget App",
+  "TARGET_KEYWORD": "Offline budget app",
+  "HERO_HEADLINE": "A budget app that works <em>with no internet</em>",
+  "HERO_SUBHEAD": "FincWin installs to your phone or desktop as an app and runs entirely offline. No bank login, no account, no connection required.",
+  "PROBLEM_HEADLINE": "Most budget apps break the moment you go offline",
+  "PROBLEM_BODY": "<p>They need a constant connection to sync with your bank, and they store your data on someone else's server. On a plane, on patchy signal, or if you simply don't want a bank link — they stop working.</p><p>FincWin is built the opposite way: your data lives in your browser, and the app works whether you're online or not.</p>",
+  "CAPABILITIES": "<li><span class=\"li-icon\">✓</span><span><strong>Installs as a PWA</strong> on iOS, Android, Windows and Mac.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Full offline use</strong> — every feature works with no connection.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>No bank login</strong> — add transactions manually or by CSV.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Your data stays local</strong> — nothing on our servers.</span></li>",
+  "COMPARISON_HEADLINE": "FincWin vs typical cloud budget apps",
+  "COMPARISON_RIVAL": "Cloud budget apps",
+  "COMPARISON_TABLE": "<tr><td>Works offline</td><td class=\"fw-col yes\">Yes — full PWA</td><td class=\"no\">No</td></tr>\n        <tr><td>Bank login required</td><td class=\"fw-col yes\">No</td><td class=\"no\">Usually yes</td></tr>\n        <tr><td>Data location</td><td class=\"fw-col yes\">Your browser</td><td class=\"no\">Their servers</td></tr>\n        <tr><td>Account required</td><td class=\"fw-col yes\">No</td><td class=\"part\">Usually</td></tr>",
+  "FAQ_ITEMS": "<div class=\"faq-item\"><p class=\"faq-q\">Does FincWin really work with no internet?</p><p class=\"faq-a\">Yes. Once loaded, it runs from your device. You can budget on a plane and it syncs nothing because there's nothing to sync — your data is already local.</p></div>\n    <div class=\"faq-item\"><p class=\"faq-q\">Where is my data stored?</p><p class=\"faq-a\">In your browser's local storage. Optionally you can back it up to your own Google Drive. FincWin keeps no copy.</p></div>\n    <div class=\"faq-item\"><p class=\"faq-q\">Is it free?</p><p class=\"faq-a\">Yes — the free plan is permanent. Pro ($39/year or $149 lifetime) adds CSV import and AI coaching.</p></div>",
+  "FAQ_JSON": "[{\"@type\":\"Question\",\"name\":\"Does FincWin really work with no internet?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Yes. Once loaded it runs from your device with nothing to sync.\"}},{\"@type\":\"Question\",\"name\":\"Where is my data stored?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"In your browser's local storage, optionally backed up to your own Google Drive.\"}},{\"@type\":\"Question\",\"name\":\"Is it free?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Yes, the free plan is permanent. Pro is $39/year or $149 lifetime.\"}}]",
+  "CTA_HEADLINE": "Budget anywhere — <em>even offline.</em>",
+  "RELATED_FEATURES": "<a href=\"/blog/posts/offline-personal-finance-apps\" class=\"related-link\"><span>Tools &amp; Tech</span><p>Offline Personal Finance Apps</p></a>\n    <a href=\"/blog/posts/pwa-finance-apps\" class=\"related-link\"><span>Tools &amp; Tech</span><p>PWA Finance Apps</p></a>\n    <a href=\"/features/google-drive-backup\" class=\"related-link\"><span>Feature</span><p>Google Drive Backup</p></a>\n    <a href=\"/privacy\" class=\"related-link\"><span>Trust</span><p>Privacy</p></a>"
+}

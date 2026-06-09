@@ -1,0 +1,17 @@
+{
+  "META_TITLE": "Google Drive Backup — Your Data, Your Drive | FincWin",
+  "META_DESCRIPTION": "FincWin backs up your finance data to your own Google Drive — encrypted, restorable on any device, with no copy kept on our servers. Free to start.",
+  "OG_DESCRIPTION": "Encrypted backup to your own Google Drive. Restore on any device. FincWin keeps no copy. Free.",
+  "CANONICAL_URL": "https://fincwin.com/features/google-drive-backup",
+  "FEATURE_NAME": "Google Drive Backup",
+  "FEATURE_MODULE": "Sync & Backup",
+  "FEATURE_HEADLINE": "Your data, <em>your</em> Google Drive",
+  "FEATURE_SUBHEAD": "Back up everything to a Drive file you own and control. Restore on any device. FincWin never keeps a copy.",
+  "PROBLEM_HEADLINE": "Local-first is private — until you lose the device",
+  "PROBLEM_BODY": "<p>Keeping data in your browser is private, but it also means a lost phone or cleared cache can take your budget with it. Most apps solve this by storing your data on their servers — trading privacy for safety.</p><p>FincWin refuses the trade. Your backup goes to your own Google Drive, encrypted, and you can restore it anywhere.</p>",
+  "HOW_IT_WORKS": "<li><strong>Connect Google Drive</strong> — authorise once; FincWin only touches its own backup file.</li>\n    <li><strong>Back up</strong> — your data is encrypted and saved to your Drive.</li>\n    <li><strong>Switch devices</strong> — open FincWin anywhere and restore from Drive.</li>\n    <li><strong>Stay in control</strong> — the file is yours; delete it any time.</li>",
+  "CAPABILITIES": "<li><span class=\"li-icon\">✓</span><span><strong>Encrypted backup</strong> to your own Drive.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Restore anywhere</strong> — move between phone and desktop.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>No server storage</strong> — FincWin keeps no copy of your data.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>You own the file</strong> — full control, delete any time.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Scoped access</strong> — FincWin only sees its own backup file.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Works with offline-first</strong> — back up when it suits you.</span></li>",
+  "FEATURE_PLAN": "Free & Pro",
+  "CTA_HEADLINE": "Keep your data <em>safe and yours.</em>",
+  "RELATED_FEATURES": "<a href=\"/features/ai-coach\" class=\"related-link\"><span>Feature</span><p>AI Coach</p></a>\n    <a href=\"/features/analytics-dashboard\" class=\"related-link\"><span>Feature</span><p>Analytics Dashboard</p></a>\n    <a href=\"/privacy\" class=\"related-link\"><span>Trust</span><p>Privacy</p></a>\n    <a href=\"/use-cases/couples-shared-finances\" class=\"related-link\"><span>Use case</span><p>Couples &amp; Shared Finances</p></a>"
+}

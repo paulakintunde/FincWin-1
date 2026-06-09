@@ -10,6 +10,7 @@ let _noteWi=-1, _noteIi=-1, _receiptWi=-1, _receiptIi=-1;
 
 // ── Undo state ────────────────────────────────────────────────────────────────
 let _undoSnapshot = null; // { json, timer }
+let _persisting = false;  // guard against concurrent _doPersist calls
 
 // ── Session encryption state ──────────────────────────────────────────────────
 // _sessionKey : AES-GCM CryptoKey derived from PIN via PBKDF2 — null when locked.
@@ -21,8 +22,39 @@ let _sessionKey   = null;
 let _lockResolve  = null;
 let _lastActivity = Date.now();
 let _pinActive    = false;
-// Expose session key accessor for settings.js (AI key encryption).
-window.getSessionKey = function () { return _sessionKey; };
+// ── Purpose-specific session-key wrappers (S-02) ─────────────────────────────
+// External modules (settings.js, gdrive.js) must never receive the raw CryptoKey.
+// These wrappers perform encrypt/decrypt operations inside this closure scope and
+// return only the result — the key itself never leaves state.js.
+async function sessionKeyEncrypt(plaintext) {
+  if (!_sessionKey || typeof CRYPTO === 'undefined') return plaintext;
+  try { return JSON.stringify(await CRYPTO.encrypt(plaintext, _sessionKey)); } catch(e) { return plaintext; }
+}
+async function sessionKeyDecrypt(val) {
+  if (!_sessionKey || typeof CRYPTO === 'undefined') return val;
+  try {
+    var _p = typeof val === 'string' ? JSON.parse(val) : val;
+    if (CRYPTO.isEncryptedPayload(_p)) return await CRYPTO.decrypt(_p, _sessionKey);
+  } catch(e) {}
+  return val;
+}
+function isSessionKeyActive() { return _sessionKey !== null; }
+
+// ── Cross-tab state sync (DI-02) ──────────────────────────────────────────
+// BroadcastChannel notifies sibling tabs when state is written so they can
+// warn the user rather than silently overwriting data on next save.
+let _bc = null;
+let _bcLastSend = 0;
+function _initBC() {
+  if (typeof BroadcastChannel === 'undefined' || _bc) return;
+  _bc = new BroadcastChannel('fw_state_sync');
+  _bc.onmessage = function(e) {
+    if (!e.data || e.data.type !== 'STATE_WRITTEN') return;
+    if (typeof showToast === 'function') {
+      showToast('⚠ Data changed in another tab — refresh to sync', 'warn-t');
+    }
+  };
+}
 
 // ── Session-unlock token ──────────────────────────────────────────────────────
 // A lightweight token written to sessionStorage when the PIN is entered.
@@ -217,18 +249,19 @@ document.addEventListener('visibilitychange',function(){
   if(document.visibilityState==='hidden'&&_persistTimer){clearTimeout(_persistTimer);_doPersist(false);}
 });
 async function _doPersist(toast=true){
+  if(_persisting) return;
+  _persisting=true;
   // Mark dashboard stale so next tab-switch to dashboard re-renders
   if(typeof _dashDirty!=='undefined') _dashDirty=true;
   S.currentMonthKey=CMK;
   S.lastModified = Date.now();
   const json=JSON.stringify(S);
-  // Update storage banner — estimate UTF-16 byte size (json.length*2) to avoid
-  // allocating a second copy of the state as a Blob just for the size check.
-  const bytes=json.length*2;
+  // Estimate byte size (UTF-8, 1 byte per char is conservative enough for JSON).
+  const bytes=json.length;
   const alertEl=document.getElementById('storAlert');
   const msgEl=document.getElementById('storMsg');
   if(alertEl){
-    const pct=bytes/(20*1024*1024)*100;
+    const pct=bytes/(50*1024*1024)*100;
     if(pct>80){alertEl.classList.add('show');if(msgEl)msgEl.textContent='Data is large ('+Math.round(bytes/1024)+'KB) — consider exporting a backup.';}
     else alertEl.classList.remove('show');
   }
@@ -245,11 +278,21 @@ async function _doPersist(toast=true){
     }
   }
   idbSet(SK, toStore).then(function () {
+    _persisting=false;
     if(toast)showToast('✓ Saved');
     // Sync hooks always receive plaintext — they apply their own encryption.
     if(typeof window.fileWrite==='function')window.fileWrite(json);
     if(typeof window.cloudSyncPush==='function')window.cloudSyncPush(json);
+    // Notify sibling tabs (throttled to once per 2 s to avoid flooding on rapid edits).
+    if (_bc) {
+      var _now = Date.now();
+      if (_now - _bcLastSend > 2000) {
+        _bcLastSend = _now;
+        try { _bc.postMessage({ type: 'STATE_WRITTEN', at: _now }); } catch(e) {}
+      }
+    }
   }).catch(function () {
+    _persisting=false;
     try{localStorage.setItem(SK,toStore);if(toast)showToast('✓ Saved (local)');}
     catch(e){showToast('⚠ Save failed — tap Export to backup','err-t');}
   });
@@ -267,7 +310,7 @@ async function _doPersist(toast=true){
 // ══════════════════════════════════════════════
 var _DESTRUCTIVE_ACTIONS=['ITEM_REMOVE','LOAN_REMOVE','SAVINGS_REMOVE','REVENUE_REMOVE',
   'RECURRING_REMOVE','MONTH_RESET_EXPENSES','MONTH_RESET_REVENUE',
-  'MONTH_RESET_LOANS_PMT','SAVINGS_RESET_ALL'];
+  'MONTH_RESET_LOANS_PMT','SAVINGS_RESET_ALL','INVESTMENTS_RESET_ALL','SAVINGS_TXN_REMOVE'];
 
 function dispatch(type, payload, toast) {
   var p = payload || {};
@@ -433,7 +476,7 @@ function dispatch(type, payload, toast) {
       if (S.months[mk]) S.months[mk].revenue = [];
       break;
     case 'MONTH_RESET_LOANS_PMT':
-      if (S.loans) S.loans.forEach(function(l){ if(l.payments) l.payments = l.payments.filter(function(pmt){ return pmt.month !== mk; }); });
+      if (S.loans) S.loans.forEach(function(l){ l.payments = []; });
       break;
     case 'SAVINGS_RESET_ALL':
       S.savings = [];
@@ -446,6 +489,34 @@ function dispatch(type, payload, toast) {
       break;
     case 'INVESTMENTS_REMOVE':
       if (S.investments) S.investments.splice(p.idx, 1);
+      break;
+    case 'INVESTMENTS_RESET_ALL':
+      S.investments = [];
+      break;
+    // ── LOAN SCHEDULE ─────────────────────────────
+    case 'LOAN_GENERATE_SCHEDULE':
+      if (S.loans && S.loans[p.loanIdx]) {
+        var _sched = S.loans[p.loanIdx];
+        if (!_sched.payments) _sched.payments = [];
+        (p.months || []).forEach(function(mo) {
+          if (!_sched.payments.find(function(pmt){ return pmt.month === mo; }))
+            _sched.payments.push({month: mo, paid: false});
+        });
+      }
+      break;
+    // ── SAVINGS TRANSACTION ───────────────────────
+    case 'SAVINGS_TXN_REMOVE':
+      if (S.savings && S.savings[p.goalIdx]) {
+        var _stg = S.savings[p.goalIdx];
+        if (_stg.transactions && _stg.transactions[p.txnIdx] !== undefined) {
+          var _stxn = _stg.transactions[p.txnIdx];
+          if (_stxn.type === 'deposit')
+            _stg.balance = Math.max(0, Math.round((amt(_stg.balance) - _stxn.amount) * 100) / 100);
+          else
+            _stg.balance = Math.round((amt(_stg.balance) + _stxn.amount) * 100) / 100;
+          _stg.transactions.splice(p.txnIdx, 1);
+        }
+      }
       break;
     case 'SYNC_SAVINGS_EXPENSES': {
       // Sync savings contributions to current month week 0.
@@ -580,7 +651,10 @@ function showUndoToast(msg) {
 function undoLast() {
   if(!_undoSnapshot)return;
   clearTimeout(_undoSnapshot.timer);
+  // GAM-02: preserve XP earned after the snapshot — it accumulates and should not revert.
+  var _xpNow = S.xp || 0;
   try{S=JSON.parse(_undoSnapshot.json);}catch(e){_undoSnapshot=null;return;}
+  if(_xpNow > (S.xp || 0)) S.xp = _xpNow;
   _undoSnapshot=null;
   persist(false);
   // Re-render all visible sections so the restored data shows immediately
@@ -588,6 +662,7 @@ function undoLast() {
   if(typeof renderRevenue==='function')renderRevenue();
   if(typeof renderLoans==='function')renderLoans();
   if(typeof renderSavings==='function')renderSavings();
+  if(typeof renderInvestments==='function')renderInvestments();
   if(typeof updateHealth==='function')updateHealth();
   showToast('↩ Undone');
 }
@@ -620,10 +695,87 @@ function getCatStyle(catClass){
 function fmtK(n){if(n==null)return fmt(0);return n>=1000?getCurrency().symbol+(Math.abs(n)/1000).toFixed(1)+'k':fmt(n);}
 function deepClone(o){return JSON.parse(JSON.stringify(o));}
 function getTab(){var _gs=document.querySelector('.section.active');return _gs?_gs.id.replace('section-',''):'dashboard';}
+
+// ══════════════════════════════════════════════
+// PLAN GATING
+// Three tiers: free → pro → lifetime
+// Free = no valid license key in localStorage
+// Pro  = key present, plan name does not include 'lifetime'
+// Lifetime = key present, plan name includes 'lifetime'
+// ══════════════════════════════════════════════
+function getPlan(){
+  if(!localStorage.getItem('fw_license_key')) return 'free';
+  var p=(localStorage.getItem('fw_plan')||'').toLowerCase();
+  if(p.includes('lifetime')) return 'lifetime';
+  return 'pro'; // any valid key without 'lifetime' = pro
+}
+
+var _PLAN_RANK={free:0,pro:1,lifetime:2};
+
+// Returns true if the user's plan meets minTier. Otherwise shows upgrade wall and returns false.
+function requirePlan(minTier,featureName){
+  if((_PLAN_RANK[getPlan()]||0)>=(_PLAN_RANK[minTier]||0)) return true;
+  _showUpgradeWall(featureName,minTier);
+  return false;
+}
+
+function _showUpgradeWall(featureName,minTier){
+  var el=document.getElementById('_fw_upgrade_wall');
+  if(!el){
+    el=document.createElement('div');
+    el.id='_fw_upgrade_wall';
+    el.setAttribute('role','dialog');
+    el.setAttribute('aria-modal','true');
+    el.setAttribute('aria-labelledby','_fw_uw_title');
+    el.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);';
+    el.innerHTML=`
+      <div style="background:#fff;border-radius:20px;padding:36px 40px;max-width:420px;width:100%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.18);">
+        <div style="width:52px;height:52px;border-radius:50%;background:#f5f4f0;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5a6e3f" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        </div>
+        <h2 id="_fw_uw_title" style="font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;color:#111;margin-bottom:8px;"></h2>
+        <p id="_fw_uw_desc" style="font-size:14px;color:#6b7280;line-height:1.65;margin-bottom:6px;"></p>
+        <p style="font-size:12px;color:#9ca3af;margin-bottom:24px;">Available on FincWin Pro &amp; Lifetime</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a id="_fw_uw_upgrade" href="pricing.html" style="display:block;padding:13px;background:#111;color:#fff;border-radius:50px;font-family:inherit;font-size:14px;font-weight:500;text-decoration:none;transition:background .2s;">Upgrade to Pro — $39/yr →</a>
+          <button id="_fw_uw_close" type="button" style="padding:11px;background:none;border:1px solid rgba(0,0,0,.1);border-radius:50px;font-family:inherit;font-size:13px;color:#6b7280;cursor:pointer;">Maybe later</button>
+        </div>
+      </div>`;
+    document.body.appendChild(el);
+    // Inline on* handlers are blocked by the CSP (script-src-attr 'none'), so
+    // every interaction must be wired with addEventListener.
+    function _dismiss(){
+      el.style.display='none';
+      // Route back to the dashboard — the gated feature was never entered, so
+      // returning the user to a safe, always-available tab is the expected exit.
+      if(typeof switchTab==='function'){
+        var dashTab=document.getElementById('tab-dashboard');
+        switchTab('dashboard',dashTab);
+      }
+    }
+    el.querySelector('#_fw_uw_close').addEventListener('click',_dismiss);
+    el.addEventListener('click',function(e){if(e.target===el)_dismiss();});
+    var _up=el.querySelector('#_fw_uw_upgrade');
+    _up.addEventListener('mouseover',function(){this.style.background='#5a6e3f';});
+    _up.addEventListener('mouseout',function(){this.style.background='#111';});
+  }
+  var isPro=minTier==='pro';
+  document.getElementById('_fw_uw_title').textContent=(featureName||'Pro feature')+' requires Pro';
+  document.getElementById('_fw_uw_desc').textContent=
+    isPro
+      ? (featureName||'This feature')+' is included in FincWin Pro. Upgrade once and it\'s yours for the year.'
+      : (featureName||'This feature')+' is exclusive to FincWin Lifetime. One payment, all features, forever.';
+  el.style.display='flex';
+  var closeBtn=el.querySelector('button');
+  if(closeBtn)setTimeout(function(){closeBtn.focus();},60);
+}
+
+window.getPlan=getPlan;
+window.requirePlan=requirePlan;
 function cw(){return cm().weeks;}
 function cr(){return cm().revenue;}
 function cwSafe(wi){const w=cw();return(wi>=0&&wi<w.length)?w[wi]:null;}
-function cm(){return S.months[CMK];}
+function cm(){return S.months[CMK]||{weeks:[{items:[]},{items:[]},{items:[]},{items:[]}],revenue:[]};}
 
 function _cvt(amount,currency){
   // Convert amount to home currency for totals (E6). Gracefully no-ops if fx not loaded.
@@ -715,7 +867,7 @@ function _conflictDiffMetrics(stateA, stateB) {
     return c;
   }
   var sym=(stateA.currency&&stateA.currency.symbol)||'$';
-  function money(v){return sym+(v/100).toFixed(0);}
+  function money(v){return sym+Math.round(v).toLocaleString();}
   function count(v){return String(v);}
   return [
     {label:'Total expenses',   a:money(totalExp(stateA)),   b:money(totalExp(stateB)),   aRaw:totalExp(stateA),   bRaw:totalExp(stateB),   lowerIsBetter:true},
@@ -1126,7 +1278,6 @@ async function checkLock(){
     if(restoredKey){
       // Encrypted session: key restored from sessionStorage JWK.
       _sessionKey = restoredKey;
-      window.getSessionKey = function(){ return _sessionKey; };
       _lastActivity = Date.now();
       _writeSessionToken();
       return; // skip PIN screen
@@ -1165,6 +1316,9 @@ const _SS_KEY = 'fw_sk';
 
 async function _storeSessionKey(key){
   if(!key) return;
+  // S-03: when the user has opted into high-security mode, do not persist the DEK
+  // as a JWK in sessionStorage — this forces a PIN re-entry on every page load.
+  if(typeof S !== 'undefined' && S && S.pinRefreshSkip === false) return;
   try{
     var jwk = await crypto.subtle.exportKey('jwk', key);
     sessionStorage.setItem(_SS_KEY, JSON.stringify(jwk));
@@ -1196,6 +1350,7 @@ async function verifyPin(){
   const raw = await getPinHash();
   if(!raw) return;
   let match = false;
+  let _matchedLegacy = false;
   try {
     const stored = JSON.parse(raw);
     if(stored.hash && stored.salt){
@@ -1205,6 +1360,7 @@ async function verifyPin(){
   } catch(e){
     // Legacy format: plain hex string from static-salt SHA-256
     match = (await _hashPinLegacy(_lockBuffer)) === raw;
+    if(match) _matchedLegacy = true;
   }
   if(match){
     _pinFailCount=0; _pinLockUntil=0; _savePinLockout();
@@ -1212,7 +1368,6 @@ async function verifyPin(){
     // Do this before hiding the lock screen so the key is ready for initState().
     try {
       _sessionKey = await _deriveSessionKey(_lockBuffer);
-      window.getSessionKey = function() { return _sessionKey; };
       // Persist key + token so refresh within the inactivity window skips PIN.
       await _storeSessionKey(_sessionKey);
       _writeSessionToken();
@@ -1220,6 +1375,20 @@ async function verifyPin(){
       // Key derivation failed — still allow UI unlock, but log warning.
       // initState() will fall back to plaintext load if _sessionKey is null.
       _sessionKey = null;
+    }
+    // Upgrade legacy static-salt SHA-256 hash to PBKDF2 on first successful login.
+    if(_matchedLegacy){
+      try{
+        var _upgSalt = crypto.getRandomValues(new Uint8Array(16));
+        var _upgHash = await _hashPin(_lockBuffer, _upgSalt);
+        var _upgStored = JSON.stringify({hash:_upgHash, salt:btoa(String.fromCharCode(..._upgSalt)), hashV:2});
+        await _metaSet(PIN_IDB_KEY, _upgStored);
+      }catch(e){ /* non-fatal — will retry on next login */ }
+    }
+    // Set pinEnabled for legacy users whose S was saved before this field existed.
+    if(typeof S !== 'undefined' && S && !S.pinEnabled){
+      S.pinEnabled = true;
+      if(_sessionKey) S.passphraseEnabled = true;
     }
     // Reset activity timer so auto-lock countdown restarts from now.
     _lastActivity = Date.now();
@@ -1279,7 +1448,10 @@ function updateLockDots(){
     var d=document.getElementById('ld'+i);
     if(!d) continue;
     d.style.display=i<_pinLen?'':'none';
-    d.classList.toggle('filled',i<_lockBuffer.length);
+    var filled=i<_lockBuffer.length;
+    d.classList.toggle('filled',filled);
+    // A-01: keep aria-label in sync so screen readers can navigate the dot grid.
+    d.setAttribute('aria-label','Digit '+(i+1)+': '+(filled?'filled':'empty'));
   }
   var s=document.getElementById('lockPinStatus');
   if(s) s.textContent=_lockBuffer.length===_pinLen?'PIN complete':_lockBuffer.length+' of '+_pinLen+' digits entered';
@@ -1462,7 +1634,6 @@ async function _doFinalPinSetup(pin,passphrase){
       await _metaSet(PIN_LEN_IDB_KEY,String(_pinLen));
       await _metaDel(ENC_SALT_IDB_KEY); // clean up v1 key
       _sessionKey=dek;
-      window.getSessionKey=function(){return _sessionKey;};
       if(typeof S!=='undefined'&&S) await _doPersist(false);
       if(typeof window._syncAIKeyEncryption==='function') await window._syncAIKeyEncryption();
     }catch(e){
@@ -1487,14 +1658,12 @@ async function removePin(){
   if(_sessionKey && typeof CRYPTO !== 'undefined'){
     const prevKey = _sessionKey;
     _sessionKey = null;
-    window.getSessionKey = function() { return null; };
     // Re-save state as plaintext (sessionKey is null so _doPersist writes cleartext).
     if(typeof S !== 'undefined' && S) await _doPersist(false);
     // Re-save AI keys as plaintext.
     if(typeof window._syncAIKeyEncryption === 'function') await window._syncAIKeyEncryption();
   } else {
     _sessionKey = null;
-    window.getSessionKey = function() { return null; };
   }
   // Delete PIN hash, all encryption keys (v1 and v2), and length record.
   await _metaDel(PIN_IDB_KEY);
@@ -1557,7 +1726,6 @@ async function lockApp(){
     await _doPersist(false);
   }
   _sessionKey = null;
-  window.getSessionKey = function() { return null; };
   // Clear the session token so refresh also shows PIN after a manual lock.
   _clearSessionToken();
   try { sessionStorage.removeItem(_SS_KEY); } catch(e) {}
@@ -1605,7 +1773,6 @@ async function verifyRecovery(){
     var recKek=await CRYPTO.deriveKeyV2(passphrase,recKekSalt);
     var wrappedPayload=typeof dekRecRaw==='string'?JSON.parse(dekRecRaw):dekRecRaw;
     _sessionKey=await CRYPTO.unwrapDEK(recKek,wrappedPayload);
-    window.getSessionKey=function(){return _sessionKey;};
     _pinFailCount=0; _pinLockUntil=0;
     await _savePinLockout();
     _lastActivity=Date.now();

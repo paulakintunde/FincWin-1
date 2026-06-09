@@ -1,0 +1,17 @@
+{
+  "META_TITLE": "AI Coach — A Money Coach That Knows Your Numbers | FincWin",
+  "META_DESCRIPTION": "FincWin's AI Coach answers questions about your spending and suggests plans — using your own OpenAI or Anthropic key, on your data, privately. Pro feature.",
+  "OG_DESCRIPTION": "Bring your own OpenAI or Anthropic key. The AI Coach reasons over your data, privately, to answer money questions. Pro.",
+  "CANONICAL_URL": "https://fincwin.com/features/ai-coach",
+  "FEATURE_NAME": "AI Coach",
+  "FEATURE_MODULE": "Insights",
+  "FEATURE_HEADLINE": "A money coach that <em>knows your numbers</em>",
+  "FEATURE_SUBHEAD": "Ask about your spending, get plan suggestions, and explore what-ifs — powered by your own AI key, on your own data.",
+  "PROBLEM_HEADLINE": "Generic money advice doesn't know your situation",
+  "PROBLEM_BODY": "<p>Articles and calculators give one-size-fits-all answers. They don't know your income, your envelopes or your goals — so the advice stays abstract.</p><p>FincWin's AI Coach reasons over your actual numbers. You bring your own OpenAI or Anthropic key, and your data is used to answer your questions — not to train anyone's model.</p>",
+  "HOW_IT_WORKS": "<li><strong>Add your API key</strong> — OpenAI or Anthropic; it stays on your device.</li>\n    <li><strong>Ask a question</strong> — “Where can I cut $200?” or “Can I afford this?”</li>\n    <li><strong>Get grounded answers</strong> — the coach reasons over your real budget and goals.</li>\n    <li><strong>Act on suggestions</strong> — apply ideas directly to your envelopes and goals.</li>",
+  "CAPABILITIES": "<li><span class=\"li-icon\">✓</span><span><strong>Bring your own key</strong> — OpenAI or Anthropic.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Grounded in your data</strong> — answers reflect your actual numbers.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Spending Q&amp;A</strong> in plain language.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Plan suggestions</strong> for budgets, debt and savings.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Private by design</strong> — your key and data stay yours.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>No markup</strong> — you pay your provider directly.</span></li>",
+  "FEATURE_PLAN": "Pro",
+  "CTA_HEADLINE": "Get answers about <em>your</em> money.",
+  "RELATED_FEATURES": "<a href=\"/features/analytics-dashboard\" class=\"related-link\"><span>Feature</span><p>Analytics Dashboard</p></a>\n    <a href=\"/features/google-drive-backup\" class=\"related-link\"><span>Feature</span><p>Google Drive Backup</p></a>\n    <a href=\"/blog/posts/ai-financial-coach\" class=\"related-link\"><span>Tools &amp; Tech</span><p>The AI Financial Coach</p></a>\n    <a href=\"/pricing\" class=\"related-link\"><span>Plans</span><p>See Pricing</p></a>"
+}

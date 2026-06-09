@@ -1,0 +1,23 @@
+﻿User-agent: *
+Disallow: /app
+Disallow: /admin
+Disallow: /account
+Disallow: /signin
+Disallow: /api/
+Disallow: /cat-banking.html
+Disallow: /cat-clothing.html
+Disallow: /cat-dining.html
+Disallow: /cat-education.html
+Disallow: /cat-entertainment.html
+Disallow: /cat-groceries.html
+Disallow: /cat-healthcare.html
+Disallow: /cat-housing.html
+Disallow: /cat-other.html
+Disallow: /cat-personal.html
+Disallow: /cat-subscriptions.html
+Disallow: /cat-telecom.html
+Disallow: /cat-transport.html
+Disallow: /cat-utilities.html
+Allow: /
+
+Sitemap: https://fincwin.com/sitemap.xml

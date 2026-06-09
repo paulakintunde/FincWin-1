@@ -103,6 +103,7 @@ var _ACTION_ALLOWLIST = new Set([
   'openNoteModal','openReceiptModal','closeReceiptModal','clearReceipt','editAmt','bulkMarkPaid','toggleAllWeekPaid',
   'delExpConfirm','delExpCancel',
   'enterBulkMode','exitBulkMode',
+  'bulkSelectWeek',
   'bulkMarkAllPaid','bulkMarkAllUnpaid','bulkDeleteSelected',
   'openQuickAdd','closeQuickAdd','quickAddSave','selectQaCat',
   'openRestoreModal',

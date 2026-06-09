@@ -3,19 +3,35 @@
 // ══════════════════════════════════════════════
 // HEALTH SCORE
 // ══════════════════════════════════════════════
+
+// FC-01: 3-month rolling average income — used when the current month has no
+// income yet (e.g. on the 1st) so DTI and savings buffer don't collapse to 0.
+function _rollingAvgRev(months){
+  var allM=Object.assign({},S.archivedMonths||{},S.months||{});
+  var keys=Object.keys(allM).sort().slice(-months);
+  if(!keys.length)return 0;
+  var total=keys.reduce(function(s,k){
+    var m=allM[k];
+    return s+(m.revenue||[]).reduce(function(rs,i){return rs+amt(i.amount);},0);
+  },0);
+  return total/keys.length;
+}
+
 function calcHealth(){
   const rev=totalRev(),exp=totalExp(),debt=totalDebt(),mp=minPmts();
+  // Use rolling 3-month average when current month has no income entered yet.
+  const revEff=rev>0?rev:_rollingAvgRev(3);
   const allI=cw().reduce((s,w)=>s+w.items.length,0);
   const pI=cw().reduce((s,w)=>s+w.items.filter(i=>i.paid).length,0);
   const sv=Math.max(0,totalSav());
   const invV=typeof totalInvValue==='function'?Math.max(0,totalInvValue()):0;
   const cf=rev>0?Math.min(25,Math.max(0,((rev-exp)/rev)*40)):0;
-  const dti=rev>0?Math.min(25,Math.max(0,(1-mp/rev)*30)):0;
+  const dti=revEff>0?Math.min(25,Math.max(0,(1-mp/revEff)*30)):0;
   const pmt=allI>0?(pI/allI)*20:0;
-  const dl=rev>0?Math.min(15,Math.max(0,(1-debt/(rev*12))*15)):0;
+  const dl=revEff>0?Math.min(15,Math.max(0,(1-debt/(revEff*12))*15)):0;
   // Savings buffer includes investment portfolio — liquid savings for 3-month cushion,
   // investments weighted at 50% (less liquid, but real wealth)
-  const ss=rev>0?Math.min(10,Math.max(0,((sv+invV*0.5)/(rev*3))*10)):0;
+  const ss=revEff>0?Math.min(10,Math.max(0,((sv+invV*0.5)/(revEff*3))*10)):0;
   const div=cr().length>1?5:0;
   const total=Math.min(100,Math.round(cf+dti+pmt+dl+ss+div));
   return{total,details:[{label:'Cash Flow',score:Math.round(cf),max:25},{label:'Debt-to-Income',score:Math.round(dti),max:25},{label:'Payment Rate',score:Math.round(pmt),max:20},{label:'Debt Load',score:Math.round(dl),max:15},{label:'Savings & Investments',score:Math.round(ss),max:10},{label:'Income Diversity',score:Math.round(div),max:5}]};

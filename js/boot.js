@@ -96,6 +96,11 @@ function switchTab(name,btn){
     if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
   });
   renderSection(name);
+  // Reset scroll to top so the new section's masthead clears the sticky
+  // topbar + tab-bar instead of sitting jammed underneath them. Without this,
+  // switching from a scrolled-down tab leaves the prior scroll offset and the
+  // new heading renders behind the (translucent, in glass theme) nav.
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function renderSection(name){
   if(name==='dashboard'){if(typeof _dashDirty!=='undefined'&&!_dashDirty)return;renderDash();}
@@ -1139,12 +1144,26 @@ async function resetAllData(){
 // BOOT
 // ══════════════════════════════════════════════
 (async function boot(){
+  // Returning users (completed onboarding) must have an active licence key.
+  // First-time visitors are allowed through so onboarding/demo can run.
+  if (!localStorage.getItem('fw_license_key') && localStorage.getItem('finflow_onboarded')) {
+    window.location.replace('./signin.html');
+    return;
+  }
+  if(!window.crypto || !window.crypto.subtle){
+    var _cryptoErr=document.createElement('div');
+    _cryptoErr.style.cssText='position:fixed;top:0;left:0;right:0;padding:14px 16px;background:#c53030;color:#fff;font-size:15px;text-align:center;z-index:9999;';
+    _cryptoErr.textContent='FincWin requires the Web Cryptography API, which is unavailable in your browser. Please use Chrome, Firefox, Edge, or Safari 15+ over HTTPS.';
+    document.body?document.body.prepend(_cryptoErr):document.addEventListener('DOMContentLoaded',function(){document.body.prepend(_cryptoErr);});
+    return;
+  }
   // checkLock() MUST run before initState() so that _sessionKey is derived
   // from the correct PIN before initState() attempts to decrypt IDB data.
   // checkLock() returns a Promise that resolves when the PIN is entered (or
   // immediately if no PIN is set). See state.js for the full design.
   await checkLock();
   await initState();
+  if (typeof _initBC === 'function') _initBC();
   if (typeof window.handleOAuthReturn === 'function') await window.handleOAuthReturn();
   if (typeof checkSyncTokenOnLoad === 'function') await checkSyncTokenOnLoad();
   // Migrate localStorage to IDB if not yet done

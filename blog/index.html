@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Finance Blog — Budgeting, Debt &amp; Savings Tips · FincWin</title>
+  <meta name="description" content="Practical guides on budgeting, debt payoff, savings goals, and personal finance tools. Written for people who want clarity, not complexity.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fincwin.com/blog">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fincwin.com/blog">
+  <meta property="og:title" content="Personal Finance Blog — Budgeting, Debt &amp; Savings Tips · FincWin">
+  <meta property="og:description" content="Practical guides on budgeting, debt payoff, savings goals, and personal finance tools. Written for people who want clarity, not complexity.">
+  <meta property="og:image" content="https://fincwin.com/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Personal Finance Blog · FincWin">
+  <meta name="twitter:description" content="Practical guides on budgeting, debt payoff, savings goals, and personal finance tools.">
+  <meta name="twitter:image" content="https://fincwin.com/og-image.svg">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/mkt.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "FincWin Personal Finance Blog",
+    "url": "https://fincwin.com/blog/",
+    "description": "Practical guides on budgeting, debt payoff, savings goals, and personal finance tools.",
+    "publisher": { "@type": "Organization", "name": "FincWin", "url": "https://fincwin.com" }
+  }
+  </script>
+  <style>
+    .blog-hero { padding: 140px 48px 80px; text-align: center; position: relative; overflow: hidden; }
+    .blog-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(90,110,63,.08) 0%, transparent 65%); pointer-events: none; }
+    .blog-hero .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 24px; opacity: 0; animation: fadeUp .6s .1s forwards; }
+    .blog-hero h1 { font-family: var(--serif); font-size: clamp(36px, 5.5vw, 68px); font-weight: 400; line-height: 1.08; color: var(--ink); max-width: 720px; margin: 0 auto 20px; opacity: 0; animation: fadeUp .7s .2s forwards; }
+    .blog-hero h1 em { font-style: italic; color: var(--sage); }
+    .blog-hero p { font-size: 17px; font-weight: 300; color: var(--muted); max-width: 480px; margin: 0 auto; line-height: 1.65; opacity: 0; animation: fadeUp .7s .35s forwards; }
+
+    /* filter tabs */
+    .cat-filter { background: rgba(255,255,255,.95); border-bottom: 1px solid var(--border); padding: 0 48px; display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; position: sticky; top: 61px; z-index: 80; backdrop-filter: blur(10px); }
+    .cat-filter::-webkit-scrollbar { display: none; }
+    .cat-btn { font-family: var(--sans); font-size: 13px; font-weight: 400; color: var(--muted); padding: 14px 18px; border: none; border-bottom: 2px solid transparent; background: none; cursor: pointer; white-space: nowrap; transition: color .2s, border-color .2s; }
+    .cat-btn:hover { color: var(--ink); }
+    .cat-btn.active { color: var(--sage); font-weight: 500; border-bottom-color: var(--sage); }
+
+    /* grid */
+    .blog-section { padding: 64px 48px 96px; }
+    .blog-inner { max-width: 1060px; margin: 0 auto; }
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .blog-card { text-decoration: none; color: inherit; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color .2s, box-shadow .2s, transform .2s; display: flex; flex-direction: column; }
+    .blog-card:hover { border-color: rgba(90,110,63,.25); box-shadow: 0 4px 24px rgba(0,0,0,.07); transform: translateY(-2px); }
+    .blog-card-thumb { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+    .blog-card-body { padding: 24px 22px 28px; flex: 1; display: flex; flex-direction: column; }
+    .blog-card-cat { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sage); margin-bottom: 10px; }
+    .blog-card h2 { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--ink); line-height: 1.3; margin-bottom: 10px; }
+    .blog-card p { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.65; flex: 1; }
+    .blog-card-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; font-size: 11px; color: var(--muted); }
+    .blog-card-read { font-weight: 500; color: var(--sage); }
+
+    @media (max-width: 900px) { .blog-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .blog-grid { grid-template-columns: 1fr; } .blog-hero { padding: 120px 20px 60px; } .blog-section { padding: 48px 20px 72px; } .cat-filter { padding: 0 20px; } }
+  </style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a href="/" class="nav-logo">Finc<span>Win</span></a>
+  <div class="nav-links">
+    <a href="/features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/compare">Compare</a>
+    <a href="/use-cases">Use cases</a>
+    <a href="/blog" class="active">Blog</a>
+    <a href="/app">App</a>
+    <a href="/app" class="nav-cta">Get started free</a>
+  </div>
+</nav>
+
+<section class="blog-hero">
+  <div class="eyebrow">FincWin Blog</div>
+  <h1>Personal finance,<br><em>plainly explained.</em></h1>
+  <p>Practical guides on budgeting, debt payoff, savings, and the tools that actually help — written for people who want clarity, not complexity.</p>
+</section>
+
+<div class="cat-filter" id="catFilter">
+  <button class="cat-btn active" onclick="filterCat('all')">All posts</button>
+  <a href="/blog/budgeting/" class="cat-btn">Budgeting</a>
+  <a href="/blog/debt/" class="cat-btn">Debt</a>
+  <a href="/blog/savings/" class="cat-btn">Savings</a>
+  <a href="/blog/tools/" class="cat-btn">Tools &amp; Tech</a>
+  <a href="/blog/mindset/" class="cat-btn">Mindset</a>
+</div>
+
+<section class="blog-section">
+  <div class="blog-inner">
+    <div class="blog-grid" id="blogGrid">
+
+      <a href="/blog/posts/envelope-budgeting-method" class="blog-card" data-cat="budgeting">
+        <div class="blog-card-thumb" style="background:#f0f5ec">💌</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Budgeting</div>
+          <h2>The Envelope Budgeting Method: A Complete Guide</h2>
+          <p>The oldest budgeting system still works — because it makes the abstract concrete. Here's everything you need to put envelopes to work today.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">8 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/debt-snowball-vs-avalanche" class="blog-card" data-cat="debt">
+        <div class="blog-card-thumb" style="background:#fef3f3">❄️</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Debt</div>
+          <h2>Debt Snowball vs Avalanche: Which Clears Debt Faster?</h2>
+          <p>Both methods work. The real question is which one you'll actually stick with — and the answer might surprise you.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">7 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/offline-personal-finance-apps" class="blog-card" data-cat="tools">
+        <div class="blog-card-thumb" style="background:#f0f4ff">📱</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Tools &amp; Tech</div>
+          <h2>Best Offline Personal Finance Apps (No Account Required)</h2>
+          <p>Most finance apps want your bank login. These don't. A guide to privacy-first tools that work completely offline.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">6 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/emergency-fund-guide" class="blog-card" data-cat="savings">
+        <div class="blog-card-thumb" style="background:#fef9ec">🛡️</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Savings</div>
+          <h2>How to Build a 6-Month Emergency Fund on Any Income</h2>
+          <p>A 6-month emergency fund is the foundation of financial stability. Here's a step-by-step approach that works even when money is tight.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">7 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/budget-categories" class="blog-card" data-cat="budgeting">
+        <div class="blog-card-thumb" style="background:#f0f5ec">📋</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Budgeting</div>
+          <h2>What Budget Categories Should You Actually Track?</h2>
+          <p>Most people either track too little or overcomplicate it with 40 categories. Here are the 14 that actually matter — and why.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">6 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/financial-health-score" class="blog-card" data-cat="mindset">
+        <div class="blog-card-thumb" style="background:#f0f5ec">📊</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Mindset</div>
+          <h2>Your Financial Health Score: What It Means and How to Improve It</h2>
+          <p>A single number that measures cash flow, debt load, savings, and payment discipline. Understanding it is the first step to improving it.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">8 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/sinking-funds" class="blog-card" data-cat="budgeting">
+        <div class="blog-card-thumb" style="background:#fef9ec">🪣</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Budgeting</div>
+          <h2>Sinking Funds: The Hack That Eliminates Surprise Expenses</h2>
+          <p>Car repairs, annual subscriptions, holiday gifts — these aren't surprises. They're predictable costs you haven't started saving for yet.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">6 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/irregular-income-budgeting" class="blog-card" data-cat="budgeting">
+        <div class="blog-card-thumb" style="background:#f0f4ff">📈</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Budgeting</div>
+          <h2>How to Budget on Irregular Income (Freelancers &amp; Self-Employed)</h2>
+          <p>The standard "monthly budget" assumes you know what you'll earn. If you don't, here's the system that still works.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">8 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/zero-based-budgeting" class="blog-card" data-cat="budgeting">
+        <div class="blog-card-thumb" style="background:#f0f5ec">🎯</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Budgeting</div>
+          <h2>Zero-Based Budgeting: Step-by-Step Guide</h2>
+          <p>Every dollar gets a job before the month begins. Zero-based budgeting is intense — and for people who do it, transformative.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">8 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/compare/ynab-alternative" class="blog-card" data-cat="tools">
+        <div class="blog-card-thumb" style="background:#fef3f3">🔄</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Tools &amp; Tech</div>
+          <h2>YNAB Alternative: Why Privacy-First Budgeting Is Different</h2>
+          <p>YNAB is excellent. But at $109/year — and with all your data in someone else's cloud — it's not the right fit for everyone.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">7 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/50-30-20-rule" class="blog-card" data-cat="budgeting">
+        <div class="blog-card-thumb" style="background:#fef9ec">⚖️</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Budgeting</div>
+          <h2>The 50/30/20 Rule Explained — Does It Still Work?</h2>
+          <p>The most widely cited budgeting rule is easy to remember and hard to follow in most cities. Here's how to adapt it to reality.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">6 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/import-bank-statements" class="blog-card" data-cat="tools">
+        <div class="blog-card-thumb" style="background:#f0f4ff">🏦</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Tools &amp; Tech</div>
+          <h2>How to Import Bank Statements Into a Budget Tracker</h2>
+          <p>Live bank sync gives access to your credentials. CSV import does the same job — without handing over the keys. Here's how.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">5 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/loan-payoff-calculator" class="blog-card" data-cat="debt">
+        <div class="blog-card-thumb" style="background:#fef3f3">🧮</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Debt</div>
+          <h2>Loan Payoff Calculator: Real Numbers for Snowball vs Avalanche</h2>
+          <p>Running the actual maths on a $25,000 debt stack using both methods — with real payoff dates and interest totals.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">8 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/multi-currency-budgeting" class="blog-card" data-cat="tools">
+        <div class="blog-card-thumb" style="background:#f0f4ff">🌍</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Tools &amp; Tech</div>
+          <h2>Multi-Currency Budgeting for Expats and Digital Nomads</h2>
+          <p>When you earn in one currency and spend in three, standard budget apps fall apart. Here's what to use instead.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">6 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/financial-gamification" class="blog-card" data-cat="mindset">
+        <div class="blog-card-thumb" style="background:#f0f5ec">🎮</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Mindset</div>
+          <h2>Financial Gamification: Why Points and Badges Actually Work</h2>
+          <p>Gamification has a bad reputation. When it's applied to things that don't matter, it's manipulation. When applied to your finances, it's different.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">7 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/net-worth-tracking" class="blog-card" data-cat="savings">
+        <div class="blog-card-thumb" style="background:#f0f5ec">📉</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Savings</div>
+          <h2>Net Worth Tracking: The One Number That Shows Real Progress</h2>
+          <p>Income goes up. Spending follows. Net worth stays flat. Tracking the right number changes what you optimise for.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">7 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/stop-paycheck-to-paycheck" class="blog-card" data-cat="mindset">
+        <div class="blog-card-thumb" style="background:#fef9ec">💡</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Mindset</div>
+          <h2>How to Stop Living Paycheck to Paycheck (A Data-Driven Approach)</h2>
+          <p>Most advice says "spend less." That's accurate and useless. The data approach starts with knowing where the money actually goes.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">8 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/pwa-finance-apps" class="blog-card" data-cat="tools">
+        <div class="blog-card-thumb" style="background:#f0f4ff">🔒</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Tools &amp; Tech</div>
+          <h2>PWA Finance Apps: Why Browser-Based Is More Secure</h2>
+          <p>Progressive Web Apps have no app store gatekeeper and no forced updates. For financial tools, that's a feature, not a limitation.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">6 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/expense-categories" class="blog-card" data-cat="budgeting">
+        <div class="blog-card-thumb" style="background:#f0f5ec">🗂️</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Budgeting</div>
+          <h2>The 14 Expense Categories Everyone Should Track</h2>
+          <p>Not all categories are equal. Some are fixed, some are flexible, and some are the ones that quietly grow without you noticing. Know which is which.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">6 min read →</span></div>
+        </div>
+      </a>
+
+      <a href="/blog/posts/ai-financial-coach" class="blog-card" data-cat="tools">
+        <div class="blog-card-thumb" style="background:#f0f4ff">🤖</div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat">Tools &amp; Tech</div>
+          <h2>AI Financial Coach: How AI Improves Your Money Habits</h2>
+          <p>AI can answer "where am I overspending?" in seconds. The question is whether it's seeing your real data — or making something up.</p>
+          <div class="blog-card-meta"><span>June 2026</span><span class="blog-card-read">7 min read →</span></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<div style="background:var(--ink);padding:80px 48px;text-align:center">
+  <div style="max-width:540px;margin:0 auto">
+    <span class="section-label-inv">Ready to apply this?</span>
+    <h2 style="font-family:var(--serif);font-size:clamp(28px,4vw,48px);font-weight:400;color:var(--white);margin-bottom:16px">The dashboard that makes <em style="font-style:italic;color:#a8c48a">these ideas real.</em></h2>
+    <p style="font-size:16px;color:rgba(255,255,255,.45);margin-bottom:36px;line-height:1.7">FincWin is free to start. No card, no account, no expiry. Open it, add your income and expenses, and have a working budget in under 10 minutes.</p>
+    <a href="/app" class="btn-primary">Get started free →</a>
+  </div>
+</div>
+
+<footer class="mkt-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><a href="/" class="footer-logo">Finc<span>Win</span></a><p>The personal finance dashboard for people who want clarity, not complexity.</p></div>
+      <div class="footer-col"><h4>Product</h4><a href="/features">Features</a><a href="/pricing">Pricing</a><a href="/compare">Compare</a><a href="/use-cases">Use cases</a><a href="/app">Open app</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about">About</a><a href="/changelog">Changelog</a><a href="/contact">Contact</a></div>
+      <div class="footer-col"><h4>Learn</h4><a href="./index.html">Blog</a><a href="/help">Help guide</a></div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom"><p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookie-policy">Cookies</a></div></div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+
+  function filterCat(cat) {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.getAttribute('onclick').includes("'"+cat+"'")));
+    document.querySelectorAll('.blog-card').forEach(c => {
+      c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+
+  // Filter by ?cat= query param (linked from blog post sub-nav)
+  (function(){
+    var cat = (new URLSearchParams(location.search)).get('cat');
+    if (cat && ['budgeting','debt','savings','tools','mindset'].indexOf(cat) > -1) {
+      filterCat(cat);
+    }
+  })();
+</script>
+<script>document.querySelectorAll('.copy-year').forEach(function(e){e.textContent=new Date().getFullYear();});</script>
+<script src="/js/mkt.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "META_TITLE": "Analytics Dashboard — See Where Your Money Goes | FincWin",
+  "META_DESCRIPTION": "FincWin's analytics dashboard shows net flow over time, category breakdowns, smart insights and net worth — so you see exactly where your money goes. Free to start.",
+  "OG_DESCRIPTION": "Net flow, category breakdowns, smart insights and net worth — all in one private, offline dashboard. Free.",
+  "CANONICAL_URL": "https://fincwin.com/features/analytics-dashboard",
+  "FEATURE_NAME": "Analytics Dashboard",
+  "FEATURE_MODULE": "Insights",
+  "FEATURE_HEADLINE": "See where your money <em>actually goes</em>",
+  "FEATURE_SUBHEAD": "One dashboard for net flow, category spending, net worth and smart insights — updated as you go, no spreadsheets required.",
+  "PROBLEM_HEADLINE": "Your numbers are scattered across apps and statements",
+  "PROBLEM_BODY": "<p>Income in one app, spending in another, balances in a third. Piecing together the full picture takes hours you don't have — so most people never do.</p><p>FincWin pulls it together into one view: what came in, what went out, where it went, and where you stand.</p>",
+  "HOW_IT_WORKS": "<li><strong>Log your activity</strong> — add income and expenses, or import a CSV.</li>\n    <li><strong>See net flow</strong> — a clear chart of money in vs out over time.</li>\n    <li><strong>Drill into categories</strong> — find the spending that actually moves the needle.</li>\n    <li><strong>Read your insights</strong> — FincWin surfaces trends and outliers automatically.</li>",
+  "CAPABILITIES": "<li><span class=\"li-icon\">✓</span><span><strong>Monthly net flow</strong> chart over time.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Category breakdowns</strong> to spot where money leaks.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Smart insights</strong> highlighting trends and outliers.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Net worth tracking</strong> across accounts and assets.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Multi-currency</strong> totals.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Offline &amp; private</strong> — your data never leaves your device.</span></li>",
+  "FEATURE_PLAN": "Free & Pro",
+  "CTA_HEADLINE": "See your full <em>money picture</em> today.",
+  "RELATED_FEATURES": "<a href=\"/features/envelope-budgeting\" class=\"related-link\"><span>Feature</span><p>Envelope Budgeting</p></a>\n    <a href=\"/features/ai-coach\" class=\"related-link\"><span>Feature</span><p>AI Coach</p></a>\n    <a href=\"/blog/posts/net-worth-tracking\" class=\"related-link\"><span>Tools &amp; Tech</span><p>Net Worth Tracking</p></a>\n    <a href=\"/use-cases/irregular-income\" class=\"related-link\"><span>Use case</span><p>Irregular Income</p></a>"
+}

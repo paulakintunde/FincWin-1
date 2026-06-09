@@ -147,7 +147,7 @@ function renderLoans(){
   document.getElementById('loan-pmts').textContent=fmt(minPmts());
   const ti=S.loans.reduce((s,l)=>{const m=calcMTP(amt(l.amount),l.rate,amt(l.minPayment));return m>=999?s:s+Math.max(0,amt(l.minPayment)*m-amt(l.amount));},0);
   document.getElementById('loan-int').textContent=fmt(Math.max(0,ti));
-  const mm=Math.max(...S.loans.map(l=>calcMTP(amt(l.amount),l.rate,amt(l.minPayment))));
+  const mm=S.loans.reduce((mx,l)=>Math.max(mx,calcMTP(amt(l.amount),l.rate,amt(l.minPayment))),0);
   document.getElementById('loan-free').textContent=getPayoffDate(mm);
   document.getElementById('loanBadge').textContent=S.loans.length;
   const sel=document.getElementById('calcSel');const cv=sel.value;
@@ -279,7 +279,7 @@ function addLP(li){
   dispatch('LOAN_ADD_PAYMENT',{li,payment:{month:target,paid:false}});
   renderLoans();
 }
-function addLoan(){openLoanModal(-1);} // now opens modal
+function addLoan(){if(typeof requirePlan==='function'&&!requirePlan('pro','Loan Payoff Calculator'))return;openLoanModal(-1);}
 function setStrategy(s){
   dispatch('LOAN_STRATEGY',{strategy:s});
   document.getElementById('btn-avalanche').classList.toggle('active',s==='avalanche');
@@ -290,21 +290,20 @@ let _newChipMonths=new Set();
 function generatePaySchedule(li){
   const loan=S.loans[li];
   const parts=CMK.split(' ');let mo=MS.indexOf(parts[0]),yr=parseInt(parts[1]);
-  let added=0;
+  const monthsToAdd=[];
   _newChipMonths=new Set();
   for(let i=0;i<12;i++){
     const key=mk(mo,yr);
     if(!loan.payments.find(p=>p.month===key)){
-      loan.payments.push({month:key,paid:false});
+      monthsToAdd.push(key);
       _newChipMonths.add(key);
-      added++;
     }
     mo++;if(mo>11){mo=0;yr++;}
   }
-  if(added>0){
-    persist();renderLoans();
-    showToast('✓ Added '+added+' payment chip'+(added>1?'s':'')+' for '+esc(loan.name)+' — new ones are highlighted');
-    // Clear highlight after 4 seconds
+  if(monthsToAdd.length>0){
+    dispatch('LOAN_GENERATE_SCHEDULE',{loanIdx:li,months:monthsToAdd},false);
+    renderLoans();
+    showToast('✓ Added '+monthsToAdd.length+' payment chip'+(monthsToAdd.length>1?'s':'')+' for '+esc(loan.name)+' — new ones are highlighted');
     setTimeout(()=>{_newChipMonths=new Set();renderLoans();},4000);
   } else showToast('All 12 months already logged','warn-t');
 }
@@ -340,7 +339,7 @@ function runCalc(){
   let rp=r===0?P/tgt:P*(r*Math.pow(1+r,tgt))/(Math.pow(1+r,tgt)-1);
   rp=Math.max(rp,mp)+ex;
   let bal=P,tp=0,ti=0;const rows=[];
-  for(let m=1;m<=360&&bal>0.005;m++){const ic=bal*r;const ap=Math.min(rp,bal+ic);const pc=ap-ic;bal=Math.max(0,bal-pc);tp+=ap;ti+=ic;rows.push({m,pmt:ap,prin:pc,int:ic,bal});}
+  for(let m=1;m<=600&&bal>0.005;m++){const ic=bal*r;const ap=Math.min(rp,bal+ic);const pc=ap-ic;bal=Math.max(0,bal-pc);tp+=ap;ti+=ic;rows.push({m,pmt:ap,prin:pc,int:ic,bal});}
   let mB=P,mT=0;for(let m=1;m<=600&&mB>0.005;m++){const ic=mB*r;const p2=Math.max(mp,mB+ic);mB=Math.max(0,mB-(p2-ic));mT+=p2;}
   const sv=Math.max(0,mT-tp);
   document.getElementById('calcMonthly').textContent=fmt(rp);document.getElementById('calcTotal').textContent=fmt(tp);
@@ -362,7 +361,7 @@ function updateBonus(val){
   const nw=calcMTP(amt(tgt.amount),tgt.rate,amt(tgt.minPayment)+parseFloat(val));
   const saved=base-nw;
   document.getElementById('bonusResult').textContent=val>0
-    ?`+${fmt(val)}/mo on ${tgt.name}: pays off ${saved>0?saved+' months earlier':'at same time'}. All loans debt-free: ${getPayoffDate(Math.max(...S.loans.map(l=>calcMTP(amt(l.amount),l.rate,amt(l.minPayment)+val/S.loans.length))))}.`
+    ?`+${fmt(val)}/mo on ${tgt.name}: pays off ${saved>0?saved+' months earlier':'at same time'}. All loans debt-free: ${getPayoffDate(S.loans.reduce((mx,l)=>Math.max(mx,calcMTP(amt(l.amount),l.rate,amt(l.minPayment)+val/S.loans.length)),0))}.`
     :'Adjust the slider to see how extra payments speed up payoff.';
 }
 

@@ -767,6 +767,7 @@ async function obLoadDemoAndClose() {
   // Close the onboarding overlay first so the dashboard is visible immediately
   var overlay = document.getElementById('onboardOverlay');
   if (overlay) overlay.style.display = 'none';
+  document.body.style.overflow = '';
   localStorage.setItem('finflow_onboarded', '1');
   // Show banner so user knows this is demo data and can start fresh any time
   var banner = document.getElementById('demoBanner');

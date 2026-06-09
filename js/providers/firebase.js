@@ -27,7 +27,7 @@ async function getFirebaseInstances() {
   if (!firebaseConfig) throw new Error('Firebase config not available — deploy with js/config.local.js or set window.__FINCWIN_CONFIG__');
   const [
     { initializeApp },
-    { getAuth, signInAnonymously, onAuthStateChanged, linkWithCredential, EmailAuthProvider },
+    { getAuth, signInAnonymously, onAuthStateChanged, linkWithCredential, EmailAuthProvider, signInWithEmailAndPassword },
     { getFirestore, doc, getDoc, setDoc, deleteDoc, onSnapshot }
   ] = await Promise.all([
     import('./vendor/firebase/firebase-app.js'),
@@ -38,7 +38,7 @@ async function getFirebaseInstances() {
   _auth = getAuth(_firebaseApp);
   _db = getFirestore(_firebaseApp);
   _fsHelpers = { doc, getDoc, setDoc, deleteDoc, onSnapshot };
-  _authHelpers = { signInAnonymously, onAuthStateChanged, linkWithCredential, EmailAuthProvider };
+  _authHelpers = { signInAnonymously, onAuthStateChanged, linkWithCredential, EmailAuthProvider, signInWithEmailAndPassword };
   return { auth: _auth, db: _db, fsHelpers: _fsHelpers };
 }
 
@@ -170,13 +170,24 @@ if (typeof window.registerProvider === 'function') {
   window.registerProvider('firebase', _firebasePlugin);
 }
 
+// ── Phase 3: upgrade anonymous session to permanent email/password account ────
+// Called when a user who already has anonymous sync data creates a full account.
+// Preserves uid → Firestore doc (sync data) is retained without migration.
+async function linkAnonymousToEmail(email, password) {
+  const { auth } = await getFirebaseInstances();
+  if (!auth.currentUser?.isAnonymous) throw new Error('No anonymous session to upgrade');
+  const credential = _authHelpers.EmailAuthProvider.credential(email, password);
+  return _authHelpers.linkWithCredential(auth.currentUser, credential);
+}
+
 // ── Internal Firebase helpers for QR callers in sync.js (Research Finding 4) ──
 // Non-writable + non-configurable so no script can overwrite the references.
 // (Previous audit finding: plain window.X = fn assignments are writable by any script.)
 [
-  ['_fbGetInstances',  getFirebaseInstances],
-  ['_fbEnsureSignedIn', ensureSignedIn],
-  ['_fbCloudPull',     cloudPull]
+  ['_fbGetInstances',       getFirebaseInstances],
+  ['_fbEnsureSignedIn',    ensureSignedIn],
+  ['_fbCloudPull',         cloudPull],
+  ['_fbLinkAnonymous',     linkAnonymousToEmail]
 ].forEach(function(pair) {
   Object.defineProperty(window, pair[0], {
     value: pair[1],

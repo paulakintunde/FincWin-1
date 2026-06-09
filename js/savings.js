@@ -4,7 +4,7 @@ function renderSavings(){
   renderGoals();
   const goals=S.savings||[];
   const svTot=Math.round(goals.reduce((s,g)=>s+amt(g.balance),0)*100)/100;
-  const estInt=Math.round(goals.reduce((s,g)=>s+amt(g.balance)*(g.rate/100),0)*100)/100;
+  const estInt=Math.round(goals.reduce((s,g)=>s+amt(g.balance)*(g.rate/100/12),0)*100)/100;
   const mContrib=Math.round(goals.reduce((s,g)=>s+amt(g.contribution),0)*100)/100;
   const done=goals.filter(g=>amt(g.balance)>=amt(g.target)).length;
   document.getElementById('sv-total').textContent=fmt(svTot);
@@ -102,6 +102,13 @@ function renderDashSavings(goals){
 
 // Savings goal modal (add/edit)
 function openSavModal(idx){
+  // Free tier: cap at 1 savings goal
+  if(idx<0&&typeof getPlan==='function'&&getPlan()==='free'){
+    if((typeof S!=='undefined'&&S&&(S.savings||[]).length>=1)){
+      if(typeof requirePlan==='function')requirePlan('pro','Unlimited Savings Goals');
+      return;
+    }
+  }
   _pendingSavIdx=idx;
   document.getElementById('savModalTitle').textContent=idx<0?'Add Savings Goal':'Edit Savings Goal';
   const g=idx>=0?S.savings[idx]:{name:'',target:0,balance:0,contribution:0,rate:0,deadline:'',transferDay:''};
@@ -175,13 +182,9 @@ function checkSavingsAutopilot(){
 function deleteSavTxn(goalIdx, txnIdx){
   const g = S.savings[goalIdx];
   if(!g||!g.transactions||!g.transactions[txnIdx]) return;
-  const txn = g.transactions[txnIdx];
-  // Reverse the balance effect of this transaction
-  if(txn.type==='deposit') g.balance=Math.max(0,Math.round((amt(g.balance)-txn.amount)*100)/100);
-  else g.balance=Math.round((amt(g.balance)+txn.amount)*100)/100;
-  g.transactions.splice(txnIdx,1);
-  persist();renderSavings();updateHealth();
-  showToast('✓ Transaction removed');
+  dispatch('SAVINGS_TXN_REMOVE',{goalIdx,txnIdx},false);
+  renderSavings();updateHealth();
+  showUndoToast('Transaction removed — Undo');
 }
 
 function openDelSav(i){_pendingDelSavIdx=i;document.getElementById('delSavName').textContent='Delete "'+S.savings[i].name+'"? This cannot be undone.';document.getElementById('delSavModal').classList.add('open');

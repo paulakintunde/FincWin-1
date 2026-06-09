@@ -1,0 +1,20 @@
+{
+  "META_TITLE": "The Most Private Personal Finance App — FincWin",
+  "META_DESCRIPTION": "FincWin is a private finance app: local-first, no server storage, optional encryption, and backup to your own Google Drive. Your money data stays yours. Free.",
+  "OG_DESCRIPTION": "A private finance app that's local-first with no server storage. Optional encryption, your-own-Drive backup. Free.",
+  "CANONICAL_URL": "https://fincwin.com/private-finance-app",
+  "PAGE_TITLE": "Private Finance App",
+  "TARGET_KEYWORD": "Private finance app",
+  "HERO_HEADLINE": "A finance app that <em>keeps your data yours</em>",
+  "HERO_SUBHEAD": "Local-first, no server storage, optional encryption, and backup to a Google Drive file you control. Privacy isn't a setting — it's the architecture.",
+  "PROBLEM_HEADLINE": "Most finance apps are built to collect your data",
+  "PROBLEM_BODY": "<p>Free apps are rarely free — they monetise your financial data through ads, offers, or resale. Even paid apps usually store everything on their own servers, where it's a target.</p><p>FincWin is built the other way. Your data lives on your device, never on our servers, and you choose if and where it's backed up.</p>",
+  "CAPABILITIES": "<li><span class=\"li-icon\">✓</span><span><strong>Local-first</strong> — data lives in your browser, not our cloud.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>No server storage</strong> — FincWin keeps no copy of your finances.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Optional encryption</strong> — lock your data behind a PIN.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Your-own-Drive backup</strong> — you own the backup file.</span></li>",
+  "COMPARISON_HEADLINE": "FincWin vs typical finance apps",
+  "COMPARISON_RIVAL": "Typical finance apps",
+  "COMPARISON_TABLE": "<tr><td>Data stored on their servers</td><td class=\"fw-col yes\">No</td><td class=\"no\">Yes</td></tr>\n        <tr><td>Monetises your data</td><td class=\"fw-col yes\">No</td><td class=\"no\">Often</td></tr>\n        <tr><td>Optional encryption</td><td class=\"fw-col yes\">Yes</td><td class=\"part\">Rarely</td></tr>\n        <tr><td>You control backups</td><td class=\"fw-col yes\">Yes — your Drive</td><td class=\"no\">No</td></tr>",
+  "FAQ_ITEMS": "<div class=\"faq-item\"><p class=\"faq-q\">Where is my financial data stored?</p><p class=\"faq-a\">On your device, in your browser. FincWin keeps no copy on any server. Backup is optional and goes to your own Google Drive.</p></div>\n    <div class=\"faq-item\"><p class=\"faq-q\">Do you sell or use my data?</p><p class=\"faq-a\">No. There are no ads and no data resale. The app is funded by Pro subscriptions, not your data.</p></div>\n    <div class=\"faq-item\"><p class=\"faq-q\">Can I lock the app?</p><p class=\"faq-a\">Yes — optional encryption lets you protect your data behind a PIN.</p></div>",
+  "FAQ_JSON": "[{\"@type\":\"Question\",\"name\":\"Where is my financial data stored?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"On your device, in your browser. No server copy; optional backup to your own Google Drive.\"}},{\"@type\":\"Question\",\"name\":\"Do you sell or use my data?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"No ads, no data resale. FincWin is funded by Pro subscriptions.\"}},{\"@type\":\"Question\",\"name\":\"Can I lock the app?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Yes, optional encryption protects your data behind a PIN.\"}}]",
+  "CTA_HEADLINE": "Keep your finances <em>truly private.</em>",
+  "RELATED_FEATURES": "<a href=\"/features/google-drive-backup\" class=\"related-link\"><span>Feature</span><p>Google Drive Backup</p></a>\n    <a href=\"/privacy\" class=\"related-link\"><span>Trust</span><p>Privacy</p></a>\n    <a href=\"/blog/posts/offline-personal-finance-apps\" class=\"related-link\"><span>Tools &amp; Tech</span><p>Offline Personal Finance Apps</p></a>\n    <a href=\"/compare/mint-alternative\" class=\"related-link\"><span>Compare</span><p>Best Mint Alternative</p></a>"
+}

@@ -191,6 +191,7 @@ function unlockAchievement(id, _skipRender) {
   if (!ACHIEVEMENTS[id]) return;
   var _ids = (S.achievements || []).map(function(e){ return (e && typeof e === 'object') ? e.id : e; });
   if (_ids.includes(id)) return;
+  if (!Array.isArray(S.achievements)) S.achievements = [];
   S.achievements.push(id);
   var b = ACHIEVEMENTS[id];
   if (b.xp) { S.xp = (S.xp||0) + b.xp; }

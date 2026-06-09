@@ -1,10 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — FincWin</title>
   <meta name="description" content="FincWin Privacy Policy. Your financial data stays on your device. We collect almost nothing.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://fincwin.com/privacy">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,7 +74,11 @@
     .footer-cols h4 { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.25); margin-bottom: 4px; }
     .footer-cols a { font-size: 13px; color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
     .footer-cols a:hover { color: rgba(255,255,255,.7); }
-    .footer-bottom { max-width: 1060px; margin: 36px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06); font-size: 12px; color: rgba(255,255,255,.2); }
+    .footer-bottom { max-width: 1060px; margin: 36px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06); font-size: 12px; color: rgba(255,255,255,.2);   display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-copy { font-size: 12px; }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
+    .footer-legal a:hover { color: rgba(255,255,255,.7); }
 
     @media (max-width: 768px) {
       nav { padding: 18px 24px; }
@@ -86,13 +92,16 @@
 </head>
 <body>
 
-  <nav id="nav">
-    <a href="landing.html" class="nav-logo">Finc<span>Win</span></a>
+  <nav id="mainNav">
+    <a href="/" class="nav-logo">Finc<span>Win</span></a>
     <div class="nav-links">
-      <a href="features.html">Features</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="index.html">App</a>
-      <a href="signin.html" class="nav-cta">Sign in</a>
+      <a href="/features">Features</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/compare">Compare</a>
+      <a href="/use-cases">Use cases</a>
+      <a href="/blog">Blog</a>
+      <a href="/app">App</a>
+      <a href="/app" class="nav-cta">Get started free</a>
     </div>
   </nav>
 
@@ -167,7 +176,7 @@
 
     <div class="policy-section">
       <h2>Contact</h2>
-      <p>Questions about this policy or your data? Reach us at <a href="mailto:privacy@fincwin.app">privacy@fincwin.app</a>. We're a small team and will respond personally within 2 business days.</p>
+      <p>Questions about this policy or your data? Reach us at <a href="mailto:privacy@fincwin.com">privacy@fincwin.com</a>. We're a small team and will respond personally within 2 business days.</p>
       <p>FincWin is operated by the company behind FincWin. For our registered address and business details, email us at the address above.</p>
     </div>
   </div>
@@ -175,34 +184,40 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-brand">
-        <a href="landing.html" class="nav-logo">Finc<span>Win</span></a>
-        <p>Personal finance clarity, offline and private.</p>
+        <a href="/" class="nav-logo">Finc<span>Win</span></a>
+        <p>The personal finance dashboard for people who want clarity, not complexity.</p>
       </div>
       <div class="footer-cols">
         <div>
           <h4>Product</h4>
-          <a href="features.html">Features</a>
-          <a href="pricing.html">Pricing</a>
-          <a href="index.html">Open App</a>
+          <a href="/features">Features</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/compare">Compare</a>
+          <a href="/use-cases">Use cases</a>
+          <a href="/app">Open app</a>
         </div>
         <div>
-          <h4>Account</h4>
-          <a href="signin.html">Sign In</a>
-          <a href="account.html">My Account</a>
+          <h4>Company</h4>
+          <a href="/about">About</a>
+          <a href="/changelog">Changelog</a>
+          <a href="/contact">Contact</a>
         </div>
         <div>
-          <h4>Legal</h4>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
+          <h4>Learn</h4>
+          <a href="/blog">Blog</a>
+          <a href="/help">Help guide</a>
         </div>
+        
       </div>
     </div>
-    <div class="footer-bottom">© 2026 FincWin. All rights reserved.</div>
+    <div class="footer-bottom"><p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookie-policy">Cookies</a></div></div>
   </footer>
 
   <script>
-    const nav = document.getElementById('nav');
+    const nav = document.getElementById('mainNav');
     window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
   </script>
+<script>document.querySelectorAll('.copy-year').forEach(function(e){e.textContent=new Date().getFullYear();});</script>
+<script src="/js/mkt.js" defer></script>
 </body>
 </html>

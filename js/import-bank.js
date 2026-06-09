@@ -75,9 +75,11 @@ const _BANK_PROFILES = [
   }
 ];
 
-// ── PapaParse CSV helper (bundled locally at js/vendor/papaparse.esm.js) ──
+// ── PapaParse CSV helper (js/vendor/papaparse.min.js loaded as a defer script) ──
 async function _parseCsvWithPapa(text, errEl) {
-  const { default: Papa } = await import('./vendor/papaparse.esm.js');
+  text = text.replace(/^﻿/, '');
+  const Papa = window.Papa;
+  if (!Papa) { errEl.textContent = 'CSV parser not ready — please refresh and try again.'; return; }
   const result = Papa.parse(text, { header: true, skipEmptyLines: true });
   // Prototype-pollution guard: filter dangerous field names before any object access
   const headers = (result.meta.fields || []).filter(function(h) {

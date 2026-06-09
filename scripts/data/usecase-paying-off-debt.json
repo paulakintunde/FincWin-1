@@ -1,0 +1,16 @@
+{
+  "META_TITLE": "Budgeting for Paying Off Debt — FincWin",
+  "META_DESCRIPTION": "A budgeting setup built for paying off debt: snowball or avalanche planning, a real debt-free date, and envelope budgeting to free up payments. Free to start.",
+  "OG_DESCRIPTION": "Paying off debt? FincWin gives you a debt-free date, snowball/avalanche planning, and envelopes to find the extra payment.",
+  "CANONICAL_URL": "https://fincwin.com/use-cases/paying-off-debt",
+  "PERSONA_LABEL": "people paying off debt",
+  "PERSONA_HEADLINE": "Know the exact date you'll be <em>debt-free</em>",
+  "PERSONA_SUBHEAD": "FincWin turns scattered balances into one plan: a payoff date, the cheapest route, and the budget to get there.",
+  "SITUATION_HEADLINE": "You're paying every month but the end never feels closer",
+  "SITUATION_BODY": "<p>You have a few balances — a card, maybe a loan — and you're making payments. But nothing tells you when it actually ends, or whether paying one down first would save you money.</p><p>That uncertainty is exhausting. FincWin replaces it with a single, moving target you can plan around.</p>",
+  "HOW_IT_HELPS": "<li><span class=\"li-icon\">→</span><span><strong>A real debt-free date:</strong> add your loans and FincWin projects exactly when you'll be done.</span></li>\n    <li><span class=\"li-icon\">→</span><span><strong>Snowball or avalanche:</strong> compare momentum vs lowest cost and pick your route.</span></li>\n    <li><span class=\"li-icon\">→</span><span><strong>Find the extra payment:</strong> envelope budgeting surfaces money you can redirect to debt.</span></li>\n    <li><span class=\"li-icon\">→</span><span><strong>Stay motivated:</strong> achievements and a health score keep you going through the long haul.</span></li>",
+  "HOWTO_STEPS_JSON": "[{\"@type\":\"HowToStep\",\"name\":\"Add your loans\",\"text\":\"Enter each balance, rate and minimum payment.\"},{\"@type\":\"HowToStep\",\"name\":\"Choose snowball or avalanche\",\"text\":\"Pick momentum or lowest total interest.\"},{\"@type\":\"HowToStep\",\"name\":\"Set an extra payment\",\"text\":\"Add any amount above minimums to pull your debt-free date earlier.\"},{\"@type\":\"HowToStep\",\"name\":\"Budget the rest\",\"text\":\"Use envelopes to protect the extra payment each month.\"}]",
+  "USER_QUOTE": "The first time I saw an actual debt-free date instead of a vague ‘someday,’ the whole thing finally felt possible.",
+  "CTA_HEADLINE": "Get your debt-free date <em>today.</em>",
+  "RELEVANT_FEATURES": "<a href=\"/features/loan-payoff-calculator\" class=\"related-link\"><span>Feature</span><p>Loan Payoff Calculator</p></a>\n    <a href=\"/features/envelope-budgeting\" class=\"related-link\"><span>Feature</span><p>Envelope Budgeting</p></a>\n    <a href=\"/blog/posts/debt-snowball-vs-avalanche\" class=\"related-link\"><span>Debt</span><p>Snowball vs Avalanche</p></a>\n    <a href=\"/blog/posts/stop-paycheck-to-paycheck\" class=\"related-link\"><span>Budgeting</span><p>Stop Living Paycheck to Paycheck</p></a>"
+}

@@ -1,4 +1,6 @@
-const CACHE = 'finflow-a1b2c3d4';
+// PERF-03: bump this string on every deploy that changes static assets so
+// existing installs pick up the new files on next visit.
+const CACHE = 'fincwin-v3';
 const ASSETS = [
   './',
   './index.html',

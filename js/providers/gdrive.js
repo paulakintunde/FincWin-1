@@ -174,7 +174,12 @@ async function _onDriveTokenGranted(accessToken) {
   var email = await _getDriveEmail(accessToken);
   _driveEmail = email;
   if (typeof window._idbSetRaw === 'function') {
-    await window._idbSetRaw('driveAccessToken', accessToken);
+    // Encrypt the access token at rest when a session key is active.
+    // sessionKeyEncrypt returns the original string when no key is set (S-02).
+    var tokenToStore = typeof sessionKeyEncrypt === 'function'
+      ? await sessionKeyEncrypt(accessToken)
+      : accessToken;
+    await window._idbSetRaw('driveAccessToken', tokenToStore);
     await window._idbSetRaw('driveTokenIssuedAt', Date.now());
     await window._idbSetRaw('driveEmail', email);
   }
@@ -196,6 +201,7 @@ async function _onDriveTokenGranted(accessToken) {
 
 // ── Public connectGoogleDrive — triggers GIS popup (user-initiated) ───────────
 function connectGoogleDrive() {
+  if(typeof requirePlan==='function'&&!requirePlan('pro','Google Drive Sync')) return;
   var clientId = window.__FINCWIN_CONFIG__ && window.__FINCWIN_CONFIG__.googleClientId;
   if (!clientId || clientId === 'YOUR_GOOGLE_OAUTH_CLIENT_ID') {
     if (typeof showToast === 'function') showToast('Google Client ID not configured — add googleClientId to js/config.local.js', 'warn-t');

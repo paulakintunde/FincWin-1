@@ -1,0 +1,20 @@
+{
+  "META_TITLE": "Budget App Without Bank Sync (No Plaid, No Login) — FincWin",
+  "META_DESCRIPTION": "FincWin is a budget app with no bank sync — no Plaid, no bank credentials. Add transactions manually or by CSV, keep your data private and offline. Free.",
+  "OG_DESCRIPTION": "A budget app that needs no bank sync. No Plaid, no login — manual or CSV entry, fully private. Free to start.",
+  "CANONICAL_URL": "https://fincwin.com/no-bank-sync-budget",
+  "PAGE_TITLE": "Budget App Without Bank Sync",
+  "TARGET_KEYWORD": "Budget app without bank sync",
+  "HERO_HEADLINE": "Budget <em>without</em> handing over your bank login",
+  "HERO_SUBHEAD": "No Plaid, no credentials, no third-party connection. Add transactions manually or import a CSV — your bank never enters the picture.",
+  "PROBLEM_HEADLINE": "Bank sync means trusting a middleman with your login",
+  "PROBLEM_BODY": "<p>Most budget apps connect through services like Plaid, which need your banking credentials and route your transaction data through their servers. For a lot of people that's a hard no.</p><p>FincWin doesn't sync with your bank at all. You stay in control of what goes in — by hand or by CSV — and nothing leaves your device.</p>",
+  "CAPABILITIES": "<li><span class=\"li-icon\">✓</span><span><strong>No bank credentials</strong> — ever. No Plaid, no aggregator.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Manual or CSV entry</strong> — add what you want, when you want.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Private by default</strong> — data stays in your browser.</span></li>\n    <li><span class=\"li-icon\">✓</span><span><strong>Full budgeting</strong> — envelopes, goals, loans, analytics.</span></li>",
+  "COMPARISON_HEADLINE": "FincWin vs bank-sync budget apps",
+  "COMPARISON_RIVAL": "Bank-sync apps",
+  "COMPARISON_TABLE": "<tr><td>Needs bank login</td><td class=\"fw-col yes\">No</td><td class=\"no\">Yes (via Plaid etc.)</td></tr>\n        <tr><td>Data sent to third party</td><td class=\"fw-col yes\">No</td><td class=\"no\">Yes</td></tr>\n        <tr><td>Manual &amp; CSV entry</td><td class=\"fw-col yes\">Yes</td><td class=\"part\">Sometimes</td></tr>\n        <tr><td>Works offline</td><td class=\"fw-col yes\">Yes</td><td class=\"no\">No</td></tr>",
+  "FAQ_ITEMS": "<div class=\"faq-item\"><p class=\"faq-q\">How do transactions get in without bank sync?</p><p class=\"faq-a\">You add them manually in seconds, or import a CSV exported from your bank. FincWin never needs your login.</p></div>\n    <div class=\"faq-item\"><p class=\"faq-q\">Is CSV import free?</p><p class=\"faq-a\">CSV import is a Pro feature ($39/year or $149 lifetime). Manual entry is free forever.</p></div>\n    <div class=\"faq-item\"><p class=\"faq-q\">Does my data leave my device?</p><p class=\"faq-a\">No. It stays in your browser, with optional encrypted backup to your own Google Drive.</p></div>",
+  "FAQ_JSON": "[{\"@type\":\"Question\",\"name\":\"How do transactions get in without bank sync?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Add them manually or import a CSV from your bank. No login required.\"}},{\"@type\":\"Question\",\"name\":\"Is CSV import free?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"CSV import is Pro; manual entry is free forever.\"}},{\"@type\":\"Question\",\"name\":\"Does my data leave my device?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"No. It stays in your browser, with optional backup to your own Google Drive.\"}}]",
+  "CTA_HEADLINE": "Budget privately — <em>no bank link.</em>",
+  "RELATED_FEATURES": "<a href=\"/blog/posts/import-bank-statements\" class=\"related-link\"><span>Tools &amp; Tech</span><p>Import Bank Statements</p></a>\n    <a href=\"/features/envelope-budgeting\" class=\"related-link\"><span>Feature</span><p>Envelope Budgeting</p></a>\n    <a href=\"/compare/mint-alternative\" class=\"related-link\"><span>Compare</span><p>Best Mint Alternative</p></a>\n    <a href=\"/privacy\" class=\"related-link\"><span>Trust</span><p>Privacy</p></a>"
+}

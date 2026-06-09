@@ -1,95 +1,66 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FincWin — Know exactly where you stand</title>
-  <meta name="description" content="The personal finance app that replaces anxiety with clarity. Budget envelopes, loan payoff, AI coaching — all offline, all yours.">
+  <title>Free Personal Finance App — FincWin</title>
+  <meta name="description" content="FincWin is the free budget app that brings income, spending, debt, and savings into one view. No bank login. No subscription required. Your data stays on your device. Pro from $39/year.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fincwin.com/">
+  <link rel="alternate" hreflang="en" href="https://fincwin.com/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fincwin.com/">
+  <meta property="og:title" content="Free Personal Finance App — FincWin">
+  <meta property="og:description" content="FincWin brings income, spending, debt, and savings into one clear dashboard. No bank login. Free to start. Pro from $39/year.">
+  <meta property="og:image" content="https://fincwin.com/og-image.svg">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Personal Finance App — FincWin">
+  <meta name="twitter:description" content="FincWin brings income, spending, debt, and savings into one clear dashboard. No bank login. Free to start. Pro from $39/year.">
+  <meta name="twitter:image" content="https://fincwin.com/og-image.svg">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/mkt.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "FincWin",
+    "url": "https://fincwin.com/",
+    "description": "Free personal finance dashboard — budget tracking, debt payoff, savings goals, AI coaching. No bank login. Offline-first.",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fincwin.com/" }
+      ]
+    }
+  }
+  </script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --sage:    #5a6e3f;
-      --sage-lt: #dce8d4;
-      --sage-dk: #3d4d2b;
-      --ink:     #111111;
-      --muted:   #6b7280;
-      --faint:   #f5f4f0;
-      --white:   #ffffff;
-      --border:  rgba(0,0,0,.08);
-      --r: 10px;
-      --sans: 'Hanken Grotesk', sans-serif;
-      --serif: 'Instrument Serif', serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--sans);
-      font-weight: 300;
-      color: var(--ink);
-      background: var(--white);
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 48px;
-      background: rgba(255,255,255,.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color .3s;
-    }
-    nav.scrolled { border-color: var(--border); }
-    .nav-logo {
-      font-size: 17px; font-weight: 500; letter-spacing: -.3px;
-      color: var(--ink); text-decoration: none;
-    }
-    .nav-logo span { color: var(--sage); }
-    .nav-links { display: flex; align-items: center; gap: 32px; }
-    .nav-links a {
-      font-size: 13px; font-weight: 400; color: var(--muted);
-      text-decoration: none; transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-cta {
-      font-size: 13px; font-weight: 500; color: var(--white) !important;
-      background: var(--ink); padding: 9px 20px; border-radius: 50px;
-      transition: background .2s !important;
-    }
-    .nav-cta:hover { background: var(--sage) !important; color: var(--white) !important; }
-
-    /* ── HERO ── */
+    /* ── HERO ──────────────────────────────────── */
     .hero {
       min-height: 100vh;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center;
-      padding: 140px 24px 80px;
-      background: var(--white);
+      text-align: center; padding: 140px 24px 80px;
       position: relative; overflow: hidden;
     }
     .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(90,110,63,.07) 0%, transparent 70%);
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(90,110,63,.09) 0%, transparent 70%);
       pointer-events: none;
     }
     .hero-eyebrow {
-      font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+      font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
       color: var(--sage); margin-bottom: 32px;
       opacity: 0; animation: fadeUp .6s .1s forwards;
     }
     .hero h1 {
       font-family: var(--serif);
-      font-size: clamp(42px, 7vw, 88px);
-      font-weight: 400; line-height: 1.05; letter-spacing: -.5px;
+      font-size: clamp(42px, 7.5vw, 96px);
+      font-weight: 400; line-height: 1.02; letter-spacing: -.5px;
       color: var(--ink); max-width: 860px;
       opacity: 0; animation: fadeUp .7s .2s forwards;
     }
@@ -97,788 +68,906 @@
     .hero-sub {
       margin-top: 28px;
       font-size: clamp(16px, 2vw, 20px); font-weight: 300;
-      color: var(--muted); max-width: 520px; line-height: 1.6;
+      color: var(--muted); max-width: 540px; line-height: 1.65;
       opacity: 0; animation: fadeUp .7s .35s forwards;
     }
     .hero-actions {
-      margin-top: 44px;
-      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+      margin-top: 44px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
       opacity: 0; animation: fadeUp .7s .5s forwards;
     }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 32px; border-radius: 50px;
-      background: var(--ink); color: var(--white);
-      font-family: var(--sans); font-size: 14px; font-weight: 500;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: background .2s, transform .15s;
-    }
-    .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
-    .btn-ghost {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 28px; border-radius: 50px;
-      background: transparent; color: var(--ink);
-      font-family: var(--sans); font-size: 14px; font-weight: 400;
-      text-decoration: none; border: 1px solid var(--border); cursor: pointer;
-      transition: border-color .2s, transform .15s;
-    }
-    .btn-ghost:hover { border-color: var(--ink); transform: translateY(-1px); }
     .hero-footnote {
-      margin-top: 20px; font-size: 12px; color: var(--muted);
+      margin-top: 20px; font-size: 12px; color: var(--muted); letter-spacing: .2px;
       opacity: 0; animation: fadeUp .7s .65s forwards;
     }
+    .hero-footnote span { margin: 0 8px; color: var(--border); }
 
-    /* App preview strip */
+    /* dashboard preview strip */
     .hero-preview {
-      margin-top: 72px; width: 100%; max-width: 1100px;
-      opacity: 0; animation: fadeUp .8s .75s forwards;
-      position: relative;
+      margin-top: 64px; width: 100%; max-width: 860px;
+      opacity: 0; animation: fadeUp .8s .8s forwards;
     }
-    .hero-preview::before {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
-      background: linear-gradient(to bottom, transparent, white);
-      z-index: 2; pointer-events: none;
-    }
-    .app-frame {
-      background: #f0efe9;
-      border-radius: 16px 16px 0 0;
-      border: 1px solid var(--border);
-      border-bottom: none;
-      padding: 14px 14px 0;
-      box-shadow: 0 32px 80px rgba(0,0,0,.1), 0 4px 16px rgba(0,0,0,.06);
-      overflow: hidden;
-    }
-    .app-bar {
-      background: white; border-radius: 8px 8px 0 0;
-      height: 44px; display: flex; align-items: center; justify-content: space-between;
-      padding: 0 20px; border-bottom: 1px solid var(--border);
-    }
-    .app-bar-dots { display: flex; gap: 6px; }
-    .app-bar-dots span {
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--border);
-    }
-    .app-screen {
-      background: #f9f8f5;
-      height: 320px;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px; padding: 16px;
-    }
-    .mock-card {
-      background: white; border-radius: 10px;
-      padding: 16px; border: 1px solid var(--border);
-    }
-    .mock-card.tall { grid-row: span 2; }
-    .mock-label { font-size: 9px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-    .mock-value { font-size: 22px; font-weight: 200; color: var(--ink); }
-    .mock-value.green { color: var(--sage); }
-    .mock-bar { height: 4px; background: var(--faint); border-radius: 2px; margin-top: 10px; overflow: hidden; }
-    .mock-bar-fill { height: 100%; border-radius: 2px; background: var(--sage); }
-    .mock-pill {
-      display: inline-block; font-size: 9px; font-weight: 500;
-      padding: 3px 8px; border-radius: 20px; margin-top: 8px;
-    }
-    .mock-pill.g { background: #d1fae5; color: #065f46; }
-    .mock-pill.a { background: #fef3c7; color: #92400e; }
-    .mock-rows { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
-    .mock-row { display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: var(--muted); }
-    .mock-row strong { color: var(--ink); font-weight: 500; }
-    .mock-donut {
-      width: 60px; height: 60px; border-radius: 50%;
-      background: conic-gradient(var(--sage) 0% 38%, #b7791f 38% 58%, #6b46c1 58% 70%, #2b6cb0 70% 84%, #d4a853 84%);
-      margin: 12px auto 0;
-      position: relative;
-    }
-    .mock-donut::after {
-      content: ''; position: absolute; inset: 14px;
-      background: white; border-radius: 50%;
-    }
-
-    /* ── TRUST BAR ── */
-    .trust-bar {
-      padding: 28px 48px;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center; gap: 48px;
-      flex-wrap: wrap;
-    }
-    .trust-item {
-      font-size: 12px; font-weight: 400; color: var(--muted);
-      display: flex; align-items: center; gap: 8px;
-    }
-    .trust-item strong { color: var(--ink); font-weight: 600; }
-
-    /* ── SECTION SHARED ── */
-    section { padding: 120px 48px; }
-    .section-inner { max-width: 1060px; margin: 0 auto; }
-    .section-label {
-      font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--sage); margin-bottom: 20px;
-    }
-    h2 {
-      font-family: var(--serif);
-      font-size: clamp(32px, 4.5vw, 56px);
-      font-weight: 400; line-height: 1.1; letter-spacing: -.3px;
-      color: var(--ink);
-    }
-    h2 em { font-style: italic; color: var(--sage); }
-    .section-sub {
-      margin-top: 20px; font-size: 17px; font-weight: 300;
-      color: var(--muted); max-width: 520px; line-height: 1.6;
-    }
-
-    /* ── PROBLEM SECTION ── */
-    .problem { background: var(--ink); }
-    .problem .section-label { color: rgba(255,255,255,.4); }
-    .problem h2 { color: var(--white); }
-    .problem h2 em { color: #a8c48a; }
-    .problem .section-sub { color: rgba(255,255,255,.5); }
-    .problem-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 2px; margin-top: 64px; border: 1px solid rgba(255,255,255,.06); border-radius: var(--r);
-      overflow: hidden;
-    }
-    .problem-item {
-      padding: 40px 36px;
-      background: rgba(255,255,255,.03);
-      border-right: 1px solid rgba(255,255,255,.06);
-      transition: background .2s;
-    }
-    .problem-item:last-child { border-right: none; }
-    .problem-item:hover { background: rgba(255,255,255,.06); }
-    .problem-num {
-      font-size: 11px; font-weight: 500; letter-spacing: 2px;
-      color: rgba(255,255,255,.25); margin-bottom: 24px;
-    }
-    .problem-item h3 {
-      font-family: var(--serif);
-      font-size: 22px; font-weight: 400; color: var(--white);
-      line-height: 1.3; margin-bottom: 14px;
-    }
-    .problem-item p {
-      font-size: 14px; font-weight: 300; color: rgba(255,255,255,.45);
-      line-height: 1.65;
-    }
-
-    /* ── FEATURES ── */
-    .features { background: var(--faint); }
-    .feature-row {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center;
-      padding: 64px 0; border-bottom: 1px solid var(--border);
-    }
-    .feature-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .feature-row.reverse { direction: rtl; }
-    .feature-row.reverse > * { direction: ltr; }
-    .feature-content { }
-    .feature-tag {
-      font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
-      color: var(--sage); margin-bottom: 16px; display: block;
-    }
-    .feature-content h3 {
-      font-family: var(--serif);
-      font-size: clamp(26px, 3vw, 38px); font-weight: 400;
-      line-height: 1.15; color: var(--ink); margin-bottom: 18px;
-    }
-    .feature-content h3 em { font-style: italic; color: var(--sage); }
-    .feature-content p {
-      font-size: 15px; font-weight: 300; color: var(--muted);
-      line-height: 1.7; margin-bottom: 24px;
-    }
-    .feature-detail {
-      font-size: 13px; font-weight: 400; color: var(--sage);
-      text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
-    }
-    .feature-visual {
-      background: white; border-radius: 16px;
-      border: 1px solid var(--border);
-      padding: 28px; min-height: 280px;
-      box-shadow: 0 8px 40px rgba(0,0,0,.06);
-      display: flex; flex-direction: column; justify-content: space-between;
-    }
-    .visual-header {
-      font-size: 11px; font-weight: 600; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
-    }
-    .envelope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .envelope-item { background: var(--faint); border-radius: 8px; padding: 14px; }
-    .env-label { font-size: 10px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; color: var(--muted); }
-    .env-amount { font-size: 18px; font-weight: 200; color: var(--ink); margin: 4px 0; }
-    .env-bar { height: 3px; background: #e5e7eb; border-radius: 2px; margin-top: 8px; }
-    .env-bar-fill { height: 100%; border-radius: 2px; }
-    .loan-card { background: var(--faint); border-radius: 10px; padding: 18px; }
-    .loan-name { font-size: 14px; font-weight: 500; color: var(--ink); }
-    .loan-meta { font-size: 12px; color: var(--muted); margin-top: 4px; }
-    .loan-progress { height: 6px; background: #e5e7eb; border-radius: 3px; margin: 14px 0 8px; }
-    .loan-progress-fill { height: 100%; border-radius: 3px; background: var(--sage); }
-    .loan-stat-row { display: flex; gap: 16px; }
-    .loan-stat { font-size: 11px; color: var(--muted); }
-    .loan-stat strong { color: var(--ink); font-size: 13px; font-weight: 500; }
-    .ai-bubble {
-      background: var(--faint); border-radius: 12px 12px 12px 2px;
-      padding: 14px 16px; margin-bottom: 10px;
-      font-size: 13px; line-height: 1.5; color: var(--ink);
-    }
-    .ai-bubble.user {
-      background: var(--sage); color: white;
-      border-radius: 12px 12px 2px 12px; margin-left: 20%;
-    }
-    .ai-label { font-size: 10px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-
-    /* ── STATS BAR ── */
-    .stats { background: var(--white); padding: 80px 48px; }
-    .stats-inner { max-width: 900px; margin: 0 auto; }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
-    .stat-item { text-align: center; }
-    .stat-number {
-      font-family: var(--serif);
-      font-size: 48px; font-weight: 400; color: var(--ink);
-      letter-spacing: -1px; line-height: 1;
-    }
-    .stat-label { font-size: 13px; font-weight: 300; color: var(--muted); margin-top: 8px; }
-
-    /* ── PRICING ── */
-    .pricing { background: var(--faint); }
-    .pricing-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 16px; margin-top: 56px;
-    }
-    .price-card {
-      background: white; border-radius: 16px;
-      border: 1px solid var(--border);
-      padding: 40px 36px;
-      position: relative; transition: transform .2s, box-shadow .2s;
-    }
-    .price-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.08); }
-    .price-card.featured {
-      background: var(--ink); border-color: var(--ink);
-      transform: scale(1.02);
-    }
-    .price-card.featured:hover { transform: scale(1.02) translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,.2); }
-    .price-badge {
-      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--sage); color: white;
-      font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
-      padding: 4px 14px; border-radius: 20px;
-    }
-    .price-plan {
-      font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 20px;
-    }
-    .price-card.featured .price-plan { color: rgba(255,255,255,.4); }
-    .price-amount {
-      font-family: var(--serif);
-      font-size: 52px; font-weight: 400; color: var(--ink);
-      line-height: 1; letter-spacing: -1px;
-    }
-    .price-card.featured .price-amount { color: white; }
-    .price-amount sup { font-family: var(--sans); font-size: 22px; font-weight: 300; vertical-align: super; }
-    .price-was {
-      font-size: 13px; color: var(--muted); margin-top: 4px;
-      text-decoration: line-through;
-    }
-    .price-card.featured .price-was { color: rgba(255,255,255,.3); }
-    .price-period { font-size: 13px; color: var(--muted); margin-top: 4px; }
-    .price-card.featured .price-period { color: rgba(255,255,255,.4); }
-    .price-divider { height: 1px; background: var(--border); margin: 28px 0; }
-    .price-card.featured .price-divider { background: rgba(255,255,255,.1); }
-    .price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .price-features li {
-      font-size: 13px; font-weight: 300; color: var(--muted);
-      display: flex; align-items: flex-start; gap: 10px; line-height: 1.4;
-    }
-    .price-card.featured .price-features li { color: rgba(255,255,255,.55); }
-    .price-features li::before {
-      content: '';
-      width: 14px; height: 14px; flex-shrink: 0; margin-top: 1px;
-      background: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235a6e3f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/contain no-repeat;
-    }
-    .price-card.featured .price-features li::before {
-      background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a8c48a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
-    }
-    .price-features li.dim::before {
-      background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23d1d5db' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E");
-    }
-    .price-features li.dim { opacity: .4; }
-    .price-cta {
-      display: block; width: 100%; margin-top: 32px;
-      padding: 14px; border-radius: 50px; text-align: center;
-      font-family: var(--sans); font-size: 14px; font-weight: 500;
-      text-decoration: none; cursor: pointer; border: none;
-      transition: background .2s, transform .15s;
-    }
-    .price-cta-outline {
-      background: transparent; color: var(--ink);
+    .preview-bar {
+      background: var(--faint); border-radius: 14px; padding: 20px 24px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
       border: 1px solid var(--border);
     }
-    .price-cta-outline:hover { border-color: var(--ink); transform: translateY(-1px); }
-    .price-cta-fill {
-      background: var(--sage); color: white;
-    }
-    .price-cta-fill:hover { background: var(--sage-dk); transform: translateY(-1px); }
-    .price-cta-inv {
-      background: white; color: var(--ink);
-    }
-    .price-cta-inv:hover { background: var(--faint); transform: translateY(-1px); }
-    .pricing-note {
-      text-align: center; margin-top: 28px;
-      font-size: 13px; color: var(--muted);
-    }
+    .preview-metric { text-align: center; }
+    .preview-label { font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .preview-value { font-family: var(--serif); font-size: 26px; color: var(--ink); }
+    .preview-value.sage { color: var(--sage); }
+    .preview-value.red { color: #dc2626; }
+    .preview-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
 
-    /* ── TESTIMONIALS ── */
-    .testimonials { background: var(--white); }
-    .testi-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 24px; margin-top: 56px;
+    /* ── FREE TIER STRIP ─────────────────────── */
+    .free-strip { background: var(--faint); padding: 56px 48px; }
+    .free-strip .section-inner { text-align: center; }
+    .free-strip-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 36px; display: block;
     }
-    .testi-card {
-      padding: 36px; border-radius: 16px;
-      background: var(--faint); border: 1px solid var(--border);
+    .free-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 24px; margin-bottom: 32px;
     }
-    .testi-quote {
-      font-family: var(--serif); font-size: 18px; font-weight: 400;
-      color: var(--ink); line-height: 1.5; margin-bottom: 24px; font-style: italic;
+    .free-item {
+      background: var(--white); border-radius: 12px; border: 1px solid var(--border);
+      padding: 24px 20px; text-align: left;
     }
-    .testi-person { display: flex; align-items: center; gap: 12px; }
-    .testi-avatar {
-      width: 36px; height: 36px; border-radius: 50%;
+    .free-item-icon {
+      width: 36px; height: 36px; border-radius: 10px;
       background: var(--sage-lt); display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 600; color: var(--sage);
+      margin-bottom: 14px; color: var(--sage);
     }
-    .testi-name { font-size: 13px; font-weight: 500; color: var(--ink); }
-    .testi-role { font-size: 12px; color: var(--muted); }
+    .free-item-icon svg { width: 18px; height: 18px; }
+    .free-item h3 { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+    .free-item p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+    .free-anchor {
+      font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.6; max-width: 500px; margin: 0 auto;
+    }
+    .free-anchor strong { color: var(--ink); font-weight: 500; }
 
-    /* ── FINAL CTA ── */
-    .final-cta {
-      padding: 140px 48px;
-      background: var(--ink); text-align: center;
+    /* ── PROBLEM SECTION ─────────────────────── */
+    .problem { background: var(--ink); padding: 96px 48px; }
+    .problem .section-inner { max-width: 1060px; margin: 0 auto; }
+    .problem h2 {
+      font-family: var(--serif); font-size: clamp(32px, 5vw, 60px);
+      font-weight: 400; line-height: 1.08; color: var(--white); max-width: 740px; margin-bottom: 28px;
     }
-    .final-cta h2 { color: white; margin-bottom: 20px; }
-    .final-cta h2 em { color: #a8c48a; }
-    .final-cta p { color: rgba(255,255,255,.45); max-width: none; margin: 0 auto 44px; }
-    .final-cta .btn-primary { background: white; color: var(--ink); }
-    .final-cta .btn-primary:hover { background: var(--sage-lt); }
+    .problem h2 em { font-style: italic; color: #a8c48a; }
+    .problem-lead {
+      font-size: clamp(15px, 1.8vw, 18px); font-weight: 300; color: rgba(255,255,255,.5);
+      line-height: 1.75; max-width: 600px; margin-bottom: 64px;
+    }
+    .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .problem-card {
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
+      padding: 36px 32px; border-radius: 2px;
+    }
+    .problem-card:first-child { border-radius: 10px 2px 2px 10px; }
+    .problem-card:last-child { border-radius: 2px 10px 10px 2px; }
+    .problem-num {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px;
+      color: rgba(255,255,255,.2); margin-bottom: 16px; display: block;
+    }
+    .problem-card h3 {
+      font-family: var(--serif); font-size: 22px; font-weight: 400;
+      color: var(--white); margin-bottom: 14px; line-height: 1.3;
+    }
+    .problem-card h3 em { font-style: italic; color: #a8c48a; }
+    .problem-card p { font-size: 14px; color: rgba(255,255,255,.42); line-height: 1.75; }
 
-    /* ── FOOTER ── */
-    footer {
-      padding: 48px; background: var(--ink);
-      border-top: 1px solid rgba(255,255,255,.06);
+    /* ── FEATURES ────────────────────────────── */
+    .features { padding: 96px 48px; }
+    .features .section-inner { max-width: 1060px; margin: 0 auto; }
+    .features-header { margin-bottom: 80px; }
+    .features-header h2 {
+      font-family: var(--serif); font-size: clamp(32px, 4.5vw, 56px);
+      font-weight: 400; line-height: 1.08; color: var(--ink);
     }
-    .footer-inner {
-      max-width: 1060px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+    .features-header h2 em { font-style: italic; color: var(--sage); }
+    .feat-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: center; margin-bottom: 96px;
     }
-    .footer-logo { font-size: 16px; font-weight: 500; color: white; text-decoration: none; }
-    .footer-logo span { color: #a8c48a; }
-    .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
-    .footer-links a { font-size: 13px; color: rgba(255,255,255,.35); text-decoration: none; transition: color .2s; }
-    .footer-links a:hover { color: rgba(255,255,255,.7); }
-    .footer-copy { font-size: 12px; color: rgba(255,255,255,.2); margin-top: 4px; }
+    .feat-row.reverse { direction: rtl; }
+    .feat-row.reverse > * { direction: ltr; }
+    .feat-tag {
+      font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+    }
+    .feat-pro-badge {
+      font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      background: var(--sage); color: var(--white);
+      padding: 2px 7px; border-radius: 20px; vertical-align: middle;
+    }
+    .feat-content h3 {
+      font-family: var(--serif); font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 400; line-height: 1.1; color: var(--ink); margin-bottom: 20px;
+    }
+    .feat-content h3 em { font-style: italic; color: var(--sage); }
+    .feat-content p {
+      font-size: 16px; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 24px;
+    }
+    .feat-link {
+      font-size: 13px; font-weight: 500; color: var(--sage); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .feat-link:hover { text-decoration: underline; }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* CSS UI mockups */
+    .feat-mock {
+      background: var(--white); border-radius: 16px; border: 1px solid var(--border);
+      padding: 24px; box-shadow: 0 8px 48px rgba(0,0,0,.07);
     }
-    .reveal {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity .7s ease, transform .7s ease;
+    .mock-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
     }
-    .reveal.visible { opacity: 1; transform: none; }
+    .mock-title { font-size: 13px; font-weight: 600; color: var(--ink); }
+    .mock-date { font-size: 11px; color: var(--muted); }
+    /* envelope mock */
+    .mock-envs { display: flex; flex-direction: column; gap: 10px; }
+    .mock-env {
+      display: grid; grid-template-columns: 1fr auto; gap: 8px;
+      align-items: center; background: var(--faint); border-radius: 8px; padding: 12px 14px;
+    }
+    .mock-env-name { font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+    .mock-env-bar-wrap { height: 5px; background: rgba(0,0,0,.08); border-radius: 3px; overflow: hidden; }
+    .mock-env-bar { height: 100%; border-radius: 3px; transition: width .3s; }
+    .mock-env-amt { font-size: 11px; font-weight: 500; color: var(--muted); text-align: right; white-space: nowrap; }
+    .mock-env-pct { font-size: 10px; color: var(--muted); margin-top: 4px; text-align: right; }
+    /* loan mock */
+    .mock-loan-card { background: var(--faint); border-radius: 10px; padding: 20px; }
+    .mock-loan-name { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+    .mock-loan-bal { font-size: 28px; font-weight: 200; font-family: var(--serif); color: var(--ink); margin-bottom: 12px; }
+    .mock-loan-bar-wrap { height: 6px; background: rgba(0,0,0,.1); border-radius: 3px; overflow: hidden; margin-bottom: 8px; }
+    .mock-loan-bar { height: 100%; background: var(--sage); border-radius: 3px; }
+    .mock-loan-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); }
+    .mock-extra {
+      margin-top: 16px; background: rgba(90,110,63,.08); border-radius: 8px;
+      padding: 12px 14px; border: 1px solid rgba(90,110,63,.15);
+    }
+    .mock-extra-label { font-size: 11px; font-weight: 600; color: var(--sage); margin-bottom: 4px; }
+    .mock-extra-value { font-size: 13px; color: var(--ink); }
+    /* savings mock */
+    .mock-goals { display: flex; flex-direction: column; gap: 10px; }
+    .mock-goal { background: var(--faint); border-radius: 10px; padding: 16px; }
+    .mock-goal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .mock-goal-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+    .mock-goal-pct { font-size: 12px; font-weight: 500; color: var(--sage); }
+    .mock-goal-bar-wrap { height: 5px; background: rgba(0,0,0,.1); border-radius: 3px; overflow: hidden; margin-bottom: 8px; }
+    .mock-goal-bar { height: 100%; background: var(--sage); border-radius: 3px; }
+    .mock-goal-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); }
+    .mock-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px;
+    }
+    .mock-badge.on-track { background: rgba(90,110,63,.12); color: var(--sage); }
+    .mock-badge.behind { background: rgba(220,38,38,.1); color: #dc2626; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 18px 24px; }
-      .nav-links a:not(.nav-cta) { display: none; }
-      section { padding: 80px 24px; }
-      .problem-grid { grid-template-columns: 1fr; }
-      .feature-row { grid-template-columns: 1fr; gap: 40px; }
-      .feature-row.reverse { direction: ltr; }
-      .pricing-grid { grid-template-columns: 1fr; }
-      .price-card.featured { transform: none; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .testi-grid { grid-template-columns: 1fr; }
-      .trust-bar { padding: 24px; gap: 24px; }
-      footer { padding: 36px 24px; }
-      .footer-inner { flex-direction: column; align-items: flex-start; }
+    /* ── STATS BAR ────────────────────────────── */
+    .stats-bar { background: var(--faint); padding: 64px 48px; }
+    .stats-bar .section-inner { max-width: 1060px; margin: 0 auto; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; }
+    .stat-item { padding: 32px; text-align: center; }
+    .stat-item + .stat-item { border-left: 1px solid var(--border); }
+    .stat-n {
+      font-family: var(--serif); font-size: clamp(36px, 5vw, 54px);
+      color: var(--sage); line-height: 1; margin-bottom: 12px;
+    }
+    .stat-label { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.5; max-width: 180px; margin: 0 auto; }
+
+    /* ── BUILT FOR ────────────────────────────── */
+    .built-for { padding: 96px 48px; }
+    .built-for .section-inner { max-width: 1060px; margin: 0 auto; }
+    .built-for-header { margin-bottom: 56px; }
+    .built-for-header h2 {
+      font-family: var(--serif); font-size: clamp(30px, 4vw, 52px);
+      font-weight: 400; line-height: 1.1; color: var(--ink); max-width: 620px;
+    }
+    .built-for-header h2 em { font-style: italic; color: var(--sage); }
+    .persona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .persona-card {
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 36px 32px; transition: border-color .2s, box-shadow .2s;
+    }
+    .persona-card:hover { border-color: rgba(90,110,63,.3); box-shadow: 0 4px 24px rgba(0,0,0,.06); }
+    .persona-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--sage-lt); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; color: var(--sage);
+    }
+    .persona-icon svg { width: 22px; height: 22px; }
+    .persona-card h3 {
+      font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase;
+      letter-spacing: 1px; margin-bottom: 14px;
+    }
+    .persona-card p { font-size: 15px; font-weight: 300; color: var(--ink); line-height: 1.75; }
+    .persona-card p em { font-style: italic; }
+
+    /* ── PRICING ──────────────────────────────── */
+    .pricing { background: var(--faint); padding: 96px 48px; }
+    .pricing .section-inner { max-width: 1060px; margin: 0 auto; }
+    .pricing-header { text-align: center; margin-bottom: 56px; }
+    .pricing-header h2 {
+      font-family: var(--serif); font-size: clamp(28px, 4vw, 50px);
+      font-weight: 400; line-height: 1.1; color: var(--ink); max-width: 640px; margin: 0 auto 20px;
+    }
+    .pricing-header h2 em { font-style: italic; color: var(--sage); }
+    .pricing-sub { font-size: 16px; font-weight: 300; color: var(--muted); line-height: 1.65; max-width: 480px; margin: 0 auto 32px; }
+
+    /* billing toggle */
+    .billing-toggle {
+      display: inline-flex; background: var(--border); border-radius: 50px;
+      padding: 3px; margin-bottom: 0;
+    }
+    .billing-toggle button {
+      font-family: var(--sans); font-size: 13px; font-weight: 500;
+      background: none; border: none; cursor: pointer;
+      padding: 8px 20px; border-radius: 50px; color: var(--muted);
+      transition: background .2s, color .2s;
+    }
+    .billing-toggle button.active { background: var(--white); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+
+    .pricing-cards { display: grid; grid-template-columns: 1fr 1.08fr 1fr; gap: 16px; align-items: start; }
+    .pricing-card {
+      background: var(--white); border-radius: 16px; border: 1px solid var(--border);
+      padding: 36px 28px; position: relative;
+    }
+    .pricing-card.pro {
+      border-color: var(--sage); border-width: 1.5px;
+      box-shadow: 0 8px 40px rgba(90,110,63,.12);
+      padding: 44px 32px;
+    }
+    .pro-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--sage); color: var(--white);
+      font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+      padding: 4px 16px; border-radius: 20px; white-space: nowrap;
+    }
+    .card-tier { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .card-price { margin-bottom: 6px; }
+    .card-price .amount { font-family: var(--serif); font-size: 48px; color: var(--ink); line-height: 1; }
+    .card-price .amount.pro-price { color: var(--sage-dk); }
+    .card-price .period { font-size: 14px; color: var(--muted); margin-left: 2px; }
+    .card-price .was { font-size: 13px; text-decoration: line-through; color: var(--muted); margin-right: 8px; }
+    .card-tagline { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+    .card-cta { display: block; text-align: center; padding: 12px 24px; border-radius: 50px; font-size: 14px; font-weight: 500; text-decoration: none; transition: background .2s, color .2s, transform .15s; margin-bottom: 28px; }
+    .card-cta:hover { transform: translateY(-1px); }
+    .card-cta.free-cta { border: 1.5px solid var(--border); color: var(--ink); background: transparent; }
+    .card-cta.free-cta:hover { border-color: var(--ink); }
+    .card-cta.pro-cta { background: var(--ink); color: var(--white); }
+    .card-cta.pro-cta:hover { background: var(--sage); }
+    .card-cta.life-cta { border: 1.5px solid var(--sage); color: var(--sage); background: transparent; }
+    .card-cta.life-cta:hover { background: var(--sage); color: var(--white); }
+    .card-features { list-style: none; }
+    .card-features li {
+      font-size: 13px; font-weight: 300; color: var(--muted);
+      padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,.05);
+      display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+    }
+    .card-features li:last-child { border-bottom: none; }
+    .card-features li .check { color: var(--sage); flex-shrink: 0; margin-top: 2px; }
+    .card-features li .lock { color: rgba(0,0,0,.2); flex-shrink: 0; margin-top: 2px; }
+    .card-features li.locked { opacity: .5; }
+    .card-features li.section-head { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); padding-top: 16px; border-bottom: none; opacity: 1; }
+
+    .pricing-breakeven {
+      text-align: center; margin-top: 32px; font-size: 14px; color: var(--muted); padding: 0 24px;
+    }
+    .pricing-trust {
+      display: flex; justify-content: center; gap: 0; flex-wrap: wrap; margin-top: 16px;
+      font-size: 12px; color: var(--muted);
+    }
+    .pricing-trust span { padding: 0 14px; border-right: 1px solid var(--border); }
+    .pricing-trust span:last-child { border-right: none; }
+
+    /* ── DATA TRANSPARENCY ───────────────────── */
+    .data-section { padding: 96px 48px; }
+    .data-section .section-inner { max-width: 1060px; margin: 0 auto; }
+    .data-header { max-width: 640px; margin-bottom: 56px; }
+    .data-header h2 {
+      font-family: var(--serif); font-size: clamp(28px, 4vw, 48px);
+      font-weight: 400; line-height: 1.1; color: var(--ink);
+    }
+    .data-header h2 em { font-style: italic; color: var(--sage); }
+    .data-panels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
+    .data-panel {
+      border: 1px solid var(--border); border-radius: 14px; padding: 32px 28px;
+    }
+    .data-panel-icon {
+      width: 44px; height: 44px; border-radius: 12px; margin-bottom: 18px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .data-panel-icon.device { background: rgba(90,110,63,.1); color: var(--sage); }
+    .data-panel-icon.account { background: rgba(107,114,128,.1); color: var(--muted); }
+    .data-panel-icon.cloud { background: rgba(59,130,246,.1); color: #3b82f6; }
+    .data-panel-icon svg { width: 22px; height: 22px; }
+    .data-panel h3 { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
+    .data-panel p { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.75; }
+    .data-anchor {
+      font-size: 16px; font-weight: 300; color: var(--ink); line-height: 1.7;
+      max-width: 640px; border-left: 3px solid var(--sage-lt); padding-left: 24px;
+    }
+    .data-anchor em { font-style: italic; color: var(--sage); font-family: var(--serif); font-size: 18px; }
+
+    /* ── FINAL CTA ────────────────────────────── */
+    .final-cta { background: var(--ink); padding: 100px 48px; text-align: center; }
+    .final-cta .section-inner { max-width: 640px; margin: 0 auto; }
+    .final-cta h2 {
+      font-family: var(--serif); font-size: clamp(32px, 5vw, 60px);
+      font-weight: 400; line-height: 1.08; color: var(--white); margin-bottom: 24px;
+    }
+    .final-cta h2 em { font-style: italic; color: #a8c48a; }
+    .final-cta p { font-size: 17px; font-weight: 300; color: rgba(255,255,255,.5); line-height: 1.75; margin-bottom: 44px; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .final-cta .cta-pair { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── RESPONSIVE ───────────────────────────── */
+    @media (max-width: 1000px) {
+      .feat-row { gap: 48px; }
+      .pricing-cards { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+      .pricing-card.pro { padding: 44px 28px; }
+    }
+    @media (max-width: 860px) {
+      .free-grid { grid-template-columns: 1fr 1fr; }
+      .feat-row { grid-template-columns: 1fr; gap: 40px; }
+      .feat-row.reverse { direction: ltr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stat-item + .stat-item { border-left: none; }
+      .stat-item:nth-child(odd) { border-right: 1px solid var(--border); }
+      .stat-item { border-bottom: 1px solid var(--border); }
+      .stat-item:nth-last-child(-n+2) { border-bottom: none; }
+      .persona-grid { grid-template-columns: 1fr; gap: 16px; }
+      .data-panels { grid-template-columns: 1fr; gap: 16px; }
+      .problem-grid { grid-template-columns: 1fr; gap: 2px; }
+      .problem-card:first-child { border-radius: 10px 10px 2px 2px; }
+      .problem-card:last-child { border-radius: 2px 2px 10px 10px; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 120px 20px 60px; }
+      .hero h1 { letter-spacing: 0; }
+      .free-strip { padding: 48px 20px; }
+      .free-grid { grid-template-columns: 1fr; }
+      .problem { padding: 72px 20px; }
+      .features { padding: 72px 20px; }
+      .built-for { padding: 72px 20px; }
+      .pricing { padding: 72px 20px; }
+      .data-section { padding: 72px 20px; }
+      .final-cta { padding: 80px 20px; }
+      .preview-bar { grid-template-columns: 1fr 1fr; }
+      .stats-bar { padding: 48px 20px; }
+      .built-for { padding: 72px 20px; }
     }
   </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://fincwin.com/#org",
+      "name": "FincWin",
+      "url": "https://fincwin.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://fincwin.com/icon-512.png",
+        "width": 512,
+        "height": 512
+      },
+      "sameAs": [],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "support@fincwin.com",
+        "contactType": "customer support"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://fincwin.com/#website",
+      "url": "https://fincwin.com",
+      "name": "FincWin",
+      "publisher": { "@id": "https://fincwin.com/#org" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://fincwin.com/features?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://fincwin.com/#app",
+      "name": "FincWin",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web, Android, iOS, Windows, macOS",
+      "offers": [
+        { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": "Pro", "price": "39", "priceCurrency": "USD", "billingDuration": "P1Y" },
+        { "@type": "Offer", "name": "Lifetime", "price": "149", "priceCurrency": "USD" }
+      ],
+      "publisher": { "@id": "https://fincwin.com/#org" }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav id="nav">
-    <a href="landing.html" class="nav-logo">Finc<span>Win</span></a>
-    <div class="nav-links">
-      <a href="features.html">Features</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="index.html">App</a>
-      <a href="signin.html" class="nav-cta">Sign in</a>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <p class="hero-eyebrow">Personal Finance — Reimagined</p>
-    <h1>You know what you earn.<br>You don't know <em>where it goes.</em></h1>
-    <p class="hero-sub">Most people check their bank balance with one eye closed. FincWin replaces that anxiety with something better — complete clarity.</p>
-    <div class="hero-actions">
-      <a href="index.html" class="btn-primary">Try the app free &nbsp;→</a>
-      <a href="features.html" class="btn-ghost">See how it works</a>
-    </div>
-    <p class="hero-footnote">No account required to start &nbsp;·&nbsp; Your data never leaves your device &nbsp;·&nbsp; Free forever plan</p>
-
-    <!-- Mock app preview -->
-    <div class="hero-preview">
-      <div class="app-frame">
-        <div class="app-bar">
-          <div class="app-bar-dots"><span></span><span></span><span></span></div>
-          <span style="font-size:12px;color:#9ca3af;">FincWin — JUN 2026</span>
-          <span style="font-size:12px;color:#5a6e3f;font-weight:600;">89/100 STRONG</span>
-        </div>
-        <div class="app-screen">
-          <div class="mock-card">
-            <div class="mock-label">Net Position</div>
-            <div class="mock-value green">$7,820</div>
-            <div class="mock-bar"><div class="mock-bar-fill" style="width:74%"></div></div>
-            <div class="mock-pill g">↑ $576 vs last month</div>
-          </div>
-          <div class="mock-card">
-            <div class="mock-label">Spending Breakdown</div>
-            <div class="mock-donut"></div>
-          </div>
-          <div class="mock-card">
-            <div class="mock-label">Upcoming Bills</div>
-            <div class="mock-rows">
-              <div class="mock-row"><strong>Mortgage</strong><span class="mock-pill g">Paid</span></div>
-              <div class="mock-row"><strong>Electric</strong><span class="mock-pill a">Due 20</span></div>
-              <div class="mock-row"><strong>Verizon</strong><span class="mock-pill g">Paid</span></div>
-              <div class="mock-row"><strong>Health Ins</strong><span class="mock-pill a">Due 28</span></div>
-            </div>
-          </div>
-          <div class="mock-card">
-            <div class="mock-label">Income</div>
-            <div class="mock-value">$10,520</div>
-            <div class="mock-pill g">Confirmed</div>
-          </div>
-          <div class="mock-card">
-            <div class="mock-label">Total Debt</div>
-            <div class="mock-value">$42,000</div>
-            <div class="mock-bar"><div class="mock-bar-fill" style="width:85%;background:#b7791f"></div></div>
-            <div style="font-size:10px;color:#9ca3af;margin-top:6px;">Payoff: Dec 2030</div>
-          </div>
-          <div class="mock-card">
-            <div class="mock-label">Savings</div>
-            <div class="mock-value green">$53,500</div>
-            <div style="font-size:10px;color:#9ca3af;margin-top:8px;">0 / 2 goals met</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRUST BAR -->
-  <div class="trust-bar reveal">
-    <div class="trust-item"><strong>100%</strong>&nbsp; offline-first — your data stays local</div>
-    <div class="trust-item"><strong>Zero</strong>&nbsp; third-party data brokers</div>
-    <div class="trust-item"><strong>Google Drive</strong>&nbsp; encrypted backup available</div>
-    <div class="trust-item"><strong>Works</strong>&nbsp; without internet</div>
+<!-- ── NAV ───────────────────────────────────────────────────── -->
+<nav id="mainNav">
+  <a href="/" class="nav-logo">Finc<span>Win</span></a>
+  <div class="nav-links">
+    <a href="/features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/compare">Compare</a>
+    <a href="/use-cases">Use cases</a>
+    <a href="/blog">Blog</a>
+    <a href="/app">App</a>
+    <a href="/app" class="nav-cta">Get started free</a>
   </div>
+</nav>
 
-  <!-- PROBLEM SECTION -->
-  <section class="problem">
-    <div class="section-inner">
-      <p class="section-label reveal">The real problem</p>
-      <h2 class="reveal">You don't have a spending<br>problem. You have a <em>visibility</em> problem.</h2>
-      <p class="section-sub reveal">Nobody overspends on purpose. The money disappears because there was never a system showing you where it was going in the first place.</p>
-      <div class="problem-grid reveal">
-        <div class="problem-item">
-          <div class="problem-num">01</div>
-          <h3>The 11pm bank check</h3>
-          <p>You open your banking app at night, almost hoping the balance won't be as bad as you're imagining. It's not a money problem. It's an information problem.</p>
-        </div>
-        <div class="problem-item">
-          <div class="problem-num">02</div>
-          <h3>The invisible drain</h3>
-          <p>Subscriptions, fees, irregular bills — they're not large individually. Together they quietly absorb hundreds every month. Nobody warns you when the pattern starts.</p>
-        </div>
-        <div class="problem-item">
-          <div class="problem-num">03</div>
-          <h3>The debt that never shrinks</h3>
-          <p>You make the minimum payment. The balance barely moves. Without a payoff plan with real numbers, you're just running on a treadmill labelled "someday."</p>
-        </div>
+<!-- ── HERO ──────────────────────────────────────────────────── -->
+<section class="hero" id="hero">
+  <div class="hero-eyebrow">Personal Finance — Simplified</div>
+  <h1>Every number<br>that <em>matters.</em><br></h1>
+  <h2>Your money has been waiting for a plan.</h2>
+  <p class="hero-sub">FincWin brings your income, spending, debt, and savings together into one clear dashboard — so you can stop guessing and start making confident decisions.</p>
+  <div class="hero-actions">
+    <a href="/app" class="btn-primary">Get started free →</a>
+    <a href="#features" class="btn-ghost">See how it works</a>
+  </div>
+  <p class="hero-footnote">
+    No card required<span>·</span>Free plan, no expiry<span>·</span>Pro from $39/year
+  </p>
+  <div class="hero-preview">
+    <div class="preview-bar">
+      <div class="preview-metric">
+        <div class="preview-label">Monthly Income</div>
+        <div class="preview-value">$4,200</div>
+        <div class="preview-sub">this month</div>
       </div>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="features" id="features">
-    <div class="section-inner">
-      <p class="section-label reveal">How FincWin works</p>
-      <h2 class="reveal">Every dollar has a job.<br><em>You decide what it is.</em></h2>
-
-      <!-- Budget Envelopes -->
-      <div class="feature-row reveal">
-        <div class="feature-content">
-          <span class="feature-tag">Budget Envelopes</span>
-          <h3>See your money<br><em>before</em> you spend it.</h3>
-          <p>Give every category a cap. Watch the bar fill as you spend. When Housing is at 57% on day 8, you know — weeks before the problem arrives.</p>
-          <a href="index.html" class="feature-detail">Explore envelopes &nbsp;→</a>
-        </div>
-        <div class="feature-visual">
-          <div class="visual-header">Budget Envelopes — Jun 2026</div>
-          <div class="envelope-grid">
-            <div class="envelope-item">
-              <div class="env-label">Housing</div>
-              <div class="env-amount">$850 <span style="font-size:13px;color:#9ca3af;">/ $1,500</span></div>
-              <div class="env-bar"><div class="env-bar-fill" style="width:57%;background:#5a6e3f"></div></div>
-              <div style="font-size:10px;color:#9ca3af;margin-top:6px;">57% · On pace</div>
-            </div>
-            <div class="envelope-item">
-              <div class="env-label">Telecom</div>
-              <div class="env-amount">$95 <span style="font-size:13px;color:#9ca3af;">/ $150</span></div>
-              <div class="env-bar"><div class="env-bar-fill" style="width:63%;background:#b7791f"></div></div>
-              <div style="font-size:10px;color:#b7791f;margin-top:6px;">63% · Hits cap day 8</div>
-            </div>
-            <div class="envelope-item">
-              <div class="env-label">Auto</div>
-              <div class="env-amount">$245 <span style="font-size:13px;color:#9ca3af;">/ $400</span></div>
-              <div class="env-bar"><div class="env-bar-fill" style="width:61%;background:#b7791f"></div></div>
-              <div style="font-size:10px;color:#b7791f;margin-top:6px;">61% · Hits cap day 8</div>
-            </div>
-            <div class="envelope-item">
-              <div class="env-label">Food/Meals</div>
-              <div class="env-amount">$186 <span style="font-size:13px;color:#9ca3af;">/ $350</span></div>
-              <div class="env-bar"><div class="env-bar-fill" style="width:53%;background:#5a6e3f"></div></div>
-              <div style="font-size:10px;color:#9ca3af;margin-top:6px;">53% · On pace</div>
-            </div>
-          </div>
-        </div>
+      <div class="preview-metric">
+        <div class="preview-label">Total Expenses</div>
+        <div class="preview-value red">$2,840</div>
+        <div class="preview-sub">67% of income</div>
       </div>
-
-      <!-- Loans -->
-      <div class="feature-row reverse reveal">
-        <div class="feature-content">
-          <span class="feature-tag">Loan Payoff Tracker</span>
-          <h3>Know the <em>exact date</em><br>you'll be free.</h3>
-          <p>Avalanche or snowball — model both strategies and see which one saves you the most. Watch the amortisation schedule collapse as you make extra payments.</p>
-          <a href="index.html" class="feature-detail">See loan calculator &nbsp;→</a>
-        </div>
-        <div class="feature-visual">
-          <div class="visual-header">Active Loans</div>
-          <div class="loan-card">
-            <div class="loan-name">Mortgage — Final Years</div>
-            <div class="loan-meta">3.25% APR &nbsp;·&nbsp; Min $850/mo</div>
-            <div class="loan-progress">
-              <div class="loan-progress-fill" style="width:85%"></div>
-            </div>
-            <div style="font-size:11px;color:#9ca3af;margin-bottom:12px;">$238,000 paid of $280,000 &nbsp;·&nbsp; 85%</div>
-            <div class="loan-stat-row">
-              <div class="loan-stat"><div style="font-size:11px;margin-bottom:2px;">Balance</div><strong>$42,000</strong></div>
-              <div class="loan-stat"><div style="font-size:11px;margin-bottom:2px;">Payoff date</div><strong>Dec 2030</strong></div>
-              <div class="loan-stat"><div style="font-size:11px;margin-bottom:2px;">Interest saved</div><strong style="color:#5a6e3f;">+$2,137</strong></div>
-            </div>
-          </div>
-        </div>
+      <div class="preview-metric">
+        <div class="preview-label">Savings Goals</div>
+        <div class="preview-value sage">$890</div>
+        <div class="preview-sub">saved this month</div>
       </div>
-
-      <!-- AI Coach -->
-      <div class="feature-row reveal">
-        <div class="feature-content">
-          <span class="feature-tag">AI Financial Coach</span>
-          <h3>The advisor who<br>actually <em>knows your numbers.</em></h3>
-          <p>Ask anything. "Can I afford a new car this year?" "Which debt should I attack first?" Your AI Coach has read every line of your financial data before answering.</p>
-          <a href="index.html" class="feature-detail">Meet your coach &nbsp;→</a>
-        </div>
-        <div class="feature-visual" style="justify-content:flex-start;gap:10px;">
-          <div class="ai-label">AI Coach</div>
-          <div class="ai-bubble user">Can I afford a vacation in September?</div>
-          <div class="ai-bubble">Based on your current savings rate and August expenses, you'll have approximately <strong>$2,400</strong> of discretionary cash by September 1st. A $1,800 trip is achievable without touching your emergency fund.</div>
-          <div class="ai-bubble user">What's draining my budget most?</div>
-          <div class="ai-bubble">Auto is on pace to hit its $400 cap by day 8 — driven by a $245 car insurance payment. Consider reviewing your policy at renewal in October.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STATS -->
-  <div class="stats reveal">
-    <div class="stats-inner">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number">14</div>
-          <div class="stat-label">Budget categories tracked</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Data stays on your device</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">5</div>
-          <div class="stat-label">Expense frequency types</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">0</div>
-          <div class="stat-label">Third parties with your data</div>
-        </div>
+      <div class="preview-metric">
+        <div class="preview-label">Health Score</div>
+        <div class="preview-value sage">74</div>
+        <div class="preview-sub">Strong ↑ from 68</div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- PRICING -->
-  <section class="pricing" id="pricing">
-    <div class="section-inner">
-      <p class="section-label reveal">Simple pricing</p>
-      <h2 class="reveal">Pay once.<br><em>Own it forever.</em></h2>
-      <p class="section-sub reveal">No subscriptions that quietly renew. No upsells six months in. Pick a plan and it's yours.</p>
-      <div class="pricing-grid reveal">
-
-        <!-- Starter -->
-        <div class="price-card">
-          <div class="price-plan">Starter</div>
-          <div class="price-amount"><sup>$</sup>49</div>
-          <div class="price-was">Was $69</div>
-          <div class="price-period">One-time &nbsp;·&nbsp; 1 device</div>
-          <div class="price-divider"></div>
-          <ul class="price-features">
-            <li>Monthly expense tracking</li>
-            <li>Budget envelopes (all categories)</li>
-            <li>Income & revenue tracker</li>
-            <li>Due date calendar</li>
-            <li>Local data storage</li>
-            <li class="dim">AI Coach</li>
-            <li class="dim">Google Drive sync</li>
-            <li class="dim">Multi-device (up to 3)</li>
-          </ul>
-          <a href="signin.html#register" class="price-cta price-cta-outline">Get Starter</a>
+<!-- ── FREE TIER STRIP ────────────────────────────────────────── -->
+<div class="free-strip">
+  <div class="section-inner">
+    <span class="free-strip-label">What's free, forever</span>
+    <div class="free-grid">
+      <div class="free-item">
+        <div class="free-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         </div>
-
-        <!-- Pro — featured -->
-        <div class="price-card featured">
-          <div class="price-badge">Most popular</div>
-          <div class="price-plan">Pro</div>
-          <div class="price-amount"><sup>$</sup>89</div>
-          <div class="price-was">Was $120</div>
-          <div class="price-period">One-time &nbsp;·&nbsp; 3 devices</div>
-          <div class="price-divider"></div>
-          <ul class="price-features">
-            <li>Everything in Starter</li>
-            <li>AI Financial Coach (Claude / GPT)</li>
-            <li>Google Drive encrypted backup</li>
-            <li>Loan paydown calculator</li>
-            <li>Savings goal tracker</li>
-            <li>Analytics & forecasting</li>
-            <li>CSV bank import</li>
-            <li>3-device activation</li>
-          </ul>
-          <a href="signin.html#register" class="price-cta price-cta-inv">Get Pro — $89</a>
-        </div>
-
-        <!-- Lifetime -->
-        <div class="price-card">
-          <div class="price-plan">Lifetime</div>
-          <div class="price-amount"><sup>$</sup>149</div>
-          <div class="price-was">Was $200</div>
-          <div class="price-period">One-time &nbsp;·&nbsp; 5 devices</div>
-          <div class="price-divider"></div>
-          <ul class="price-features">
-            <li>Everything in Pro</li>
-            <li>5-device activation</li>
-            <li>All future features included</li>
-            <li>Priority support</li>
-            <li>Custom categories (unlimited)</li>
-            <li>Early access to new features</li>
-            <li>Desktop app (Tauri) when released</li>
-            <li>Lifetime updates — no renewals</li>
-          </ul>
-          <a href="signin.html#register" class="price-cta price-cta-outline">Get Lifetime</a>
-        </div>
+        <h3>Core dashboard</h3>
+        <p>Income, expenses &amp; bills tracked in one view, always up to date.</p>
       </div>
-      <p class="pricing-note reveal">All plans include a 14-day refund — no questions asked &nbsp;·&nbsp; Secure payment via Lemon Squeezy</p>
+      <div class="free-item">
+        <div class="free-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <h3>Budget categories</h3>
+        <p>14 pre-built spending envelopes. Nothing to configure — open and go.</p>
+      </div>
+      <div class="free-item">
+        <div class="free-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="3" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Savings goal</h3>
+        <p>Track your first goal from day one — name it, set a target, watch it grow.</p>
+      </div>
+      <div class="free-item">
+        <div class="free-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        </div>
+        <h3>PIN-protected</h3>
+        <p>Your data locked to your device. AES-256 encryption available on all plans.</p>
+      </div>
     </div>
-  </section>
+    <p class="free-anchor"><strong>No trial period. No expiry.</strong> Start using FincWin today and upgrade only if you want more.</p>
+  </div>
+</div>
 
-  <!-- TESTIMONIALS -->
-  <section class="testimonials">
-    <div class="section-inner">
-      <p class="section-label reveal">Early users</p>
-      <h2 class="reveal">Clarity changes<br>how you <em>make decisions.</em></h2>
-      <div class="testi-grid reveal">
-        <div class="testi-card">
-          <div class="testi-quote">"I've tried YNAB, Mint, spreadsheets. FincWin is the first one I've actually used for more than a week. The envelope view made the difference."</div>
-          <div class="testi-person">
-            <div class="testi-avatar">SL</div>
-            <div><div class="testi-name">Sarah L.</div><div class="testi-role">Nurse, two income household</div></div>
+<!-- ── PROBLEM SECTION ────────────────────────────────────────── -->
+<section class="problem">
+  <div class="section-inner">
+    <span class="section-label-inv">Why most people feel behind</span>
+    <h2>You're not bad with money.<br><em>You just don't have the right view.</em></h2>
+    <p class="problem-lead">Most people make financial decisions by feel — a rough sense of what's in the account, a mental estimate of what's left. That's not a personal failing. It's what happens when your financial life is spread across four apps, two bank accounts, and a spreadsheet nobody updates.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <span class="problem-num">01</span>
+        <h3>The balance that doesn't tell you <em>anything</em></h3>
+        <p>Your bank app shows what's there right now. It doesn't show what's already committed — the rent due Friday, the insurance renewal on the 12th, the subscription you forgot you agreed to. The number is accurate. The picture it gives you isn't.</p>
+      </div>
+      <div class="problem-card">
+        <span class="problem-num">02</span>
+        <h3>The drain you <em>can't name</em></h3>
+        <p>Recurring charges accumulate quietly. Each one is small. Together, they absorb a significant portion of most households' monthly income — and most people can name fewer than half of them. You don't need to spend less. You need to see what you're already spending.</p>
+      </div>
+      <div class="problem-card">
+        <span class="problem-num">03</span>
+        <h3>The debt without <em>a deadline</em></h3>
+        <p>You make the payment every month. The balance barely moves. Without a payoff date — a real calendar year — there's nothing to stay motivated by. "Someday" is not a plan. A date is.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ───────────────────────────────────────────────── -->
+<section class="features" id="features">
+  <div class="section-inner">
+    <div class="features-header">
+      <span class="section-label">How FincWin works</span>
+      <h2>Every dollar has a job.<br><em>You decide what it is.</em></h2>
+    </div>
+
+    <!-- Feature 1: Budget Envelopes -->
+    <div class="feat-row">
+      <div class="feat-content">
+        <div class="feat-tag">Spending — made visible</div>
+        <h3>See your money<br><em>before</em> you spend it.</h3>
+        <p>Assign every category a monthly cap. Housing, food, transport, subscriptions — each one gets its own envelope. As you spend, the bar fills. When a category is at 60% on day 8, you know — not when the statement arrives, but while there's still time to adjust.</p>
+        <a href="/features#budget" class="feat-link">Explore budget envelopes →</a>
+      </div>
+      <div class="feat-mock">
+        <div class="mock-header">
+          <span class="mock-title">Monthly Budget</span>
+          <span class="mock-date">June 2026</span>
+        </div>
+        <div class="mock-envs">
+          <div class="mock-env">
+            <div>
+              <div class="mock-env-name">Housing</div>
+              <div class="mock-env-bar-wrap"><div class="mock-env-bar" style="width:92%;background:#dc2626"></div></div>
+            </div>
+            <div>
+              <div class="mock-env-amt">$1,850 / $2,000</div>
+              <div class="mock-env-pct" style="color:#dc2626">92% — $150 left</div>
+            </div>
+          </div>
+          <div class="mock-env">
+            <div>
+              <div class="mock-env-name">Food &amp; Dining</div>
+              <div class="mock-env-bar-wrap"><div class="mock-env-bar" style="width:57%;background:#5a6e3f"></div></div>
+            </div>
+            <div>
+              <div class="mock-env-amt">$342 / $600</div>
+              <div class="mock-env-pct">57% — $258 left</div>
+            </div>
+          </div>
+          <div class="mock-env">
+            <div>
+              <div class="mock-env-name">Subscriptions</div>
+              <div class="mock-env-bar-wrap"><div class="mock-env-bar" style="width:74%;background:#d97706"></div></div>
+            </div>
+            <div>
+              <div class="mock-env-amt">$89 / $120</div>
+              <div class="mock-env-pct" style="color:#d97706">74% — $31 left</div>
+            </div>
+          </div>
+          <div class="mock-env">
+            <div>
+              <div class="mock-env-name">Transport</div>
+              <div class="mock-env-bar-wrap"><div class="mock-env-bar" style="width:22%;background:#5a6e3f"></div></div>
+            </div>
+            <div>
+              <div class="mock-env-amt">$44 / $200</div>
+              <div class="mock-env-pct">22% — $156 left</div>
+            </div>
           </div>
         </div>
-        <div class="testi-card">
-          <div class="testi-quote">"I didn't know I was going to hit my telecom cap every month until the app showed me the trend. Switched plans, saved $40/mo."</div>
-          <div class="testi-person">
-            <div class="testi-avatar">MK</div>
-            <div><div class="testi-name">Marcus K.</div><div class="testi-role">Freelance designer</div></div>
+      </div>
+    </div>
+
+    <!-- Feature 2: Loan Payoff (Pro) -->
+    <div class="feat-row reverse">
+      <div class="feat-content">
+        <div class="feat-tag">Debt — made finite <span class="feat-pro-badge">Pro</span></div>
+        <h3>Know the exact date<br>you'll be <em>free.</em></h3>
+        <p>Enter your loan details. Model the avalanche or snowball method. Add an extra monthly amount and watch the payoff date move forward — sometimes by years. People with a concrete payoff plan consistently clear debt faster than those making payments without one.</p>
+        <a href="/features#loans" class="feat-link">See loan calculator →</a>
+      </div>
+      <div class="feat-mock">
+        <div class="mock-header">
+          <span class="mock-title">Loan Payoff</span>
+          <span class="mock-date">Avalanche method</span>
+        </div>
+        <div class="mock-loan-card">
+          <div class="mock-loan-name">Car Loan</div>
+          <div class="mock-loan-bal">$7,688 remaining</div>
+          <div class="mock-loan-bar-wrap"><div class="mock-loan-bar" style="width:38%"></div></div>
+          <div class="mock-loan-meta">
+            <span>38% paid</span>
+            <span>Payoff: <strong>March 2027</strong></span>
           </div>
         </div>
-        <div class="testi-card">
-          <div class="testi-quote">"The loan payoff calculator showed me I could be mortgage-free 4 years early by adding $200/month. That number is what motivated me to actually do it."</div>
-          <div class="testi-person">
-            <div class="testi-avatar">AT</div>
-            <div><div class="testi-name">Amanda T.</div><div class="testi-role">Teacher, homeowner</div></div>
+        <div class="mock-extra">
+          <div class="mock-extra-label">If you add $100/month extra:</div>
+          <div class="mock-extra-value">Payoff moves to <strong>August 2026</strong> — saves 7 months</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 3: Savings Goals -->
+    <div class="feat-row">
+      <div class="feat-content">
+        <div class="feat-tag">Goals — made trackable</div>
+        <h3>Track what you're<br><em>building</em> toward.</h3>
+        <p>Name your goal. Give it an amount and a date. Log contributions as you make them. Watch the percentage fill. The simple act of seeing progress — a number climbing, a bar growing — is what makes goals last longer than week two.</p>
+        <a href="/features#savings" class="feat-link">See savings goals →</a>
+      </div>
+      <div class="feat-mock">
+        <div class="mock-header">
+          <span class="mock-title">Savings Goals</span>
+          <span class="mock-date">2 of 3 on track</span>
+        </div>
+        <div class="mock-goals">
+          <div class="mock-goal">
+            <div class="mock-goal-header">
+              <span class="mock-goal-name">Emergency Fund</span>
+              <span class="mock-goal-pct">53%</span>
+            </div>
+            <div class="mock-goal-bar-wrap"><div class="mock-goal-bar" style="width:53%"></div></div>
+            <div class="mock-goal-meta">
+              <span>$3,200 of $6,000</span>
+              <span class="mock-badge on-track">✓ On track · Dec 2026</span>
+            </div>
+          </div>
+          <div class="mock-goal">
+            <div class="mock-goal-header">
+              <span class="mock-goal-name">Holiday</span>
+              <span class="mock-goal-pct">59%</span>
+            </div>
+            <div class="mock-goal-bar-wrap"><div class="mock-goal-bar" style="width:59%"></div></div>
+            <div class="mock-goal-meta">
+              <span>$890 of $1,500</span>
+              <span class="mock-badge on-track">✓ 5 months to go</span>
+            </div>
+          </div>
+          <div class="mock-goal">
+            <div class="mock-goal-header">
+              <span class="mock-goal-name">House Deposit</span>
+              <span class="mock-goal-pct">12%</span>
+            </div>
+            <div class="mock-goal-bar-wrap"><div class="mock-goal-bar" style="width:12%;background:#d97706"></div></div>
+            <div class="mock-goal-meta">
+              <span>$6,000 of $50,000</span>
+              <span class="mock-badge behind">⚠ Behind · Jun 2028</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FINAL CTA -->
-  <section class="final-cta">
-    <div class="section-inner" style="text-align:center;">
-      <p class="section-label reveal" style="color:rgba(255,255,255,.3);">Start today</p>
-      <h2 class="reveal">Your next paycheck<br>deserves a <em>plan.</em></h2>
-      <p class="section-sub reveal" style="max-width:440px;margin:0 auto 44px;color:rgba(255,255,255,.4);">
-        The average person spends 47 minutes a week anxious about money. FincWin replaces that with 10 minutes of clarity.
-      </p>
-      <div class="hero-actions reveal" style="justify-content:center;">
-        <a href="index.html" class="btn-primary">Open the app free &nbsp;→</a>
-        <a href="pricing.html" class="btn-ghost" style="border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.6);">View pricing</a>
+<!-- ── STATS BAR ──────────────────────────────────────────────── -->
+<div class="stats-bar">
+  <div class="section-inner">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-n">1 in 3</div>
+        <div class="stat-label">people consistently track where their money goes each month</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">2×</div>
+        <div class="stat-label">more savings among people who budget regularly vs. those who don't</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">12+</div>
+        <div class="stat-label">active recurring charges the average household carries — most can name fewer than half</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">Faster</div>
+        <div class="stat-label">debt elimination for people with a written payoff plan vs. paying without one</div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div>
-        <a href="landing.html" class="footer-logo">Finc<span>Win</span></a>
-        <div class="footer-copy" style="margin-top:8px;">© 2026 FincWin. All rights reserved.</div>
+<!-- ── BUILT FOR ──────────────────────────────────────────────── -->
+<section class="built-for" id="who">
+  <div class="section-inner">
+    <div class="built-for-header">
+      <span class="section-label">Who FincWin is for</span>
+      <h2>Your situation is <em>specific.</em><br>The tools are flexible.</h2>
+    </div>
+    <div class="persona-grid">
+      <div class="persona-card">
+        <div class="persona-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>For the one who earns but can't account for it</h3>
+        <p>You have income. You have expenses. Somewhere in between, the month just… happens. FincWin's envelope view shows every category filling in real time — so you can see the pattern before it becomes a problem.</p>
       </div>
-      <div class="footer-links">
-        <a href="index.html">App</a>
-        <a href="features.html">Features</a>
-        <a href="features-v2.html">All Features</a><a href="help.html">User Guide</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="signin.html">Sign in</a>
-        <a href="account.html">Account</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="terms.html">Terms</a>
+      <div class="persona-card">
+        <div class="persona-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <h3>For the one carrying debt</h3>
+        <p>You know you owe. You make the payment. But there's no finish line in sight. The loan payoff calculator shows you exactly when you'll be done — and what happens if you add just a little more each month.</p>
+      </div>
+      <div class="persona-card">
+        <div class="persona-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3>For the one with goals but no system</h3>
+        <p>The house deposit. The emergency fund. The trip. You know what you're working toward — you just don't have a way to track how close you're getting. Savings goals give your money a name and a destination.</p>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script>
-    // Scroll-triggered nav border
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
-    });
+<!-- ── PRICING ────────────────────────────────────────────────── -->
+<section class="pricing" id="pricing">
+  <div class="section-inner">
+    <div class="pricing-header">
+      <span class="section-label">Simple pricing</span>
+      <h2>Simple annual billing. No surprise upsells.<br><em>Or buy Lifetime and never pay again.</em></h2>
+      <p class="pricing-sub">FincWin is free to use. You pay to unlock more of it — not to access your own data.</p>
+      <div class="billing-toggle" id="billingToggle">
+        <button class="active" id="btnAnnual">Annual</button>
+        <button id="btnMonthly">Monthly</button>
+      </div>
+    </div>
+    <div class="pricing-cards">
+      <!-- Free -->
+      <div class="pricing-card">
+        <div class="card-tier">Free</div>
+        <div class="card-price"><span class="amount">$0</span></div>
+        <div class="card-tagline">Try it free. No card, no expiry.</div>
+        <a href="/app" class="card-cta free-cta">Get started free</a>
+        <ul class="card-features">
+          <li class="section-head">Included</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Core dashboard</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 90-day expense history</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 14 budget categories</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Income &amp; bill tracker</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Local PIN lock</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 1 savings goal</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Demo profile</li>
+          <li class="section-head locked">Pro only</li>
+          <li class="locked"><svg class="lock" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Google Drive sync</li>
+          <li class="locked"><svg class="lock" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Loan payoff calculator</li>
+          <li class="locked"><svg class="lock" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> AI Coach</li>
+        </ul>
+      </div>
+      <!-- Pro -->
+      <div class="pricing-card pro">
+        <div class="pro-badge">Most popular</div>
+        <div class="card-tier">Pro</div>
+        <div class="card-price">
+          <span class="amount pro-price" id="proPrice">$39</span><span class="period" id="proPeriod">/year</span>
+        </div>
+        <div class="card-tagline">Full access, billed annually. <span id="proAltPrice" style="color:var(--muted)">Or $4.99/month.</span></div>
+        <a href="/pricing" class="card-cta pro-cta" id="proCtaBtn">Get Pro — $39/yr</a>
+        <ul class="card-features">
+          <li class="section-head">Everything in Free, plus:</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited history</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Google Drive backup</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> CSV bank import</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Loan payoff calculator</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Advanced analytics</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited savings goals</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Full gamification suite</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> AI Coach — bring your own API key</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Investment portfolio tracking</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Multi-currency support</li>
+        </ul>
+      </div>
+      <!-- Lifetime -->
+      <div class="pricing-card">
+        <div class="card-tier">Lifetime</div>
+        <div class="card-price">
+          <span class="was">$200</span>
+          <span class="amount">$149</span>
+        </div>
+        <div class="card-tagline">One payment. All future features. No renewals.</div>
+        <a href="/pricing" class="card-cta life-cta">Get Lifetime</a>
+        <ul class="card-features">
+          <li class="section-head">Everything in Pro, plus:</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> All future features included</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Priority support</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Early access to new features</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Desktop app (Tauri) when released</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Custom spending categories</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Lifetime updates</li>
+        </ul>
+      </div>
+    </div>
+    <p class="pricing-breakeven">Lifetime pays for itself in under 4 years. After that, it's free forever.</p>
+    <div class="pricing-trust">
+      <span>30-day refund — no questions asked</span>
+      <span>Secure payment via Lemon Squeezy</span>
+      <span>Your financial data never touches our servers</span>
+    </div>
+  </div>
+</section>
 
-    // Reveal on scroll
-    const reveals = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(el => io.observe(el));
-  </script>
+<!-- ── DATA TRANSPARENCY ──────────────────────────────────────── -->
+<section class="data-section" id="privacy">
+  <div class="section-inner">
+    <div class="data-header">
+      <span class="section-label">Your data — plainly explained</span>
+      <h2>What stays on your device.<br><em>What doesn't. And why.</em></h2>
+    </div>
+    <div class="data-panels">
+      <div class="data-panel">
+        <div class="data-panel-icon device">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <h3>Financial data — stays local</h3>
+        <p>Your budgets, expenses, loan details, savings goals — everything financial — lives in your browser's local storage. It is never transmitted to FincWin or any backend. We can't see it. We don't have it.</p>
+      </div>
+      <div class="data-panel">
+        <div class="data-panel-icon account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        </div>
+        <h3>Account data — external, minimal</h3>
+        <p>To restore your licence on a new device, we store your email address, licence key, display name, and plan in a secure database. This is the minimum needed to manage your account. It contains nothing financial.</p>
+      </div>
+      <div class="data-panel">
+        <div class="data-panel-icon cloud">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+        </div>
+        <h3>Google Drive backup — encrypted, optional</h3>
+        <p>If you choose to enable Drive backup, your financial data is encrypted on your device before it reaches Google. Neither Google nor FincWin can read the backup — only your licence key can decrypt it.</p>
+      </div>
+    </div>
+    <p class="data-anchor">No advertising. No data brokering. No selling your usage patterns. <em>FincWin is a product you pay for, not a product you are.</em></p>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ──────────────────────────────────────────────── -->
+<section class="final-cta">
+  <div class="section-inner">
+    <span class="section-label-inv">Start today</span>
+    <h2>Your next paycheck<br><em>deserves a plan.</em></h2>
+    <p>Most people spend more time researching a new phone than planning their finances for the month. FincWin takes 10 minutes to set up and gives you a view of your money you've probably never had before.</p>
+    <div class="cta-pair">
+      <a href="/app" class="btn-primary">Get started free →</a>
+      <a href="/pricing" class="btn-ghost-inv">View pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<footer class="mkt-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><a href="/" class="footer-logo">Finc<span>Win</span></a><p>The personal finance dashboard for people who want clarity, not complexity.</p></div>
+      <div class="footer-col"><h4>Product</h4><a href="/features">Features</a><a href="/pricing">Pricing</a><a href="/compare">Compare</a><a href="/use-cases">Use cases</a><a href="/app">Open app</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about">About</a><a href="/changelog">Changelog</a><a href="/contact">Contact</a></div>
+      
+      <div class="footer-col"><h4>Learn</h4><a href="/blog">Blog</a><a href="/help">Help guide</a></div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom"><p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookie-policy">Cookies</a></div></div>
+  </div>
+</footer>
+
+
+
+<script src="/js/landing.js" defer></script>
+<script src="/js/mkt.js" defer></script>
 </body>
 </html>

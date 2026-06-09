@@ -1,0 +1,16 @@
+{
+  "META_TITLE": "Budgeting for Building Savings — FincWin",
+  "META_DESCRIPTION": "Build savings that stick: named goals, target dates, and sinking funds that turn ‘save more’ into a clear monthly plan. Free to start, private, offline.",
+  "OG_DESCRIPTION": "Building savings? FincWin gives every goal a target, a date and a progress bar — plus sinking funds for irregular costs.",
+  "CANONICAL_URL": "https://fincwin.com/use-cases/building-savings",
+  "PERSONA_LABEL": "people building savings",
+  "PERSONA_HEADLINE": "Turn ‘save more’ into <em>a real plan</em>",
+  "PERSONA_SUBHEAD": "Name your goals, set targets and dates, and let FincWin show you the monthly amount that gets you there.",
+  "SITUATION_HEADLINE": "You want to save, but it never quite happens",
+  "SITUATION_BODY": "<p>There's always something — a bill, a treat, a gap — and the money you meant to save quietly disappears back into spending.</p><p>FincWin makes saving deliberate: each goal gets its own envelope, target and timeline, so the money is set aside before it can drift.</p>",
+  "HOW_IT_HELPS": "<li><span class=\"li-icon\">→</span><span><strong>Named goals:</strong> emergency fund, deposit, holiday — each tracked separately.</span></li>\n    <li><span class=\"li-icon\">→</span><span><strong>Auto-calculated contributions:</strong> set a target and date, FincWin works out the monthly amount.</span></li>\n    <li><span class=\"li-icon\">→</span><span><strong>Sinking funds:</strong> smooth out irregular costs so they never derail you.</span></li>\n    <li><span class=\"li-icon\">→</span><span><strong>Visible progress:</strong> a progress bar per goal keeps momentum up.</span></li>",
+  "HOWTO_STEPS_JSON": "[{\"@type\":\"HowToStep\",\"name\":\"Name each goal\",\"text\":\"Create a goal for each thing you're saving toward.\"},{\"@type\":\"HowToStep\",\"name\":\"Set target and date\",\"text\":\"FincWin calculates the monthly amount needed.\"},{\"@type\":\"HowToStep\",\"name\":\"Fund it monthly\",\"text\":\"Assign money to each goal, or run it as a sinking fund.\"},{\"@type\":\"HowToStep\",\"name\":\"Track progress\",\"text\":\"Watch each goal fill toward its target.\"}]",
+  "USER_QUOTE": "Giving every pound a destination was the thing that finally made saving automatic instead of an afterthought.",
+  "CTA_HEADLINE": "Start building <em>real savings</em> today.",
+  "RELEVANT_FEATURES": "<a href=\"/features/savings-goals\" class=\"related-link\"><span>Feature</span><p>Savings Goals</p></a>\n    <a href=\"/features/envelope-budgeting\" class=\"related-link\"><span>Feature</span><p>Envelope Budgeting</p></a>\n    <a href=\"/blog/posts/sinking-funds\" class=\"related-link\"><span>Savings</span><p>How Sinking Funds Work</p></a>\n    <a href=\"/blog/posts/emergency-fund-guide\" class=\"related-link\"><span>Savings</span><p>Emergency Fund Guide</p></a>"
+}

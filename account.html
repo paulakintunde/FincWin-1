@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Account — FincWin</title>
+  <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +21,6 @@
       --white:   #ffffff;
       --border:  rgba(0,0,0,.09);
       --danger:  #dc2626;
-      --amber:   #b7791f;
       --sans: 'Hanken Grotesk', sans-serif;
       --serif: 'Instrument Serif', serif;
     }
@@ -50,10 +50,7 @@
     .nav-app-btn:hover { background: var(--sage) !important; }
 
     /* ── LAYOUT ── */
-    .page {
-      max-width: 920px; margin: 0 auto;
-      padding: 48px 24px 80px;
-    }
+    .page { max-width: 920px; margin: 0 auto; padding: 48px 24px 80px; }
     .page-header { margin-bottom: 40px; }
     .page-eyebrow {
       font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
@@ -64,6 +61,14 @@
       color: var(--ink); margin-bottom: 4px;
     }
     .page-sub { font-size: 14px; color: var(--muted); }
+
+    /* ── ERROR / INFO BANNER ── */
+    .error-banner {
+      display: none; background: #fef2f2; border: 1px solid #fecaca;
+      color: var(--danger); font-size: 13px; border-radius: 10px;
+      padding: 14px 18px; margin-bottom: 24px; line-height: 1.5;
+    }
+    .error-banner a { color: var(--danger); font-weight: 500; }
 
     /* ── SIDEBAR LAYOUT ── */
     .account-grid {
@@ -80,26 +85,24 @@
       text-decoration: none; transition: background .15s, color .15s;
       border: none; background: none; width: 100%; text-align: left;
     }
-    .sidebar-item:hover, .sidebar-item.active {
-      background: var(--faint); color: var(--ink);
-    }
+    .sidebar-item:hover, .sidebar-item.active { background: var(--faint); color: var(--ink); }
     .sidebar-item.active { font-weight: 500; }
     .sidebar-divider { height: 1px; background: var(--border); margin: 6px 0; }
+    .sidebar-danger-label { color: var(--danger); }
 
     /* ── CARDS ── */
     .card {
-      background: white; border-radius: 14px;
-      border: 1px solid var(--border);
+      background: white; border-radius: 14px; border: 1px solid var(--border);
       margin-bottom: 20px; overflow: hidden;
     }
     .card-header {
-      padding: 24px 28px 20px;
-      border-bottom: 1px solid var(--border);
+      padding: 24px 28px 20px; border-bottom: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
     }
     .card-title { font-size: 15px; font-weight: 500; color: var(--ink); }
     .card-subtitle { font-size: 12px; color: var(--muted); margin-top: 2px; }
     .card-body { padding: 24px 28px; }
+    .card-body-text { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
 
     /* ── PLAN BADGE ── */
     .plan-badge {
@@ -107,13 +110,12 @@
       padding: 5px 14px; border-radius: 20px;
       font-size: 12px; font-weight: 600; letter-spacing: .5px;
     }
-    .plan-badge.pro { background: var(--sage-lt); color: var(--sage-dk); }
-    .plan-badge.starter { background: #e0e7ff; color: #3730a3; }
+    .plan-badge.pro      { background: var(--sage-lt); color: var(--sage-dk); }
+    .plan-badge.starter  { background: #e0e7ff; color: #3730a3; }
     .plan-badge.lifetime { background: #fef3c7; color: #92400e; }
-    .plan-badge.free { background: var(--faint); color: var(--muted); }
+    .plan-badge.free     { background: var(--faint); color: var(--muted); }
     .plan-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
-    /* Plan card body */
     .plan-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
     .plan-info h3 { font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 4px; }
     .plan-info p { font-size: 13px; color: var(--muted); }
@@ -127,8 +129,7 @@
 
     /* Upgrade prompt */
     .upgrade-box {
-      background: var(--ink); border-radius: 12px;
-      padding: 20px 24px; margin-top: 20px;
+      background: var(--ink); border-radius: 12px; padding: 20px 24px; margin-top: 20px;
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
     .upgrade-box p { font-size: 13px; color: rgba(255,255,255,.6); }
@@ -140,6 +141,28 @@
       text-decoration: none; transition: background .15s;
     }
     .btn-upgrade:hover { background: var(--sage-lt); }
+
+    /* Ghost compare-plans button */
+    .btn-ghost {
+      background: var(--faint); color: var(--ink);
+      padding: 9px 18px; border-radius: 50px;
+      font-size: 12px; font-weight: 500; text-decoration: none;
+      display: inline-block; white-space: nowrap; transition: background .15s;
+    }
+    .btn-ghost:hover { background: #e8e5df; }
+
+    /* Billing portal row */
+    .billing-portal {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .billing-portal p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .billing-note { font-size: 12px; color: var(--muted); margin-top: 16px; }
+    .billing-sub-note {
+      display: none; margin-top: 14px; padding: 12px 16px;
+      background: #fef9ec; border: 1px solid #fde68a; border-radius: 10px;
+      color: #92400e;
+    }
+    .link-sage { color: var(--sage); }
 
     /* ── LICENCE KEY ── */
     .key-display {
@@ -161,6 +184,14 @@
     .btn-icon:hover { border-color: var(--ink); color: var(--ink); }
     .key-meta { margin-top: 10px; font-size: 12px; color: var(--muted); display: flex; gap: 20px; flex-wrap: wrap; }
     .key-meta span { display: flex; align-items: center; gap: 5px; }
+    .input-key { text-transform: uppercase; letter-spacing: 1px; }
+    .key-copy-block {
+      background: var(--faint); border-radius: 10px;
+      padding: 16px 20px; font-family: monospace;
+      font-size: 13px; color: var(--ink); letter-spacing: 1px;
+    }
+    .key-copy-instructions { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+    .mt-12 { margin-top: 12px; }
 
     /* ── DEVICES ── */
     .device-list { display: flex; flex-direction: column; gap: 12px; }
@@ -169,18 +200,19 @@
       padding: 14px 16px; border-radius: 10px;
       background: var(--faint); border: 1px solid var(--border);
     }
+    .device-item--inactive { opacity: .45; }
     .device-icon {
       width: 36px; height: 36px; border-radius: 10px;
       background: var(--sage-lt); display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
+    .device-icon--empty { background: var(--faint); }
     .device-info { flex: 1; }
     .device-name { font-size: 13px; font-weight: 500; color: var(--ink); }
     .device-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
     .device-current {
       font-size: 10px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase;
-      color: var(--sage); background: var(--sage-lt);
-      padding: 3px 9px; border-radius: 20px;
+      color: var(--sage); background: var(--sage-lt); padding: 3px 9px; border-radius: 20px;
     }
     .btn-deactivate {
       font-size: 12px; color: var(--muted); background: none; border: none;
@@ -188,28 +220,23 @@
       transition: background .15s, color .15s;
     }
     .btn-deactivate:hover { background: #fee2e2; color: var(--danger); }
-    .add-device-btn {
-      width: 100%; padding: 13px; border-radius: 10px;
-      background: none; border: 1px dashed var(--border);
-      font-family: var(--sans); font-size: 13px; color: var(--muted);
-      cursor: pointer; transition: border-color .15s, color .15s;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-    }
-    .add-device-btn:hover { border-color: var(--sage); color: var(--sage); }
+    .device-upgrade-note { font-size: 12px; color: var(--muted); margin-top: 16px; }
 
-    /* ── BILLING ── */
-    .billing-table { width: 100%; border-collapse: collapse; }
-    .billing-table th {
-      font-size: 11px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase;
-      color: var(--muted); text-align: left; padding: 0 0 12px; border-bottom: 1px solid var(--border);
+    /* Skeleton loader placeholders */
+    .skel-name { width: 160px; height: 14px; }
+    .skel-meta { width: 120px; height: 10px; margin-top: 6px; }
+    .skeleton {
+      background: #e0ddd7; border-radius: 6px;
+      color: transparent !important;
+      pointer-events: none;
+      -webkit-user-select: none;
+      user-select: none;
+      animation: skeleton-pulse 1.4s ease-in-out infinite;
     }
-    .billing-table td { padding: 14px 0; font-size: 13px; border-bottom: 1px solid var(--border); }
-    .billing-table tr:last-child td { border-bottom: none; }
-    .billing-table .amount { font-weight: 500; }
-    .billing-badge {
-      display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 500;
+    @keyframes skeleton-pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: .45; }
     }
-    .billing-badge.paid { background: #d1fae5; color: #065f46; }
 
     /* ── PROFILE FORM ── */
     .form-group { margin-bottom: 18px; }
@@ -217,6 +244,7 @@
       display: block; font-size: 11px; font-weight: 500;
       letter-spacing: .8px; text-transform: uppercase; color: var(--muted); margin-bottom: 7px;
     }
+    .label-hint { font-weight: 300; font-size: 10px; color: #9ca3af; }
     input[type="text"], input[type="email"], input[type="password"] {
       width: 100%; padding: 12px 15px;
       background: var(--faint); border: 1px solid var(--border); border-radius: 10px;
@@ -224,11 +252,13 @@
       outline: none; transition: border-color .15s; -webkit-appearance: none;
     }
     input:focus { border-color: var(--sage); background: white; }
+    input[readonly] { cursor: default; opacity: .6; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .btn-save {
       padding: 12px 28px; background: var(--ink); color: white;
       border-radius: 50px; font-family: var(--sans); font-size: 13px; font-weight: 500;
-      border: none; cursor: pointer; transition: background .2s;
+      border: none; cursor: pointer; transition: background .2s; text-decoration: none;
+      display: inline-block;
     }
     .btn-save:hover { background: var(--sage); }
     .btn-danger {
@@ -237,11 +267,81 @@
       border: 1px solid #fecaca; cursor: pointer; transition: background .15s;
     }
     .btn-danger:hover { background: #fef2f2; }
+    .field-hint { font-size: 11px; color: var(--muted); margin-top: 5px; }
+    .form-success {
+      display: none; background: #f0fdf4; border: 1px solid #bbf7d0;
+      color: #15803d; font-size: 12px; border-radius: 8px;
+      padding: 10px 14px; margin-bottom: 16px;
+    }
+
+    /* Expired state box */
+    .expired-box {
+      display: none; background: #fef2f2; border: 1px solid #fecaca;
+      border-radius: 12px; padding: 20px 24px; margin-top: 20px;
+    }
+    .expired-box strong { color: var(--danger); font-size: 14px; display: block; margin-bottom: 4px; }
+    .expired-box p { font-size: 13px; color: #7f1d1d; line-height: 1.5; }
+    .expired-box-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+    .btn-renew {
+      padding: 10px 22px; background: var(--danger); color: white;
+      border-radius: 50px; font-family: var(--sans); font-size: 13px;
+      font-weight: 500; border: none; cursor: pointer; text-decoration: none;
+      transition: opacity .15s;
+    }
+    .btn-renew:hover { opacity: .85; }
+    .btn-free-info { font-size: 12px; color: #7f1d1d; align-self: center; }
+    .upgrade-credit-note { display: none; margin-top: 6px; font-size: 12px; opacity: .7; }
 
     /* Danger zone */
     .danger-zone { border-color: #fecaca !important; }
     .danger-zone .card-header { border-color: #fecaca; }
     .danger-zone .card-title { color: var(--danger); }
+    .danger-body { display: flex; flex-direction: column; gap: 20px; }
+    .danger-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .danger-label { font-size: 14px; font-weight: 500; color: var(--ink); }
+    .danger-desc { font-size: 12px; color: var(--muted); margin-top: 3px; }
+    .danger-divider { height: 1px; background: #fecaca; }
+
+    /* ── OVERVIEW SECTION ── */
+    .ov-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+    .ov-stat {
+      background: white; border-radius: 14px; border: 1px solid var(--border); padding: 20px 22px;
+    }
+    .ov-stat-lbl {
+      font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .ov-stat-val {
+      font-family: var(--serif); font-size: 26px; font-weight: 400; color: var(--ink);
+      margin-bottom: 4px; line-height: 1.1;
+    }
+    .ov-stat-sub { font-size: 12px; color: var(--muted); }
+    .quick-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .quick-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 50px;
+      background: var(--faint); border: 1px solid var(--border);
+      font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--ink);
+      cursor: pointer; text-decoration: none; transition: background .15s, border-color .15s;
+    }
+    .quick-btn:hover { background: #e8e5df; border-color: rgba(0,0,0,.14); }
+    .quick-btn.primary { background: var(--ink); color: white; border-color: transparent; }
+    .quick-btn.primary:hover { background: var(--sage); }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+    .feature-row {
+      display: flex; align-items: center; gap: 9px;
+      padding: 10px 14px; background: var(--faint); border-radius: 10px;
+      font-size: 13px; color: var(--ink);
+    }
+    .feature-row svg { flex-shrink: 0; color: var(--sage); }
+    .feature-row.off { opacity: .45; }
+    .feature-row.off svg { color: var(--muted); }
+    .ov-stat-val--sm { font-size: 20px; }
+
+    @media (max-width: 720px) {
+      .ov-stats { grid-template-columns: repeat(2, 1fr); }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
 
     /* ── SECTION PANELS ── */
     .section-panel { display: none; }
@@ -276,7 +376,7 @@
     <a href="landing.html" class="nav-logo">Finc<span>Win</span></a>
     <div class="nav-right">
       <a href="landing.html">Home</a>
-      <a href="#" onclick="signOut()">Sign out</a>
+      <a href="#" id="btn-signout">Sign out</a>
       <a href="index.html" class="nav-app-btn">Open app →</a>
     </div>
   </nav>
@@ -284,57 +384,124 @@
   <div class="page">
     <div class="page-header">
       <p class="page-eyebrow">Account</p>
-      <h1 class="page-title" id="page-greeting">Good morning, Eleanor</h1>
+      <h1 class="page-title" id="page-greeting">Loading…</h1>
       <p class="page-sub">Manage your plan, licence key, devices, and profile.</p>
     </div>
+
+    <div class="error-banner" id="error-banner"></div>
 
     <div class="account-grid">
 
       <!-- Sidebar nav -->
       <aside class="account-sidebar">
-        <button class="sidebar-item active" onclick="showSection('plan', this)">
+        <button type="button" class="sidebar-item active" data-section="overview">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Overview
+        </button>
+        <button type="button" class="sidebar-item" data-section="plan">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
           Plan &amp; Billing
         </button>
-        <button class="sidebar-item" onclick="showSection('licence', this)">
+        <button type="button" class="sidebar-item" data-section="licence">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
           Licence Key
         </button>
-        <button class="sidebar-item" onclick="showSection('devices', this)">
+        <button type="button" class="sidebar-item" data-section="devices">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
           Devices
         </button>
         <div class="sidebar-divider"></div>
-        <button class="sidebar-item" onclick="showSection('profile', this)">
+        <button type="button" class="sidebar-item" data-section="profile">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           Profile
         </button>
-        <button class="sidebar-item" onclick="showSection('danger', this)">
+        <button type="button" class="sidebar-item" data-section="danger">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-          <span style="color:#dc2626;">Danger zone</span>
+          <span class="sidebar-danger-label">Danger zone</span>
         </button>
       </aside>
 
       <!-- Main content -->
       <main>
 
+        <!-- OVERVIEW -->
+        <div class="section-panel active" id="section-overview">
+          <div class="ov-stats">
+            <div class="ov-stat">
+              <div class="ov-stat-lbl">Plan</div>
+              <div class="ov-stat-val" id="ov-plan">—</div>
+              <div class="ov-stat-sub" id="ov-plan-sub">—</div>
+            </div>
+            <div class="ov-stat">
+              <div class="ov-stat-lbl">Devices</div>
+              <div class="ov-stat-val" id="ov-devices">— / —</div>
+              <div class="ov-stat-sub">activations used</div>
+            </div>
+            <div class="ov-stat">
+              <div class="ov-stat-lbl">Key Status</div>
+              <div class="ov-stat-val" id="ov-key-status">—</div>
+              <div class="ov-stat-sub" id="ov-expires">—</div>
+            </div>
+            <div class="ov-stat">
+              <div class="ov-stat-lbl">Help</div>
+              <div class="ov-stat-val ov-stat-val--sm">Support</div>
+              <div class="ov-stat-sub"><a href="help.html" class="link-sage">View docs →</a></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div><div class="card-title">Quick Actions</div></div>
+            </div>
+            <div class="card-body">
+              <div class="quick-actions">
+                <a href="index.html" class="quick-btn primary">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V21h-6v-6H9v6H3z"/></svg>
+                  Open app →
+                </a>
+                <button type="button" class="quick-btn" id="btn-copy-key-ov">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                  Copy licence key
+                </button>
+                <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener noreferrer" class="quick-btn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                  Billing portal ↗
+                </a>
+                <a href="help.html" class="quick-btn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  Help &amp; docs
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div><div class="card-title">Your plan includes</div></div>
+            </div>
+            <div class="card-body">
+              <div class="features-grid" id="ov-features"></div>
+            </div>
+          </div>
+        </div>
+
         <!-- PLAN & BILLING -->
-        <div class="section-panel active" id="section-plan">
+        <div class="section-panel" id="section-plan">
           <div class="card">
             <div class="card-header">
               <div>
                 <div class="card-title">Current Plan</div>
-                <div class="card-subtitle">Your purchase gives you lifetime access to this tier.</div>
+                <div class="card-subtitle" id="plan-card-sub">Your purchase gives you lifetime access to this tier.</div>
               </div>
-              <span class="plan-badge pro"><span class="plan-dot"></span> Pro</span>
+              <span class="plan-badge pro" id="plan-badge"><span class="plan-dot"></span> <span id="plan-badge-text">Pro</span></span>
             </div>
             <div class="card-body">
               <div class="plan-row">
                 <div class="plan-info">
-                  <h3>FincWin Pro</h3>
-                  <p>One-time purchase &nbsp;·&nbsp; Purchased Jun 5, 2026 &nbsp;·&nbsp; 3-device activation</p>
+                  <h3 id="plan-name">FincWin Pro</h3>
+                  <p id="plan-note">One-time purchase</p>
                 </div>
-                <a href="landing.html#pricing" class="btn-upgrade" style="background:var(--faint);color:var(--ink);padding:9px 18px;border-radius:50px;font-size:12px;font-weight:500;text-decoration:none;">Compare plans</a>
+                <a href="landing.html#pricing" class="btn-ghost">Compare plans</a>
               </div>
               <div class="plan-features-mini">
                 <span class="feature-chip on">Budget Envelopes</span>
@@ -343,46 +510,49 @@
                 <span class="feature-chip on">Loan Calculator</span>
                 <span class="feature-chip on">CSV Import</span>
                 <span class="feature-chip on">Analytics</span>
-                <span class="feature-chip">Custom Categories</span>
-                <span class="feature-chip">5 Devices</span>
-                <span class="feature-chip">Desktop App</span>
+                <span class="feature-chip" id="chip-custom-cats">Custom Categories</span>
+                <span class="feature-chip" id="chip-5-devices">5 Devices</span>
+                <span class="feature-chip" id="chip-desktop">Desktop App</span>
               </div>
-              <div class="upgrade-box">
+              <div class="upgrade-box" id="upgrade-box">
                 <div>
                   <strong>Upgrade to Lifetime — $149</strong>
                   <p>5 devices, all future features, desktop app when released. One payment, forever.</p>
+                  <p id="upgrade-credit-note" class="upgrade-credit-note">Pro subscribers: email us and we'll credit your remaining months — you pay the difference only.</p>
                 </div>
-                <a href="landing.html#pricing" class="btn-upgrade">Upgrade</a>
+                <a href="pricing.html" class="btn-upgrade">Learn more</a>
+              </div>
+              <div class="expired-box" id="expired-box">
+                <strong>Your Pro subscription has expired</strong>
+                <p>You're now on the Free plan. Your financial data is untouched — nothing was deleted. Renew anytime to restore Pro features, or continue using FincWin free.</p>
+                <div class="expired-box-actions">
+                  <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener noreferrer" class="btn-renew">Renew Pro subscription ↗</a>
+                  <span class="btn-free-info">Free plan: unlimited access, no expiry</span>
+                </div>
               </div>
             </div>
           </div>
 
           <div class="card">
             <div class="card-header">
-              <div><div class="card-title">Billing History</div><div class="card-subtitle">All transactions on your account.</div></div>
+              <div><div class="card-title">Billing &amp; Receipts</div><div class="card-subtitle">View orders, download receipts, and manage your subscription.</div></div>
             </div>
             <div class="card-body">
-              <table class="billing-table">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td style="color:var(--muted);">Jun 5, 2026</td>
-                    <td>FincWin Pro — One-time</td>
-                    <td class="amount">$89.00</td>
-                    <td><span class="billing-badge paid">Paid</span></td>
-                    <td><a href="#" style="font-size:12px;color:var(--muted);text-decoration:none;">Receipt ↗</a></td>
-                  </tr>
-                </tbody>
-              </table>
-              <p style="font-size:12px;color:var(--muted);margin-top:16px;">Payments processed securely by <strong>Lemon Squeezy</strong>. For billing disputes contact <a href="mailto:support@fincwin.app" style="color:var(--sage);">support@fincwin.app</a>.</p>
+              <div class="billing-portal">
+                <p>
+                  Your purchase history and receipts are available in the Lemon Squeezy customer portal.
+                  Payments are processed securely by <strong>Lemon Squeezy</strong>.
+                </p>
+                <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener noreferrer" class="btn-save">
+                  Open billing portal ↗
+                </a>
+              </div>
+              <p class="billing-note billing-sub-note" id="billing-sub-note">
+                To cancel your Pro subscription or change your billing cycle, visit the billing portal above. Cancellation takes effect at the end of your current period.
+              </p>
+              <p class="billing-note">
+                For billing disputes contact <a href="mailto:support@fincwin.com" class="link-sage">support@fincwin.com</a>.
+              </p>
             </div>
           </div>
         </div>
@@ -391,26 +561,26 @@
         <div class="section-panel" id="section-licence">
           <div class="card">
             <div class="card-header">
-              <div><div class="card-title">Licence Key</div><div class="card-subtitle">Use this key to activate FincWin on up to 3 devices.</div></div>
+              <div><div class="card-title">Licence Key</div><div class="card-subtitle" id="key-card-sub">Use this key to activate FincWin on up to 3 devices.</div></div>
             </div>
             <div class="card-body">
               <div class="key-display">
                 <span class="key-text masked" id="key-display">•••• - •••• - •••• - ••••</span>
-                <button class="btn-icon" onclick="toggleKeyVisibility()" title="Show / hide key">
+                <button type="button" class="btn-icon" id="btn-toggle-key" title="Show / hide key">
                   <svg id="eye-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                 </button>
-                <button class="btn-icon" onclick="copyKey()" title="Copy key">
+                <button type="button" class="btn-icon" id="btn-copy-key-short" title="Copy key">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                 </button>
               </div>
               <div class="key-meta">
-                <span>
+                <span id="key-status-el">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg>
                   Status: Active
                 </span>
-                <span>Activations: 1 / 3 used</span>
-                <span>Expires: Never</span>
-                <span>Plan: Pro</span>
+                <span id="key-activations">Activations: — / — used</span>
+                <span id="key-expires">Expires: —</span>
+                <span id="key-plan-el">Plan: —</span>
               </div>
             </div>
           </div>
@@ -420,13 +590,32 @@
               <div><div class="card-title">Activate on a new device</div></div>
             </div>
             <div class="card-body">
-              <p style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6;">
+              <p class="key-copy-instructions">
                 Open FincWin on the new device, go to <strong>Settings → Account</strong>, and enter your licence key. Or paste it directly into the app's licence activation screen.
               </p>
-              <div style="background:var(--faint);border-radius:10px;padding:16px 20px;font-family:monospace;font-size:13px;color:var(--ink);letter-spacing:1px;" id="key-copy-block">
-                ••••-••••-••••-••••
+              <div class="key-copy-block" id="key-copy-block">••••-••••-••••-••••</div>
+              <button type="button" id="btn-copy-key-full" class="btn-save mt-12">Copy key to clipboard</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Activate a different key</div>
+                <div class="card-subtitle">Upgrading from Pro to Lifetime? Enter your new key here.</div>
               </div>
-              <button onclick="copyKeyFull()" style="margin-top:12px;" class="btn-save">Copy key to clipboard</button>
+            </div>
+            <div class="card-body">
+              <p class="key-copy-instructions">
+                Purchased a Lifetime key or received a replacement? Activate it below — your existing key will be deactivated on this device first. Your financial data is untouched.
+              </p>
+              <div class="form-success" id="new-key-success">Key activated. Reloading…</div>
+              <div class="form-group">
+                <label for="new-key-input">New licence key</label>
+                <input type="text" id="new-key-input" class="input-key" placeholder="XXXX-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false">
+              </div>
+              <button type="button" id="btn-activate-new" class="btn-save">Activate new key</button>
+              <p class="field-hint">Need help? Contact <a href="mailto:support@fincwin.com" class="link-sage">support@fincwin.com</a> and we'll credit your remaining Pro months toward Lifetime.</p>
             </div>
           </div>
         </div>
@@ -435,42 +624,26 @@
         <div class="section-panel" id="section-devices">
           <div class="card">
             <div class="card-header">
-              <div><div class="card-title">Active Devices</div><div class="card-subtitle">1 of 3 activations used. Deactivate a device to free up a slot.</div></div>
+              <div>
+                <div class="card-title">Active Devices</div>
+                <div class="card-subtitle" id="devices-subtitle">Loading device information…</div>
+              </div>
             </div>
             <div class="card-body">
-              <div class="device-list">
+              <div class="device-list" id="device-list">
                 <div class="device-item">
                   <div class="device-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
                   </div>
                   <div class="device-info">
-                    <div class="device-name">MacBook Pro — Chrome</div>
-                    <div class="device-meta">Activated Jun 5, 2026 &nbsp;·&nbsp; Last seen today</div>
-                  </div>
-                  <span class="device-current">This device</span>
-                </div>
-
-                <div class="device-item" style="opacity:.5;">
-                  <div class="device-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></svg>
-                  </div>
-                  <div class="device-info">
-                    <div class="device-name">Slot 2 — Available</div>
-                    <div class="device-meta">Not yet activated</div>
-                  </div>
-                </div>
-
-                <div class="device-item" style="opacity:.5;">
-                  <div class="device-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></svg>
-                  </div>
-                  <div class="device-info">
-                    <div class="device-name">Slot 3 — Available</div>
-                    <div class="device-meta">Not yet activated</div>
+                    <div class="device-name skeleton skel-name">&nbsp;</div>
+                    <div class="device-meta skeleton skel-meta">&nbsp;</div>
                   </div>
                 </div>
               </div>
-              <p style="font-size:12px;color:var(--muted);margin-top:16px;">Need more than 3 devices? <a href="landing.html#pricing" style="color:var(--sage);">Upgrade to Lifetime</a> for 5 activations.</p>
+              <p class="device-upgrade-note" id="devices-upgrade-link">
+                Need more activations? <a href="landing.html#pricing" class="link-sage">Upgrade to Lifetime</a> for 5 devices.
+              </p>
             </div>
           </div>
         </div>
@@ -479,27 +652,29 @@
         <div class="section-panel" id="section-profile">
           <div class="card">
             <div class="card-header">
-              <div><div class="card-title">Profile</div><div class="card-subtitle">Update your name and email address.</div></div>
+              <div><div class="card-title">Profile</div><div class="card-subtitle">Update your name and display name.</div></div>
             </div>
             <div class="card-body">
-              <form onsubmit="saveProfile(event)">
+              <div class="form-success" id="profile-success">Profile saved.</div>
+              <form id="profile-form">
                 <div class="form-row">
                   <div class="form-group">
-                    <label>First name</label>
-                    <input type="text" value="Eleanor" id="p-fname">
+                    <label for="p-fname">First name</label>
+                    <input type="text" id="p-fname" autocomplete="given-name">
                   </div>
                   <div class="form-group">
-                    <label>Last name</label>
-                    <input type="text" value="Davis" id="p-lname">
+                    <label for="p-lname">Last name</label>
+                    <input type="text" id="p-lname" autocomplete="family-name">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label>Email address</label>
-                  <input type="email" value="eleanor@example.com" id="p-email">
+                  <label for="p-email">Email address</label>
+                  <input type="email" id="p-email" readonly autocomplete="email">
+                  <p class="field-hint">Email is managed through Lemon Squeezy. <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener" class="link-sage">Update at billing portal ↗</a></p>
                 </div>
                 <div class="form-group">
-                  <label>Display name <span style="font-weight:300;font-size:10px;color:#9ca3af;">(shown in app greeting)</span></label>
-                  <input type="text" value="Eleanor" id="p-display">
+                  <label for="p-display">Display name <span class="label-hint">(shown in app greeting)</span></label>
+                  <input type="text" id="p-display" autocomplete="nickname">
                 </div>
                 <button type="submit" class="btn-save">Save changes</button>
               </form>
@@ -508,20 +683,15 @@
 
           <div class="card">
             <div class="card-header">
-              <div><div class="card-title">Change Password</div></div>
+              <div><div class="card-title">Manage Subscription</div><div class="card-subtitle">Update billing, email, or password at Lemon Squeezy.</div></div>
             </div>
             <div class="card-body">
-              <form onsubmit="changePassword(event)">
-                <div class="form-group">
-                  <label>Current password</label>
-                  <input type="password" placeholder="••••••••">
-                </div>
-                <div class="form-group">
-                  <label>New password</label>
-                  <input type="password" placeholder="At least 8 characters" minlength="8">
-                </div>
-                <button type="submit" class="btn-save">Update password</button>
-              </form>
+              <p class="card-body-text">
+                Your FincWin account is tied to your Lemon Squeezy purchase. Visit the customer portal to update your email address, change your password, or download receipts.
+              </p>
+              <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener noreferrer" class="btn-save">
+                Open Lemon Squeezy portal ↗
+              </a>
             </div>
           </div>
         </div>
@@ -532,21 +702,21 @@
             <div class="card-header">
               <div><div class="card-title">Danger Zone</div><div class="card-subtitle">These actions cannot be undone.</div></div>
             </div>
-            <div class="card-body" style="display:flex;flex-direction:column;gap:20px;">
-              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+            <div class="card-body danger-body">
+              <div class="danger-row">
                 <div>
-                  <div style="font-size:14px;font-weight:500;color:var(--ink);">Deactivate all devices</div>
-                  <div style="font-size:12px;color:var(--muted);margin-top:3px;">Remove all active licence activations. Your key remains valid and can be re-activated.</div>
+                  <div class="danger-label">Deactivate this device</div>
+                  <div class="danger-desc">Remove this device's licence activation. Your key stays valid and can be re-activated on another device.</div>
                 </div>
-                <button class="btn-danger" onclick="deactivateAll()">Deactivate all</button>
+                <button type="button" class="btn-danger" id="btn-deactivate-all">Deactivate device</button>
               </div>
-              <div style="height:1px;background:#fecaca;"></div>
-              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+              <div class="danger-divider"></div>
+              <div class="danger-row">
                 <div>
-                  <div style="font-size:14px;font-weight:500;color:var(--ink);">Delete account</div>
-                  <div style="font-size:12px;color:var(--muted);margin-top:3px;">Permanently delete your account and all stored settings. Your financial data on your device is unaffected.</div>
+                  <div class="danger-label">Clear account data</div>
+                  <div class="danger-desc">Remove all FincWin account data from this device (licence key, profile, settings). Your financial data in the app is unaffected.</div>
                 </div>
-                <button class="btn-danger" onclick="deleteAccount()">Delete account</button>
+                <button type="button" class="btn-danger" id="btn-clear-data">Clear data</button>
               </div>
             </div>
           </div>
@@ -556,74 +726,9 @@
     </div>
   </div>
 
-  <!-- Toast -->
   <div class="toast" id="toast"></div>
 
-  <script>
-    const REAL_KEY = localStorage.getItem('fw_license_key') || 'A1B2-C3D4-E5F6-G7H8';
-    let keyVisible = false;
-
-    // Greeting
-    const hour = new Date().getHours();
-    const greet = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
-    document.getElementById('page-greeting').textContent = greet + ', Eleanor';
-
-    // Section nav
-    function showSection(name, btn) {
-      document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
-      document.getElementById('section-' + name).classList.add('active');
-      btn.classList.add('active');
-    }
-
-    // Key visibility toggle
-    function toggleKeyVisibility() {
-      keyVisible = !keyVisible;
-      document.getElementById('key-display').textContent = keyVisible ? REAL_KEY : '•••• - •••• - •••• - ••••';
-      document.getElementById('key-display').classList.toggle('masked', !keyVisible);
-    }
-
-    function copyKey() {
-      navigator.clipboard.writeText(REAL_KEY).then(() => showToast('Licence key copied'));
-    }
-
-    function copyKeyFull() {
-      document.getElementById('key-copy-block').textContent = REAL_KEY;
-      navigator.clipboard.writeText(REAL_KEY).then(() => showToast('Licence key copied to clipboard'));
-    }
-
-    // Forms
-    function saveProfile(e) {
-      e.preventDefault();
-      showToast('Profile updated');
-    }
-    function changePassword(e) {
-      e.preventDefault();
-      showToast('Password updated');
-    }
-    function deactivateAll() {
-      if (confirm('Deactivate all devices? You can re-activate with your key.')) {
-        showToast('All devices deactivated');
-      }
-    }
-    function deleteAccount() {
-      const c = prompt('Type DELETE to confirm account deletion:');
-      if (c === 'DELETE') {
-        showToast('Account deletion scheduled — you will receive a confirmation email');
-      }
-    }
-    function signOut() {
-      localStorage.removeItem('fw_license_key');
-      localStorage.removeItem('fw_instance_id');
-      window.location.href = 'signin.html';
-    }
-
-    // Toast
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg; t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2800);
-    }
-  </script>
+  <script src="js/config.local.js"></script>
+  <script src="js/account.js"></script>
 </body>
 </html>

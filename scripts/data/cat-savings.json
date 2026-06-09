@@ -1,0 +1,15 @@
+﻿{
+  "CATEGORY_NAME": "Savings",
+  "CATEGORY_SLUG": "savings",
+  "CATEGORY_HEADLINE": "Savings guides â€” <em>building something real.</em>",
+  "CATEGORY_DESCRIPTION": "Emergency funds, net worth tracking, and the savings habits that compound over time â€” without the generic advice.",
+  "META_DESCRIPTION": "Savings guides from FincWin: how to build a 6-month emergency fund, track net worth, and set savings goals that actually get hit. Practical, not motivational.",
+  "CANONICAL_URL": "https://fincwin.com/blog/savings",
+  "POST_COUNT": "2",
+
+  "SUBNAV_LINKS": "<a href=\"/blog/budgeting/\" class=\"subnav-cat\">Budgeting</a>\n    <a href=\"/blog/debt/\" class=\"subnav-cat\">Debt</a>\n    <a href=\"/blog/savings/\" class=\"subnav-cat active\">Savings</a>\n    <a href=\"/blog/tools/\" class=\"subnav-cat\">Tools &amp; Tech</a>\n    <a href=\"/blog/mindset/\" class=\"subnav-cat\">Mindset</a>",
+
+  "POST_CARDS": "<a href=\"/blog/posts/emergency-fund-guide\" class=\"blog-card\">\n        <div class=\"blog-card-thumb\" style=\"background:#fef9ec\">ðŸ›¡ï¸</div>\n        <div class=\"blog-card-body\">\n          <div class=\"blog-card-cat\">Savings</div>\n          <h2>How to Build a 6-Month Emergency Fund on Any Income</h2>\n          <p>A 6-month emergency fund is the foundation of financial stability. Here's a step-by-step approach that works even when money is tight.</p>\n          <div class=\"blog-card-meta\"><span>June 2026</span><span class=\"blog-card-read\">7 min read â†’</span></div>\n        </div>\n      </a>\n      <a href=\"/blog/posts/net-worth-tracking\" class=\"blog-card\">\n        <div class=\"blog-card-thumb\" style=\"background:#f0f5ec\">ðŸ“‰</div>\n        <div class=\"blog-card-body\">\n          <div class=\"blog-card-cat\">Savings</div>\n          <h2>Net Worth Tracking: The One Number That Shows Real Progress</h2>\n          <p>Income goes up. Spending follows. Net worth stays flat. Tracking the right number changes what you optimise for.</p>\n          <div class=\"blog-card-meta\"><span>June 2026</span><span class=\"blog-card-read\">7 min read â†’</span></div>\n        </div>\n      </a>",
+
+  "OTHER_CATEGORIES": "<a href=\"/blog/budgeting/\" class=\"other-cat-link\"><div class=\"other-cat-name\">Budgeting</div><div class=\"other-cat-count\">7 articles</div></a>\n      <a href=\"/blog/debt/\" class=\"other-cat-link\"><div class=\"other-cat-name\">Debt</div><div class=\"other-cat-count\">2 articles</div></a>\n      <a href=\"/blog/tools/\" class=\"other-cat-link\"><div class=\"other-cat-name\">Tools &amp; Tech</div><div class=\"other-cat-count\">6 articles</div></a>\n      <a href=\"/blog/mindset/\" class=\"other-cat-link\"><div class=\"other-cat-name\">Mindset</div><div class=\"other-cat-count\">3 articles</div></a>"
+}

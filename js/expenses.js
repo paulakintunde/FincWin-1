@@ -63,19 +63,21 @@ function recurringAutoFill(){
   const prevMonths=Object.keys(S.months).filter(k=>k!==CMK);
   const recSet=buildRecurringSet();
   let added=0;
-  // For each recurring item not already in current month, add it to week 1
+  // For each recurring item not already in current month, add it to the week matching its dueDay
   const seen=new Set();
   prevMonths.forEach(mk=>{
     S.months[mk].weeks.forEach(w=>w.items.forEach(item=>{
       const k=item.name.trim().toLowerCase();
       if(recSet.has(k)&&!curNames.has(k)&&!seen.has(k)){
         seen.add(k);
-        cw()[0].items.push({name:item.name,amount:storeCents(item.amount),paid:false,dueDay:item.dueDay||null,note:'',receipt:null});
+        const due=item.dueDay||null;
+        const wi=due?getWeekForDay(due,CMK):0;
+        cw()[wi].items.push({name:item.name,amount:storeCents(item.amount),paid:false,dueDay:due,note:'',receipt:null});
         added++;
       }
     }));
   });
-  if(added>0){persist();renderExpenses();showToast(`✓ Added ${added} recurring bill${added>1?'s':''} to Week 1`);}
+  if(added>0){persist();renderExpenses();showToast(`✓ Added ${added} recurring bill${added>1?'s':''} to the correct week`);}
   else showToast('No new recurring bills to add','warn-t');
 }
 
@@ -214,7 +216,16 @@ function _onTouchDragCancel(e){
   _touchSrcWi=-1; _touchSrcIi=-1;
 }
 
+// PERF-01: batch multiple same-frame renderExpenses() calls into one DOM pass.
+let _renderExpensesRAF = null;
 function renderExpenses(){
+  if(_renderExpensesRAF) return;
+  _renderExpensesRAF = requestAnimationFrame(function(){
+    _renderExpensesRAF = null;
+    _renderExpensesImpl();
+  });
+}
+function _renderExpensesImpl(){
   document.getElementById('expMonthHdr').textContent=CMK+' Expenses';
   // Guard: if CMK is somehow in archivedMonths, warn and bail
   if(S.archivedMonths && S.archivedMonths[CMK]){
@@ -307,7 +318,7 @@ function renderExpenses(){
           <span class="week-title">Week ${wi+1}</span>
           <div style="display:flex;align-items:center;gap:5px;">
             <button class="no-print week-collapse-btn" data-action="toggleWeekCollapse" data-arg="${wi}" data-stop-prop title="${isCollapsed?'Expand':'Collapse'} week" aria-label="${isCollapsed?'Expand':'Collapse'} week ${wi+1}">${isCollapsed?'▸':'▾'}</button>
-            ${!_bulkMode?`<button class="no-print" data-action="bulkMarkPaid" data-arg="${wi}" data-stop-prop title="Mark all paid" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--sage);padding:1px 4px;border-radius:3px;border:1px solid var(--sage-mid);">${icon('check')} All</button>`:''}
+            ${!_bulkMode?`<button class="no-print" data-action="bulkMarkPaid" data-arg="${wi}" data-stop-prop title="Mark all paid" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--sage);padding:1px 4px;border-radius:3px;border:1px solid var(--sage-mid);">${icon('check')} All</button>`:`<button class="no-print" data-action="bulkSelectWeek" data-arg="${wi}" data-stop-prop title="Select all in week" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--accent);padding:1px 4px;border-radius:3px;border:1px solid var(--accent);">☑ All</button>`}
             <span class="week-grand">${fmt(wTotal)}</span>
           </div>
         </div>
@@ -511,6 +522,18 @@ function bulkToggleItem(wi,ii){
   if(cb)cb.checked=_bulkSelected.has(k);
   const rows=document.querySelectorAll(`tr[data-wi="${wi}"][data-ii="${ii}"]`);
   rows.forEach(r=>r.classList.toggle('bulk-sel',_bulkSelected.has(k)));
+  _updateBulkBar();
+}
+function bulkSelectWeek(wi){
+  const items=cw()[wi]&&cw()[wi].items||[];
+  const allSel=items.every((_,ii)=>_bulkSelected.has(wi+'-'+ii));
+  items.forEach((_,ii)=>{
+    const k=wi+'-'+ii;
+    if(allSel)_bulkSelected.delete(k); else _bulkSelected.add(k);
+    const cb=document.querySelector(`[data-bulk-key="${k}"]`);
+    if(cb)cb.checked=!allSel;
+    document.querySelectorAll(`tr[data-wi="${wi}"][data-ii="${ii}"]`).forEach(r=>r.classList.toggle('bulk-sel',!allSel));
+  });
   _updateBulkBar();
 }
 function bulkMarkAllPaid(){

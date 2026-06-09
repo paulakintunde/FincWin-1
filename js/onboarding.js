@@ -10,6 +10,23 @@ let _obReceiptData=null;
 let _obStoragePref = 'local';
 const OB_TOTAL=9;
 
+// ── PIN pad keyboard support ──────────────────────────────────────────────────
+let _obPinKeyHandler=null;
+function _attachObPinKeyboard(){
+  if(_obPinKeyHandler) return;
+  _obPinKeyHandler=function(e){
+    const step6=document.getElementById('obStep6');
+    if(!step6||step6.style.display==='none') return;
+    if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
+    if(/^[0-9]$/.test(e.key)){ e.preventDefault(); obPinKey(e.key); }
+    else if(e.key==='Backspace'){ e.preventDefault(); obPinKey('del'); }
+  };
+  document.addEventListener('keydown',_obPinKeyHandler);
+}
+function _detachObPinKeyboard(){
+  if(_obPinKeyHandler){ document.removeEventListener('keydown',_obPinKeyHandler); _obPinKeyHandler=null; }
+}
+
 function showOnboarding(){
   const sel=document.getElementById('obCurrency');
   sel.innerHTML=Object.keys(CURRENCY_MAP).map(code=>`<option value="${code}"${code==='USD'?' selected':''}>${code} — ${CURRENCY_MAP[code].symbol}</option>`).join('');
@@ -49,7 +66,9 @@ function obGoTo(step){
     document.getElementById('obExpReceiptLabel').innerHTML=icon('camera')+' Tap to attach image';
     document.getElementById('obExpReceipt').value='';
   }
+  if(step!==6) _detachObPinKeyboard();
   if(step===6){
+    _attachObPinKeyboard();
     _obPin=''; _obPinFirst=''; _obPinPhase='enter'; _obPinFinal='';
     document.getElementById('obPinPhaseLabel').textContent='Enter a new PIN';
     document.getElementById('obPinErr').textContent='';
@@ -554,3 +573,46 @@ function obToggleTip(id) {
   if (!el) return;
   el.style.display = el.style.display === 'none' ? 'block' : 'none';
 }
+
+// ── Demo-profiles lazy loader ─────────────────────────────────────────────────
+// demo-profiles.js is ~50 KB of sample data never needed by non-demo users.
+// We load it dynamically on first request so it doesn't bloat the initial parse.
+let _demoScriptLoaded = false;
+let _demoScriptPending = null;
+
+function _ensureDemoProfiles() {
+  if (_demoScriptLoaded) return Promise.resolve();
+  if (_demoScriptPending) return _demoScriptPending;
+  _demoScriptPending = new Promise(function(resolve, reject) {
+    var s = document.createElement('script');
+    s.src = 'js/demo-profiles.js';
+    s.onload = function() { _demoScriptLoaded = true; resolve(); };
+    s.onerror = function() { reject(new Error('Failed to load demo profiles')); };
+    document.head.appendChild(s);
+  });
+  return _demoScriptPending;
+}
+
+// Stub wrappers — replaced by the real function declarations after the script loads.
+// Named function expressions allow self-reference comparison to detect replacement.
+window.obLoadDemoAndClose = async function _stubObLoadDemoAndClose() {
+  try { await _ensureDemoProfiles(); } catch(e) {
+    if (typeof showToast === 'function') showToast('Failed to load demo data', 'err-t');
+    return;
+  }
+  if (window.obLoadDemoAndClose !== _stubObLoadDemoAndClose) window.obLoadDemoAndClose();
+};
+window.loadSelectedDemoProfile = async function _stubLoadSelectedDemoProfile() {
+  try { await _ensureDemoProfiles(); } catch(e) {
+    if (typeof showToast === 'function') showToast('Failed to load demo data', 'err-t');
+    return;
+  }
+  if (window.loadSelectedDemoProfile !== _stubLoadSelectedDemoProfile) window.loadSelectedDemoProfile();
+};
+window.clearDemoData = async function _stubClearDemoData() {
+  try { await _ensureDemoProfiles(); } catch(e) {
+    if (typeof showToast === 'function') showToast('Failed to load demo data', 'err-t');
+    return;
+  }
+  if (window.clearDemoData !== _stubClearDemoData) window.clearDemoData();
+};

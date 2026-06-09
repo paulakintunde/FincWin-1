@@ -8,6 +8,7 @@ function _setChartAria(id, label) {
 }
 
 function renderAnalytics(){
+  if(typeof requirePlan==='function'&&!requirePlan('pro','Analytics & Forecasting'))return;
   const keys=Object.keys(S.months);
   const revs=keys.map(k=>totalRev(k));
   const exps=keys.map(k=>totalExp(k));

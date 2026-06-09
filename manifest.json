@@ -3,6 +3,7 @@
   "short_name": "FincWin",
   "description": "Private, offline-first personal finance dashboard — track bills, income, loans and savings.",
   "start_url": "./",
+  "scope": "./",
   "id": "./",
   "display": "standalone",
   "orientation": "portrait-primary",

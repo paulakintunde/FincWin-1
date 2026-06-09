@@ -1,29 +1,69 @@
 {
+  "installCommand": "npm install --omit=dev",
   "rewrites": [
-    { "source": "/app",      "destination": "/index.html" },
-    { "source": "/signin",   "destination": "/signin.html" },
-    { "source": "/account",  "destination": "/account.html" },
-    { "source": "/pricing",  "destination": "/pricing.html" },
-    { "source": "/features", "destination": "/features-v2.html" },
-    { "source": "/help",     "destination": "/help.html" },
-    { "source": "/privacy",  "destination": "/privacy.html" },
-    { "source": "/terms",    "destination": "/terms.html" }
+    { "source": "/",              "destination": "/landing.html" },
+    { "source": "/app",           "destination": "/index.html" },
+    { "source": "/signin",        "destination": "/signin.html" },
+    { "source": "/account",       "destination": "/account.html" },
+    { "source": "/admin",         "destination": "/admin.html" },
+    { "source": "/features",      "destination": "/features.html" },
+    { "source": "/features/:slug","destination": "/features/:slug.html" },
+    { "source": "/pricing",       "destination": "/pricing.html" },
+    { "source": "/compare",            "destination": "/compare.html" },
+    { "source": "/compare/:slug",      "destination": "/compare/:slug.html" },
+    { "source": "/use-cases",     "destination": "/use-cases.html" },
+    { "source": "/use-cases/:slug","destination": "/use-cases/:slug.html" },
+    { "source": "/about",         "destination": "/about.html" },
+    { "source": "/changelog",     "destination": "/changelog.html" },
+    { "source": "/blog",           "destination": "/blog/index.html" },
+    { "source": "/blog/:category", "destination": "/blog/:category/index.html" },
+    { "source": "/help",          "destination": "/help.html" },
+    { "source": "/privacy",       "destination": "/privacy.html" },
+    { "source": "/terms",         "destination": "/terms.html" },
+    { "source": "/contact",       "destination": "/contact.html" },
+    { "source": "/cookie-policy", "destination": "/cookie-policy.html" }
   ],
+  "redirects": [
+    { "source": "/blog/posts/ynab-alternative", "destination": "/compare/ynab-alternative", "statusCode": 301 }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
+        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains; preload" },
+        { "key": "Content-Security-Policy",  "value": "default-src 'self' blob:; script-src 'self' https://accounts.google.com; script-src-elem 'self' https://accounts.google.com; script-src-attr 'none'; connect-src 'self' https://api.anthropic.com https://api.openai.com https://open.er-api.com https://*.googleapis.com https://*.firebaseio.com https://identitytoolkit.googleapis.com https://accounts.google.com; img-src 'self' data: blob:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'" },
         { "key": "X-Content-Type-Options",   "value": "nosniff" },
         { "key": "X-Frame-Options",          "value": "DENY" },
         { "key": "Referrer-Policy",          "value": "strict-origin-when-cross-origin" },
         { "key": "Permissions-Policy",       "value": "camera=(), microphone=(), geolocation=(), payment=()" },
-        { "key": "Cross-Origin-Opener-Policy","value": "same-origin" }
+        { "key": "Cross-Origin-Opener-Policy","value": "same-origin" },
+        { "key": "Cache-Control",            "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/styles/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/js/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
       ]
     },
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin",  "value": "*" },
+        { "key": "Access-Control-Allow-Origin",  "value": "https://fincwin.com" },
         { "key": "Access-Control-Allow-Methods", "value": "POST, OPTIONS" },
         { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
       ]

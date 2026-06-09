@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Changelog — FincWin</title>
+  <meta name="description" content="Every update to FincWin, in one place. New features, fixes, and improvements — documented as they ship.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fincwin.com/changelog">
+  <link rel="alternate" hreflang="en" href="https://fincwin.com/changelog">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fincwin.com/changelog">
+  <meta property="og:title" content="Changelog — FincWin">
+  <meta property="og:description" content="Every update to FincWin, in one place. New features, fixes, and improvements — documented as they ship.">
+  <meta property="og:image" content="https://fincwin.com/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Changelog — FincWin">
+  <meta name="twitter:description" content="Every update to FincWin — new features, fixes, and improvements documented as they ship.">
+  <meta name="twitter:image" content="https://fincwin.com/og-image.svg">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/mkt.css">
+  <style>
+    .cl-wrap{max-width:720px;margin:0 auto;padding:120px 24px 96px}.cl-head{margin-bottom:64px}.cl-head h1{font-family:var(--serif);font-size:clamp(38px,5vw,56px);font-weight:400;color:var(--ink);line-height:1.08;margin-bottom:16px}.cl-head h1 em{font-style:italic;color:var(--sage)}.cl-head p{font-size:17px;font-weight:300;color:var(--muted);line-height:1.7}.cl-entry{border-left:2px solid var(--border);padding-left:28px;margin-bottom:56px;position:relative}.cl-entry::before{content:'';position:absolute;left:-5px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--sage)}.cl-version{display:flex;align-items:center;gap:12px;margin-bottom:16px}.cl-ver-num{font-size:20px;font-weight:700;color:var(--ink)}.cl-ver-date{font-size:12px;color:var(--muted);font-weight:400}.cl-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:4px}.cl-tag.new{background:#dce8d4;color:var(--sage-dk)}.cl-tag.fix{background:#fef3c7;color:#92400e}.cl-tag.improve{background:#dbeafe;color:#1e40af}.cl-items{margin:0;padding:0;list-style:none}.cl-item{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start;font-size:15px;font-weight:300;color:var(--ink);line-height:1.6}.cl-item-tag{flex-shrink:0;margin-top:2px}.cl-item strong{font-weight:600}.cl-subscribe{background:var(--faint);border:1px solid var(--border);border-radius:16px;padding:36px;text-align:center;margin-top:24px}.cl-subscribe h3{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--ink);margin-bottom:10px}.cl-subscribe h3 em{font-style:italic;color:var(--sage)}.cl-subscribe p{font-size:14px;color:var(--muted);margin-bottom:0;line-height:1.6}
+  </style>
+</head>
+<body>
+<nav id="mainNav">
+  <a href="/" class="nav-logo">Finc<span>Win</span></a>
+  <div class="nav-links">
+    <a href="/features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/compare">Compare</a>
+    <a href="/use-cases">Use cases</a>
+    <a href="/blog">Blog</a>
+    <a href="/app">App</a>
+    <a href="/app" class="nav-cta">Get started free</a>
+  </div>
+</nav>
+
+<div class="cl-wrap">
+  <div class="cl-head">
+    <h1>What's new in <em>FincWin</em></h1>
+    <p>Every release, documented as it ships. Sorted newest first.</p>
+  </div>
+
+  <div class="cl-entry">
+    <div class="cl-version">
+      <span class="cl-ver-num">v2.8</span>
+      <span class="cl-ver-date">June 2026</span>
+      <span class="cl-tag new">New</span>
+    </div>
+    <ul class="cl-items">
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>PWA install banner:</strong> Smart install prompt above the top bar — appears on first visit and dismisses permanently once installed or declined.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag fix">Fix</span></span><span><strong>Achievement badge displacement:</strong> Badges were misaligning in the gamification panel after a page refresh. Now stable on all screen sizes.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag fix">Fix</span></span><span><strong>PIN on every refresh:</strong> Encrypted users were being asked for PIN on every page load. Root cause was non-extractable DEK; resolved — PIN now fires correctly on session open only.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag fix">Fix</span></span><span><strong>Demo profile investment values:</strong> Investment balances in demo profiles were displaying as zero due to a field name mismatch. Corrected.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag improve">Improve</span></span><span><strong>Dashboard layout:</strong> Smart Insights moved to the left column below Monthly Net Flow chart — better visual hierarchy and context.</span></li>
+    </ul>
+  </div>
+
+  <div class="cl-entry">
+    <div class="cl-version">
+      <span class="cl-ver-num">v2.7</span>
+      <span class="cl-ver-date">May 2026</span>
+      <span class="cl-tag new">New</span>
+    </div>
+    <ul class="cl-items">
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>AI coaching (BYOK):</strong> Connect your OpenAI or Anthropic API key and ask questions about your own financial data. All conversations go directly from your browser to the AI provider — FincWin never handles the content.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Health score v2:</strong> Rebuilt the financial health score with six weighted dimensions. Score now updates in real time as data changes and shows per-dimension breakdown.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Lifetime plan:</strong> One-time $149 payment for permanent Pro access. No annual renewal, no price increases.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag improve">Improve</span></span><span><strong>CSV import (Pro):</strong> Column mapping step added to handle bank-specific CSV formats. Now supports date format selection and debit/credit split columns.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag improve">Improve</span></span><span><strong>Savings goals:</strong> Added deadline field and monthly contribution calculator. Goals now show whether current pace is on track for target date.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag fix">Fix</span></span><span><strong>Multi-currency display:</strong> Currency symbol was occasionally switching on dashboard refresh for users with multiple income currencies. Fixed.</span></li>
+    </ul>
+  </div>
+
+  <div class="cl-entry">
+    <div class="cl-version">
+      <span class="cl-ver-num">v2.6</span>
+      <span class="cl-ver-date">April 2026</span>
+      <span class="cl-tag new">New</span>
+    </div>
+    <ul class="cl-items">
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Gamification — achievements v2:</strong> 40+ achievements across 6 categories. XP system, level progression, and achievement panel in the dashboard.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Investment tracking:</strong> Added 6 asset types (stocks, ETFs, crypto, bonds, real estate, retirement). Portfolio view with total value and per-asset performance.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Biometric unlock:</strong> WebAuthn-based fingerprint/Face ID unlock on supported devices. Works alongside PIN as an alternative.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag improve">Improve</span></span><span><strong>Loan payoff planner:</strong> Added per-loan payoff date display, total interest projection, and comparison table between snowball and avalanche methods.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag fix">Fix</span></span><span><strong>Google Drive backup:</strong> Drive auth token was expiring silently. Backup now detects expired tokens and prompts re-auth before backup attempt.</span></li>
+    </ul>
+  </div>
+
+  <div class="cl-entry">
+    <div class="cl-version">
+      <span class="cl-ver-num">v2.5</span>
+      <span class="cl-ver-date">March 2026</span>
+      <span class="cl-tag improve">Improve</span>
+    </div>
+    <ul class="cl-items">
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Multi-currency support:</strong> Set a base currency, log income and expenses in any currency with exchange rate entry, view consolidated totals in base currency.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag improve">Improve</span></span><span><strong>Envelope UI:</strong> Redesigned budget envelopes with animated progress bars, remaining amount display, and colour indicators (green / amber / red) based on percentage used.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag improve">Improve</span></span><span><strong>Income frequency:</strong> Added semi-monthly as a 5th income frequency alongside weekly, biweekly, monthly, and custom.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag fix">Fix</span></span><span><strong>Offline sync queue:</strong> Transactions logged offline were occasionally duplicating on reconnect. Resolved with idempotency key on the sync queue.</span></li>
+    </ul>
+  </div>
+
+  <div class="cl-entry">
+    <div class="cl-version">
+      <span class="cl-ver-num">v2.0</span>
+      <span class="cl-ver-date">January 2026</span>
+      <span class="cl-tag new">Major</span>
+    </div>
+    <ul class="cl-items">
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Complete UI redesign:</strong> New design system with Hanken Grotesk + Instrument Serif, sage colour palette, and refined data visualisations.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>AES-256 encryption:</strong> Optional full encryption of local data with a PIN-derived key. Drive backups encrypted end-to-end.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Pro plan launch:</strong> $39/year Pro with CSV import, loan payoff planner, AI coaching, and full investment tracking. Free plan remains unlimited on core features.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Loan snowball/avalanche:</strong> Multi-loan payoff planner with strategy comparison and real-time extra payment modelling.</span></li>
+    </ul>
+  </div>
+
+  <div class="cl-subscribe">
+    <h3>Stay up to date with <em>FincWin</em></h3>
+    <p>Updates ship regularly. The changelog is the canonical record — bookmark it, or follow updates in the app's notification panel.</p>
+  </div>
+</div>
+
+<footer class="mkt-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><a href="/" class="footer-logo">Finc<span>Win</span></a><p>The personal finance dashboard for people who want clarity, not complexity.</p></div>
+      <div class="footer-col"><h4>Product</h4><a href="/features">Features</a><a href="/pricing">Pricing</a><a href="/compare">Compare</a><a href="/use-cases">Use cases</a><a href="/app">Open app</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about">About</a><a href="/changelog">Changelog</a><a href="/contact">Contact</a></div>
+      <div class="footer-col"><h4>Learn</h4><a href="/blog">Blog</a><a href="/help">Help guide</a></div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom"><p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookie-policy">Cookies</a></div></div>
+  </div>
+</footer>
+<script>const nav=document.getElementById('mainNav');window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>20),{passive:true});</script>
+<script>document.querySelectorAll('.copy-year').forEach(function(e){e.textContent=new Date().getFullYear();});</script>
+<script src="/js/mkt.js" defer></script>
+</body>
+</html>
+
+
+

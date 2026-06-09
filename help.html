@@ -1,14 +1,87 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FincWin — User Guide</title>
-  <meta name="description" content="Complete user guide for FincWin — every feature explained with step-by-step instructions.">
+  <title>FincWin User Guide — Complete Feature Documentation</title>
+  <meta name="description" content="Complete user guide for FincWin — every feature explained with step-by-step instructions. Budget envelopes, loan payoff, savings goals, AI Coach, Drive backup and more.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fincwin.com/help">
+  <link rel="alternate" hreflang="en" href="https://fincwin.com/help">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fincwin.com/help">
+  <meta property="og:title" content="FincWin User Guide — Complete Feature Documentation">
+  <meta property="og:description" content="Complete user guide for FincWin — every feature explained with step-by-step instructions. Budget envelopes, loan payoff, savings goals, AI Coach, Drive backup and more.">
+  <meta property="og:image" content="https://fincwin.com/og-image.svg">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FincWin User Guide">
+  <meta name="twitter:description" content="Every FincWin feature explained with step-by-step instructions.">
+  <meta name="twitter:image" content="https://fincwin.com/og-image.svg">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to set up FincWin personal finance dashboard",
+    "description": "A 9-step setup wizard to configure your income, expenses, loans, savings, and data storage preferences in FincWin.",
+    "totalTime": "PT3M",
+    "url": "https://fincwin.com/help#getting-started",
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Open FincWin", "text": "Open FincWin in your browser. The welcome screen appears automatically on first visit. Click Get Started." },
+      { "@type": "HowToStep", "position": 2, "name": "Set name and currency", "text": "Enter your first name (optional) and select your home currency from the dropdown." },
+      { "@type": "HowToStep", "position": 3, "name": "Add income sources", "text": "Add each monthly income stream (salary, freelance, etc.) with a name and amount." },
+      { "@type": "HowToStep", "position": 4, "name": "Add monthly expenses", "text": "Add your recurring bills (rent, phone, subscriptions) with name, amount, frequency, and due day." },
+      { "@type": "HowToStep", "position": 5, "name": "Add loans and debts", "text": "Add any outstanding loans with balance, interest rate, and minimum payment. Skip if you have none." },
+      { "@type": "HowToStep", "position": 6, "name": "Add savings goals", "text": "Add savings accounts or goals with target amount, current balance, and monthly contribution." },
+      { "@type": "HowToStep", "position": 7, "name": "Set a PIN", "text": "Set a 6-digit PIN and an optional recovery passphrase to protect your financial data." },
+      { "@type": "HowToStep", "position": 8, "name": "Choose data storage", "text": "Choose where your data lives: Local File (default), Google Drive, or Firebase cloud sync." },
+      { "@type": "HowToStep", "position": 9, "name": "Open dashboard", "text": "Click Open Dashboard. Your dashboard is ready with this month pre-populated." }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is my data safe? Does FincWin send it anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "By default, all data lives entirely in your browser's local storage and IndexedDB. Nothing is sent to any server. Cloud Sync (Firebase) and Google Drive sync are opt-in and encrypt all data before it ever leaves your device. AI Coach calls send only a financial summary — never raw transaction names." }
+      },
+      {
+        "@type": "Question",
+        "name": "I forgot my PIN — how do I get back in?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If you set a recovery passphrase when creating the PIN, use the Forgot PIN? Use recovery passphrase option on the lock screen (appears after 10 failed attempts). If not, you'll need to clear app data from your browser settings (this erases all FincWin data). This is why regular JSON backups are important." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use FincWin offline?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. FincWin is a Progressive Web App (PWA) with a service worker that caches all assets. After your first visit, it works fully offline. Install it to your home screen for the best experience." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I install FincWin to my phone?",
+        "acceptedAnswer": { "@type": "Answer", "text": "iOS (Safari): Tap the Share button, then Add to Home Screen. Android (Chrome): Tap the three-dot menu, then Install app or Add to Home Screen. Desktop (Chrome/Edge): Click the install icon in the address bar, or go to Settings > App > Install." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will my data transfer if I clear my browser?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Clearing browser storage will erase local FincWin data. Always download a JSON backup before clearing. If you use Google Drive or Firebase Cloud Sync, your data is safe in the cloud and will re-sync on next open." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does my PIN get asked every time I refresh?",
+        "acceptedAnswer": { "@type": "Answer", "text": "FincWin uses a session token in sessionStorage so the PIN is only required once per tab session. If you're still prompted on every refresh, go to Settings > Security > Skip PIN on page refresh and toggle it on." }
+      }
+    ]
+  }
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -136,10 +209,21 @@
     .ref-table td:first-child { font-weight: 500; white-space: nowrap; }
 
     /* FOOTER */
-    footer { background: var(--ink); padding: 48px; text-align: center; }
-    footer p { font-size: 13px; color: rgba(255,255,255,.4); }
-    footer a { color: rgba(255,255,255,.6); text-decoration: none; }
-    footer a:hover { color: white; }
+    footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.06); padding: 56px 48px 36px; }
+    .footer-inner { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: start; }
+    .footer-brand .footer-logo { font-size: 16px; font-weight: 500; letter-spacing: -.3px; color: white; text-decoration: none; }
+    .footer-brand .footer-logo span { color: #a8c48a; }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,.3); margin-top: 10px; line-height: 1.5; max-width: 240px; }
+    .footer-cols { display: flex; gap: 56px; }
+    .footer-cols > div { display: flex; flex-direction: column; gap: 10px; }
+    .footer-cols h4 { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.25); margin-bottom: 4px; }
+    .footer-cols a { font-size: 13px; color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
+    .footer-cols a:hover { color: rgba(255,255,255,.7); }
+    .footer-bottom { max-width: 1060px; margin: 36px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06); font-size: 12px; color: rgba(255,255,255,.2);   display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-copy { font-size: 12px; }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
+    .footer-legal a:hover { color: rgba(255,255,255,.7); }
 
     @media (max-width: 900px) {
       .sidebar { display: none; }
@@ -147,18 +231,24 @@
       .feature-grid { grid-template-columns: 1fr; }
       nav { padding: 16px 20px; }
       .nav-links a:not(.nav-cta) { display: none; }
+      footer { padding: 48px 24px 28px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+      .footer-cols { gap: 32px; flex-wrap: wrap; }
     }
   </style>
 </head>
 <body>
 
-<nav id="nav">
-  <a href="landing.html" class="nav-logo">Finc<span>Win</span></a>
+<nav id="mainNav">
+  <a href="/" class="nav-logo">Finc<span>Win</span></a>
   <div class="nav-links">
-    <a href="features.html">Features</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="index.html">App</a>
-    <a href="signin.html" class="nav-cta">Sign in</a>
+    <a href="/features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/compare">Compare</a>
+    <a href="/use-cases">Use cases</a>
+    <a href="/blog">Blog</a>
+    <a href="/app">App</a>
+    <a href="/app" class="nav-cta">Get started free</a>
   </div>
 </nav>
 
@@ -168,38 +258,39 @@
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-section">
       <div class="sidebar-heading">Getting Started</div>
-      <a href="#getting-started">First Launch & Setup</a>
+      <a href="#getting-started">First Launch &amp; Setup</a>
       <a href="#demo-mode">Exploring with Demo Data</a>
       <a href="#navigation">App Navigation</a>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-heading">Core Features</div>
-      <a href="#expenses">Budgeting & Expenses</a>
-      <a href="#income">Income & Revenue</a>
-      <a href="#loans">Loans & Debt</a>
+      <a href="#expenses">Budgeting &amp; Expenses</a>
+      <a href="#revenue">Revenue &amp; Income</a>
+      <a href="#loans">Loans &amp; Debt</a>
       <a href="#savings">Savings Goals</a>
       <a href="#investments">Investments</a>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-heading">Tools</div>
-      <a href="#bulk-import">Bulk Add & Bank Import</a>
-      <a href="#analytics">Analytics & Reports</a>
+      <a href="#bulk-import">Bulk Add &amp; Bank Import</a>
+      <a href="#calendar">Bill Calendar</a>
+      <a href="#analytics">Analytics &amp; Reports</a>
       <a href="#search">Search</a>
-      <a href="#gamification">Health Score & Badges</a>
+      <a href="#gamification">Health Score &amp; Badges</a>
       <a href="#ai-coach">AI Finance Coach</a>
     </div>
     <div class="sidebar-section">
-      <div class="sidebar-heading">Data & Privacy</div>
-      <a href="#sync">Cloud & File Sync</a>
-      <a href="#archive">Archive & Months</a>
-      <a href="#security">PIN & Encryption</a>
-      <a href="#backup">Backup & Export</a>
+      <div class="sidebar-heading">Data &amp; Privacy</div>
+      <a href="#sync">Cloud, Drive &amp; File Sync</a>
+      <a href="#archive">Archive &amp; Months</a>
+      <a href="#security">PIN &amp; Encryption</a>
+      <a href="#backup">Backup &amp; Export</a>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-heading">Customisation</div>
-      <a href="#settings">Settings & Themes</a>
+      <a href="#settings">Settings &amp; Themes</a>
       <a href="#categories">Category Manager</a>
-      <a href="#currency">Currency & Locale</a>
+      <a href="#currency">Currency &amp; Locale</a>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-heading">Reference</div>
@@ -223,20 +314,20 @@
     <section class="help-section" id="getting-started">
       <div class="section-badge">01 — Getting Started</div>
       <h2>First launch <em>&amp; setup</em></h2>
-      <p class="section-intro">When you open FincWin for the first time, a short setup wizard walks you through your income, expenses, loans, savings, PIN, and storage preference. This takes about 2–3 minutes.</p>
+      <p class="section-intro">When you open FincWin for the first time, a 9-step setup wizard walks you through your income, expenses, loans, savings, PIN protection, and storage preference. This takes about 2–3 minutes.</p>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">How to complete the setup wizard</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Open <strong>FincWin</strong> in your browser. The welcome screen appears automatically on first visit.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Step 1 — Your name &amp; currency.</strong> Enter your first name and select your home currency from the dropdown.</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Step 2 — Income sources.</strong> Add each monthly income stream (salary, freelance, etc.) with a name and amount. Click <code>+ Add income</code> for each one.</div></div>
-            <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Step 3 — Monthly expenses.</strong> Add your recurring bills (rent, phone, subscriptions). Each gets a name, amount, and optional due day.</div></div>
-            <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Step 4 — Loans &amp; debts.</strong> Add any outstanding loans with balance, interest rate, and minimum payment.</div></div>
-            <div class="step"><div class="step-num">6</div><div class="step-text"><strong>Step 5 — Savings goals.</strong> Add savings accounts or goals with current balance and monthly contribution.</div></div>
-            <div class="step"><div class="step-num">7</div><div class="step-text"><strong>Step 6 — PIN protection.</strong> Set a 4–6 digit PIN to protect your data. You can skip this and enable it later in Settings.</div></div>
-            <div class="step"><div class="step-num">8</div><div class="step-text"><strong>Step 7 — Storage.</strong> Choose where your data lives: browser storage (default), cloud sync, or a local file. You can change this any time in Settings.</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Open <strong>FincWin</strong> in your browser. The welcome screen appears automatically on first visit. Click <strong>Get Started →</strong>.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Step 1 — Your name &amp; currency.</strong> Enter your first name (optional) and select your home currency from the dropdown.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Step 2 — Income sources.</strong> Add each monthly income stream (salary, freelance, etc.) with a name and amount. Click <code>+</code> or press Enter for each one.</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Step 3 — Monthly expenses.</strong> Add your recurring bills (rent, phone, subscriptions). Each gets a name, amount, frequency, due day, week slot, and optional receipt photo.</div></div>
+            <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Step 4 — Loans &amp; debts.</strong> Add any outstanding loans with balance, interest rate, and minimum payment. Skip if you have none.</div></div>
+            <div class="step"><div class="step-num">6</div><div class="step-text"><strong>Step 5 — Savings goals.</strong> Add savings accounts or goals with target amount, current balance, and monthly contribution.</div></div>
+            <div class="step"><div class="step-num">7</div><div class="step-text"><strong>Step 6 — Protect your data.</strong> Set a 6-digit PIN and an optional recovery passphrase. You can skip this and enable it later in Settings.</div></div>
+            <div class="step"><div class="step-num">8</div><div class="step-text"><strong>Step 7 — Save your data locally.</strong> Choose where your data lives: Local File (default), Google Drive, or Firebase cloud sync. You can change this any time in Settings.</div></div>
             <div class="step"><div class="step-num">9</div><div class="step-text">Click <strong>Open Dashboard</strong>. Your dashboard is ready with this month pre-populated.</div></div>
           </div>
           <div class="tip"><div class="tip-icon">💡</div><div class="tip-text"><strong>Skip the wizard.</strong> On the welcome screen, click <strong>"Explore with demo data →"</strong> to load a rich sample profile instantly and see every feature in action.</div></div>
@@ -256,10 +347,10 @@
           <div class="steps">
             <div class="step"><div class="step-num">1</div><div class="step-text">Open the app. If you haven't set up yet, click <strong>"Explore with demo data →"</strong> on the welcome screen.</div></div>
             <div class="step"><div class="step-num">2</div><div class="step-text">Alternatively, go to <strong>Settings → Demo Profiles</strong>, select a profile from the dropdown, and click <strong>Load Profile</strong>.</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">A yellow banner at the top of the app confirms demo data is active.</div></div>
-            <div class="step"><div class="step-num">4</div><div class="step-text">To clear demo data and start fresh, click <strong>Start Fresh</strong> in the banner, or <strong>Clear All Data</strong> in the Demo Profiles section.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">A yellow banner at the top of the app confirms demo data is active. You can <strong>Resume Setup</strong> or <strong>Start Fresh</strong> from this banner.</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-text">To clear demo data and start fresh, click <strong>Start Fresh</strong> in the banner.</div></div>
           </div>
-          <div class="tip"><div class="tip-icon">💡</div><div class="tip-text"><strong>Available profiles:</strong> Alex Rivera (power user — 10 investments, 5 loans, 28 badges), Sarah Chen (young professional), Rodriguez Family (dual income), Marcus Thompson (freelancer), Eleanor &amp; David (pre-retirees).</div></div>
+          <div class="tip"><div class="tip-icon">💡</div><div class="tip-text"><strong>Available profiles:</strong> Alex Rivera (Senior Engineer — 10 investments, 4 loans, 30 badges), Sarah Chen (young professional), Rodriguez Family (dual income), Marcus Thompson (freelancer), Eleanor &amp; David (pre-retirees).</div></div>
         </div>
       </div>
     </section>
@@ -268,19 +359,19 @@
     <section class="help-section" id="navigation">
       <div class="section-badge">03 — Navigation</div>
       <h2>Getting around <em>the app</em></h2>
-      <p class="section-intro">FincWin organises your finances into tabs. The tab bar is always visible at the top; on mobile a quick-nav bar appears below the header.</p>
+      <p class="section-intro">FincWin organises your finances into tabs. The tab bar is always visible at the top; on mobile a bottom navigation bar and a "More" sheet provide access to all sections.</p>
 
       <table class="ref-table">
         <thead><tr><th>Tab</th><th>What it shows</th></tr></thead>
         <tbody>
-          <tr><td>Dashboard</td><td>Monthly summary, health score, alerts, income vs expenses, upcoming bills</td></tr>
-          <tr><td>Bills</td><td>Expense items organised by week and category envelopes</td></tr>
-          <tr><td>Income</td><td>Revenue sources for the current month</td></tr>
-          <tr><td>Savings / Invest</td><td>Savings goals and investment portfolio</td></tr>
-          <tr><td>Loans</td><td>Debt tracker with amortisation, payoff dates, and progress</td></tr>
-          <tr><td>Analytics</td><td>Charts, variance table, insights, and tax summary</td></tr>
-          <tr><td>Calendar</td><td>Heatmap view of daily spending intensity</td></tr>
-          <tr><td>Archive</td><td>Past months removed from active view</td></tr>
+          <tr><td>Dashboard</td><td>7 KPI tiles, health score, alerts, trend charts, expense progress, loan and savings summaries, achievements shelf, and Net Worth breakdown</td></tr>
+          <tr><td>Expenses</td><td>Category budget envelopes, week slots, due-date calendar heatmap, recurring rules panel, and tag filter bar</td></tr>
+          <tr><td>Revenue</td><td>Income sources for the month, cross-month tracker table, YTD income, and monthly income vs expenses chart</td></tr>
+          <tr><td>Loans</td><td>Debt tracker with paydown trajectory chart, paydown calculator, amortisation schedule, and payoff-strategy toggle</td></tr>
+          <tr><td>Savings / Investment</td><td>Savings goals, debt payoff goals, 12-month projection, and investment accounts with portfolio allocation and growth charts</td></tr>
+          <tr><td>Calendar</td><td>Full monthly bill calendar showing due dates, upcoming bills, and recurring-detected list</td></tr>
+          <tr><td>Analytics</td><td>Charts, variance table, year-over-year, month scorecards, smart insights, and the AI Financial Coach</td></tr>
+          <tr><td>Archive</td><td>Read-only archived months with configurable auto-archive threshold</td></tr>
           <tr><td>Settings</td><td>All preferences, sync, security, themes, and data tools</td></tr>
         </tbody>
       </table>
@@ -300,14 +391,17 @@
     <section class="help-section" id="expenses">
       <div class="section-badge">04 — Budgeting &amp; Expenses</div>
       <h2>Bills, budgets <em>&amp; envelopes</em></h2>
-      <p class="section-intro">The Bills tab is the heart of FincWin. Expenses are organised into 14 category envelopes. Each envelope has a monthly cap (budget), and a colour-coded bar shows how fast you're spending it.</p>
+      <p class="section-intro">The Expenses tab is the heart of FincWin. Expenses are organised into 14 category envelopes and four week slots. Each envelope has a monthly cap (budget), and a colour-coded bar shows how fast you're spending it.</p>
 
       <div class="feature-grid">
         <div class="feature-card"><div class="feature-card-name">14 Category Envelopes</div><div class="feature-card-desc">Banking, Telecom, Subscriptions, Auto, Utilities, Housing, Food/Meals, Entertainment, Fees, Health, Loan Pmt, Tuition, Savings, Other</div></div>
         <div class="feature-card"><div class="feature-card-name">Budget Caps</div><div class="feature-card-desc">Set a monthly spending limit per category. The bar turns amber at 75% and red when over.</div></div>
-        <div class="feature-card"><div class="feature-card-name">Budget Rollover</div><div class="feature-card-desc">Unspent envelope balance carries forward automatically to next month.</div></div>
-        <div class="feature-card"><div class="feature-card-name">Recurring Expenses</div><div class="feature-card-desc">Mark any expense as recurring — monthly, weekly, biweekly, quarterly, or yearly.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Recurring Rules</div><div class="feature-card-desc">Quarterly and yearly expenses auto-added to qualifying months, managed in the collapsible Recurring Rules panel.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Auto-fill Recurring</div><div class="feature-card-desc">One-click button detects bills from previous months and fills them into the current month automatically.</div></div>
         <div class="feature-card"><div class="feature-card-name">Multi-Currency Items</div><div class="feature-card-desc">Log any expense in a foreign currency. FincWin converts it to your home currency automatically.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Receipt Photos</div><div class="feature-card-desc">Attach an image receipt to any expense — tap the camera icon on the expense row.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Due Date Calendar</div><div class="feature-card-desc">A visual calendar heatmap on the Expenses tab shows which bills fall on which days this month.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Category Tag Filter</div><div class="feature-card-desc">Filter the expense list by category using the pill bar above the week slots.</div></div>
         <div class="feature-card"><div class="feature-card-name">Drag-and-Drop Reorder</div><div class="feature-card-desc">Drag expense rows to reorder them within a week. Works with mouse or touch.</div></div>
       </div>
 
@@ -315,11 +409,12 @@
         <div class="howto-header"><div class="howto-title">How to add an expense</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Go to the <strong>Bills</strong> tab.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Click the <strong>+</strong> button inside any week slot (Week 1–4), or press the global <strong>Quick Add</strong> button (bottom-right floating button).</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Go to the <strong>Expenses</strong> tab.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Click the <strong>+</strong> button inside any week slot (Week 1–4), or press the global <strong>Quick Add</strong> button (floating button, bottom-right).</div></div>
             <div class="step"><div class="step-num">3</div><div class="step-text">Enter the expense name, amount, and optional due day. The category is auto-detected from the name — you can override it.</div></div>
-            <div class="step"><div class="step-num">4</div><div class="step-text">To make it recurring, toggle <strong>Recurring</strong> and select the frequency.</div></div>
-            <div class="step"><div class="step-num">5</div><div class="step-text">Click <strong>Save</strong>. The item appears in the chosen week and its category envelope updates immediately.</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-text">To make it recurring, select a frequency (Monthly, Weekly, Bi-weekly, Quarterly, or Yearly).</div></div>
+            <div class="step"><div class="step-num">5</div><div class="step-text">Optionally attach a <strong>receipt photo</strong> by tapping the camera icon.</div></div>
+            <div class="step"><div class="step-num">6</div><div class="step-text">Click <strong>Save</strong>. The item appears in the chosen week and its category envelope updates immediately.</div></div>
           </div>
         </div>
       </div>
@@ -339,10 +434,11 @@
         <div class="howto-header"><div class="howto-title">How to set a budget cap for a category</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">On the Bills tab, click the <strong>Budget</strong> button (or the pencil icon next to any envelope name).</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">On the Expenses tab, click the <strong>Edit All</strong> button (pencil icon next to the Budget Envelopes heading).</div></div>
             <div class="step"><div class="step-num">2</div><div class="step-text">The <strong>Bulk Budget</strong> modal opens showing all 14 categories. Enter a cap for each one you want to limit.</div></div>
             <div class="step"><div class="step-num">3</div><div class="step-text">Click <strong>Save</strong>. Envelopes now display a spend bar relative to your cap.</div></div>
           </div>
+          <div class="tip"><div class="tip-icon">💡</div><div class="tip-text">You can also access Bulk Budget via <strong>Settings → Budgets → Set Budgets</strong>.</div></div>
         </div>
       </div>
 
@@ -351,7 +447,7 @@
         <div class="howto-body">
           <div class="steps">
             <div class="step"><div class="step-num">1</div><div class="step-text">Click the expense row to open it, then click the <strong>Delete</strong> (trash) button.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">For bulk deletion: click the <strong>Select</strong> icon on the week header to enter multi-select mode. Check items, then click <strong>Delete Selected</strong>.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">For bulk deletion: click the <strong>Select</strong> button on the week header to enter multi-select mode. Check items, then click <strong>Delete</strong> in the bulk action bar.</div></div>
           </div>
         </div>
       </div>
@@ -365,19 +461,37 @@
           </div>
         </div>
       </div>
+
+      <div class="howto">
+        <div class="howto-header"><div class="howto-title">How to auto-fill recurring bills</div></div>
+        <div class="howto-body">
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text">Navigate to the current month on the Expenses tab.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>Auto-fill Recurring</strong> (appears when recurring bills from previous months are not yet in the current month).</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">FincWin adds all bills that appeared in 2+ prior months into the correct week based on their due day.</div></div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- ── INCOME ─────────────────────────────────────────────────────── -->
-    <section class="help-section" id="income">
-      <div class="section-badge">05 — Income &amp; Revenue</div>
+    <!-- ── REVENUE ───────────────────────────────────────────────────── -->
+    <section class="help-section" id="revenue">
+      <div class="section-badge">05 — Revenue &amp; Income</div>
       <h2>Tracking <em>what comes in</em></h2>
-      <p class="section-intro">The Income tab records all money received in a month. Add as many income sources as you have — salary, freelance, rental income, dividends, and more.</p>
+      <p class="section-intro">The Revenue tab records all money received in a month. Add as many income sources as you have — salary, freelance, rental income, dividends, and more. A cross-month table shows your income history at a glance.</p>
+
+      <div class="feature-grid">
+        <div class="feature-card"><div class="feature-card-name">Income Sources</div><div class="feature-card-desc">Add named sources with amounts. Toggle Received once the money arrives.</div></div>
+        <div class="feature-card"><div class="feature-card-name">YTD Income</div><div class="feature-card-desc">Running year-to-date total shown in the KPI strip at the top of the Revenue tab.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Cross-Month Tracker</div><div class="feature-card-desc">A scrollable table shows income and expenses for the last 12 months (or all time) side by side.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Net Cash Position</div><div class="feature-card-desc">Live card showing income minus paid expenses, with expense ratio bar and pending income note.</div></div>
+      </div>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">How to add an income source</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Go to the <strong>Income</strong> tab.</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Go to the <strong>Revenue</strong> tab.</div></div>
             <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>+ Add Income</strong>.</div></div>
             <div class="step"><div class="step-num">3</div><div class="step-text">Enter a name (e.g. "Salary") and the amount.</div></div>
             <div class="step"><div class="step-num">4</div><div class="step-text">Toggle <strong>Received</strong> once the money has arrived in your account.</div></div>
@@ -402,15 +516,16 @@
     <section class="help-section" id="loans">
       <div class="section-badge">06 — Loans &amp; Debt</div>
       <h2>Paying down <em>debt</em></h2>
-      <p class="section-intro">The Loans tab tracks every debt — student loans, car loans, mortgages, credit cards. It calculates your exact payoff date and shows the impact of extra payments.</p>
+      <p class="section-intro">The Loans tab tracks every debt — student loans, car loans, mortgages, credit cards. It calculates your exact payoff date, charts your balance trajectory, and shows the impact of extra payments.</p>
 
       <div class="feature-grid">
-        <div class="feature-card"><div class="feature-card-name">Amortisation Schedule</div><div class="feature-card-desc">Full month-by-month breakdown of principal, interest, and remaining balance.</div></div>
-        <div class="feature-card"><div class="feature-card-name">Payoff Date Calculator</div><div class="feature-card-desc">See the exact month your loan reaches zero with your current payment.</div></div>
-        <div class="feature-card"><div class="feature-card-name">Extra Payment Simulator</div><div class="feature-card-desc">Enter an extra monthly amount and see how many months and dollars in interest you save.</div></div>
-        <div class="feature-card"><div class="feature-card-name">DTI Indicator</div><div class="feature-card-desc">Live Debt-to-Income ratio badge. Below 36% is healthy; above 43% is a warning.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Paydown Trajectory Chart</div><div class="feature-card-desc">Line chart showing each loan's balance declining over time. Hover for month-by-month values.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Paydown Calculator</div><div class="feature-card-desc">Enter principal, rate, payment, and target date. Built-in amortisation schedule with interest/principal breakdown.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Extra Payment Simulator</div><div class="feature-card-desc">Drag the slider to add an extra monthly amount and see months saved and interest avoided — across all loans.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Debt-Free Date</div><div class="feature-card-desc">Estimated month all loans reach zero with current payments, shown in the KPI strip.</div></div>
+        <div class="feature-card"><div class="feature-card-name">DTI Indicator</div><div class="feature-card-desc">Live Debt-to-Income ratio badge on the Dashboard. Below 36% is healthy; above 43% is a warning.</div></div>
         <div class="feature-card"><div class="feature-card-name">Avalanche vs Snowball</div><div class="feature-card-desc">Switch paydown strategy: Avalanche (highest APR first) or Snowball (smallest balance first).</div></div>
-        <div class="feature-card"><div class="feature-card-name">Debt-Free Celebration</div><div class="feature-card-desc">Confetti animation and a badge when a loan reaches £0.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Debt-Free Celebration</div><div class="feature-card-desc">Confetti animation and a badge when a loan reaches $0.</div></div>
       </div>
 
       <div class="howto">
@@ -419,7 +534,7 @@
           <div class="steps">
             <div class="step"><div class="step-num">1</div><div class="step-text">Go to the <strong>Loans</strong> tab and click <strong>+ Add Loan</strong>.</div></div>
             <div class="step"><div class="step-num">2</div><div class="step-text">Enter: <strong>Loan name</strong>, <strong>current balance</strong>, <strong>original amount</strong>, <strong>interest rate (APR %)</strong>, and <strong>minimum monthly payment</strong>.</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">Click <strong>Save</strong>. The payoff date and amortisation schedule calculate instantly.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Click <strong>Save</strong>. The payoff date and trajectory chart update instantly.</div></div>
           </div>
         </div>
       </div>
@@ -428,11 +543,22 @@
         <div class="howto-header"><div class="howto-title">How to simulate extra payments</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Open a loan by clicking its row on the Loans tab.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">In the loan detail panel, find the <strong>Extra Payment</strong> field and enter an additional monthly amount.</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">The payoff date and total interest update in real time to show how much you save.</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">On the Loans tab, find the <strong>Extra Payment Simulator</strong> slider above the trajectory chart.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Drag the slider to add an extra monthly amount (up to $2,000). The debt-free date and interest savings update in real time.</div></div>
           </div>
           <div class="tip"><div class="tip-icon">💡</div><div class="tip-text">Even <strong>$50/month extra</strong> on a typical loan can cut years off your payoff date. Use the simulator to find your sweet spot.</div></div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <div class="howto-header"><div class="howto-title">How to use the Paydown Calculator</div></div>
+        <div class="howto-body">
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text">Scroll to the <strong>Paydown Calculator</strong> card on the Loans tab.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Select an existing loan from the <strong>Select Loan</strong> dropdown to pre-fill, or enter <strong>Custom</strong> values manually.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Enter principal, interest rate, minimum payment, target payoff period, and optional extra monthly amount.</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-text">Results show monthly payment, total paid, total interest, savings vs minimum-only, and payoff date. The full amortisation schedule appears below.</div></div>
+          </div>
         </div>
       </div>
 
@@ -440,9 +566,9 @@
         <div class="howto-header"><div class="howto-title">How to switch between Avalanche and Snowball strategy</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">On the Loans tab, find the <strong>Strategy</strong> toggle at the top.</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">On the Loans tab, find the <strong>Payoff Strategy</strong> toggle at the top.</div></div>
             <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>Avalanche</strong> to prioritise highest-interest loans first (saves most money).</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">Click <strong>Snowball</strong> to prioritise smallest-balance loans first (gives fastest psychological wins).</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Click <strong>Snowball</strong> to prioritise smallest-balance loans first (fastest psychological wins).</div></div>
           </div>
         </div>
       </div>
@@ -452,17 +578,17 @@
     <section class="help-section" id="savings">
       <div class="section-badge">07 — Savings Goals</div>
       <h2>Building <em>your future</em></h2>
-      <p class="section-intro">Track multiple savings accounts and goals — emergency fund, house deposit, holiday, retirement top-up. Each goal shows progress toward its target with projected completion.</p>
+      <p class="section-intro">Track multiple savings accounts and goals — emergency fund, house deposit, holiday, retirement top-up. Each goal shows progress toward its target with a projected completion date and a 12-month growth projection chart.</p>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">How to add a savings goal</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Go to the <strong>Savings / Invest</strong> tab and click <strong>+ Add Savings</strong>.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Enter: <strong>goal name</strong>, <strong>current balance</strong>, <strong>target amount</strong>, <strong>monthly contribution</strong>, and <strong>interest rate</strong> (optional).</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Go to the <strong>Savings / Investment</strong> tab and click <strong>+ Add Goal</strong>.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Enter: <strong>goal name</strong>, <strong>target amount</strong>, <strong>current balance</strong>, <strong>monthly contribution</strong>, and <strong>interest rate</strong> (optional).</div></div>
             <div class="step"><div class="step-num">3</div><div class="step-text">Click <strong>Save</strong>. A progress bar and projected completion date appear.</div></div>
           </div>
-          <div class="tip"><div class="tip-icon">💡</div><div class="tip-text">Enable <strong>Autopilot</strong> on a savings goal to have FincWin automatically calculate the optimal monthly contribution to hit your target on time.</div></div>
+          <div class="tip"><div class="tip-icon">💡</div><div class="tip-text">Savings contributions are automatically tracked as expenses in the current month under the <strong>Savings</strong> category when you mark a goal active.</div></div>
         </div>
       </div>
 
@@ -470,9 +596,19 @@
         <div class="howto-header"><div class="howto-title">How to log a deposit or withdrawal</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Click on a savings goal to expand it.</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Click on a savings goal card to expand it.</div></div>
             <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>+ Transaction</strong>, enter the amount, choose deposit or withdrawal, and add a note.</div></div>
             <div class="step"><div class="step-num">3</div><div class="step-text">Click <strong>Save</strong>. The balance and progress bar update instantly.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <div class="howto-header"><div class="howto-title">How to set a debt payoff goal</div></div>
+        <div class="howto-body">
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text">Scroll to the <strong>Debt Payoff Goals</strong> card on the Savings / Investment tab and click <strong>+ Add Goal</strong>.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Select the loan, set a target payoff date, and save. A goal badge appears directly on the loan card so you can see your on-track status without switching tabs.</div></div>
           </div>
         </div>
       </div>
@@ -482,23 +618,23 @@
     <section class="help-section" id="investments">
       <div class="section-badge">08 — Investments</div>
       <h2>Your portfolio <em>in context</em></h2>
-      <p class="section-intro">FincWin tracks investments manually — no brokerage connection required. Log stocks, ETFs, bonds, crypto, real estate, and other assets. See your allocation alongside your full financial picture.</p>
+      <p class="section-intro">FincWin tracks investments manually — no brokerage connection required. Log stocks, ETFs, bonds, crypto, real estate, and other assets. See your allocation and 12-month growth projection alongside your full financial picture.</p>
 
       <div class="feature-grid">
-        <div class="feature-card"><div class="feature-card-name">6 Asset Classes</div><div class="feature-card-desc">Stocks, ETFs/Bonds, Crypto, Real Estate, Cash, Other. Each shown with separate colour in the allocation chart.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Multiple Asset Types</div><div class="feature-card-desc">Stocks, ETFs/Bonds, Crypto, Real Estate, Cash, Other — each shown separately in the allocation chart.</div></div>
         <div class="feature-card"><div class="feature-card-name">Cost Basis Tracking</div><div class="feature-card-desc">Log purchase price and current value to see your gain/loss per holding.</div></div>
-        <div class="feature-card"><div class="feature-card-name">Allocation Doughnut Chart</div><div class="feature-card-desc">Visual breakdown of how your portfolio is distributed across asset types.</div></div>
-        <div class="feature-card"><div class="feature-card-name">Net Worth Calculation</div><div class="feature-card-desc">Investments + savings − loans = live net worth figure on the dashboard.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Allocation Doughnut Chart</div><div class="feature-card-desc">Visual breakdown of your portfolio across account types.</div></div>
+        <div class="feature-card"><div class="feature-card-name">12-Month Growth Projection</div><div class="feature-card-desc">Compound-growth chart showing each account's projected value over the next year.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Net Worth Calculation</div><div class="feature-card-desc">Savings + Investments − Loans = live net worth on the Dashboard.</div></div>
       </div>
 
       <div class="howto">
-        <div class="howto-header"><div class="howto-title">How to add an investment</div></div>
+        <div class="howto-header"><div class="howto-title">How to add an investment account</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Savings / Invest</strong> and click <strong>+ Add Investment</strong>.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Select the <strong>asset type</strong> (Stock, ETF, Crypto, Real Estate, Cash, Other).</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">Enter the investment name, <strong>ticker symbol</strong> (optional), number of shares (optional), <strong>purchase price</strong>, and <strong>current value</strong>.</div></div>
-            <div class="step"><div class="step-num">4</div><div class="step-text">Click <strong>Save</strong>. The allocation chart updates immediately.</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Savings / Investment</strong> and click <strong>+ Add Account</strong> in the Investment Accounts section.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Enter the account name, <strong>account type</strong> (Stock, ETF/Bond, Crypto, Real Estate, Cash, Other), current value, cost basis, and assumed growth rate.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Click <strong>Save</strong>. The allocation chart and growth projection update immediately.</div></div>
           </div>
         </div>
       </div>
@@ -508,13 +644,13 @@
     <section class="help-section" id="bulk-import">
       <div class="section-badge">09 — Bulk Add &amp; Bank Import</div>
       <h2>Adding data <em>in bulk</em></h2>
-      <p class="section-intro">Bulk Add lets you add many expenses, loans, or savings at once. Bank Import reads a CSV or OFX file directly from your bank and maps transactions into FincWin.</p>
+      <p class="section-intro">Bulk Add lets you add many expenses, loans, or savings at once. Bank Import reads a CSV file directly from your bank and maps transactions into FincWin.</p>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">How to use Bulk Add</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Click the <strong>Bulk Add</strong> button (found on the Bills tab or via the + menu).</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Click the <strong>Bulk Add</strong> button (found on the Expenses tab or via the + menu).</div></div>
             <div class="step"><div class="step-num">2</div><div class="step-text">Select the tab: <strong>Expenses</strong>, <strong>Loans</strong>, or <strong>Savings</strong>.</div></div>
             <div class="step"><div class="step-num">3</div><div class="step-text">Enter each item on its own row — name and amount. Press <strong>Enter</strong> to add another row quickly.</div></div>
             <div class="step"><div class="step-num">4</div><div class="step-text">Click <strong>Save All</strong> to import everything at once.</div></div>
@@ -523,11 +659,11 @@
       </div>
 
       <div class="howto">
-        <div class="howto-header"><div class="howto-title">How to import a bank statement (CSV/OFX)</div></div>
+        <div class="howto-header"><div class="howto-title">How to import a bank statement (CSV)</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Download a statement CSV or OFX file from your bank's website.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Go to <strong>Settings → Bank Import</strong> (or the import icon on the Bills tab).</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Download a statement CSV file from your bank's website.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>Import CSV</strong> on the Expenses tab (or <strong>Bank CSV</strong> in the mobile More menu).</div></div>
             <div class="step"><div class="step-num">3</div><div class="step-text">Click <strong>Choose File</strong> and select your statement file.</div></div>
             <div class="step"><div class="step-num">4</div><div class="step-text">Use the <strong>Column Mapper</strong> to match your file's columns to Date, Amount, and Name fields.</div></div>
             <div class="step"><div class="step-num">5</div><div class="step-text">FincWin detects duplicates and recurring patterns automatically. Review the transactions, assign categories where needed, and click <strong>Import Selected</strong>.</div></div>
@@ -537,28 +673,44 @@
       </div>
     </section>
 
-    <!-- ── ANALYTICS ──────────────────────────────────────────────────── -->
-    <section class="help-section" id="analytics">
-      <div class="section-badge">10 — Analytics &amp; Reports</div>
-      <h2>Understand <em>your patterns</em></h2>
-      <p class="section-intro">The Analytics tab shows charts, trends, and reports across all your months. Export your data to CSV or JSON at any time.</p>
+    <!-- ── CALENDAR ───────────────────────────────────────────────────── -->
+    <section class="help-section" id="calendar">
+      <div class="section-badge">10 — Bill Calendar</div>
+      <h2>Bills on a <em>calendar</em></h2>
+      <p class="section-intro">The Calendar tab shows a full monthly grid of bill due dates. Quickly spot when bills cluster, see upcoming deadlines, and identify recurring patterns detected across months.</p>
 
       <div class="feature-grid">
-        <div class="feature-card"><div class="feature-card-name">Income vs Expenses Chart</div><div class="feature-card-desc">Bar chart comparing income and spending month by month.</div></div>
-        <div class="feature-card"><div class="feature-card-name">Category Trend Charts</div><div class="feature-card-desc">Per-category spend over time. Click any category envelope to drill in.</div></div>
-        <div class="feature-card"><div class="feature-card-name">Variance Table</div><div class="feature-card-desc">Budget cap vs actual spend per category — green under, red over.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Monthly Calendar Grid</div><div class="feature-card-desc">Each day shows bills due that day. Click a day to see which bills are due.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Upcoming Bills Panel</div><div class="feature-card-desc">Chronological list of unpaid bills sorted by due date — your personal bill radar.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Recurring Detected</div><div class="feature-card-desc">Items appearing in 2+ months are flagged so you can confirm recurring status.</div></div>
+      </div>
+
+      <div class="tip"><div class="tip-icon">💡</div><div class="tip-text">Bills only appear on the calendar when you set a <strong>due day</strong> on an expense. Go to <strong>Expenses</strong> and edit each bill to add a day number (e.g. "15" for the 15th).</div></div>
+    </section>
+
+    <!-- ── ANALYTICS ──────────────────────────────────────────────────── -->
+    <section class="help-section" id="analytics">
+      <div class="section-badge">11 — Analytics &amp; Reports</div>
+      <h2>Understand <em>your patterns</em></h2>
+      <p class="section-intro">The Analytics tab shows charts, trends, year-over-year comparisons, month scorecards, smart insights, and the AI Financial Coach — all in one place.</p>
+
+      <div class="feature-grid">
+        <div class="feature-card"><div class="feature-card-name">Category Spending Trend</div><div class="feature-card-desc">Per-category spend over time. Identify which categories grow month-to-month.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Monthly Net Flow Over Time</div><div class="feature-card-desc">Bar chart of net cash (income − expenses) for every month in history.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Year-over-Year Table</div><div class="feature-card-desc">Side-by-side comparison of the same months across calendar years.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Budget vs Actual Variance</div><div class="feature-card-desc">Budget cap vs actual spend per category — green under, red over — for the last 3 months.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Month Scorecards</div><div class="feature-card-desc">Re-open any closed month's scorecard to review how you performed.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Smart Insights</div><div class="feature-card-desc">Auto-generated plain-English observations: "You spent 22% more on Food this month."</div></div>
         <div class="feature-card"><div class="feature-card-name">Tax Summary</div><div class="feature-card-desc">Filter expenses marked as tax-deductible and export to CSV for your accountant.</div></div>
-        <div class="feature-card"><div class="feature-card-name">Spending Heatmap</div><div class="feature-card-desc">Calendar heatmap showing daily spend intensity — find your high-spend days.</div></div>
-        <div class="feature-card"><div class="feature-card-name">Auto Insights</div><div class="feature-card-desc">FincWin generates plain-English observations: "You spent 22% more on Food this month."</div></div>
       </div>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">How to export your data</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → Export</strong>.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>Download CSV</strong> for a spreadsheet of all expense data, or <strong>Download JSON</strong> for a full backup of everything.</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">For tax purposes, click <strong>Download Tax CSV</strong> to export only tax-flagged items.</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → Cloud &amp; File → Export / Backup</strong>.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>JSON</strong> for a full backup of everything, or <strong>CSV</strong> for a spreadsheet of all expense data.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">For tax purposes, click <strong>Tax CSV</strong> to export only tax-flagged items.</div></div>
           </div>
         </div>
       </div>
@@ -566,7 +718,7 @@
 
     <!-- ── SEARCH ─────────────────────────────────────────────────────── -->
     <section class="help-section" id="search">
-      <div class="section-badge">11 — Search</div>
+      <div class="section-badge">12 — Search</div>
       <h2>Find anything <em>instantly</em></h2>
       <p class="section-intro">Global search finds any expense or income item across all months. Results navigate you directly to the relevant month and tab.</p>
 
@@ -575,7 +727,7 @@
         <div class="howto-body">
           <div class="steps">
             <div class="step"><div class="step-num">1</div><div class="step-text">Press the <strong>/ key</strong> on your keyboard, or click the magnifying glass icon in the top bar.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Start typing. Results appear instantly as you type — expenses and income across all months.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Start typing. Results appear instantly — expenses and income across all months.</div></div>
             <div class="step"><div class="step-num">3</div><div class="step-text">Click a result to jump directly to that month and highlight the item.</div></div>
           </div>
         </div>
@@ -584,14 +736,14 @@
 
     <!-- ── GAMIFICATION ───────────────────────────────────────────────── -->
     <section class="help-section" id="gamification">
-      <div class="section-badge">12 — Health Score &amp; Badges</div>
+      <div class="section-badge">13 — Health Score &amp; Badges</div>
       <h2>Your financial <em>score</em></h2>
-      <p class="section-intro">The Financial Health Score (0–100) reflects how well your finances are performing. Earn XP and unlock badges as you hit milestones.</p>
+      <p class="section-intro">The Financial Health Score (0–100) reflects how well your finances are performing across six dimensions. Earn XP and unlock badges as you hit milestones. Your achievement shelf lives on the Dashboard.</p>
 
       <table class="ref-table">
         <thead><tr><th>Score</th><th>Tier</th><th>What it means</th></tr></thead>
         <tbody>
-          <tr><td>0–24</td><td>Critical</td><td>Significant overspending or unpaid obligations</td></tr>
+          <tr><td>0–24</td><td>Beginner</td><td>Getting started — significant gaps in spending or payments</td></tr>
           <tr><td>25–49</td><td>Building</td><td>Some positive habits, but gaps remain</td></tr>
           <tr><td>50–74</td><td>Stable</td><td>On track most months; minor improvements available</td></tr>
           <tr><td>75–89</td><td>Strong</td><td>Budget discipline, positive cash flow, savings growing</td></tr>
@@ -600,13 +752,27 @@
         </tbody>
       </table>
 
+      <p class="section-intro" style="margin-top:16px;">The score is calculated across six dimensions:</p>
+
+      <table class="ref-table">
+        <thead><tr><th>Dimension</th><th>Max</th><th>How to improve</th></tr></thead>
+        <tbody>
+          <tr><td>Cash Flow</td><td>25 pts</td><td>Aim for 20%+ positive flow: income well above expenses</td></tr>
+          <tr><td>Debt-to-Income</td><td>25 pts</td><td>Keep monthly loan payments below 36% of income</td></tr>
+          <tr><td>Payment Rate</td><td>20 pts</td><td>Mark all bills paid — full score when 100% cleared</td></tr>
+          <tr><td>Debt Load</td><td>15 pts</td><td>Lower total debt relative to one year's income</td></tr>
+          <tr><td>Savings &amp; Investments</td><td>10 pts</td><td>Build 3 months of income in savings; investments count at 50%</td></tr>
+          <tr><td>Income Diversity</td><td>5 pts</td><td>Add a second income source to earn the bonus</td></tr>
+        </tbody>
+      </table>
+
       <div class="howto">
         <div class="howto-header"><div class="howto-title">How to earn XP and badges</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">XP is earned automatically when you take financial actions: logging expenses (+10 XP), recording income (+15 XP), adding investments (+20 XP), enabling PIN (+100 XP), and more.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Badges unlock when you hit specific milestones — e.g. <strong>Debt Slayer</strong> (first loan paid off), <strong>Goal Crusher</strong> (savings goal reached), <strong>3-Month Streak</strong> (positive cash flow for 3 months).</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">View your badges in the <strong>Achievements</strong> section on the Dashboard. Earned badges glow with a rarity ring (green = uncommon, blue = rare, purple = epic, gold = legendary).</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">XP is earned automatically when you take financial actions: marking a bill paid (+5 XP), completing a week (+20 XP), logging income (+15 XP), adding investments (+20 XP), enabling PIN (+100 XP), and more.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Badges unlock when you hit specific milestones — e.g. <strong>Debt Slayer</strong> (first loan paid off), <strong>Goal Crusher</strong> (savings goal reached), <strong>3-Month Streak</strong> (positive cash flow for 3 months), <strong>Vault Keeper</strong> (PIN + passphrase enabled).</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">View your badges in the compact <strong>Achievement Shelf</strong> on the Dashboard. Earned badges show a rarity ring (green = uncommon, blue = rare, purple = epic, gold = legendary).</div></div>
           </div>
         </div>
       </div>
@@ -626,19 +792,27 @@
 
     <!-- ── AI COACH ───────────────────────────────────────────────────── -->
     <section class="help-section" id="ai-coach">
-      <div class="section-badge">13 — AI Finance Coach</div>
+      <div class="section-badge">14 — AI Finance Coach</div>
       <h2>Your personal <em>finance advisor</em></h2>
-      <p class="section-intro">FincWin integrates with Claude (Anthropic) and OpenAI so you can ask plain-English questions about your finances. You supply your own API key — no data leaves your device through FincWin's servers.</p>
+      <p class="section-intro">FincWin integrates with Claude (Anthropic) and GPT-4o (OpenAI) so you can ask plain-English questions about your finances. The AI Coach lives in the Analytics tab. You supply your own API key — no data leaves your device through FincWin's servers.</p>
+
+      <div class="feature-grid">
+        <div class="feature-card"><div class="feature-card-name">General Insights</div><div class="feature-card-desc">A broad overview of your financial health and key opportunities.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Debt Optimizer</div><div class="feature-card-desc">Personalised advice on the best order to pay down your loans.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Spending Anomalies</div><div class="feature-card-desc">Flags unusual spikes or patterns in your expense history.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Budget Recommender</div><div class="feature-card-desc">Suggests realistic category caps based on your income and history.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Monthly Summary</div><div class="feature-card-desc">A concise narrative recap of the current month's performance.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Cash Flow Forecast</div><div class="feature-card-desc">Projection of your cash position over the next few months.</div></div>
+      </div>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">How to set up the AI coach</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → AI Coach</strong>.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Choose your provider: <strong>Claude</strong> (Anthropic) or <strong>OpenAI</strong>.</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">Paste your API key into the key field. Keys are stored encrypted on your device.</div></div>
-            <div class="step"><div class="step-num">4</div><div class="step-text">Click the <strong>AI Coach</strong> button (brain icon) from the Dashboard or Analytics tab to open the chat panel.</div></div>
-            <div class="step"><div class="step-num">5</div><div class="step-text">Ask anything — "Where am I overspending?", "How long to pay off my student loan?", "Should I prioritise savings or debt this month?"</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Go to the <strong>Analytics</strong> tab and scroll to the <strong>AI Financial Coach</strong> section.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>Connect Claude</strong> or <strong>connect GPT-4o</strong>.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Paste your API key. Keys are stored encrypted in your browser's IndexedDB — never in plain localStorage.</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-text">Click one of the <strong>Quick Analysis</strong> mode buttons, or type a free-form question in the text field and click <strong>Ask</strong>.</div></div>
           </div>
           <div class="tip"><div class="tip-icon">💡</div><div class="tip-text">The AI coach receives a <strong>summary of your financial data</strong> as context — your totals, loan balances, and category spend — but never raw transaction names. Your privacy is protected.</div></div>
         </div>
@@ -647,48 +821,68 @@
 
     <!-- ── SYNC ───────────────────────────────────────────────────────── -->
     <section class="help-section" id="sync">
-      <div class="section-badge">14 — Cloud &amp; File Sync</div>
+      <div class="section-badge">15 — Cloud, Drive &amp; File Sync</div>
       <h2>Your data, <em>everywhere</em></h2>
-      <p class="section-intro">By default FincWin stores everything locally in your browser. For multi-device access, enable Cloud Sync (Firebase) or link a local JSON file.</p>
+      <p class="section-intro">By default FincWin stores data in your browser. For multi-device access choose from three sync options: a Local Folder (auto-save to disk), Google Drive (OAuth), or Firebase Cloud Sync (encrypted). All three are in Settings → Cloud &amp; File.</p>
 
       <div class="howto">
-        <div class="howto-header"><div class="howto-title">How to enable cloud sync</div></div>
+        <div class="howto-header"><div class="howto-title">How to link a local folder (Chrome / Edge)</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → Sync</strong> and click <strong>Enable Cloud Sync</strong>.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Enter a <strong>passphrase</strong>. All data is encrypted with this passphrase before leaving your device. <em>You must remember this — it cannot be recovered.</em></div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">On a second device, open FincWin → Settings → Sync, enable cloud sync, and enter the <strong>same passphrase</strong>. Your data will sync automatically.</div></div>
-            <div class="step"><div class="step-num">4</div><div class="step-text">Alternatively, use <strong>QR Code Sync</strong> — one device shows a QR code; scan it with the second device to pair them instantly.</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → Cloud &amp; File → Local Folder</strong> and click <strong>Choose folder</strong>.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Pick a folder (e.g. Documents). FincWin will auto-save <code>fincwin-data.json</code> there on every change.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">On another browser or device, link the same folder and FincWin will load from that file.</div></div>
           </div>
-          <div class="warn"><div class="warn-icon">⚠️</div><div class="warn-text"><strong>Remember your passphrase.</strong> If you forget it, your cloud data cannot be decrypted by anyone — including us. Store it safely.</div></div>
+          <div class="tip"><div class="tip-icon">💡</div><div class="tip-text">Other browsers (Safari, Firefox) without the File System Access API will prompt a manual download on demand instead of auto-saving.</div></div>
         </div>
       </div>
 
       <div class="howto">
-        <div class="howto-header"><div class="howto-title">How to resolve a sync conflict</div></div>
+        <div class="howto-header"><div class="howto-title">How to connect Google Drive sync</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">If cloud and local data diverge significantly, a <strong>Conflict Resolution</strong> dialog appears showing both versions side by side.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Review the summary of each version (totals, last modified time) and choose <strong>Keep Local</strong> or <strong>Use Cloud</strong>.</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">If both versions have identical financial totals, FincWin silently auto-resolves by picking the most recently modified version — no prompt needed.</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → Cloud &amp; File → Google Drive</strong> and click <strong>Connect</strong>.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Sign in to your Google account and grant permission. FincWin stores data in your Drive's app-private folder (not visible in your main Drive).</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">On a second device, connect the same Google account. Your data syncs automatically on each save.</div></div>
           </div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <div class="howto-header"><div class="howto-title">How to enable Firebase cloud sync</div></div>
+        <div class="howto-body">
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → Cloud &amp; File → Cloud Sync</strong> and click <strong>Set up</strong>.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Enter a <strong>passphrase</strong>. All data is encrypted with this passphrase before leaving your device. <em>You must remember this — it cannot be recovered.</em></div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">On a second device, open FincWin → Settings → Cloud &amp; File, enable cloud sync, and enter the <strong>same passphrase</strong>. Your data will sync automatically.</div></div>
+          </div>
+          <div class="warn"><div class="warn-icon">⚠️</div><div class="warn-text"><strong>Remember your passphrase.</strong> If you forget it, your cloud data cannot be decrypted by anyone — including us. Store it safely.</div></div>
         </div>
       </div>
     </section>
 
     <!-- ── ARCHIVE ────────────────────────────────────────────────────── -->
     <section class="help-section" id="archive">
-      <div class="section-badge">15 — Archive &amp; Months</div>
+      <div class="section-badge">16 — Archive &amp; Months</div>
       <h2>Managing <em>your history</em></h2>
-      <p class="section-intro">FincWin keeps your active months in view and automatically archives older ones. You can create, clone, and delete months manually.</p>
+      <p class="section-intro">FincWin automatically archives months older than your chosen threshold (default 6 months). Archived months are read-only but still included in Analytics charts and the Revenue cross-month table.</p>
+
+      <div class="howto">
+        <div class="howto-header"><div class="howto-title">How to change the auto-archive threshold</div></div>
+        <div class="howto-body">
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text">Go to the <strong>Archive</strong> tab.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Use the <strong>Threshold</strong> dropdown (top-right) to choose 3, 6, 9, 12 months, or <strong>Never auto-archive</strong>.</div></div>
+          </div>
+        </div>
+      </div>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">How to clone a month</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → Month Management</strong>.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>Clone Current Month</strong>. Choose the target month from the selector.</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">Decide whether to <strong>reset paid status</strong> on cloned expenses (useful for recurring bills at the start of a new month).</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">On the Expenses tab, click <strong>Clone Month</strong>.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Choose the target month and decide whether to <strong>reset paid status</strong> on cloned expenses.</div></div>
           </div>
         </div>
       </div>
@@ -698,7 +892,7 @@
         <div class="howto-body">
           <div class="steps">
             <div class="step"><div class="step-num">1</div><div class="step-text">Go to the <strong>Archive</strong> tab.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Find the month, expand it, and click <strong>Restore</strong>. It returns to your active month list.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Find the month in the list and click <strong>Restore</strong>. It returns to your active months and becomes editable again.</div></div>
           </div>
         </div>
       </div>
@@ -706,17 +900,18 @@
 
     <!-- ── SECURITY ───────────────────────────────────────────────────── -->
     <section class="help-section" id="security">
-      <div class="section-badge">16 — PIN &amp; Encryption</div>
+      <div class="section-badge">17 — PIN &amp; Encryption</div>
       <h2>Protecting <em>your data</em></h2>
-      <p class="section-intro">FincWin offers two layers of security: a PIN lock (requires entry on app open) and AES-GCM encryption of stored data using your PIN as the key.</p>
+      <p class="section-intro">FincWin uses a 6-digit PIN lock and AES-GCM encryption. Your PIN is the key — enable it in Settings or via the lock icon in the top bar. A session token means you won't be re-asked on every page refresh within the same tab session.</p>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">How to set a PIN</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Click the <strong>lock icon</strong> in the top bar, or go to <strong>Settings → Security → Set PIN</strong>.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Enter a 4–6 digit PIN, confirm it, and click <strong>Save</strong>.</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">The app will now require this PIN on each new browser session. Within the same session, the PIN is remembered until the auto-lock timeout expires.</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Click the <strong>lock icon</strong> in the top bar, or go to <strong>Settings → Security → Set / Change PIN</strong>.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Enter a <strong>6-digit PIN</strong> twice to confirm.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Optionally add a <strong>recovery passphrase</strong> (min. 8 characters). Write it down — it's the only way back in if you forget the PIN.</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-text">Click <strong>Save PIN</strong>. The app will require this PIN on each new browser session. Within the same session, the PIN is remembered until the auto-lock timeout expires.</div></div>
           </div>
         </div>
       </div>
@@ -726,7 +921,7 @@
         <div class="howto-body">
           <div class="steps">
             <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → Security → Auto-lock after</strong>.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Choose a timeout: 30 min, 1 hr, 4 hrs (default), 8 hrs, 1 day, or Never.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Choose a timeout: 30 min, 1 hr, 4 hrs (default), 8 hrs, 1 day, or <strong>Never (tab close only)</strong>.</div></div>
             <div class="step"><div class="step-num">3</div><div class="step-text">After this period of inactivity the app locks and asks for your PIN again. Closing the browser tab always locks regardless of timeout.</div></div>
           </div>
         </div>
@@ -735,18 +930,18 @@
 
     <!-- ── BACKUP ─────────────────────────────────────────────────────── -->
     <section class="help-section" id="backup">
-      <div class="section-badge">17 — Backup &amp; Export</div>
+      <div class="section-badge">18 — Backup &amp; Export</div>
       <h2>Never lose <em>your data</em></h2>
-      <p class="section-intro">Download a full JSON backup of all your data at any time. Import it back on any device to restore everything exactly.</p>
+      <p class="section-intro">Download a full JSON backup of all your data at any time. Import it back on any device to restore everything exactly. CSV and Tax CSV exports are also available.</p>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">How to download a backup</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → Export &amp; Backup</strong>.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>Download JSON Backup</strong>. A file named <code>fincwin-YYYY-MM-DD.json</code> saves to your downloads.</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → Cloud &amp; File → Export / Backup</strong>.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>JSON</strong>. A file named <code>fincwin-YYYY-MM-DD.json</code> saves to your downloads.</div></div>
           </div>
-          <div class="tip"><div class="tip-icon">💡</div><div class="tip-text">Downloading a backup also unlocks the <strong>Backup Hero</strong> badge (+125 XP). Do it regularly.</div></div>
+          <div class="tip"><div class="tip-icon">💡</div><div class="tip-text">Downloading a backup unlocks the <strong>Backup Hero</strong> badge (+125 XP). Do it regularly.</div></div>
         </div>
       </div>
 
@@ -754,7 +949,7 @@
         <div class="howto-header"><div class="howto-title">How to restore from a backup</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → Import</strong>.</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → Cloud &amp; File → Import</strong>.</div></div>
             <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>Choose File</strong> and select your <code>.json</code> backup file.</div></div>
             <div class="step"><div class="step-num">3</div><div class="step-text">Confirm the import. All data is replaced with the backup. This cannot be undone.</div></div>
           </div>
@@ -765,33 +960,46 @@
 
     <!-- ── SETTINGS ───────────────────────────────────────────────────── -->
     <section class="help-section" id="settings">
-      <div class="section-badge">18 — Settings &amp; Themes</div>
+      <div class="section-badge">19 — Settings &amp; Themes</div>
       <h2>Make it <em>yours</em></h2>
-      <p class="section-intro">FincWin is highly customisable — themes, dark mode, currency, username, and more. Everything is in the Settings tab.</p>
+      <p class="section-intro">FincWin is highly customisable — 7 design styles, each with light &amp; dark modes, plus 7 accent colour swatches. Everything is in the Settings tab.</p>
 
       <div class="feature-grid">
-        <div class="feature-card"><div class="feature-card-name">Theme Gallery</div><div class="feature-card-desc">Multiple colour themes: Sage (default), Ocean, Ember, Violet, and more.</div></div>
-        <div class="feature-card"><div class="feature-card-name">Dark Mode</div><div class="feature-card-desc">Toggle manually or follow your system preference automatically.</div></div>
-        <div class="feature-card"><div class="feature-card-name">Currency Selection</div><div class="feature-card-desc">Full global currency list. Change your home currency at any time.</div></div>
-        <div class="feature-card"><div class="feature-card-name">Username</div><div class="feature-card-desc">Set your name to personalise the dashboard greeting.</div></div>
-        <div class="feature-card"><div class="feature-card-name">Bill Reminders</div><div class="feature-card-desc">Enable browser notifications for upcoming due dates.</div></div>
-        <div class="feature-card"><div class="feature-card-name">Scheduled Rules</div><div class="feature-card-desc">Define auto-recurring expenses that auto-fill every new month.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Design Gallery</div><div class="feature-card-desc">Clay (Soft &amp; Friendly), Light Glass (Frosted Aurora), Neumorphic (Tactile Depth), Bento (Chunky Tiles), Editorial A (Statement Ivory), Editorial B (Ledger Porcelain), Sage (Classic Editorial).</div></div>
+        <div class="feature-card"><div class="feature-card-name">Light &amp; Dark Mode</div><div class="feature-card-desc">Each design has a light and dark variant. Pick independently per design.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Accent Colours</div><div class="feature-card-desc">Override the design accent with: Default, Forest, Burgundy, Teal, Rose, Coral, or Amber.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Profile &amp; Name</div><div class="feature-card-desc">Set your name — used in the dashboard greeting and AI Coach prompts.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Setup Wizard Re-run</div><div class="feature-card-desc">Re-run the initial setup any time to update your income, loans, or savings.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Onboarding Tour Replay</div><div class="feature-card-desc">Replay the guided walkthrough of key features.</div></div>
+        <div class="feature-card"><div class="feature-card-name">Bill Reminders</div><div class="feature-card-desc">Enable browser notifications for upcoming due dates (bell icon in top bar).</div></div>
+        <div class="feature-card"><div class="feature-card-name">Currency</div><div class="feature-card-desc">Full global currency list. Change your home currency and live exchange rates any time.</div></div>
+      </div>
+
+      <div class="howto">
+        <div class="howto-header"><div class="howto-title">How to change the design style</div></div>
+        <div class="howto-body">
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → Design Style</strong>.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Click the <strong>Light</strong> or <strong>Dark</strong> button on any design card. The app switches instantly.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Optionally pick an <strong>Accent Colour</strong> from the swatch row below the gallery.</div></div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ── CATEGORIES ─────────────────────────────────────────────────── -->
     <section class="help-section" id="categories">
-      <div class="section-badge">19 — Category Manager</div>
+      <div class="section-badge">20 — Category Manager</div>
       <h2>Custom <em>categories</em></h2>
-      <p class="section-intro">FincWin's 14 default categories cover most people. The category manager lets you rename them or add your own.</p>
+      <p class="section-intro">FincWin's 14 default categories cover most people. The category manager lets you rename them or add your own. Access it from the Analytics tab header or the Settings page.</p>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">How to add a custom category</div></div>
         <div class="howto-body">
           <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → Categories</strong>.</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">Click <strong>Manage Categories</strong> on the Analytics tab, or go to <strong>Settings → Categories</strong>.</div></div>
             <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>+ Add Category</strong>. Enter a name and choose an icon.</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">Click <strong>Save</strong>. The new category appears as an envelope on the Bills tab.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Click <strong>Save</strong>. The new category appears as an envelope on the Expenses tab.</div></div>
           </div>
         </div>
       </div>
@@ -799,9 +1007,9 @@
 
     <!-- ── CURRENCY ───────────────────────────────────────────────────── -->
     <section class="help-section" id="currency">
-      <div class="section-badge">20 — Currency &amp; Locale</div>
+      <div class="section-badge">21 — Currency &amp; Locale</div>
       <h2>Any currency, <em>anywhere</em></h2>
-      <p class="section-intro">Set your home currency in Settings. Individual expenses can be logged in a different currency — FincWin converts them automatically using cached exchange rates.</p>
+      <p class="section-intro">Set your home currency in Settings. Individual expenses can be logged in a different currency — FincWin converts them automatically using cached live exchange rates.</p>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">How to log a foreign-currency expense</div></div>
@@ -817,7 +1025,7 @@
 
     <!-- ── KEYBOARD SHORTCUTS ─────────────────────────────────────────── -->
     <section class="help-section" id="keyboard">
-      <div class="section-badge">21 — Keyboard Shortcuts</div>
+      <div class="section-badge">22 — Keyboard Shortcuts</div>
       <h2>Move faster <em>with keys</em></h2>
 
       <table class="ref-table">
@@ -825,7 +1033,7 @@
         <tbody>
           <tr><td>/</td><td>Open global search</td></tr>
           <tr><td>Esc</td><td>Close any open modal or panel</td></tr>
-          <tr><td>← →</td><td>Navigate between months (when focused on month nav)</td></tr>
+          <tr><td>← →</td><td>Navigate between months (when month nav is focused)</td></tr>
           <tr><td>Enter</td><td>Confirm / save in forms and bulk-add rows</td></tr>
           <tr><td>Tab</td><td>Move between form fields</td></tr>
         </tbody>
@@ -834,46 +1042,60 @@
 
     <!-- ── ACTIONS INDEX ──────────────────────────────────────────────── -->
     <section class="help-section" id="actions">
-      <div class="section-badge">22 — All Actions Index</div>
+      <div class="section-badge">23 — All Actions Index</div>
       <h2>Every action <em>at a glance</em></h2>
 
       <table class="ref-table">
         <thead><tr><th>Action</th><th>Where to find it</th></tr></thead>
         <tbody>
-          <tr><td>Add expense</td><td>Bills tab → + button in any week slot, or Quick Add (floating button)</td></tr>
+          <tr><td>Add expense</td><td>Expenses tab → + button in any week slot, or Quick Add (floating button)</td></tr>
           <tr><td>Edit expense</td><td>Click expense row → edit modal, or click amount cell directly</td></tr>
-          <tr><td>Delete expense</td><td>Open expense → trash icon; or multi-select mode → Delete Selected</td></tr>
+          <tr><td>Delete expense</td><td>Open expense → trash icon; or multi-select mode → Delete</td></tr>
           <tr><td>Mark paid / unpaid</td><td>Click checkbox on any expense row</td></tr>
           <tr><td>Mark all week paid</td><td>Week header → ✓ All button</td></tr>
           <tr><td>Reorder expenses</td><td>Drag the handle icon on any expense row</td></tr>
-          <tr><td>Set budget cap</td><td>Bills tab → Budget button → Bulk Budget modal</td></tr>
-          <tr><td>Add income</td><td>Income tab → + Add Income</td></tr>
+          <tr><td>Set budget cap</td><td>Expenses tab → Edit All button; or Settings → Budgets → Set Budgets</td></tr>
+          <tr><td>Auto-fill recurring bills</td><td>Expenses tab → Auto-fill Recurring button</td></tr>
+          <tr><td>Attach receipt photo</td><td>Open expense → camera icon</td></tr>
+          <tr><td>Filter by category</td><td>Expenses tab → tag pill bar above week slots</td></tr>
+          <tr><td>Add income</td><td>Revenue tab → + Add Income</td></tr>
           <tr><td>Mark income received</td><td>Toggle Received on any income row</td></tr>
           <tr><td>Add loan</td><td>Loans tab → + Add Loan</td></tr>
-          <tr><td>Simulate extra payment</td><td>Open loan → Extra Payment field</td></tr>
-          <tr><td>Add savings goal</td><td>Savings tab → + Add Savings</td></tr>
+          <tr><td>Simulate extra payment</td><td>Loans tab → Extra Payment Simulator slider</td></tr>
+          <tr><td>Run paydown calculator</td><td>Loans tab → Paydown Calculator card</td></tr>
+          <tr><td>Add savings goal</td><td>Savings / Investment tab → + Add Goal</td></tr>
           <tr><td>Log savings transaction</td><td>Open savings goal → + Transaction</td></tr>
-          <tr><td>Add investment</td><td>Savings/Invest tab → + Add Investment</td></tr>
-          <tr><td>Bulk add expenses/loans/savings</td><td>Bills tab → Bulk Add button</td></tr>
-          <tr><td>Import bank statement</td><td>Settings → Bank Import</td></tr>
-          <tr><td>Download CSV</td><td>Settings → Export → Download CSV</td></tr>
-          <tr><td>Download JSON backup</td><td>Settings → Export → Download JSON Backup</td></tr>
-          <tr><td>Restore from backup</td><td>Settings → Import → Choose File</td></tr>
-          <tr><td>Clone month</td><td>Settings → Month Management → Clone</td></tr>
-          <tr><td>Create new month</td><td>Settings → Month Management → New Month</td></tr>
-          <tr><td>Delete month</td><td>Settings → Month Management → Delete</td></tr>
-          <tr><td>Set PIN</td><td>Lock icon (top bar) → Set PIN, or Settings → Security</td></tr>
+          <tr><td>Add debt payoff goal</td><td>Savings / Investment tab → Debt Payoff Goals → + Add Goal</td></tr>
+          <tr><td>Add investment account</td><td>Savings / Investment tab → Investment Accounts → + Add Account</td></tr>
+          <tr><td>Bulk add expenses/loans/savings</td><td>Expenses tab → Bulk Add button</td></tr>
+          <tr><td>Import bank statement</td><td>Expenses tab → Import CSV button</td></tr>
+          <tr><td>Export JSON backup</td><td>Settings → Cloud &amp; File → JSON</td></tr>
+          <tr><td>Export CSV</td><td>Settings → Cloud &amp; File → CSV</td></tr>
+          <tr><td>Export Tax CSV</td><td>Settings → Cloud &amp; File → Tax CSV (or Analytics tab)</td></tr>
+          <tr><td>Restore from backup</td><td>Settings → Cloud &amp; File → Import → Choose File</td></tr>
+          <tr><td>Clone month</td><td>Expenses tab → Clone Month button</td></tr>
+          <tr><td>Create new month</td><td>Expenses tab → + New Month button</td></tr>
+          <tr><td>Restore archived month</td><td>Archive tab → month row → Restore</td></tr>
+          <tr><td>Set auto-archive threshold</td><td>Archive tab → Threshold dropdown</td></tr>
+          <tr><td>Set PIN</td><td>Lock icon (top bar), or Settings → Security → Set / Change PIN</td></tr>
           <tr><td>Change auto-lock timeout</td><td>Settings → Security → Auto-lock after</td></tr>
-          <tr><td>Enable cloud sync</td><td>Settings → Sync → Enable Cloud Sync</td></tr>
-          <tr><td>QR code sync</td><td>Settings → Sync → QR Code</td></tr>
-          <tr><td>Change theme</td><td>Settings → Appearance → Theme</td></tr>
-          <tr><td>Toggle dark mode</td><td>Moon icon (top bar), or Settings → Appearance</td></tr>
-          <tr><td>Change currency</td><td>Settings → General → Currency</td></tr>
-          <tr><td>Open AI coach</td><td>Dashboard → AI Coach button, or Analytics tab</td></tr>
+          <tr><td>Link local folder</td><td>Settings → Cloud &amp; File → Local Folder → Choose folder</td></tr>
+          <tr><td>Connect Google Drive</td><td>Settings → Cloud &amp; File → Google Drive → Connect</td></tr>
+          <tr><td>Enable Firebase cloud sync</td><td>Settings → Cloud &amp; File → Cloud Sync → Set up</td></tr>
+          <tr><td>Change design style</td><td>Settings → Design Style → Light / Dark buttons on any card</td></tr>
+          <tr><td>Change accent colour</td><td>Settings → Accent Colour swatch row</td></tr>
+          <tr><td>Toggle dark mode</td><td>Moon icon (top bar), or Settings → Design Style</td></tr>
+          <tr><td>Change currency</td><td>Settings → Cloud &amp; File → Currency → Change</td></tr>
+          <tr><td>Connect AI coach</td><td>Analytics tab → AI Financial Coach → Connect Claude / connect GPT-4o</td></tr>
+          <tr><td>Run AI analysis mode</td><td>Analytics tab → AI Financial Coach → Quick Analysis buttons</td></tr>
+          <tr><td>Ask AI free-form question</td><td>Analytics tab → AI Financial Coach → text field → Ask</td></tr>
           <tr><td>Search</td><td>/ key, or magnifying glass icon (top bar)</td></tr>
-          <tr><td>View achievements</td><td>Dashboard → Achievements section (scroll down)</td></tr>
+          <tr><td>View achievements</td><td>Dashboard → Achievement Shelf (scroll up, compact row)</td></tr>
           <tr><td>View health score</td><td>Dashboard → Health Score tile → click for scorecard</td></tr>
+          <tr><td>View bill calendar</td><td>Calendar tab</td></tr>
           <tr><td>Load demo profile</td><td>Settings → Demo Profiles, or welcome screen</td></tr>
+          <tr><td>Re-run setup wizard</td><td>Settings → Setup → Re-run</td></tr>
+          <tr><td>Replay onboarding tour</td><td>Settings → Setup → Replay tour</td></tr>
           <tr><td>Reset all data</td><td>Settings → Danger Zone → Full Reset</td></tr>
         </tbody>
       </table>
@@ -881,17 +1103,17 @@
 
     <!-- ── FAQ ────────────────────────────────────────────────────────── -->
     <section class="help-section" id="faq">
-      <div class="section-badge">23 — FAQ</div>
+      <div class="section-badge">24 — FAQ</div>
       <h2>Common <em>questions</em></h2>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">Is my data safe? Does FincWin send it anywhere?</div></div>
-        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">By default, all data lives entirely in your browser's local storage. Nothing is sent to any server. Cloud Sync is opt-in and encrypts all data with your passphrase before it ever leaves your device.</p></div>
+        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">By default, all data lives entirely in your browser's local storage and IndexedDB. Nothing is sent to any server. Cloud Sync (Firebase) and Google Drive sync are opt-in and encrypt all data before it ever leaves your device. AI Coach calls send only a financial summary — never raw transaction names.</p></div>
       </div>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">I forgot my PIN — how do I get back in?</div></div>
-        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">If you set a passphrase during PIN setup, use the <strong>Passphrase Recovery</strong> option on the lock screen. If not, you'll need to clear app data from your browser settings (this erases all FincWin data). This is why regular JSON backups are important.</p></div>
+        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">If you set a recovery passphrase when creating the PIN, use the <strong>Forgot PIN? Use recovery passphrase</strong> option on the lock screen (appears after 10 failed attempts). If not, you'll need to clear app data from your browser settings (this erases all FincWin data). This is why regular JSON backups are important.</p></div>
       </div>
 
       <div class="howto">
@@ -905,14 +1127,19 @@
           <div class="steps">
             <div class="step"><div class="step-num">1</div><div class="step-text"><strong>iOS (Safari):</strong> Tap the Share button → <strong>Add to Home Screen</strong>.</div></div>
             <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Android (Chrome):</strong> Tap the three-dot menu → <strong>Install app</strong> or <strong>Add to Home Screen</strong>.</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Desktop (Chrome/Edge):</strong> Click the install icon in the address bar.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Desktop (Chrome/Edge):</strong> Click the install icon in the address bar, or go to <strong>Settings → App → Install</strong>.</div></div>
           </div>
         </div>
       </div>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">Will my data transfer if I clear my browser?</div></div>
-        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">Clearing browser storage will erase local FincWin data. Always download a JSON backup before clearing. If you use Cloud Sync, your data is safe in the cloud and will re-sync on next open.</p></div>
+        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">Clearing browser storage will erase local FincWin data. Always download a JSON backup before clearing. If you use Google Drive or Firebase Cloud Sync, your data is safe in the cloud and will re-sync on next open.</p></div>
+      </div>
+
+      <div class="howto">
+        <div class="howto-header"><div class="howto-title">Why does my PIN get asked every time I refresh?</div></div>
+        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">FincWin uses a session token in <code>sessionStorage</code> so the PIN is only required once per tab session. If you're still prompted on every refresh, go to <strong>Settings → Security → Skip PIN on page refresh</strong> and toggle it on. When that setting is off, the encrypted DEK is not persisted between loads, providing higher security at the cost of convenience.</p></div>
       </div>
     </section>
 
@@ -920,8 +1147,34 @@
 </div>
 
 <footer>
-  <p>FincWin User Guide · <a href="landing.html">Home</a> · <a href="features.html">Features</a> · <a href="pricing.html">Pricing</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
-  <p style="margin-top:8px;">© 2026 FincWin. Your data. Your device. Your rules.</p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">Finc<span>Win</span></a>
+      <p>The personal finance dashboard for people who want clarity, not complexity.</p>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <h4>Product</h4>
+        <a href="/features">Features</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/compare">Compare</a>
+        <a href="/use-cases">Use cases</a>
+        <a href="/app">Open app</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="/about">About</a>
+        <a href="/changelog">Changelog</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div>
+        <h4>Learn</h4>
+        <a href="/blog">Blog</a>
+        <a href="/help">Help guide</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom"><p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookie-policy">Cookies</a></div></div>
 </footer>
 
 <script>
@@ -941,8 +1194,10 @@
 
   // Scroll topbar border
   window.addEventListener('scroll', () => {
-    document.getElementById('nav').style.borderBottomColor = window.scrollY > 10 ? 'var(--border)' : 'transparent';
+    document.getElementById('mainNav').style.borderBottomColor = window.scrollY > 10 ? 'var(--border)' : 'transparent';
   });
 </script>
+<script>document.querySelectorAll('.copy-year').forEach(function(e){e.textContent=new Date().getFullYear();});</script>
+<script src="/js/mkt.js" defer></script>
 </body>
 </html>

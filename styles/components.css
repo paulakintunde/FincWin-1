@@ -1498,3 +1498,10 @@ tr.bulk-sel td { background: var(--sage-light) !important; }
   }
   .catmgr-kw-wrap { grid-column: 1 / -1; }
 }
+
+/* Prevent iOS Safari from zooming in on focus for inputs smaller than 16px */
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (max-width: 600px) {
+  input, select, textarea, .ob-input {
+    font-size: 16px !important;
+  }
+}
