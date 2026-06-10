@@ -7,44 +7,27 @@
   <meta name="description" content="FincWin Privacy Policy. Your financial data stays on your device. We collect almost nothing.">
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://www.fincwin.com/privacy">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.fincwin.com/privacy">
+  <meta property="og:title" content="Privacy Policy — FincWin">
+  <meta property="og:description" content="FincWin Privacy Policy. Your financial data stays on your device. We collect almost nothing.">
+  <meta property="og:image" content="https://www.fincwin.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Privacy Policy — FincWin">
+  <meta name="twitter:description" content="FincWin Privacy Policy. Your financial data stays on your device.">
+  <meta name="twitter:image" content="https://www.fincwin.com/og-image.png">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/mkt.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --sage: #5a6e3f; --sage-lt: #dce8d4; --sage-dk: #3d4d2b;
-      --ink: #111111; --muted: #6b7280; --faint: #f5f4f0;
-      --white: #ffffff; --border: rgba(0,0,0,.08);
-      --sans: 'Hanken Grotesk', sans-serif; --serif: 'Instrument Serif', serif;
-    }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--sans); font-weight: 300; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; }
 
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 48px; background: rgba(255,255,255,.85); backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent; transition: border-color .3s;
-    }
-    nav.scrolled { border-color: var(--border); }
-    .nav-logo { font-size: 17px; font-weight: 500; letter-spacing: -.3px; color: var(--ink); text-decoration: none; }
-    .nav-logo span { color: var(--sage); }
-    /* New chip logo — header only (footer keeps its own .footer-brand styling) */
-    nav .nav-logo {
-      font-family: 'Instrument Serif', serif; font-size: 22px; font-weight: 400; letter-spacing: -.5px;
-      display: inline-flex; align-items: center; gap: 3px; line-height: 1;
-    }
-    nav .nav-logo span {
-      background: var(--sage); color: #fff; font-weight: 700;
-      padding: 1px 9px 2px; border-radius: 7px;
-    }
-    .nav-links { display: flex; align-items: center; gap: 32px; }
-    .nav-links a { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; transition: color .2s; }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-cta { font-size: 13px; font-weight: 500; color: var(--white) !important; background: var(--ink); padding: 9px 20px; border-radius: 50px; transition: background .2s !important; }
-    .nav-cta:hover { background: var(--sage) !important; }
+
+
+
+
+    /* Header/nav styled by the shared system in styles/mkt.css */
 
     .page-wrap { max-width: 720px; margin: 0 auto; padding: 160px 48px 100px; }
 
@@ -73,47 +56,27 @@
 
     .divider { height: 1px; background: var(--border); margin: 56px 0; }
 
-    footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.06); padding: 56px 48px 36px; }
-    .footer-inner { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: start; }
-    .footer-brand .nav-logo { color: white; font-size: 16px; }
-    .footer-brand .nav-logo span { color: #a8c48a; }
-    .footer-brand p { font-size: 13px; color: rgba(255,255,255,.3); margin-top: 10px; line-height: 1.5; max-width: 240px; }
-    .footer-cols { display: flex; gap: 56px; }
-    .footer-cols > div { display: flex; flex-direction: column; gap: 10px; }
-    .footer-cols h4 { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.25); margin-bottom: 4px; }
-    .footer-cols a { font-size: 13px; color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
-    .footer-cols a:hover { color: rgba(255,255,255,.7); }
-    .footer-bottom { max-width: 1060px; margin: 36px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06); font-size: 12px; color: rgba(255,255,255,.2);   display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-    .footer-copy { font-size: 12px; }
-    .footer-legal { display: flex; gap: 20px; }
-    .footer-legal a { color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
-    .footer-legal a:hover { color: rgba(255,255,255,.7); }
+    /* Footer styled by the shared system in styles/mkt.css */
 
     @media (max-width: 768px) {
-      nav { padding: 18px 24px; }
-      .nav-links a:not(.nav-cta) { display: none; }
       .page-wrap { padding: 120px 24px 80px; }
-      .footer-inner { grid-template-columns: 1fr; gap: 40px; }
-      .footer-cols { gap: 32px; flex-wrap: wrap; }
-      footer { padding: 48px 24px 28px; }
     }
   </style>
-  <link rel="stylesheet" href="styles/footer.css">
 </head>
 <body>
 
   <nav id="mainNav">
-    <a href="index.html" class="nav-logo">Finc<span>Win</span></a>
-    <div class="nav-links">
-      <a href="features.html">Features</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="compare.html">Compare</a>
-      <a href="use-cases.html">Use cases</a>
-      <a href="blog/index.html">Blog</a>
-      <a href="app.html">App</a>
-      <a href="app.html" class="nav-cta">Get started free</a>
-    </div>
-  </nav>
+  <a href="index.html" class="nav-logo">Finc<span>Win</span></a>
+  <div class="nav-links">
+    <a href="features.html">Features</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="compare.html">Compare</a>
+    <a href="use-cases.html">Use cases</a>
+    <a href="blog/index.html">Blog</a>
+    <a href="app.html">App</a>
+    <a href="signin.html#register" class="nav-cta">Get started free</a>
+  </div>
+</nav>
 
   <div class="page-wrap">
     <p class="page-eyebrow">Legal</p>
@@ -187,29 +150,35 @@
     <div class="policy-section">
       <h2>Contact</h2>
       <p>Questions about this policy or your data? Reach us at <a href="mailto:privacy@fincwin.com">privacy@fincwin.com</a>. We're a small team and will respond personally within 2 business days.</p>
-      <p>FincWin is operated by the company behind FincWin. For our registered address and business details, email us at the address above.</p>
+      <p>FincWin is operated by EA (doing business as FincWin), a company incorporated in Canada, with a business address at Wesbrook Mall, Vancouver, BC, V6S 0G9, Canada. For any questions about this policy or your data rights under GDPR, PIPEDA, or applicable privacy law, contact us at <a href="mailto:privacy@fincwin.com">privacy@fincwin.com</a>.</p>
     </div>
   </div>
 
   <footer class="mkt-footer">
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-brand"><a href="index.html" class="footer-logo">Finc<span>Win</span></a><p>The personal finance dashboard for people who want clarity, not complexity.</p></div>
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">Finc<span>Win</span></a>
+        <p>The personal finance dashboard for people who want clarity, not complexity.</p>
+      </div>
       <div class="footer-col"><h4>Product</h4><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="compare.html">Compare</a><a href="use-cases.html">Use cases</a><a href="app.html">Open app</a></div>
       <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="changelog.html">Changelog</a><a href="contact.html">Contact</a></div>
-      <div class="footer-col"><h4>Learn</h4><a href="blog/index.html">Blog</a><a href="help.html">Help guide</a></div>
+      <div class="footer-col"><h4>Learn</h4><a href="blog/index.html">Blog</a><a href="help.html">Help guide</a><a href="budget-categories.html">Budget categories</a></div>
     </div>
     <hr class="footer-divider">
-    <div class="footer-bottom"><p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p><div class="footer-legal"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="cookie-policy.html">Cookies</a></div></div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="cookie-policy.html">Cookies</a>
+        <button type="button" class="footer-cookie-btn" onclick="window.FincWinConsent && FincWinConsent.open()">Cookie settings</button>
+      </div>
+    </div>
   </div>
 </footer>
 
-  <script>
-    const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
-  </script>
-<script>document.querySelectorAll('.copy-year').forEach(function(e){e.textContent=new Date().getFullYear();});</script>
-<script src="js/mkt.js" defer></script>
-  <script src="js/consent.js" defer></script>
+  <script src="js/mkt.js" defer></script>
+<script src="js/consent.js" defer></script>
 </body>
 </html>

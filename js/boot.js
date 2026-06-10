@@ -877,8 +877,8 @@ document.addEventListener('keydown',function(e){
                   || !!window.navigator.standalone;
 
   // Increment session counter on each page load for the 3rd-session banner
-  var _sessionCount = parseInt(localStorage.getItem('finflow_session_count') || '0', 10) + 1;
-  localStorage.setItem('finflow_session_count', String(_sessionCount));
+  var _sessionCount = parseInt(localStorage.getItem('fincwin_session_count') || '0', 10) + 1;
+  localStorage.setItem('fincwin_session_count', String(_sessionCount));
 
   var _deferred = null;
 
@@ -900,7 +900,7 @@ document.addEventListener('keydown',function(e){
   }
 
   function _showBanner(){
-    if(localStorage.getItem('finflow_install_banner_dismissed')) return;
+    if(localStorage.getItem('fincwin_install_banner_dismissed')) return;
     if(document.getElementById('pwaInstallBanner')) return;
     var banner = document.createElement('div');
     banner.id = 'pwaInstallBanner';
@@ -916,7 +916,7 @@ document.addEventListener('keydown',function(e){
       document.documentElement.style.removeProperty('--banner-h');
     });
     banner.querySelector('.pwa-banner-dismiss').addEventListener('click', function(){
-      localStorage.setItem('finflow_install_banner_dismissed', '1');
+      localStorage.setItem('fincwin_install_banner_dismissed', '1');
       banner.remove();
       document.documentElement.style.removeProperty('--banner-h');
     });
@@ -1111,7 +1111,7 @@ async function resetAllData(){
     }
   }catch(e){}
   // Wipe localStorage
-  [SK,SK+'_migrated','finflow_onboarded',PIN_IDB_KEY,
+  [SK,SK+'_migrated','fincwin_onboarded',PIN_IDB_KEY,
    _CLAUDE_KEY,_OPENAI_KEY,_AI_PREF].forEach(k=>{
     try{localStorage.removeItem(k);}catch(e){}
   });
@@ -1141,15 +1141,97 @@ async function resetAllData(){
 }
 
 // ══════════════════════════════════════════════
+// ENTRY GUARD — auth for all users (freemium)
+//   • Licence key cached       → Pro/Lifetime; allow, then revalidate server-side.
+//   • No key, Firebase session → Free tier; allow.
+//   • No key, no session       → register a free account at signin.html.
+// The old model gated on a licence key alone, which locked Free and demo users
+// out of their own local data. We now gate on identity, not payment.
+// ══════════════════════════════════════════════
+async function _entryGuard(){
+  if (localStorage.getItem('fw_license_key')) {
+    _revalidateLicence();            // background; fail-open offline
+    return true;
+  }
+  const cfg = window.__FINCWIN_CONFIG__;
+  if (!cfg) { window.location.replace('./signin.html'); return false; }
+  const user = await _awaitFirebaseUser(cfg, 8000);
+  if (!user) { window.location.replace('./signin.html'); return false; }
+  return true;
+}
+
+async function _awaitFirebaseUser(cfg, timeoutMs){
+  try {
+    const [{ initializeApp, getApps, getApp }, { getAuth, onAuthStateChanged }] =
+      await Promise.all([
+        import('./vendor/firebase/firebase-app.js'),
+        import('./vendor/firebase/firebase-auth.js'),
+      ]);
+    const app  = getApps().length ? getApp() : initializeApp(cfg);
+    const auth = getAuth(app);
+    return await new Promise((resolve) => {
+      let settled = false;
+      const t = setTimeout(() => { if (!settled) { settled = true; resolve(null); } }, timeoutMs);
+      onAuthStateChanged(auth, (u) => {
+        if (settled) return;
+        settled = true; clearTimeout(t); resolve(u || null);
+      });
+    });
+  } catch { return null; }
+}
+
+// Server-side licence check — the old index.html validation, now living in the
+// app. Non-blocking and fail-open: transient/offline failures never lock a user
+// out; only a definitive invalid/expired licence downgrades them to Free.
+async function _revalidateLicence(){
+  const key  = localStorage.getItem('fw_license_key');
+  const inst = localStorage.getItem('fw_instance_id');
+  if (!key || !inst) return;
+  let data;
+  try {
+    const res = await fetch('/api/validate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ license_key: key, instance_id: inst }),
+    });
+    data = await res.json();
+  } catch { return; }                // offline / network — keep current tier
+  if (['network_error','rate_limited','server_error'].includes(data.reason)) return;
+  if (!data.valid) {
+    localStorage.removeItem('fw_license_key');
+    localStorage.removeItem('fw_instance_id');
+    localStorage.removeItem('fw_plan');
+    if (typeof S !== 'undefined') S.tier = 'free';
+    _showLicenceBanner(data.reason || 'invalid_key');
+  } else if (data.plan) {
+    localStorage.setItem('fw_plan', data.plan);
+  }
+}
+
+function _showLicenceBanner(reason){
+  if (document.getElementById('_fw_lic_banner')) return;
+  var b = document.createElement('div');
+  b.id = '_fw_lic_banner';
+  b.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9998;padding:11px 16px;background:#c53030;color:#fff;font-size:14px;text-align:center;';
+  b.innerHTML = 'Your licence could not be validated (' + reason + '). You\'ve been moved to the Free plan. ' +
+                '<a href="signin.html#activate" style="color:#fff;text-decoration:underline;">Re-activate</a>';
+  (document.body || document.documentElement).prepend(b);
+}
+
+// ══════════════════════════════════════════════
 // BOOT
 // ══════════════════════════════════════════════
 (async function boot(){
-  // Returning users (completed onboarding) must have an active licence key.
-  // First-time visitors are allowed through so onboarding/demo can run.
-  if (!localStorage.getItem('fw_license_key') && localStorage.getItem('finflow_onboarded')) {
-    window.location.replace('./signin.html');
-    return;
-  }
+  // Entry guard — require a free account (Firebase session) OR a licence key.
+  // Marketing (index.html) links here; unauthenticated visitors are routed to
+  // signin.html to register a free account, then sent back to app.html.
+  if (!(await _entryGuard())) return;
+  // Authorised — lift the auth cloak now, before checkLock()'s PIN screen (a
+  // body child the cloak would otherwise hide). On a redirect the guard returns
+  // early above, so the dashboard stays hidden behind the splash, no flash.
+  document.documentElement.classList.remove('auth-cloak');
+  // Marketing nav reads this to show the "App" link to signed-in users.
+  localStorage.setItem('fw_signed_in', '1');
   if(!window.crypto || !window.crypto.subtle){
     var _cryptoErr=document.createElement('div');
     _cryptoErr.style.cssText='position:fixed;top:0;left:0;right:0;padding:14px 16px;background:#c53030;color:#fff;font-size:15px;text-align:center;z-index:9999;';
@@ -1193,7 +1275,7 @@ document.getElementById('btn-snowball').classList.toggle('active',S.strategy==='
   document.getElementById('loanBadge').textContent=S.loans.length;
   // Show demo banner or onboarding for first-time users
   checkDemoBanner();
-  if(!localStorage.getItem('finflow_onboarded')) showOnboarding();
+  if(!localStorage.getItem('fincwin_onboarded')) showOnboarding();
   // Wire ob-label divs to adjacent inputs with aria-labelledby (accessibility fix).
   // This runs once on boot for all static HTML labels without needing to change 30+
   // div→label tags in index.html.

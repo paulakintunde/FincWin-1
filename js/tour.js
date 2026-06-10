@@ -1,11 +1,11 @@
 // === tour.js ===
 // 5-step onboarding spotlight tour. Fires once after wizard completion.
-// Gated by localStorage flag 'finflow_tour_done'.
+// Gated by localStorage flag 'fincwin_tour_done'.
 // Replayable via replayTour() called from Settings.
 
 (function(){
 
-var TOUR_FLAG = 'finflow_tour_done';
+var TOUR_FLAG = 'fincwin_tour_done';
 
 var TOUR_STEPS = [
   {

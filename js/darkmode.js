@@ -2,8 +2,14 @@
 // Restores both the design system and dark mode before first paint to prevent FOUC.
 // Also injects only the Google Font(s) needed for the active theme — avoids loading 8 families.
 (function(){
+  // One-time migration: rename finflow_* keys → fincwin_* before any reads.
+  (function(){
+    var LK=['dark_cache','session_count','install_banner_dismissed','onboarded','claude_key','openai_key','ai_provider','tour_done'];
+    try{LK.forEach(function(k){var v=localStorage.getItem('finflow_'+k);if(v!==null){localStorage.setItem('fincwin_'+k,v);localStorage.removeItem('finflow_'+k);}});}catch(e){}
+    try{var fx=sessionStorage.getItem('finflow_fx_rates');if(fx!==null){sessionStorage.setItem('fincwin_fx_rates',fx);sessionStorage.removeItem('finflow_fx_rates');}}catch(e){}
+  }());
   try {
-    var dark   = localStorage.getItem('finflow_dark_cache');
+    var dark   = localStorage.getItem('fincwin_dark_cache');
     var design = localStorage.getItem('fincwin_design') || '';
     if (dark === 'true') document.body.classList.add('dark');
     if (design) document.body.setAttribute('data-design', design);

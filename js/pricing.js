@@ -4,6 +4,17 @@
 (function () {
   'use strict';
 
+  // Single-source pricing — update these when prices change.
+  var PRICES = {
+    annualInt:      '39',
+    monthlyInt:     '4',
+    monthlyCents:   '.99',
+    annualYrLabel:  '$39/yr',
+    monthlyMoLabel: '$4.99/mo',
+    altAnnual:      '$39/year',
+    altMonthly:     '$4.99/month',
+  };
+
   // Billing toggle — updates Pro card price, tagline, period, and CTA
   document.querySelectorAll('.btog-opt').forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -18,16 +29,16 @@
       var saveEl   = document.getElementById('btog-save-pill');
 
       if (annual) {
-        amountEl.innerHTML   = '<sup>$</sup>39';
+        amountEl.innerHTML   = '<sup>$</sup>' + PRICES.annualInt;
         tagEl.textContent    = 'Full access, billed annually';
-        periodEl.textContent = 'Or $4.99/month. Cancel anytime.';
-        ctaEl.textContent    = 'Get Pro — $39/yr';
+        periodEl.textContent = 'Or ' + PRICES.altMonthly + '. Cancel anytime.';
+        ctaEl.textContent    = 'Get Pro — ' + PRICES.annualYrLabel;
         saveEl.style.opacity = '1';
       } else {
-        amountEl.innerHTML   = '<sup>$</sup>4<span class="price-cents">.99</span>';
+        amountEl.innerHTML   = '<sup>$</sup>' + PRICES.monthlyInt + '<span class="price-cents">' + PRICES.monthlyCents + '</span>';
         tagEl.textContent    = 'Full access, billed monthly';
-        periodEl.textContent = 'Or $39/year — save 35%.';
-        ctaEl.textContent    = 'Get Pro — $4.99/mo';
+        periodEl.textContent = 'Or ' + PRICES.altAnnual + ' — save 35%.';
+        ctaEl.textContent    = 'Get Pro — ' + PRICES.monthlyMoLabel;
         saveEl.style.opacity = '0';
       }
     });

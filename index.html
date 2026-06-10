@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free Personal Finance App — FincWin</title>
-  <meta name="description" content="FincWin is the free budget app that brings income, spending, debt, and savings into one view. No bank login. No subscription required. Your data stays on your device. Pro from $39/year.">
+  <meta name="description" content="Free budget app that brings income, spending, debt and savings into one view. No bank login, no subscription. Data stays on your device.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.fincwin.com/">
   <link rel="alternate" hreflang="en" href="https://www.fincwin.com/">
@@ -13,12 +13,15 @@
   <meta property="og:url" content="https://www.fincwin.com/">
   <meta property="og:title" content="Free Personal Finance App — FincWin">
   <meta property="og:description" content="FincWin brings income, spending, debt, and savings into one clear dashboard. No bank login. Free to start. Pro from $39/year.">
-  <meta property="og:image" content="https://www.fincwin.com/og-image.svg">
+  <meta property="og:image" content="https://www.fincwin.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Free Personal Finance App — FincWin">
   <meta name="twitter:description" content="FincWin brings income, spending, debt, and savings into one clear dashboard. No bank login. Free to start. Pro from $39/year.">
-  <meta name="twitter:image" content="https://www.fincwin.com/og-image.svg">
+  <meta name="twitter:image" content="https://www.fincwin.com/og-image.png">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -164,7 +167,7 @@
       color: var(--white); margin-bottom: 14px; line-height: 1.3;
     }
     .problem-card h3 em { font-style: normal; color: #a8c48a; }
-    .problem-card p { font-size: 14px; color: rgba(255,255,255,.42); line-height: 1.75; }
+    .problem-card p { font-size: 14px; color: rgba(255,255,255,.65); line-height: 1.75; }
 
     /* ── FEATURES ────────────────────────────── */
     .features { padding: 96px 48px; }
@@ -409,7 +412,7 @@
       font-weight: 400; line-height: 1.08; color: var(--white); margin-bottom: 24px;
     }
     .final-cta h2 em { font-style: normal; color: #a8c48a; }
-    .final-cta p { font-size: 17px; font-weight: 300; color: rgba(255,255,255,.5); line-height: 1.75; margin-bottom: 44px; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .final-cta p { font-size: 17px; font-weight: 300; color: rgba(255,255,255,.7); line-height: 1.75; margin-bottom: 44px; max-width: 520px; margin-left: auto; margin-right: auto; }
     .final-cta .cta-pair { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
     /* ── RESPONSIVE ───────────────────────────── */
@@ -515,7 +518,7 @@
     <a href="use-cases.html">Use cases</a>
     <a href="blog/index.html">Blog</a>
     <a href="app.html">App</a>
-    <a href="app.html" class="nav-cta">Get started free</a>
+    <a href="signin.html#register" class="nav-cta">Get started free</a>
   </div>
 </nav>
 
@@ -526,7 +529,7 @@
   <h2>Your money has been waiting for a plan.</h2>
   <p class="hero-sub">FincWin brings your income, spending, debt, and savings together into one clear dashboard — so you can stop guessing and start making confident decisions.</p>
   <div class="hero-actions">
-    <a href="app.html" class="btn-primary">Get started free →</a>
+    <a href="signin.html#register" class="btn-primary">Get started free →</a>
     <a href="#features" class="btn-ghost">See how it works</a>
   </div>
   <p class="hero-footnote">
@@ -845,7 +848,7 @@
         <div class="card-tier">Free</div>
         <div class="card-price"><span class="amount">$0</span></div>
         <div class="card-tagline">Try it free. No card, no expiry.</div>
-        <a href="app.html" class="card-cta free-cta">Get started free</a>
+        <a href="signin.html#register" class="card-cta free-cta">Get started free</a>
         <ul class="card-features">
           <li class="section-head">Included</li>
           <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Core dashboard</li>
@@ -954,7 +957,7 @@
     <h2>Your next paycheck<br><em>deserves a plan.</em></h2>
     <p>Most people spend more time researching a new phone than planning their finances for the month. FincWin takes 10 minutes to set up and gives you a view of your money you've probably never had before.</p>
     <div class="cta-pair">
-      <a href="app.html" class="btn-primary">Get started free →</a>
+      <a href="signin.html#register" class="btn-primary">Get started free →</a>
       <a href="pricing.html" class="btn-ghost-inv">View pricing</a>
     </div>
   </div>
@@ -964,14 +967,24 @@
 <footer class="mkt-footer">
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-brand"><a href="index.html" class="footer-logo">Finc<span>Win</span></a><p>The personal finance dashboard for people who want clarity, not complexity.</p></div>
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">Finc<span>Win</span></a>
+        <p>The personal finance dashboard for people who want clarity, not complexity.</p>
+      </div>
       <div class="footer-col"><h4>Product</h4><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="compare.html">Compare</a><a href="use-cases.html">Use cases</a><a href="app.html">Open app</a></div>
       <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="changelog.html">Changelog</a><a href="contact.html">Contact</a></div>
-      
-      <div class="footer-col"><h4>Learn</h4><a href="blog/index.html">Blog</a><a href="help.html">Help guide</a></div>
+      <div class="footer-col"><h4>Learn</h4><a href="blog/index.html">Blog</a><a href="help.html">Help guide</a><a href="budget-categories.html">Budget categories</a></div>
     </div>
     <hr class="footer-divider">
-    <div class="footer-bottom"><p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p><div class="footer-legal"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="cookie-policy.html">Cookies</a></div></div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="cookie-policy.html">Cookies</a>
+        <button type="button" class="footer-cookie-btn" onclick="window.FincWinConsent && FincWinConsent.open()">Cookie settings</button>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -979,6 +992,6 @@
 
 <script src="js/landing.js" defer></script>
 <script src="js/mkt.js" defer></script>
-  <script src="js/consent.js" defer></script>
+<script src="js/consent.js" defer></script>
 </body>
 </html>

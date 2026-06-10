@@ -21,6 +21,7 @@ vitest.config.*
 
 # Planning & internal documentation
 docs/
+.planning/
 CONTENT-STRATEGY.md
 STRATEGY-GUIDE.md
 TEMPLATING-PLAN.md
@@ -34,3 +35,9 @@ firestore.rules
 
 # Local agent / editor config
 .claude/
+
+# Internal docs - not part of the public site
+README.md
+DEPLOY.md
+PRODUCTION-SETUP.md
+VERCEL-SETUP.md

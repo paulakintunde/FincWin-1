@@ -2,23 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="robots" content="index, follow">
   <title>Dining Budget Category — FincWin</title>
   <meta name="description" content="Track restaurants, takeout, coffee, and delivery. FincWin's Dining envelope shows the true cost of eating out.">
+  <link rel="canonical" href="https://www.fincwin.com/cat-dining">
+  <link rel="alternate" hreflang="en" href="https://www.fincwin.com/cat-dining">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.fincwin.com/cat-dining">
+  <meta property="og:title" content="Dining Budget Category  |  FincWin">
+  <meta property="og:description" content="Track restaurants, takeout, coffee, and delivery. FincWin's Dining envelope shows the true cost of eating out.">
+  <meta property="og:image" content="https://www.fincwin.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dining Budget Category  |  FincWin">
+  <meta name="twitter:description" content="Track restaurants, takeout, coffee, and delivery. FincWin's Dining envelope shows the true cost of eating out.">
+  <meta name="twitter:image" content="https://www.fincwin.com/og-image.png">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/mkt.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --sage: #5a6e3f; --sage-lt: #dce8d4; --sage-dk: #3d4d2b; --ink: #111111; --muted: #6b7280; --faint: #f5f4f0; --white: #ffffff; --border: rgba(0,0,0,.08); --sans: 'Hanken Grotesk', sans-serif; --serif: 'Instrument Serif', serif; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--sans); font-weight: 300; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 22px 48px; background: rgba(255,255,255,.85); backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color .3s; }
-    nav.scrolled { border-color: var(--border); }
-    .nav-logo { font-size: 17px; font-weight: 500; letter-spacing: -.3px; color: var(--ink); text-decoration: none; } .nav-logo span { color: var(--sage); }
-    .nav-links { display: flex; align-items: center; gap: 32px; }
-    .nav-links a { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; transition: color .2s; } .nav-links a:hover { color: var(--ink); }
-    .nav-cta { font-size: 13px; font-weight: 500; color: var(--white) !important; background: var(--ink); padding: 9px 20px; border-radius: 50px; transition: background .2s !important; } .nav-cta:hover { background: var(--sage) !important; }
+
+
+
+
+    /* Header/nav styled by the shared system in styles/mkt.css */
     .hero { min-height: 88vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 160px 24px 100px; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(90,110,63,.07) 0%, transparent 70%); pointer-events: none; }
     .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 24px; opacity: 0; animation: fadeUp .6s .1s forwards; }
@@ -70,27 +80,32 @@
     .cat-nav h4 { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
     .cat-nav-grid { display: flex; flex-wrap: wrap; gap: 10px; }
     .cat-link { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; padding: 7px 16px; border: 1px solid var(--border); border-radius: 50px; transition: all .2s; } .cat-link:hover { border-color: var(--sage); color: var(--sage); } .cat-link.active { background: var(--sage); color: white; border-color: var(--sage); }
-    footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.06); padding: 56px 48px 36px; }
-    .footer-inner { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: start; }
-    .footer-brand p { font-size: 13px; color: rgba(255,255,255,.3); margin-top: 10px; line-height: 1.5; max-width: 240px; }
-    .footer-cols { display: flex; gap: 56px; } .footer-cols > div { display: flex; flex-direction: column; gap: 10px; }
-    .footer-cols h4 { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.25); margin-bottom: 4px; }
-    .footer-cols a { font-size: 13px; color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; } .footer-cols a:hover { color: rgba(255,255,255,.7); }
-    .footer-bottom { max-width: 1060px; margin: 36px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06); font-size: 12px; color: rgba(255,255,255,.2); }
+    /* Footer styled by the shared system in styles/mkt.css */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; } .reveal.visible { opacity: 1; transform: none; }
-    @media (max-width: 768px) { nav { padding: 18px 24px; } .nav-links a:not(.nav-cta) { display: none; } section, .pain-section, .gamification-section, .final-cta-section, .cat-nav { padding: 72px 24px; } .pain-grid, .cards-grid { grid-template-columns: 1fr; } .footer-inner { grid-template-columns: 1fr; gap: 40px; } .footer-cols { gap: 32px; flex-wrap: wrap; } footer { padding: 48px 24px 28px; } }
+    @media (max-width: 768px) {   section, .pain-section, .gamification-section, .final-cta-section, .cat-nav { padding: 72px 24px; } .pain-grid, .cards-grid { grid-template-columns: 1fr; }    }
   </style>
 </head>
 <body>
-  <nav id="nav"><a href="index.html" class="nav-logo">Finc<span>Win</span></a><div class="nav-links"><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="blog/index.html">Blog</a><a href="app.html">App</a><a href="app.html" class="nav-cta">Get started free</a></div></nav>
+  <nav id="mainNav">
+  <a href="index.html" class="nav-logo">Finc<span>Win</span></a>
+  <div class="nav-links">
+    <a href="features.html">Features</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="compare.html">Compare</a>
+    <a href="use-cases.html">Use cases</a>
+    <a href="blog/index.html">Blog</a>
+    <a href="app.html">App</a>
+    <a href="signin.html#register" class="nav-cta">Get started free</a>
+  </div>
+</nav>
 
   <section class="hero">
     <p class="hero-eyebrow">Budget Category — Dining</p>
     <h1>Eating out is one of life's<br>great pleasures. <em>Until you see the total.</em></h1>
     <p class="hero-sub">Restaurants, takeout, coffee shops, food delivery — dining out adds up faster than any other discretionary category. FincWin's Dining envelope makes every meal visible, not just memorable.</p>
     <div class="hero-actions">
-      <a href="app.html" class="btn-primary">Track Dining spend free →</a>
+      <a href="signin.html#register" class="btn-primary">Track Dining spend free →</a>
       <a href="pricing.html" class="btn-ghost">View pricing</a>
     </div>
   </section>
@@ -160,7 +175,7 @@
       <h2>Track your Dining spend free.<br><em>Enjoy every meal. Know every dollar.</em></h2>
       <p class="section-sub">Log your first restaurant or coffee purchase in 10 seconds. By month-end, you'll have the most honest dining picture you've ever seen.</p>
       <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-        <a href="app.html" class="btn-primary">Open the app free →</a>
+        <a href="signin.html#register" class="btn-primary">Open the app free →</a>
         <a href="features.html" class="btn-ghost">Explore all features</a>
       </div>
     </div>
@@ -168,12 +183,35 @@
 
   <div class="cat-nav"><div class="cat-nav-inner"><h4>Browse all 14 categories</h4><div class="cat-nav-grid"><a href="cat-banking.html" class="cat-link">Banking</a><a href="cat-telecom.html" class="cat-link">Telecom</a><a href="cat-subscriptions.html" class="cat-link">Subscriptions</a><a href="cat-utilities.html" class="cat-link">Utilities</a><a href="cat-transport.html" class="cat-link">Transport</a><a href="cat-groceries.html" class="cat-link">Groceries</a><a href="cat-healthcare.html" class="cat-link">Healthcare</a><a href="cat-education.html" class="cat-link">Education</a><a href="cat-housing.html" class="cat-link">Housing</a><a href="cat-entertainment.html" class="cat-link">Entertainment</a><a href="cat-clothing.html" class="cat-link">Clothing</a><a href="cat-dining.html" class="cat-link active">Dining</a><a href="cat-personal.html" class="cat-link">Personal</a><a href="cat-other.html" class="cat-link">Other</a></div></div></div>
 
-  <footer><div class="footer-inner"><div class="footer-brand"><a href="index.html" class="nav-logo">Finc<span>Win</span></a><p>Personal finance clarity, offline and private.</p></div><div class="footer-cols"><div><h4>Product</h4><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="compare.html">Compare</a><a href="use-cases.html">Use cases</a><a href="app.html">Open app</a></div><div><h4>Company</h4><a href="about.html">About</a><a href="changelog.html">Changelog</a><a href="contact.html">Contact</a></div><div><h4>Learn</h4><a href="blog/index.html">Blog</a><a href="help.html">Help guide</a></div><div><h4>Legal</h4><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div></div></div><div class="footer-bottom">© 2026 FincWin. All rights reserved.</div></footer>
+  <footer class="mkt-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">Finc<span>Win</span></a>
+        <p>The personal finance dashboard for people who want clarity, not complexity.</p>
+      </div>
+      <div class="footer-col"><h4>Product</h4><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="compare.html">Compare</a><a href="use-cases.html">Use cases</a><a href="app.html">Open app</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="changelog.html">Changelog</a><a href="contact.html">Contact</a></div>
+      <div class="footer-col"><h4>Learn</h4><a href="blog/index.html">Blog</a><a href="help.html">Help guide</a><a href="budget-categories.html">Budget categories</a></div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
+      <p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="cookie-policy.html">Cookies</a>
+        <button type="button" class="footer-cookie-btn" onclick="window.FincWinConsent && FincWinConsent.open()">Cookie settings</button>
+      </div>
+    </div>
+  </div>
+</footer>
   <script>
-    const nav = document.getElementById('nav'); window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
+    // scroll border handled by js/mkt.js via #mainNav 
     const reveals = document.querySelectorAll('.reveal'); const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }); reveals.forEach(el => io.observe(el));
   </script>
-  <script src="js/consent.js" defer></script>
+  <script src="js/mkt.js" defer></script>
+<script src="js/consent.js" defer></script>
 </body>
 </html>
 

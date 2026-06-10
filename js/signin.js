@@ -34,18 +34,21 @@ function _applyFirestoreDoc(d) {
     const { onAuthStateChanged } = await import('./vendor/firebase/firebase-auth.js');
     onAuthStateChanged(_fbAuth, async (user) => {
       if (!user) return;
+      localStorage.setItem('fw_signed_in', '1');
+      // Any signed-in user belongs in the app. Restore a cached licence first so
+      // the app boots into the correct tier, then route straight to app.html.
       if (localStorage.getItem('fw_license_key')) {
-        window.location.href = 'account.html'; return;
+        window.location.href = 'app.html'; return;
       }
       try {
         const { doc, getDoc } = await import('./vendor/firebase/firebase-firestore.js');
         const snap = await getDoc(doc(_fbDb, 'users', user.uid));
-        if (snap.exists() && snap.data().licenseKey) {
-          _applyFirestoreDoc(snap.data());
-          window.location.href = 'account.html';
+        if (snap.exists()) {
+          if (snap.data().licenseKey)   _applyFirestoreDoc(snap.data());
+          else if (snap.data().profile) localStorage.setItem('fw_profile', JSON.stringify(snap.data().profile));
         }
-        // else: signed in but no key — stay and let user activate
       } catch {}
+      window.location.href = 'app.html';
     });
   } catch {}
 })();
@@ -84,6 +87,7 @@ async function handleSignin(e) {
     await _initFirebase();
     const { signInWithEmailAndPassword } = await import('./vendor/firebase/firebase-auth.js');
     const { user } = await signInWithEmailAndPassword(_fbAuth, email, pass);
+    localStorage.setItem('fw_signed_in', '1');
 
     if (!localStorage.getItem('fw_license_key')) {
       try {
@@ -91,16 +95,16 @@ async function handleSignin(e) {
         const snap = await getDoc(doc(_fbDb, 'users', user.uid));
         if (snap.exists()) {
           const d = snap.data();
-          if (d.licenseKey) { _applyFirestoreDoc(d); window.location.href = 'account.html'; return; }
+          if (d.licenseKey) { _applyFirestoreDoc(d); window.location.href = 'app.html'; return; }
           if (d.profile)    localStorage.setItem('fw_profile', JSON.stringify(d.profile));
         }
       } catch {}
-      // Signed in as a Free user (no licence key) — go to the account hub.
-      // account.html renders the Free-plan view; no forced licence activation.
-      window.location.href = 'account.html';
+      // Signed in as a Free user (no licence key) — go straight into the app.
+      // The app boots the Free tier; paid features gate themselves via requirePlan().
+      window.location.href = 'app.html';
       return;
     }
-    window.location.href = 'account.html';
+    window.location.href = 'app.html';
   } catch (err) {
     btn.textContent = 'Sign in'; btn.disabled = false;
     _showStatus(statusEl, 'error', _fbMsg(err.code));
@@ -139,6 +143,7 @@ async function handleRegister(e) {
       userCred = await createUserWithEmailAndPassword(_fbAuth, email, pass);
     }
     const user = userCred.user;
+    localStorage.setItem('fw_signed_in', '1');
 
     if (fname) await updateProfile(user, { displayName: fname + (lname ? ' ' + lname : '') });
 
@@ -161,8 +166,8 @@ async function handleRegister(e) {
     }
 
     // No key provided — show success then redirect to account
-    _showStatus(statusEl, 'info', 'Account created! Taking you to your account…');
-    setTimeout(() => { window.location.href = 'account.html'; }, 1500);
+    _showStatus(statusEl, 'info', 'Account created! Taking you into FincWin…');
+    setTimeout(() => { window.location.href = 'app.html'; }, 1500);
   } catch (err) {
     btn.textContent = 'Create account'; btn.disabled = false;
     _showStatus(statusEl, 'error', _fbMsg(err.code));
@@ -195,6 +200,7 @@ async function activateLicence() {
     const data = await res.json();
 
     if (data.activated) {
+      localStorage.setItem('fw_signed_in', '1');
       const instanceId = data.instance?.id || '';
       const plan       = data.meta?.variant_name || 'Pro';
 
@@ -263,13 +269,27 @@ async function showForgot(e) {
     document.getElementById('si-email').focus();
     return;
   }
+  // Self-hosted reset (api/forgot-password.js) sends the email from fincwin.com
+  // via Resend with a clean subject and a fincwin.com/reset link. The endpoint
+  // always returns a generic success so it can't be used to probe which emails
+  // have accounts — so we show the same confirmation regardless of the outcome.
   try {
-    await _initFirebase();
-    const { sendPasswordResetEmail } = await import('./vendor/firebase/firebase-auth.js');
-    await sendPasswordResetEmail(_fbAuth, email);
-    _showStatus(statusEl, 'info', 'Password reset email sent to ' + email + '. Check your inbox (and spam folder).');
+    const res  = await fetch('/api/forgot-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    if (res.status === 429) {
+      _showStatus(statusEl, 'error', 'Too many attempts — please try again in a minute.');
+      return;
+    }
+    if (!res.ok) {
+      _showStatus(statusEl, 'error', 'Could not send the reset email. Please try again.');
+      return;
+    }
+    _showStatus(statusEl, 'info', 'If an account exists for ' + email + ', a password reset link is on its way. Check your inbox (and spam folder).');
   } catch (err) {
-    _showStatus(statusEl, 'error', _fbMsg(err.code));
+    _showStatus(statusEl, 'error', 'Network error. Check your connection and try again.');
   }
 }
 
@@ -350,4 +370,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Hash-based initial tab routing
   if (window.location.hash === '#register') switchTab('register');
+  else if (window.location.hash === '#activate') switchTab('activate');
 });

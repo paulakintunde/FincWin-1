@@ -1,6 +1,6 @@
 // PERF-03: bump this string on every deploy that changes static assets so
 // existing installs pick up the new files on next visit.
-const CACHE = 'fincwin-v6';
+const CACHE = 'fincwin-v7';
 const ASSETS = [
   './',
   './app.html',
@@ -42,6 +42,7 @@ const ASSETS = [
   './js/sync.js',
   './js/events.js',
   './js/bulk-add.js',
+  './js/investments.js',
   './js/config.fallback.js',
   './icon.svg',
   './icon-maskable.svg'

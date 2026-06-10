@@ -10,11 +10,14 @@
   <meta property="og:url" content="{{CANONICAL_URL}}">
   <meta property="og:title" content="{{OG_TITLE}} — FincWin">
   <meta property="og:description" content="{{OG_DESCRIPTION}}">
-  <meta property="og:image" content="https://www.fincwin.com/og-image.svg">
+  <meta property="og:image" content="https://www.fincwin.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{TWITTER_TITLE}}">
   <meta name="twitter:description" content="{{TWITTER_DESCRIPTION}}">
-  <meta name="twitter:image" content="https://www.fincwin.com/og-image.svg">
+  <meta name="twitter:image" content="https://www.fincwin.com/og-image.png">
   <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -63,7 +66,7 @@
     <a href="{{BASE}}use-cases.html">Use cases</a>
     <a href="{{BASE}}blog/index.html" class="active">Blog</a>
     <a href="{{BASE}}app.html">App</a>
-    <a href="{{BASE}}app.html" class="nav-cta">Get started free</a>
+    <a href="{{BASE}}signin.html#register" class="nav-cta">Get started free</a>
   </div>
 </nav>
 <div id="blogSubNav" role="navigation" aria-label="Blog navigation">
@@ -105,7 +108,7 @@
     <div class="post-cta">
       <h3>{{POST_CTA_HEADLINE}}</h3>
       <p>{{POST_CTA_BODY}}</p>
-      <a href="{{BASE}}app.html" class="btn-primary">Open FincWin free →</a>
+      <a href="{{BASE}}signin.html#register" class="btn-primary">Open FincWin free →</a>
     </div>
 
     <div class="related-posts">
@@ -123,7 +126,7 @@
       <div class="footer-brand"><a href="{{BASE}}index.html" class="footer-logo">Finc<span>Win</span></a><p>The personal finance dashboard for people who want clarity, not complexity.</p></div>
       <div class="footer-col"><h4>Product</h4><a href="{{BASE}}features.html">Features</a><a href="{{BASE}}pricing.html">Pricing</a><a href="{{BASE}}compare.html">Compare</a><a href="{{BASE}}use-cases.html">Use cases</a><a href="{{BASE}}app.html">Open app</a></div>
       <div class="footer-col"><h4>Company</h4><a href="{{BASE}}about.html">About</a><a href="{{BASE}}changelog.html">Changelog</a><a href="{{BASE}}contact.html">Contact</a></div>
-      <div class="footer-col"><h4>Learn</h4><a href="{{BASE}}blog/index.html">Blog</a><a href="{{BASE}}help.html">Help guide</a></div>
+      <div class="footer-col"><h4>Learn</h4><a href="{{BASE}}blog/index.html">Blog</a><a href="{{BASE}}help.html">Help guide</a><a href="{{BASE}}budget-categories.html">Budget categories</a></div>
     </div>
     <hr class="footer-divider">
     <div class="footer-bottom"><p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p><div class="footer-legal"><a href="{{BASE}}privacy.html">Privacy</a><a href="{{BASE}}terms.html">Terms</a><a href="{{BASE}}cookie-policy.html">Cookies</a></div></div>
@@ -134,5 +137,6 @@
 </script>
 <script>document.querySelectorAll('.copy-year').forEach(function(e){e.textContent=new Date().getFullYear();});</script>
 <script src="{{BASE}}js/mkt.js" defer></script>
+<script src="{{BASE}}js/consent.js" defer></script>
 </body>
 </html>

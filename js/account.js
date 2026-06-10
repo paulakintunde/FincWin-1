@@ -566,7 +566,7 @@ async function activateNewKey() {
 function clearAccountData() {
   const c = prompt('Type CLEAR to remove all FincWin account data from this device:');
   if (c !== 'CLEAR') return;
-  ['fw_license_key', 'fw_instance_id', 'fw_instance_name', 'fw_plan', 'fw_profile'].forEach(k =>
+  ['fw_license_key', 'fw_instance_id', 'fw_instance_name', 'fw_plan', 'fw_profile', 'fw_signed_in'].forEach(k =>
     localStorage.removeItem(k)
   );
   showToast('Account data cleared — redirecting…');
@@ -580,6 +580,7 @@ function signOut(e) {
   localStorage.removeItem('fw_instance_name');
   localStorage.removeItem('fw_license_key');
   localStorage.removeItem('fw_plan');
+  localStorage.removeItem('fw_signed_in');
   if (typeof window._fbSignOut === 'function') {
     window._fbSignOut().catch(() => {}).finally(() => { window.location.href = 'signin.html'; });
   } else {
