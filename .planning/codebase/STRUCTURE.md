@@ -1,292 +1,394 @@
 <!-- refreshed: 2026-06-10 -->
-# File Structure
+# Codebase Structure
 
 **Analysis Date:** 2026-06-10
 
-## Root Layout
+## Directory Layout
 
 ```
 freetinz-stack/
-├── index.html              Marketing homepage (FincWin)
-├── app.html                SPA app shell — the full finance dashboard
-├── signin.html             Auth page (sign in / register / activate)
-├── account.html            User account management
-├── admin.html              Internal admin panel
-├── pricing.html            Pricing / upgrade page
-├── features.html           Features overview page
-├── compare.html            Competitor comparison hub
-├── use-cases.html          Use-cases hub
-├── about.html              About page
-├── changelog.html          Product changelog
-├── help.html               Help/FAQ
-├── contact.html            Contact form page
-├── privacy.html            Privacy policy
-├── terms.html              Terms of service
-├── cookie-policy.html      Cookie policy
-├── 404.html                Not-found page
-├── no-bank-sync-budget.html   Niche landing (generated)
-├── offline-budget-app.html    Niche landing (generated)
-├── private-finance-app.html   Niche landing (generated)
-├── budget-categories.html  Standalone SEO page
-├── cat-*.html              Category pages (14 files: banking, dining, etc.)
-├── manifest.json           PWA web app manifest
-├── service-worker.js       Offline cache service worker (cache: fincwin-v6)
-├── robots.txt              Search crawler directives
-├── sitemap.xml             XML sitemap
-├── firestore.rules         Firebase security rules (committed, deployed via CLI)
-├── vercel.json             Deployment config — rewrites, redirects, headers, CSP
-├── package.json            Dev scripts + devDependencies (vitest, playwright)
-├── server.js               Local dev HTTP server (port 4141, development only)
-├── favicon.svg / favicon-32.png  Site favicon
-├── icon-*.png / icon.svg   PWA icons (180, 192, 512, maskable)
-├── og-image.png            Open Graph image
-├── *.mjs                   One-off audit/diagnostic scripts (not part of app)
-└── node_modules/           Dev dependencies only
+├── index.html                  # Marketing home page (hand-authored)
+├── app.html                    # PWA app shell (hand-authored, noindex)
+├── signin.html                 # Auth page (hand-authored, noindex)
+├── account.html                # Account management (hand-authored, noindex)
+├── admin.html                  # Admin panel (hand-authored, noindex)
+├── pricing.html                # Pricing page (hand-authored)
+├── features.html               # Features index (hand-authored)
+├── compare.html                # Compare index (hand-authored)
+├── use-cases.html              # Use cases index (hand-authored)
+├── about.html                  # About page (hand-authored)
+├── changelog.html              # Changelog (hand-authored)
+├── contact.html                # Contact page (hand-authored)
+├── help.html                   # Help guide (hand-authored)
+├── privacy.html                # Privacy policy (hand-authored)
+├── terms.html                  # Terms of service (hand-authored)
+├── cookie-policy.html          # Cookie policy (hand-authored)
+├── 404.html                    # Custom 404 page
+├── budget-categories.html      # SEO landing page (hand-authored)
+├── no-bank-sync-budget.html    # Niche landing (BUILD-GENERATED)
+├── offline-budget-app.html     # Niche landing (BUILD-GENERATED)
+├── private-finance-app.html    # Niche landing (BUILD-GENERATED)
+│
+│   # Expense category pages (hand-authored, noindex per robots.txt)
+├── cat-banking.html
+├── cat-clothing.html  ...      # cat-*.html (14 files total)
+│
+├── features/                   # Feature detail pages (BUILD-GENERATED)
+│   ├── ai-coach.html
+│   ├── analytics-dashboard.html
+│   ├── envelope-budgeting.html
+│   ├── google-drive-backup.html
+│   ├── loan-payoff-calculator.html
+│   └── savings-goals.html
+│
+├── compare/                    # Competitor alternative pages (BUILD-GENERATED)
+│   ├── everydollar-alternative.html
+│   ├── goodbudget-alternative.html
+│   ├── mint-alternative.html
+│   ├── monarch-alternative.html
+│   └── ynab-alternative.html
+│
+├── use-cases/                  # Use case pages (BUILD-GENERATED)
+│   ├── building-savings.html
+│   ├── couples-shared-finances.html
+│   ├── expat-multi-currency.html
+│   ├── irregular-income.html
+│   └── paying-off-debt.html
+│
+├── blog/
+│   ├── index.html              # Blog hub (hand-authored)
+│   ├── budgeting/index.html    # Category hub
+│   ├── debt/index.html
+│   ├── mindset/index.html
+│   ├── savings/index.html
+│   ├── tools/index.html
+│   └── posts/                  # Individual blog posts (hand-authored)
+│       ├── 50-30-20-rule.html
+│       ├── ai-financial-coach.html
+│       └── ...                 # 22 posts total
+│
+├── styles/
+│   ├── mkt.css                 # Marketing site stylesheet (all public pages)
+│   ├── base.css                # App shell design tokens + reset
+│   ├── layout.css              # App shell layout grid
+│   ├── components.css          # App shell UI components
+│   ├── dark.css                # Dark mode overrides
+│   ├── themes.css              # Colour theme variants
+│   └── auth-tokens.css         # Shared tokens for signin/account pages
+│
+├── js/
+│   ├── boot.js                 # App init: SW registration, nav, auth-cloak removal
+│   ├── state.js                # Central state, IDB persistence, encryption
+│   ├── crypto-core.js          # PBKDF2 + AES-GCM primitives
+│   ├── constants.js            # App-wide constants, category maps
+│   ├── sync.js                 # Sync orchestration + provider registry
+│   ├── providers/
+│   │   ├── firebase.js         # Firebase Firestore provider plugin
+│   │   └── gdrive.js           # Google Drive provider plugin
+│   ├── expenses.js             # Expenses feature module
+│   ├── revenue.js              # Revenue / income feature module
+│   ├── loans.js                # Loans feature module
+│   ├── savings.js              # Savings goals feature module
+│   ├── analytics.js            # Charts + analytics feature module
+│   ├── health.js               # Financial health score
+│   ├── calendar.js             # Calendar view
+│   ├── archive.js              # Data archiving
+│   ├── gamification.js         # Achievements / badges
+│   ├── import-bank.js          # CSV/OFX bank statement import
+│   ├── search.js               # Global search
+│   ├── modals.js               # Modal management
+│   ├── settings.js             # Settings panel
+│   ├── onboarding.js           # First-run onboarding
+│   ├── bulk-add.js             # Bulk transaction entry
+│   ├── fx.js                   # Foreign exchange rate lookup
+│   ├── investments.js          # Investments tracker
+│   ├── tour.js                 # Guided tour
+│   ├── darkmode.js             # Theme/dark mode (runs sync before DOM)
+│   ├── events.js               # Centralised event delegation
+│   ├── icons.js                # SVG icon helpers
+│   ├── features.js             # Feature flag / plan gating
+│   ├── demo-profiles.js        # Demo data profiles
+│   ├── signin.js               # Sign-in / register page JS
+│   ├── account.js              # Account page JS
+│   ├── pricing.js              # Pricing page: billing toggle, FAQ
+│   ├── contact.js              # Contact form submission
+│   ├── landing.js              # Landing page interactions
+│   ├── mkt.js                  # Shared marketing: nav, hamburger, copyright year
+│   ├── consent.js              # GDPR cookie consent banner + GA4 gating
+│   ├── config.local.js         # Firebase config (real credentials, gitignored)
+│   ├── config.example.js       # Config template (committed)
+│   ├── config.fallback.js      # Ensures window.__FINCWIN_CONFIG__ = null if absent
+│   └── vendor/
+│       ├── chart.min.js        # Chart.js (vendored, cache-first)
+│       ├── papaparse.esm.js    # PapaParse CSV parser (ESM)
+│       ├── papaparse.min.js    # PapaParse CSV parser (classic)
+│       ├── qr-creator.es6.min.js  # QR code generator
+│       └── firebase/
+│           ├── firebase-app.js
+│           ├── firebase-auth.js
+│           └── firebase-firestore.js
+│
+├── api/                        # Vercel serverless functions
+│   ├── validate.js             # POST /api/validate — LemonSqueezy license check
+│   ├── activate.js             # POST /api/activate — license activation
+│   ├── deactivate.js           # POST /api/deactivate — license deactivation
+│   ├── admin.js                # POST /api/admin — admin operations
+│   └── contact.js              # POST /api/contact — contact form (Edge runtime)
+│
+├── scripts/                    # Build tooling (dev-only, not deployed)
+│   ├── build-all.js            # Runs all entries in build-manifest.json
+│   ├── build-manifest.json     # [ { template, data, out }, ... ] build registry
+│   ├── generate-page.js        # Core template renderer ({{TOKEN}}, {{> partial}})
+│   ├── templates/
+│   │   ├── feature-page.html   # Template for features/* pages
+│   │   ├── competitor-alt.html # Template for compare/* pages
+│   │   ├── use-case-page.html  # Template for use-cases/* pages
+│   │   ├── niche-landing.html  # Template for root niche pages
+│   │   ├── blog-category.html  # Template for blog category hubs
+│   │   └── blog-post.html      # Template for blog/posts/* pages
+│   ├── partials/
+│   │   ├── nav.html            # Shared nav markup (uses {{BASE}})
+│   │   ├── footer.html         # Shared footer markup (uses {{BASE}})
+│   │   └── scripts.html        # Shared script tags (mkt.js + consent.js)
+│   ├── data/
+│   │   ├── feature-*.json      # Data for features/* pages
+│   │   ├── *-alt.json          # Data for compare/* pages
+│   │   ├── usecase-*.json      # Data for use-cases/* pages
+│   │   ├── niche-*.json        # Data for niche landing pages
+│   │   └── cat-*.json          # Data for blog category hubs
+│   ├── add-mkt-js.js           # One-off script: add mkt.js tag to HTML files
+│   ├── fix-footers.js          # One-off script: normalise footer markup
+│   ├── sync-chrome.js          # Chrome extension sync utility
+│   ├── gen-icons.mjs           # PWA icon generation
+│   ├── gen-og.mjs              # OG image generation
+│   └── relativize-links.py     # Python utility: convert absolute to relative links
+│
+├── assets/
+│   └── images/
+│       └── blog/               # .webp images for blog posts (22 images)
+│
+├── styles/tests/               # Unit tests (co-located with styles dir — naming anomaly)
+│   ├── crypto.test.js
+│   ├── generator.test.js
+│   ├── state-dispatch.test.js
+│   └── sync-fingerprint.test.js
+│
+├── docs/
+│   ├── logo-concepts.html      # Design artefact
+│   └── superpowers/plans/      # Internal planning docs
+│
+├── manifest.json               # PWA web app manifest
+├── service-worker.js           # PWA service worker (cache: fincwin-v6)
+├── vercel.json                 # Vercel routing, CSP headers, redirects
+├── server.js                   # Dev server (Node, port 4141)
+├── package.json                # npm scripts + devDependencies (vitest, playwright)
+├── robots.txt                  # Disallows app/admin/account/signin/api/cat-*
+├── sitemap.xml                 # Static sitemap
+├── favicon.svg / favicon-32.png
+├── icon.svg / icon-180.png / icon-192.png / icon-512.png / icon-maskable*.png
+├── og-image.png / og-image.svg
+├── icons.svg                   # Inline SVG sprite
+└── .claude/skills/             # SEO skill definitions for Claude agents
 ```
 
-## Directory Map
+## Directory Purposes
 
-### `js/` — Client-side JavaScript
+**Root `.html` files:**
+- Purpose: Hand-authored marketing and app pages not covered by the build system
+- Contains: `index.html` (home), `app.html` (PWA shell), `signin.html`, `pricing.html`, `about.html`, policy pages, niche landings (BUILD-GENERATED), `cat-*.html`
 
-All scripts are loaded as classic (non-module) `<script>` tags. Dependency order matters.
+**`features/`:**
+- Purpose: Feature detail pages for SEO (`/features/ai-coach`, etc.)
+- Contains: BUILD-GENERATED HTML only — never edit these files directly; edit `scripts/data/feature-*.json` and re-run `npm run build:pages`
 
-```
-js/
-├── config.local.js         window.__FINCWIN_CONFIG__ — Firebase public config + Google client ID
-├── config.example.js       Template for config.local.js (safe to commit example)
-├── config.fallback.js      Offline fallback config values
-├── crypto-core.js          window.CRYPTO — AES-GCM-256 + PBKDF2 primitives (loaded first)
-├── constants.js            Global constants: CAT_MAP, month names, storage key SK='finflow_v5'
-├── state.js                Global state S, IndexedDB engine, PIN/session/encryption management
-├── sync.js                 Sync orchestrator, provider plugin registry, file-system backup
-├── boot.js                 App boot sequence, tab switching, confetti engine, nav init
-├── darkmode.js             Theme/dark-mode toggling (loaded before body in app.html)
-├── modals.js               Modal open/close/confirm utilities
-├── expenses.js             Expenses tab logic
-├── revenue.js              Income/revenue tab logic
-├── loans.js                Loan payoff tab logic
-├── savings.js              Savings goals tab logic
-├── analytics.js            Analytics dashboard logic
-├── calendar.js             Budget calendar logic
-├── archive.js              Transaction archive/history
-├── health.js               Financial health score computation
-├── settings.js             Settings panel logic
-├── import-bank.js          CSV bank statement importer
-├── onboarding.js           First-run onboarding flow
-├── gamification.js         Badges, streaks, confetti triggers
-├── search.js               In-app search
-├── fx.js                   Foreign exchange / multi-currency
-├── investments.js          Investment tracking
-├── bulk-add.js             Bulk transaction entry
-├── calendar.js             Calendar view
-├── tour.js                 Product tour
-├── demo-profiles.js        Demo data profiles
-├── events.js               Custom event bus
-├── features.js             Feature-flag checks
-├── icons.js                Icon rendering helpers
-├── landing.js              Marketing page interactivity
-├── mkt.js                  Marketing analytics / tracking helpers
-├── pricing.js              Pricing page logic
-├── signin.js               Auth flow (Firebase sign in / register / Google OAuth)
-├── account.js              Account page logic
-├── admin.js                Admin page logic
-├── contact.js              Contact form submission
-├── consent.js              Cookie consent banner
-├── providers/
-│   ├── firebase.js         Firebase Firestore sync provider (self-registers via registerProvider)
-│   └── gdrive.js           Google Drive sync provider (self-registers via registerProvider)
-└── vendor/
-    ├── chart.min.js         Chart.js (bundled, no CDN)
-    ├── papaparse.esm.js     CSV parser ESM build
-    ├── papaparse.min.js     CSV parser classic build
-    ├── qr-creator.es6.min.js  QR code generator
-    └── firebase/
-        ├── firebase-app.js
-        ├── firebase-auth.js
-        └── firebase-firestore.js
-```
+**`compare/`:**
+- Purpose: Competitor alternative pages for SEO (`/compare/ynab-alternative`, etc.)
+- Contains: BUILD-GENERATED HTML only
 
-### `styles/` — CSS
+**`use-cases/`:**
+- Purpose: Use-case scenario pages for SEO (`/use-cases/paying-off-debt`, etc.)
+- Contains: BUILD-GENERATED HTML only
 
-```
-styles/
-├── base.css         CSS custom properties, resets, typography — app shell
-├── layout.css       Grid, sidebar, tab layout — app shell
-├── components.css   UI components (cards, modals, buttons, forms) — app shell
-├── dark.css         Dark mode overrides — app shell
-├── themes.css       Theme variants (Light Glass, etc.) — app shell
-├── mkt.css          All marketing page styles (single file covers all mkt pages)
-├── auth-tokens.css  Auth page specific styles
-└── tests/           CSS regression test snapshots
-```
+**`blog/`:**
+- Purpose: Educational content for organic search
+- Contains: Hand-authored `index.html` hub + category `index.html` hubs + `posts/*.html` individual posts
+- Key files: `blog/index.html`, `blog/posts/zero-based-budgeting.html`
 
-### `api/` — Vercel Edge / Serverless Functions
+**`styles/`:**
+- Purpose: All CSS — split into app-shell styles and marketing styles
+- Key split: `mkt.css` (marketing, all public pages) vs `base.css` + `layout.css` + `components.css` + `dark.css` + `themes.css` (app shell only)
 
-```
-api/
-├── activate.js      POST — License activation via Lemon Squeezy (Node serverless)
-├── deactivate.js    POST — License deactivation via Lemon Squeezy
-├── validate.js      POST — License validation
-├── contact.js       POST — Contact form email via Resend (Edge runtime)
-└── admin.js         POST — Admin operations (guarded)
-```
+**`js/`:**
+- Purpose: All client-side JavaScript
+- Key split: app modules (loaded in `app.html`) vs marketing scripts (`mkt.js`, `consent.js`, `pricing.js`, `contact.js`, `landing.js`) vs shared infrastructure (`crypto-core.js`, `state.js`, `sync.js`, `boot.js`)
 
-### `scripts/` — Build tooling
+**`js/vendor/`:**
+- Purpose: Vendored third-party libraries (not loaded from CDN — required for CSP `script-src 'self'`)
+- Contains: Chart.js, PapaParse, qr-creator, Firebase SDKs
+- Generated: Yes (copied from node_modules or downloaded manually)
+- Committed: Yes
 
-```
-scripts/
-├── build-all.js         Iterates build-manifest.json and calls generate-page.js for each entry
-├── generate-page.js     Template engine: resolves {{> partial}} and {{TOKEN}} substitutions
-├── build-manifest.json  Declares all template-generated pages (template + data + output path)
-├── sync-chrome.js       Chrome extension sync helper
-├── add-mkt-js.js        Injects marketing JS snippet into HTML files
-├── fix-footers.js       Footer consistency fixer script
-├── relativize-links.py  Python utility to make links relative
-├── gen-icons.mjs        PWA icon generation script
-├── gen-og.mjs           OG image generation script
-├── templates/           HTML templates for generated pages
-│   ├── feature-page.html
-│   ├── competitor-alt.html
-│   ├── use-case-page.html
-│   ├── niche-landing.html
-│   ├── blog-post.html
-│   └── blog-category.html
-├── partials/            Shared HTML fragments injected into templates
-│   ├── nav.html         Global navigation bar (uses {{BASE}} for root-relative links)
-│   ├── footer.html      Global footer
-│   └── scripts.html     Common script tags
-├── data/                JSON data files — one per generated page
-│   ├── feature-*.json   Feature page data (6 features)
-│   ├── *-alt.json       Competitor alternative page data (5 competitors)
-│   ├── usecase-*.json   Use-case page data (5 use-cases)
-│   └── niche-*.json     Niche landing page data (3 niches)
-└── images/              Static build images
-```
+**`api/`:**
+- Purpose: Vercel serverless functions — deployed as `/api/*` routes
+- Contains: License lifecycle endpoints + contact form
+- Note: `contact.js` uses Vercel Edge Runtime (`export const config = { runtime: 'edge' }`); others use Node runtime
 
-### `blog/` — Blog content
+**`scripts/`:**
+- Purpose: Build tooling — runs on developer machine, never deployed
+- Contains: Template renderer, build manifest, data JSONs, partials, one-off utilities
 
-```
-blog/
-├── index.html           Blog hub
-├── budgeting/index.html Category index
-├── debt/index.html      Category index
-├── mindset/index.html   Category index
-├── savings/index.html   Category index
-├── tools/index.html     Category index
-└── posts/               Individual blog post HTML files (30+ posts)
-```
+**`scripts/templates/`:**
+- Purpose: HTML templates for build-generated pages
+- Contains: `{{TOKEN}}` placeholders and `{{> partial}}` includes
+- Key files: `feature-page.html`, `competitor-alt.html`, `use-case-page.html`, `niche-landing.html`
 
-### `features/` — Feature detail pages (generated)
+**`scripts/partials/`:**
+- Purpose: Shared HTML fragments injected into templates at build time
+- Contains: `nav.html` (global nav), `footer.html` (global footer), `scripts.html` (mkt.js + consent.js tags)
+- Note: Uses `{{BASE}}` placeholder for root-relative path prefix; resolved per output file depth
 
-All files in this directory are outputs of the build pipeline (`scripts/build-all.js`). Do not edit directly — edit the corresponding `scripts/data/feature-*.json` and regenerate.
+**`scripts/data/`:**
+- Purpose: JSON data files — one per generated page; supplies all `{{TOKEN}}` values
+- Naming: `feature-*.json`, `*-alt.json`, `usecase-*.json`, `niche-*.json`, `cat-*.json`
 
-### `compare/` — Competitor alternative pages (generated)
+**`assets/images/blog/`:**
+- Purpose: Optimised `.webp` images for blog posts
+- Committed: Yes (22 images)
+- Immutable cache: Served with `max-age=31536000, immutable` by Vercel headers
 
-Same as `features/` — all outputs from the build pipeline via `competitor-alt` template.
+**`styles/tests/`:**
+- Purpose: Unit test files (despite being inside `styles/` — naming anomaly from project history)
+- Contains: Vitest test suites for `crypto-core.js`, build generator, state dispatch, sync fingerprinting
 
-### `use-cases/` — Use-case landing pages (generated)
+## Key File Locations
 
-Generated from `use-case-page` template + `scripts/data/usecase-*.json`.
+**Entry Points:**
+- `index.html`: Marketing home
+- `app.html`: PWA dashboard shell
+- `signin.html`: Authentication
+- `api/validate.js`: License validation endpoint
 
-### `assets/` — Static assets
+**Configuration:**
+- `vercel.json`: Routing rewrites, redirects, CSP headers, cache headers
+- `manifest.json`: PWA manifest (`start_url`, icons, display mode)
+- `service-worker.js`: Cache strategy and asset list
+- `js/config.local.js`: Firebase credentials (gitignored in production; must be provided)
+- `js/config.example.js`: Template showing expected config shape
+- `scripts/build-manifest.json`: Registry of all build-generated pages
 
-Static images and media used by marketing pages.
+**Core App Logic:**
+- `js/state.js`: All data read/write; must be loaded before feature modules
+- `js/boot.js`: App initialisation sequence; must be loaded after all feature modules
+- `js/crypto-core.js`: Encryption; must be first script in load order
 
-### `docs/` — Internal documentation
+**Styling:**
+- `styles/mkt.css`: Use for all marketing pages
+- `styles/base.css`: Use for app shell pages; do not use on marketing pages
 
-Logo concepts and design exploration files. Not served as part of the app.
+**Build System:**
+- `scripts/generate-page.js`: Core renderer — invoke via `node scripts/generate-page.js --template <name> --data <json> --out <path>`
+- `scripts/build-all.js`: Build all pages listed in manifest — invoke via `npm run build:pages`
 
-## Page Organization
+**Testing:**
+- `styles/tests/crypto.test.js`
+- `styles/tests/state-dispatch.test.js`
+- `styles/tests/sync-fingerprint.test.js`
+- `styles/tests/generator.test.js`
 
-### Routing (Vercel)
+## Naming Conventions
 
-`vercel.json` maps clean URLs to HTML files:
+**Files:**
+- HTML pages: `kebab-case.html` (e.g. `envelope-budgeting.html`, `ai-coach.html`)
+- JS modules: `kebab-case.js` (e.g. `import-bank.js`, `crypto-core.js`)
+- CSS files: `kebab-case.css` (e.g. `auth-tokens.css`)
+- Data JSONs: `<type>-<slug>.json` (e.g. `feature-ai-coach.json`, `usecase-paying-off-debt.json`)
+- Blog images: `<topic-slug>.webp` (e.g. `ai-finance-coach.webp`)
 
-| Clean URL | HTML file |
-|-----------|-----------|
-| `/` | `index.html` |
-| `/app` | `app.html` |
-| `/signin` | `signin.html` |
-| `/features/:slug` | `features/:slug.html` |
-| `/compare/:slug` | `compare/:slug.html` |
-| `/use-cases/:slug` | `use-cases/:slug.html` |
-| `/blog/:category` | `blog/:category/index.html` |
+**Directories:**
+- Feature groups: lowercase plural nouns (`features/`, `compare/`, `use-cases/`, `blog/`)
+- Blog categories: lowercase noun (`budgeting/`, `debt/`, `savings/`, `mindset/`, `tools/`)
+- Build artefacts: `scripts/templates/`, `scripts/data/`, `scripts/partials/`
 
-`cleanUrls: true` and `trailingSlash: false` are set globally.
+**Template Tokens:**
+- All caps with underscores: `{{META_TITLE}}`, `{{CANONICAL_URL}}`, `{{FEATURE_NAME}}`
+- Reserved: `{{BASE}}` (auto-computed path prefix), `{{> partial_name}}` (partial injection)
 
-### Page categories
-
-- **App pages** (noindex): `app.html`, `signin.html`, `account.html`, `admin.html`
-- **Core marketing** (hand-authored): `index.html`, `pricing.html`, `features.html`, `compare.html`, `about.html`, etc.
-- **Generated marketing** (build pipeline output): all files under `features/`, `compare/`, `use-cases/`, plus the three niche landing pages at root
-- **Blog** (hand-authored): all files under `blog/`
-- **Category SEO pages** (hand-authored): `cat-*.html` at root
-- **Legal/policy** (hand-authored): `privacy.html`, `terms.html`, `cookie-policy.html`
-
-## Asset Organization
-
-### CSS load strategy
-
-- Marketing pages: load `styles/mkt.css` only (single file, all mkt styles)
-- App shell: loads `styles/base.css` + `layout.css` + `components.css` + `dark.css` + `themes.css` in order
-- `styles/auth-tokens.css` used on auth pages only
-
-### JS load strategy
-
-- Marketing pages: minimal JS via `js/landing.js`, `js/mkt.js`, `js/consent.js`
-- App shell: ordered classic script tags — `config.local.js` → `crypto-core.js` → `constants.js` → `state.js` → `sync.js` → provider scripts → feature modules → `boot.js`
-- Vendor libraries: bundled locally under `js/vendor/` (no CDN dependencies for app-critical code)
-- Firebase SDK: lazy-loaded via dynamic `import()` inside async functions; not loaded until first auth/sync action
-
-### Images/icons
-
-- PWA icons: root-level (`icon-180.png`, `icon-192.png`, `icon-512.png`, `icon-maskable-512.png`)
-- OG image: `og-image.png` at root
-- SVG icon sprite: inline in `app.html` DOM (`<span id="svgSprite">`)
-- Marketing images: `assets/` directory
-
-## Notable Files
-
-| File | Purpose |
-|------|---------|
-| `vercel.json` | Routing rewrites, security headers, CSP, cache headers — single source of truth for deployment config |
-| `firestore.rules` | Firebase per-user data isolation rules — must be deployed via Firebase CLI on changes |
-| `js/config.local.js` | `window.__FINCWIN_CONFIG__` — Firebase public identifiers. Intentionally committed. |
-| `js/crypto-core.js` | Cryptographic primitives — load before all other app JS |
-| `js/state.js` | Owns all app state, IDB engine, PIN/session management, encryption wrappers |
-| `js/sync.js` | Provider plugin registry, file-system backup, cloud push/pull orchestration |
-| `service-worker.js` | PWA offline cache — bump `CACHE` constant on every static-asset deploy |
-| `scripts/build-manifest.json` | Authoritative list of all build-generated pages; add entries here to create new templated pages |
-| `scripts/generate-page.js` | Template engine implementation — the only place `{{TOKEN}}` syntax is processed |
-| `manifest.json` | PWA manifest — icons, theme color, display mode |
+**URL Slugs (via vercel.json rewrites):**
+- Marketing pages: `/features/:slug`, `/compare/:slug`, `/use-cases/:slug`
+- Blog: `/blog/:category`, `/blog/posts/:slug` (not currently in rewrites — served as directory index)
+- App pages: `/app`, `/signin`, `/account`, `/admin`
+- `cleanUrls: true` + `trailingSlash: false` enforced globally by Vercel
 
 ## Where to Add New Code
 
-**New app feature tab:**
-- Implementation: `js/{feature-name}.js` (new classic script file)
-- Add `<script src="js/{feature-name}.js">` to `app.html` after `sync.js` and before `boot.js`
-- Add tab DOM and `<section class="section" id="{feature-name}">` to `app.html`
+**New feature detail page** (e.g. `features/multi-currency.html`):
+1. Create data file: `scripts/data/feature-multi-currency.json` — copy shape from `scripts/data/feature-ai-coach.json`
+2. Add entry to `scripts/build-manifest.json`: `{ "template": "feature-page", "data": "scripts/data/feature-multi-currency.json", "out": "features/multi-currency.html" }`
+3. Run `npm run build:pages` — output file is generated automatically
+4. Add Vercel rewrite if a new slug pattern is needed (usually already covered by `/features/:slug`)
 
-**New marketing page (one-off):**
-- Author directly as a new `.html` file at root or in appropriate subdirectory
-- Add clean-URL rewrite to `vercel.json`
-- Add to `sitemap.xml`
+**New competitor compare page** (e.g. `compare/copilot-alternative.html`):
+1. Create `scripts/data/copilot-alt.json` — copy shape from `scripts/data/ynab-alt.json`
+2. Add entry to `scripts/build-manifest.json` with `"template": "competitor-alt"`
+3. Run `npm run build:pages`
 
-**New templated marketing page (e.g., new competitor alt, new feature page):**
-- Create `scripts/data/{page-slug}.json` with all `{{TOKEN}}` values
-- Add entry to `scripts/build-manifest.json`
-- Run `npm run build:pages`
-- Add clean-URL rewrite to `vercel.json` and entry to `sitemap.xml`
+**New use-case page:**
+1. Create `scripts/data/usecase-<slug>.json`
+2. Add entry to `scripts/build-manifest.json` with `"template": "use-case-page"`
+3. Run `npm run build:pages`
 
-**New API endpoint:**
-- Create `api/{name}.js` as an Edge or Node serverless function
-- Add `source`/`destination` rewrite to `vercel.json` if a clean URL is needed
-- Secrets go in Vercel environment variables only
+**New blog post:**
+- Location: `blog/posts/<slug>.html` — hand-authored (no template system currently used for blog posts)
+- Use `styles/mkt.css`; include `js/mkt.js` and `js/consent.js` via `<script defer>`
+- Add hero image to `assets/images/blog/<slug>.webp`
+- Add to category index and `blog/index.html` manually
 
-**New shared partial (nav/footer change):**
-- Edit `scripts/partials/{partial-name}.html`
-- Re-run `npm run build:pages` to propagate to all generated pages
-- Hand-authored pages must be updated manually
+**New app feature module:**
+- Implementation: `js/<feature-name>.js` (plain script, globals on `window`)
+- Load order: add `<script src="js/<feature-name>.js">` in `app.html` before `boot.js`
+- State access: call functions exposed by `js/state.js` (read via global `S`, write via state mutation functions)
+- Do not add new feature modules to marketing pages
+
+**New marketing page (hand-authored):**
+- Add `.html` at root or inside appropriate subdirectory
+- Link `styles/mkt.css`, add `js/mkt.js defer` and `js/consent.js defer`
+- Add route rewrite to `vercel.json` if needed
+- Add `<link rel="canonical">` and robots meta
+
+**Shared nav/footer changes:**
+- Edit `scripts/partials/nav.html` or `scripts/partials/footer.html`
+- Re-run `npm run build:pages` to regenerate all build-generated pages
+- Hand-authored pages embed their own nav — update those separately
+
+**New serverless endpoint:**
+- Create `api/<name>.js` following the pattern in `api/validate.js` (Node) or `api/contact.js` (Edge)
+- Edge: `export const config = { runtime: 'edge' }` + `export default async function handler(req)`
+- Node: `export default async function handler(req, res)`
+- No additional configuration needed — Vercel auto-discovers `api/*.js`
+
+## Special Directories
+
+**`js/vendor/`:**
+- Purpose: Vendored third-party libraries required by CSP `script-src 'self'`
+- Generated: Manually copied or via `scripts/sync-chrome.js`
+- Committed: Yes — must be in repo for PWA offline caching
+
+**`scripts/`:**
+- Purpose: Build tooling only — never deployed to Vercel
+- Generated: No
+- Committed: Yes
+
+**`node_modules/`:**
+- Purpose: Dev dependencies (vitest, playwright) — installed by `npm install --omit=dev` is skipped on Vercel deploy per `vercel.json` `installCommand`
+- Committed: No
+
+**`.claude/skills/`:**
+- Purpose: SEO skill definitions consumed by Claude agent tooling
+- Committed: Yes — part of the agentic workflow
+
+**`docs/`:**
+- Purpose: Internal design artefacts and planning documents
+- Committed: Yes — not served publicly
 
 ---
 

@@ -1,131 +1,172 @@
-# Integrations
+# External Integrations
 
 **Analysis Date:** 2026-06-10
 
-## External APIs
+## APIs & External Services
 
-**Lemon Squeezy (licence management):**
-- Used for: licence key activation, deactivation, and validation
-- Endpoints called: `https://api.lemonsqueezy.com/v1/licenses/activate`, `/validate`, `/deactivate`
-- Called from: `api/activate.js`, `api/validate.js`, `api/deactivate.js` (server-side only)
-- Auth: `LEMON_SQUEEZY_API_KEY` — Vercel environment variable, never exposed to browser
+### Firebase (Google)
 
-**Anthropic Claude API (AI Coach):**
-- Used for: AI financial coaching feature (Pro tier)
-- Endpoint: `https://api.anthropic.com` (present in CSP `connect-src`)
-- Called from: `js/settings.js` and related AI modules (user supplies their own API key, stored encrypted in IDB)
-- Auth: user-supplied Claude API key, stored in encrypted IndexedDB via `js/crypto-core.js`
+- **What it's used for:** Anonymous auth (automatic sign-in on first use), email/password account upgrade, Firestore document storage for end-to-end encrypted cloud sync
+- **SDK/Client:** Firebase Web SDK v9 modular — vendored at `js/vendor/firebase/` (`firebase-app.js`, `firebase-auth.js`, `firebase-firestore.js`)
+- **Provider plugin:** `js/providers/firebase.js` — registers itself via `window.registerProvider('firebase', …)`
+- **Auth:** Firebase project config injected via `window.__FINCWIN_CONFIG__` (`apiKey`, `authDomain`, `projectId`, etc.) from `js/config.local.js`
+- **Data model:** One Firestore document per user at `users/{uid}` containing `ciphertext`, `salt`, `iv`, `lastModified`, `version`; secured by `firestore.rules` (owner-only read/write)
+- **Live sync:** `onSnapshot` listener started after successful push; managed in `js/providers/firebase.js` (`startLiveSync` / `stopLiveSync`)
 
-**OpenAI API (AI Coach, alternative provider):**
-- Used for: AI financial coaching as an alternative to Claude
-- Endpoint: `https://api.openai.com` (present in CSP `connect-src`)
-- Called from: `js/settings.js` / AI modules (user supplies their own API key)
-- Auth: user-supplied OpenAI key, stored encrypted in IDB
+### Google Drive REST API v3
 
-**Open Exchange Rates (FX):**
-- Used for: live multi-currency exchange rate lookups
-- Endpoint: `https://open.er-api.com/v6/latest/{base}` — public, no API key
-- Called from: `js/fx.js`
-- Caching: 1-hour sessionStorage cache (`finflow_fx_rates`)
+- **What it's used for:** Optional alternative cloud-sync backend; stores encrypted state blob in the user's Google Drive `appDataFolder`
+- **SDK/Client:** Direct `fetch` calls to `https://www.googleapis.com/upload/drive/v3/files` and `https://www.googleapis.com/drive/v3/files` — no SDK
+- **Auth:** Google Identity Services (GIS) — OAuth 2.0 implicit/token flow; GIS script loaded on demand from `https://accounts.google.com/gsi/client`
+- **Provider plugin:** `js/providers/gdrive.js` — registers itself via `window.registerProvider('gdrive', …)`
+- **Scope:** `https://www.googleapis.com/auth/drive.appdata` (sandboxed app folder only)
+- **Config:** `googleClientId` field in `window.__FINCWIN_CONFIG__`
+- **Notes:** Drive is a Pro-plan feature (`requirePlan('pro', …)` gate in `js/providers/gdrive.js`); token stored encrypted in IDB meta store
 
-**Resend (transactional email):**
-- Used for: contact form email delivery
-- Endpoint: `https://api.resend.com/emails`
-- Called from: `api/contact.js` (server-side Edge function only)
-- Auth: `RESEND_API_KEY` — Vercel environment variable
-- From address: `contact@fincwin.com`; delivers to `freetinz@gmail.com`
+### Google Identity Services (GIS)
 
-**Google Drive REST API v3:**
-- Used for: optional encrypted cloud backup/sync of user state
-- Endpoints: `https://www.googleapis.com/upload/drive/v3/files` (create/update), `https://www.googleapis.com/drive/v3/files` (list/get)
-- Called from: `js/providers/gdrive.js` (browser-side, gated behind user OAuth consent)
-- Auth: OAuth 2.0 token obtained via Google Identity Services (GIS); token stored in IDB only, never in `S` state or localStorage
-- Scope: `https://www.googleapis.com/auth/drive.appdata` (hidden app-data folder only)
+- **What it's used for:** OAuth 2.0 token client for Google Drive authentication; loaded lazily only when user initiates Drive connect
+- **Endpoint:** `https://accounts.google.com/gsi/client` (dynamic `<script>` inject)
+- **Usage:** `_loadGIS()` in `js/providers/gdrive.js`; also allowed in CSP `script-src-elem`
 
-## Authentication Providers
+### Lemon Squeezy
 
-**Firebase Authentication:**
-- Provider: Google Firebase Auth (modular SDK, vendored at `js/vendor/firebase/`)
-- Methods: email/password (`signInWithEmailAndPassword`, `createUserWithEmailAndPassword`), password reset, anonymous → linked account upgrade
-- Project: `fincwin` (`fincwin.firebaseapp.com`)
-- Config: `window.__FINCWIN_CONFIG__` in `js/config.local.js` (public identifiers — not secrets)
-- Used in: `js/signin.js`, `js/boot.js` (`_awaitFirebaseUser`), `js/providers/firebase.js`
-- Free tier access guard: app requires a Firebase session OR a valid licence key; unauthenticated users are redirected to `signin.html`
+- **What it's used for:** Payment processor and license-key management for Pro plan subscriptions (monthly $4.99 / annual $39)
+- **API version:** `https://api.lemonsqueezy.com/v1/`
+- **Endpoints used:**
+  - `POST /v1/licenses/activate` — `api/activate.js`
+  - `POST /v1/licenses/validate` — `api/validate.js`
+  - `GET /v1/license-keys` + `GET /v1/orders` — `api/admin.js` (admin dashboard)
+- **Auth:** `LEMON_SQUEEZY_API_KEY` env var (Vercel secret)
+- **Notes:** All Lemon Squeezy calls are server-side (Vercel Serverless/Edge Functions); the API key is never exposed to the browser
 
-**Google Identity Services (GIS) for Drive OAuth:**
-- Script loaded lazily: `https://accounts.google.com/gsi/client` (injected by `js/providers/gdrive.js`)
-- OAuth 2.0 token client for Drive scope
-- `googleClientId` configured in `js/config.local.js`
+### Resend
 
-## Payment Processors
+- **What it's used for:** Transactional email delivery for the contact form
+- **Endpoint:** `POST https://api.resend.com/emails`
+- **Implementation:** `api/contact.js` (Vercel Edge Function)
+- **Auth:** `RESEND_API_KEY` env var (Vercel secret)
+- **From address:** `contact@fincwin.com`
+- **To address:** `freetinz@gmail.com`
+- **Notes:** Contact form submissions are routed through this; the API key is server-side only
 
-**Lemon Squeezy:**
-- Role: sole payment processor / licence management platform
-- Integration type: server-side API only (no Lemon Squeezy JS SDK in the browser)
-- Pricing: Free tier (no key), Pro ($39/yr), Lifetime ($149) — key format `XXXX-XXXX-XXXX-XXXX` (16 chars)
-- Licence flow: user enters key on `signin.html#activate` → `api/activate.js` → Lemon Squeezy → result stored in localStorage + Firestore
-- Background revalidation: `_revalidateLicence()` in `js/boot.js` calls `api/validate.js` on each app load; fail-open on network errors
+### Anthropic Claude API
 
-## Analytics & Monitoring
+- **What it's used for:** AI Coach feature — streaming chat responses analysing user financial data
+- **Endpoint:** `https://api.anthropic.com/v1/messages`
+- **Model:** `claude-sonnet-4-6` (primary); `claude-haiku-4-5-20251001` (connection test)
+- **Implementation:** Called directly from the browser in `js/settings.js` (`coachAsk` function) — the Anthropic API key is stored client-side in localStorage by the user
+- **Auth:** User-supplied API key stored in `localStorage` under a FincWin key; never transmitted to the FincWin backend
+- **Notes:** Pro-plan feature; rate-limited client-side (cooldown enforced in `settings.js`); streaming via SSE
 
-**Google Analytics 4 (GA4):**
-- Loaded conditionally via `js/consent.js` — only after visitor grants analytics consent (GDPR/PECR compliant, opt-in)
-- GA Measurement ID: configured via `window.FW_GA_ID` (set per-page before `consent.js` loads); not hardcoded in the script itself
-- Script source: `https://www.googletagmanager.com/gtag/js?id=...`
-- `anonymize_ip: true` is set on load
-- No GA tag present in HTML if `FW_GA_ID` is empty — analytics is entirely disabled until the ID is configured
+### OpenAI API
 
-**Error tracking:** none detected (no Sentry, Datadog, Bugsnag, or similar)
+- **What it's used for:** Alternative AI Coach backend (user choice — Claude or GPT)
+- **Endpoint:** `https://api.openai.com/v1/chat/completions`
+- **Models:** `gpt-4o` (primary), `gpt-4o-mini` (connection test)
+- **Implementation:** Same `coachAsk` function in `js/settings.js`; toggled by user AI provider selection
+- **Auth:** User-supplied API key, same pattern as Anthropic
 
-**Logging:** browser `console.warn` / `console.error` only; no server-side structured logging service detected
+### Open Exchange Rates API (open.er-api.com)
 
-## Storage & Database
+- **What it's used for:** Live multi-currency FX rates for converting foreign-currency expenses to the user's home currency
+- **Endpoint:** `GET https://open.er-api.com/v6/latest/{baseCurrency}`
+- **Implementation:** `js/fx.js` — fetches once per session, caches in `sessionStorage` with 1-hour TTL
+- **Auth:** No API key required (free tier of open.er-api.com)
 
-**Firebase Firestore:**
-- Used for: storing per-user licence key, instance ID, plan, and profile after activation; also used to restore licence on new device sign-in
-- Rules: `firestore.rules` — each user can read/write only their own document (`/users/{userId}`); all other paths denied
-- SDK: vendored at `js/vendor/firebase/firebase-firestore.js`
-- Accessed from: `js/signin.js`, `js/providers/firebase.js`
+## Data Storage
 
-**Google Drive (appDataFolder):**
-- Used for: optional encrypted full-state backup (hidden app-data folder, not visible to user in Drive UI)
-- File: `fincwin-state.enc` — AES-GCM encrypted JSON blob
-- Provider plugin: `js/providers/gdrive.js`
+### Firestore (Firebase)
 
-**IndexedDB (browser-local):**
-- Primary data store for all budget/expense/loan/savings state
-- AES-GCM-256 encrypted at rest using a PIN-derived key (PBKDF2, 600k iterations)
-- Managed in `js/state.js`; opened via `openIDB()`
+- **Type:** NoSQL document database (Google Cloud)
+- **Connection:** Firebase config via `window.__FINCWIN_CONFIG__` (`projectId`)
+- **Client:** Firebase Web SDK (vendored) in `js/providers/firebase.js`
+- **Schema:** `users/{uid}` → `{ciphertext, salt, iv, lastModified, version}`
+- **Rules file:** `firestore.rules` (owner-only access)
 
-**File System Access API (browser-local):**
-- Optional local file backup — user can persist state to a local `.json` file
-- Handle persisted in IDB `meta` store; managed in `js/sync.js`
+### IndexedDB (Browser)
 
-## Communication Services
+- **Type:** Local browser storage — primary persistence layer
+- **What it stores:** Encrypted app state blob (keyed by a session storage key `SK`), IDB meta store for sync handles and tokens
+- **Implementation:** `js/state.js` (`idbSet` / `idbGet`); meta store raw access via `_idbGetRaw` / `_idbSetRaw` in `js/sync.js`
+- **Notes:** App is fully offline-capable via IDB + Service Worker; Firestore/Drive are optional sync targets
 
-**Resend:**
-- Purpose: contact form email delivery (inbound customer messages)
-- Used in: `api/contact.js` (Edge function)
-- No outbound marketing email or transactional user notifications detected beyond this single endpoint
+### localStorage (Browser)
 
-**Web Push / browser notifications:**
-- Budget threshold alerts via the browser Notifications API (`checkBudgetThresholds()` in `js/boot.js`)
-- No third-party push service (no Firebase Cloud Messaging, OneSignal, etc.) — native browser API only
+- **What it stores:** Theme preferences (`fincwin_design`, `fintone_theme`), dark mode flag, AI provider selection, user-supplied AI API keys, sign-in state flag (`fw_signed_in`), cookie consent choice (`fw_cookie_consent`), collapsed UI state
 
-**Google Fonts:**
-- CDN: `https://fonts.googleapis.com` / `https://fonts.gstatic.com`
-- Fonts: Hanken Grotesk (200–600), Instrument Serif (italic) — loaded in marketing pages
-- Not loaded in the app shell (`app.html`) — fonts are self-hosted or system-fallback there
+### sessionStorage (Browser)
 
-## Environment Variables (Vercel)
+- **What it stores:** FX rate cache (`finflow_fx_rates`), XP award dedup keys per session
 
-| Variable | Used in | Purpose |
+### File System Access API
+
+- **What it stores:** Optional local file sync — user can choose a local `.json` file as sync target
+- **Implementation:** `js/sync.js`; file handle persisted in IDB meta store (`fincwin_fs_handle`)
+
+## Authentication & Identity
+
+### Firebase Authentication
+
+- **Approach:** Anonymous auth by default (automatic, no sign-up required); upgradeable to email/password via `linkAnonymousToEmail` in `js/providers/firebase.js`
+- **Flow:** `signInAnonymously` on first cloud sync → uid used as Firestore document key → optional upgrade to permanent account
+- **Implementation:** `js/providers/firebase.js`, account management in `js/account.js`
+
+### PIN-based At-Rest Encryption
+
+- **Approach:** User-defined PIN → PBKDF2 → AES-GCM-256 session key; all app data encrypted at rest in IDB
+- **Implementation:** `js/crypto-core.js` (key derivation primitives), `js/state.js` (IDB encryption), `js/sync.js` (cloud envelope)
+
+## Monitoring & Observability
+
+### Google Analytics 4 (GA4)
+
+- **What it's used for:** Optional web analytics (consent-gated)
+- **Implementation:** `js/consent.js` — loads `https://www.googletagmanager.com/gtag/js` only after the user grants analytics consent (GDPR/PECR compliant)
+- **Config:** `window.FW_GA_ID` — GA4 Measurement ID; left empty in current build (no hardcoded ID found), meaning GA is disabled unless `FW_GA_ID` is defined before `consent.js` loads
+- **Notes:** Consent banner is self-contained in `js/consent.js`; choice persists 180 days
+
+### Error Tracking
+
+- None detected — no Sentry, Bugsnag, or similar integration
+
+### Logging
+
+- `console.error` / `console.warn` with `[module]` prefixes (e.g. `[sync]`, `[gdrive]`, `[FX]`) — browser DevTools only; no remote log shipping
+
+## CI/CD & Deployment
+
+### Vercel
+
+- **Hosting:** Static site deployment
+- **Edge Functions:** `/api/*.js` routes run as Vercel Edge Functions (`export const config = { runtime: 'edge' }` in `api/contact.js`)
+- **Serverless Functions:** `api/activate.js`, `api/validate.js`, `api/admin.js` — standard Vercel serverless (no `runtime: 'edge'` export)
+- **Config:** `vercel.json` — URL rewrites, clean URLs, security headers, cache control, CORS
+- **Install command:** `npm install --omit=dev`
+
+### GitHub Actions (inferred)
+
+- Not present in the repo directly, but `js/config.example.js` documents that the CI workflow writes `js/config.local.js` from repo secrets
+
+## Webhooks & Callbacks
+
+### Incoming
+
+- None detected — no webhook receiver endpoints
+
+### Outgoing
+
+- None detected — no outbound webhook dispatch
+
+## Environment Variables Required
+
+| Variable | Used by | Purpose |
 |---|---|---|
-| `LEMON_SQUEEZY_API_KEY` | `api/activate.js`, `api/validate.js`, `api/deactivate.js` | Licence API auth |
-| `RESEND_API_KEY` | `api/contact.js` | Contact form email relay |
-| `ADMIN_TOKEN` | `api/admin.js` | Admin endpoint gate |
+| `RESEND_API_KEY` | `api/contact.js` | Contact form email delivery |
+| `LEMON_SQUEEZY_API_KEY` | `api/activate.js`, `api/validate.js`, `api/admin.js` | License activation/validation and admin dashboard |
+| `ADMIN_TOKEN` | `api/admin.js` | Bearer token protecting the admin API route |
 
-Firebase config (`apiKey`, `authDomain`, `projectId`, etc.) and `googleClientId` are public identifiers committed directly to `js/config.local.js` — not secrets, access is enforced by Firestore rules and OAuth authorized origins.
+Firebase config (`apiKey`, `authDomain`, `projectId`, etc.) and `googleClientId` are injected at build time into `js/config.local.js` from repo secrets — not stored as Vercel env vars.
 
 ---
 

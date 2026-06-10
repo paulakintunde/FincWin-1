@@ -1,74 +1,93 @@
-# Tech Stack
+# Technology Stack
 
 **Analysis Date:** 2026-06-10
 
-## Languages & Runtimes
+## Languages
 
-- **JavaScript (ES2020+)** — primary language for all application code, marketing JS, and serverless API functions
-- **HTML5** — static marketing pages, PWA shell (`app.html`, `signin.html`, `account.html`, `admin.html`), blog posts, all served as committed files
-- **CSS3** — hand-written styles in `styles/` (no CSS preprocessor)
-- **Node.js** — local dev server (`server.js`), build scripts (`scripts/build-all.js`, `scripts/sync-chrome.js`), and Vercel serverless functions (`api/*.js`)
+**Primary:**
+- JavaScript (ES2020+) — all application logic, both browser and server-side
+- HTML5 — static page templates and the compiled marketing/landing pages
+- CSS3 — custom design system (no CSS framework)
 
-No TypeScript. No JSX. No compile step for runtime code.
+**Secondary:**
+- Python — `scripts/relativize-links.py` (one-off link-relativization utility)
+- MJS (ESM) — build helpers: `scripts/gen-icons.mjs`, `scripts/gen-og.mjs`, `diag.mjs`, `full-audit.mjs`, `__verify_account.mjs`, `__verify_admin.mjs`
 
-## Frameworks & Libraries
+## Runtime
 
-**Runtime (vendored into `js/vendor/`, no npm runtime deps):**
-- Firebase SDK (modular) — vendored as `js/vendor/firebase/firebase-app.js`, `firebase-auth.js`, `firebase-firestore.js`
-- Chart.js — `js/vendor/chart.min.js` (version not pinned in package.json; vendored)
-- PapaParse — `js/vendor/papaparse.esm.js` + `papaparse.min.js` (CSV parsing for bank import)
-- qr-creator — `js/vendor/qr-creator.es6.min.js` (QR code generation)
+**Environment:**
+- Browser — primary runtime; app runs entirely client-side (offline-first PWA)
+- Node.js — build scripts and local dev server only (`server.js`, `scripts/`)
 
-`package.json` declares **zero runtime dependencies** — all third-party code is either vendored or loaded from a CDN that is already gated behind consent.
+**Dev Server:**
+- `server.js` — plain Node.js `http` module, port 4141; development only, not deployed
 
-**Dev dependencies (from `package.json`):**
-- `vitest ^1.6.1` — unit test runner
-- `playwright ^1.60.0` — end-to-end / browser tests
+**Package Manager:**
+- npm
+- Lockfile: `package-lock.json` present
 
-## Build Tools
+## Frameworks
 
-- **`scripts/build-all.js`** — Node.js page generator; reads templates from `scripts/templates/`, data from `scripts/data/*.json`, and writes output HTML to `compare/`, `features/`, `use-cases/`, blog categories, and niche landing pages. Run via `npm run build:pages`.
-- **`scripts/sync-chrome.js`** — dev-only helper, syncs something to Chrome; run via `npm run sync-chrome`.
-- **`server.js`** — vanilla Node `http` server for local dev on port 4141. No hot-reload; development-only, not deployed.
-- No bundler (Webpack, Vite, Rollup, esbuild) — JS is served as individual plain files.
-- No transpiler (Babel) — code targets modern browsers natively.
-- Vercel handles the only "build" on deploy: `npm install --omit=dev` (installs nothing at runtime since there are no runtime deps).
+**Core:**
+- None — vanilla JavaScript (no React, Vue, Angular, or similar)
 
-## Deployment & Infrastructure
+**Testing:**
+- Vitest `^1.6.1` — unit test runner; config via `package.json` `"test"` script
+- Playwright `^1.60.0` — end-to-end/browser tests
 
-- **Hosting:** [Vercel](https://vercel.com) — static site + serverless functions
-- **Deploy model:** push to git → Vercel serves committed static HTML + compiles `api/*.js` as Edge/Node serverless functions on demand
-- **Config:** `vercel.json` — clean URLs, rewrites, 301 redirects, security headers (CSP, HSTS, COOP, etc.), per-route cache-control, CORS on `/api/*`
-- **No build step on Vercel** — generated HTML is committed; Vercel serves files directly
-- **CI/CD:** not detected in repo (no GitHub Actions workflows committed); README mentions a workflow that writes `js/config.local.js` from repo secrets for non-static deploys
-- **Containerization:** none
+**Build:**
+- Node.js build scripts — `scripts/build-all.js` orchestrates page generation via `scripts/generate-page.js` using a `scripts/build-manifest.json` manifest
+- No bundler/transpiler (Vite, webpack, etc.) — JS is served as-is; ESM imports used inside async functions only (Firebase SDK)
 
-**Serverless functions (`api/`):**
-- `activate.js` — licence activation, calls Lemon Squeezy; Node runtime
-- `deactivate.js` — licence deactivation, calls Lemon Squeezy; Node runtime
-- `validate.js` — licence validation, calls Lemon Squeezy; Node runtime
-- `contact.js` — contact form email relay, calls Resend; **Edge runtime** (`export const config = { runtime: 'edge' }`)
-- `admin.js` — admin endpoint gated by `ADMIN_TOKEN`
+## Key Dependencies
 
-## Development Tools
+**Vendored (in `js/vendor/` — committed, not npm):**
+- Chart.js — `js/vendor/chart.min.js` — all in-app charts (line, bar, doughnut)
+- PapaParse — `js/vendor/papaparse.esm.js` + `papaparse.min.js` — CSV parsing for bank statement import
+- qr-creator — `js/vendor/qr-creator.es6.min.js` — QR code generation (sync share feature)
+- Firebase Web SDK (modular, v9-compat) — `js/vendor/firebase/firebase-app.js`, `firebase-auth.js`, `firebase-firestore.js` — vendored to allow CSP `script-src 'self'`
 
-- **Testing:** `vitest ^1.6.1` (unit, `npm test` / `npm run test:watch`); `playwright ^1.60.0` (E2E)
-- **Linting/formatting:** none detected — no `.eslintrc*`, `.prettierrc*`, `biome.json`, or similar config files present
-- **Local dev server:** `npm run dev` starts `server.js` on port 4141
-- **Audit scripts:** `audit-site.mjs`, `full-audit.mjs`, `diag.mjs` — one-off Node ESM scripts, not deployed
+**Dev-only (npm, not shipped):**
+- `vitest ^1.6.1` — test runner
+- `playwright ^1.60.0` — E2E tests
+
+## Configuration
+
+**Environment:**
+- App config set via `window.__FINCWIN_CONFIG__` (a plain object injected by `js/config.local.js`)
+- `js/config.example.js` — template showing required fields: `apiKey`, `authDomain`, `projectId`, `storageBucket`, `messagingSenderId`, `appId`, `googleClientId`
+- `js/config.fallback.js` — ensures `window.__FINCWIN_CONFIG__` is `null` (not undefined) if `config.local.js` is absent; required by CSP (no `unsafe-inline`)
+- `js/config.local.js` is gitignored; in CI/CD it is written from repo secrets at build time
+
+**Build:**
+- `scripts/build-manifest.json` — declarative list of `{template, data, out}` entries
+- `scripts/generate-page.js` — Mustache/template-style page generator
+- `scripts/build-all.js` — iterates the manifest and calls the generator via `execFileSync`
 
 ## PWA
 
-- Service worker: `service-worker.js` — cache name `fincwin-v6`, offline-first cache strategy for app shell assets
-- Web manifest: `manifest.json`
-- Icons: `icon-192.png`, `icon-512.png`, `icon-maskable-512.png`, `icon-maskable.svg`
+- `manifest.json` — Web App Manifest; `name: "Financial Win — Personal Finance"`, `short_name: "FincWin"`, `start_url: "/app"`, display `standalone`
+- `service-worker.js` — Cache-first strategy, cache key `fincwin-v6`; pre-caches all core app assets including vendored JS and CSS
+- Icons: PNG (180, 192, 512) + SVG; maskable variant at 512 px
 
-## Storage (client-side)
+## Security
 
-- **IndexedDB** — primary encrypted state store; PIN-derived AES-GCM-256 key via PBKDF2 (600k iterations, v2); managed in `js/state.js`
-- **localStorage** — licence key cache, session counters, onboarding flags, theme preferences, FX rate cache
-- **sessionStorage** — FX rate session cache (`finflow_fx_rates`), budget notification dedup flags
-- **Web Cryptography API** — required; app shows a hard error if unavailable; handled in `js/crypto-core.js`
+- Content-Security-Policy enforced via `vercel.json` response headers (no `unsafe-inline` for scripts)
+- PBKDF2-HMAC-SHA256 (210k iterations v1, 600k iterations v2 per OWASP 2023) key derivation via `js/crypto-core.js`
+- AES-GCM-256 for all at-rest and cloud-sync data encryption
+- `crypto.subtle` Web Crypto API — `js/crypto-core.js`
+
+## Platform Requirements
+
+**Development:**
+- Node.js (any recent LTS)
+- `npm install` installs Vitest + Playwright
+- Local dev: `npm run dev` → `node server.js` on port 4141
+
+**Production:**
+- Vercel (static hosting with Edge Functions for `/api/*` routes)
+- `vercel.json` defines URL rewrites (clean URLs), security headers, cache policies, and CORS for `/api/`
+- No server-side rendering; all HTML files are pre-built static assets
 
 ---
 

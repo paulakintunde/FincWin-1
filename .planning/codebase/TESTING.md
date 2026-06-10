@@ -1,122 +1,258 @@
-# Testing
+# Testing Patterns
 
 **Analysis Date:** 2026-06-10
 
-## Test Coverage
+## Test Framework
 
-**What is tested:**
-- AES-GCM encrypt/decrypt round-trips and wrong-key rejection (`styles/tests/crypto.test.js`)
-- PBKDF2 key derivation determinism and cross-passphrase isolation (`styles/tests/crypto.test.js`)
-- `isEncryptedPayload()` detector for various input shapes (`styles/tests/crypto.test.js`)
-- State dispatch logic: `INVESTMENTS_RESET_ALL`, `SAVINGS_TXN_REMOVE`, `LOAN_GENERATE_SCHEDULE`, `SAVINGS_RESET_ALL` (`styles/tests/state-dispatch.test.js`)
-- Undo snapshot/restore semantics and single-snapshot stack behaviour (`styles/tests/state-dispatch.test.js`)
-- `_DESTRUCTIVE_ACTIONS` registry completeness (`styles/tests/state-dispatch.test.js`)
-- Sync fingerprint basic correctness and known collision scenarios (`styles/tests/sync-fingerprint.test.js`)
-- Template generator: partial injection, `{{TOKEN}}` replacement, no leftover markers (`styles/tests/generator.test.js`)
-- Full site build: every manifest page has nav, footer, no leftover markers (`styles/tests/generator.test.js`)
+**Runner:**
+- Vitest `^1.6.1`
+- Config: no dedicated `vitest.config.*` file — uses Vitest defaults (resolves from `package.json`)
 
-**What is NOT tested:**
-- The full `js/state.js` module (IndexedDB, persistence, encryption integration)
-- Any rendering functions: `renderDash()`, `renderExpenses()`, `renderEnvelopes()`, etc.
-- Firebase auth flows (`js/signin.js`) — no mocked Firebase tests
-- PWA service worker (`service-worker.js`)
-- `js/sync.js` cloud sync logic beyond the fingerprint function
-- `js/health.js` score calculation (`calcHealth()`)
-- `js/loans.js`, `js/savings.js`, `js/analytics.js`, `js/gamification.js`
-- Event delegation system in `js/events.js`
-- Import/export: `js/import-bank.js`, CSV export
-- All UI interactions, modal open/close, tab switching
-
-## Test Types
-
-**Unit Tests (pure logic, no DOM):**
-- `styles/tests/crypto.test.js` — crypto primitives copied from `js/crypto-core.js`, tested in isolation using Node's `webcrypto`
-- `styles/tests/state-dispatch.test.js` — dispatch/undo logic extracted as pure functions, no browser APIs
-- `styles/tests/sync-fingerprint.test.js` — `stateFingerprint()` function replicated from `js/sync.js` and tested in isolation
-
-**Integration Tests (file system, process execution):**
-- `styles/tests/generator.test.js` — spawns `node scripts/generate-page.js` as a child process and reads output files; also runs the full `scripts/build-all.js` pipeline
-
-**E2E Tests:**
-- `playwright` is listed as a dev dependency in `package.json` but no Playwright test files are present in the repository. No E2E test suite is currently implemented.
-
-**Manual Testing:**
-- Implied by the absence of UI/DOM tests — rendering, auth, PWA install, sync, and all interactive features are tested manually
-
-## Test Tooling
-
-**Runner:** Vitest `^1.6.1`
-- Config: no `vitest.config.*` file found; Vitest uses defaults
-- Test environment: Node (default) — browser APIs polyfilled manually in test files (e.g. `webcrypto` from `node:crypto`)
-
-**Assertion Library:** Vitest's built-in `expect` (Chai-compatible)
-
-**Child Process:** Node's `node:child_process` (`execFileSync`) used in `generator.test.js` to test the build pipeline as a black box
-
-**No additional testing libraries** (no Testing Library, no Jest, no Sinon, no mock frameworks)
+**Assertion Library:**
+- Vitest's built-in `expect` (Chai-compatible via `@vitest/expect`)
 
 **Run Commands:**
 ```bash
-npm test           # vitest run  — single pass, exits with code
-npm run test:watch # vitest      — watch mode, re-runs on file change
+npm test            # Run all tests once (vitest run)
+npm run test:watch  # Watch mode (vitest)
+# No coverage command configured
 ```
 
-No coverage script is defined in `package.json`. To get coverage, run:
+**Playwright:**
+- `^1.60.0` installed as dev dependency
+- Used exclusively by the manual audit script `audit-site.mjs` — not wired into `npm test`
+
+---
+
+## Test File Organisation
+
+**Location:** `styles/tests/` (misleadingly named — contains JS logic tests, not CSS tests)
+
+**Files:**
+```
+styles/tests/
+├── crypto.test.js           # AES-GCM encrypt/decrypt primitives
+├── generator.test.js        # Build pipeline (generate-page.js + full site build)
+├── state-dispatch.test.js   # State dispatch/undo logic
+└── sync-fingerprint.test.js # Sync conflict fingerprint function
+```
+
+**Naming:** `*.test.js` suffix, kebab-case filename matching the module under test.
+
+**Import style:** ES module syntax (`import { describe, it, expect } from 'vitest'`) even though the main codebase uses CommonJS.
+
+---
+
+## Test Structure
+
+**Suite Organisation:**
+```javascript
+import { describe, it, expect, beforeEach, afterAll } from 'vitest';
+
+describe('Feature or function name', () => {
+  beforeEach(() => { /* reset shared mutable state */ });
+
+  it('describes the specific behaviour', () => {
+    // Arrange
+    const state = makeState();
+    // Act
+    const result = dispatch(state, 'ACTION_TYPE', { param: value });
+    // Assert
+    expect(result.field).toBe(expectedValue);
+  });
+
+  it('handles edge/error case', () => {
+    expect(() => dispatch(state, 'ACTION', { idx: 99 })).not.toThrow();
+  });
+});
+```
+
+**Patterns observed:**
+- `beforeEach` resets module-level mutable state (e.g. `_snapshot = null`) before each test
+- `afterAll` cleans up temp files created during integration tests
+- State fixture factories (`makeState()`, `makeBaseState()`) isolate tests from real app state
+- Pure logic is extracted into the test file itself when the source module has browser dependencies — avoids needing jsdom
+
+---
+
+## What Is Tested
+
+### 1. Crypto Primitives — `styles/tests/crypto.test.js`
+
+Tests the AES-GCM encryption layer from `js/crypto-core.js` by replicating the primitives in Node using `node:crypto`'s `webcrypto.subtle`. Covers:
+
+- Encrypt/decrypt round-trip
+- Random IV produces different ciphertext each call
+- Wrong key / wrong salt rejects (throws)
+- Tampered ciphertext rejects (throws)
+- PBKDF2 key derivation determinism
+- `isEncryptedPayload()` type guard (positive and negative cases)
+
+**Pattern for async tests:**
+```javascript
+it('throws when decrypting with a different key', async () => {
+  const key = await deriveKey('correct-pin', salt);
+  const wrongKey = await deriveKey('wrong-pin', salt);
+  await expect(decrypt(payload, wrongKey)).rejects.toThrow();
+});
+```
+
+### 2. State Dispatch / Undo — `styles/tests/state-dispatch.test.js`
+
+Tests the pure state reducer logic from `js/state.js`. The dispatch function and DESTRUCTIVE_ACTIONS list are replicated inline (no imports from the browser-coupled source file). Covers:
+
+- `INVESTMENTS_RESET_ALL` — clears array, takes snapshot, undo restores
+- `SAVINGS_TXN_REMOVE` — removes transaction, reverses balance, undo works
+- `LOAN_GENERATE_SCHEDULE` — adds payment chips, deduplicates months, no undo snapshot
+- `_DESTRUCTIVE_ACTIONS` registry completeness
+- Single-snapshot undo stack semantics (second destructive action overwrites snapshot)
+- Out-of-range index handling (does not throw)
+
+### 3. Sync Conflict Fingerprint — `styles/tests/sync-fingerprint.test.js`
+
+Documents and verifies the **known weakness** in the sync collision detection function from `js/sync.js`. Covers:
+
+- Consistent fingerprint for identical states
+- Different fingerprints for different amounts/counts
+- Collision scenarios: delete-one-add-one with equal totals, swapped item names — both produce the same fingerprint
+
+These tests intentionally **pass** on the collision case (they document the bug, not fix it). A future fix to `stateFingerprint` would break these tests in the "collision" groups — that is the signal to update the guard logic.
+
+### 4. Generator / Build Pipeline — `styles/tests/generator.test.js`
+
+Integration tests for the static site build. Uses `execFileSync` to run the actual Node scripts. Covers:
+
+- `generate-page.js` injects nav, footer, and scripts partials correctly
+- No unreplaced `{{TOKEN}}` or `{{> partial}}` markers survive in output
+- `build-all.js` builds every page listed in `scripts/build-manifest.json` with no leftover markers, nav present, and footer present
+
+**Pattern for build integration tests:**
+```javascript
+it('builds every manifest page with no leftover markers', () => {
+  execFileSync('node', ['scripts/build-all.js'], { cwd: ROOT, encoding: 'utf8' });
+  const manifest = JSON.parse(fs.readFileSync(...));
+  for (const { out } of manifest) {
+    const html = fs.readFileSync(path.join(ROOT, out), 'utf8');
+    expect(html, `${out} has leftover marker`).not.toMatch(/\{\{\s*>?\s*\w+\s*\}\}/);
+  }
+});
+```
+
+---
+
+## Mocking
+
+**Framework:** None — no `vi.mock()` usage observed.
+
+**Approach:** Pure function extraction. Browser-coupled modules (state.js, sync.js, crypto-core.js) are not imported directly. Instead, the relevant pure logic is copied into the test file and tested in isolation using Node's built-in `webcrypto` where needed.
+
+This means tests do not require jsdom and run in the default Node environment, which is faster and simpler.
+
+**What to mock:** Nothing currently mocked. If future tests need DOM APIs, configure `environment: 'jsdom'` in `vitest.config.js` per test file using Vitest's `// @vitest-environment jsdom` comment annotation.
+
+---
+
+## Fixtures and Factories
+
+**Pattern:** Inline factory functions return fresh state objects for each test, preventing cross-test mutation:
+
+```javascript
+function makeState() {
+  return {
+    months: { 'Jun 2026': { weeks: [{ items: [] }, ...], revenue: [] } },
+    loans:  [{ name: 'Car Loan', amount: 15000, rate: 5.5, minPayment: 300, payments: [] }],
+    savings: [{ name: 'Emergency Fund', balance: 2000, contribution: 200, transactions: [...] }],
+    investments: [{ name: 'RRSP', currentValue: 50000, currency: 'CAD' }],
+    currency: { code: 'CAD', symbol: '$', locale: 'en-CA' }
+  };
+}
+```
+
+Factories are defined at the top of each test file. No shared fixture files exist.
+
+---
+
+## Coverage
+
+**Requirements:** None enforced (no coverage threshold configured, no `--coverage` flag in scripts).
+
+**View Coverage:**
 ```bash
 npx vitest run --coverage
 ```
 
-## Test Organization
+---
 
-**Location:**
-- All tests live in `styles/tests/` — note this is inside the CSS styles directory, which is an unconventional location
-- No co-located test files next to source modules
-- No `__tests__/` directories
-- No `test/` directory at project root
+## Manual Audit Script
 
-**Naming:**
-- Files: `{subject}.test.js` — e.g. `crypto.test.js`, `state-dispatch.test.js`
-- `describe` blocks name the function or behaviour under test: `'AES-GCM encrypt / decrypt round-trip'`, `'INVESTMENTS_RESET_ALL'`
-- `it` descriptions state expected behaviour: `'decrypts back to the original plaintext'`, `'takes a snapshot before clearing (enabling undo)'`
+`audit-site.mjs` is a Playwright-based manual smoke test for `app.html`. It is **not part of the automated test suite** (`npm test` does not run it). It must be run manually:
 
-**Test File Structure:**
-Each test file follows this pattern:
-1. Block comment explaining what is tested and any constraints
-2. Replication of the pure logic under test (copy of the function from source, or extracted version)
-3. Helper functions / fixtures (e.g. `makeState()`, `makeBaseState()`)
-4. `describe` / `it` blocks
+```bash
+# Start the dev server first
+npm run dev    # starts server.js on localhost
 
-The pattern of replicating source logic rather than importing it directly means tests do not have a live dependency on the production module files. This insulates tests from module loading issues (no DOM, no IDB) but means tests can drift from the actual implementation.
+# In a separate terminal
+node audit-site.mjs
+```
 
-## Gaps & Risks
+Covers:
+- Initial load / onboarding overlay
+- Dashboard KPI rendering
+- Month navigation
+- Health badge modal
+- DTI tooltip toggle
+- Dark mode toggle
+- Search panel (`/` keyboard shortcut)
+- All tab sections (expenses, revenue, loans, savings, calendar, analytics, archive, settings)
+- Add/save modals for each data type
+- Mobile viewport (390px) — bottom nav, mobile menu sheet
+- PIN setup modal
+- Notification panel
+- Logo → dashboard navigation
+- Layout/overflow checks
+- Basic accessibility (buttons without labels, inputs without labels)
+- Broken images
+- JS console error count
 
-**Critical untested areas:**
+Output format: `[BUG]`, `[WARN]`, or `[NOTE]` prefixed lines, with a final summary count.
 
-**`js/state.js` — persistence and encryption integration:**
-- IndexedDB read/write/migrate paths have no tests
-- PIN lock/unlock flow and `_sessionKey` lifecycle are untested
-- `persist()` and `initState()` — the two most critical functions in the app — have no test coverage
-- BroadcastChannel cross-tab sync notification is untested
+---
 
-**`js/sync.js` — cloud sync beyond fingerprint:**
-- The fingerprint collision documented in `sync-fingerprint.test.js` is a known data-loss risk with no fix yet
-- Merge/conflict resolution logic has no test coverage
-- OAuth token refresh paths are untested
+## Build-Time Validation
 
-**`js/signin.js` — Firebase auth flows:**
-- Sign in, register, password reset, licence activation all touch Firebase with no mock layer
-- The licence revalidation background job (`_revalidateLicence`) is untested
+The generator itself acts as a build validator. `scripts/generate-page.js` exits with code 1 if:
+- A template file does not exist
+- A data file does not exist
+- Any `{{TOKEN}}` or `{{> partial}}` marker is unresolved in the output
 
-**Rendering functions:**
-- All `render*()` functions (`renderDash`, `renderExpenses`, `renderEnvelopes`, etc.) rely on DOM globals and are completely untested
-- Any regression in rendering logic will only surface in manual testing
+`scripts/build-all.js` counts failures and exits with code 1 if any page failed. This means `npm run build:pages` is a build correctness check — run it before committing changes to templates or data files.
 
-**Playwright — installed but unused:**
-- `playwright ^1.60.0` is in `devDependencies` but there are no `.spec.js` files and no Playwright config
-- No E2E tests cover the critical flows: sign in → app boot → add expense → sync
+---
 
-**Test file location:**
-- `styles/tests/` is a confusing home for JavaScript tests unrelated to CSS. A future refactor should move tests to `tests/` or `__tests__/` at the project root.
+## CI/CD
 
-**No linting on tests:**
-- No ESLint config means no enforcement of test quality rules (e.g. no `test.only` leaking into CI)
+**No CI pipeline is configured.** There is no `.github/workflows/` directory or equivalent. All checks are manual:
+
+| Check | How | When |
+|-------|-----|------|
+| Unit + integration tests | `npm test` | Manually before push |
+| Template build validity | `npm run build:pages` | After template/data changes |
+| Nav/footer sync | `npm run sync-chrome` | After nav or footer copy changes |
+| Full app smoke test | `node audit-site.mjs` (requires dev server) | Manual regression |
+
+**Deployment:** Vercel (`vercel.json` present). Vercel runs `npm install --omit=dev` as the install command. There is no build command configured — all generated HTML files are committed to the repo and deployed as static assets.
+
+---
+
+## What Is Not Tested
+
+- `js/mkt.js` and `js/consent.js` marketing scripts (no DOM tests)
+- `js/app.html` rendering or UI interactions (only the manual Playwright audit covers this)
+- API endpoints in `api/*.js`
+- CSS visual correctness
+- Service worker (`service-worker.js`)
+- `scripts/sync-chrome.js` (no automated test)
+
+---
+
+*Testing analysis: 2026-06-10*

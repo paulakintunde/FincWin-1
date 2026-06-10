@@ -1,153 +1,283 @@
-# Code Conventions
+# Coding Conventions
 
 **Analysis Date:** 2026-06-10
 
-## Naming Conventions
+## Site Architecture Split
 
-**Files:**
-- JS modules are lowercase, hyphen-separated: `boot.js`, `crypto-core.js`, `import-bank.js`, `dark-mode.js`
-- HTML pages are lowercase hyphen-separated: `signin.html`, `app.html`, `cookie-policy.html`
-- CSS files are lowercase hyphen-separated: `base.css`, `mkt.css`, `auth-tokens.css`
-- Script utilities use descriptive names: `scripts/generate-page.js`, `scripts/build-all.js`
-- Test files live in `styles/tests/` and use `.test.js` suffix: `crypto.test.js`, `state-dispatch.test.js`
+The codebase has two distinct HTML/CSS/JS layers with different conventions:
 
-**Variables:**
-- Module-level singletons and shared state use short uppercase or camelCase: `S` (global state), `CMK` (current month key), `_bc`, `_idb`
-- Private/internal identifiers are prefixed with `_`: `_sessionKey`, `_fbAuth`, `_snapshot`, `_envExpanded`
-- Loop and temporary variables use single letters or short names: `p`, `k`, `r`, `m`, `w`
-- Constants use uppercase: `SK`, `IDB_STORE`, `BDFT`, `MS`, `MF`
-- DOM cache variables use camelCase: `_canvas`, `_ctx`, `_particles`
+| Layer | Pages | Stylesheet | JS |
+|-------|-------|------------|----|
+| Marketing | `index.html`, `features.html`, `pricing.html`, `about.html`, `blog/**`, `compare/**`, `features/**`, `use-cases/**` | `styles/mkt.css` | `js/mkt.js`, `js/consent.js` |
+| App | `app.html` | `styles/base.css`, `styles/layout.css`, `styles/components.css`, `styles/dark.css`, `styles/themes.css` | `js/boot.js`, `js/state.js`, etc. |
 
-**Functions:**
-- Public/exported functions use camelCase: `switchTab()`, `renderEnvelopes()`, `calcHealth()`, `changeMonth()`
-- Private helpers use `_camelCase` prefix: `_calcBudgetVelocity()`, `_catMgrBuild()`, `_attachEnvListeners()`, `_fbMsg()`
-- Event handlers are descriptive verbs: `handleSignin()`, `handleRegister()`, `activateLicence()`
-- Render functions are prefixed `render`: `renderDash()`, `renderExpenses()`, `renderEnvelopes()`
+Never mix the two. Marketing pages must not load app CSS, and `app.html` must not load `mkt.css`.
 
-**CSS Classes:**
-- BEM-influenced block-element naming: `.be` (budget envelope), `.be-lbl`, `.be-amt`, `.be-spent`, `.be-cap`
-- State classes are short descriptors: `.active`, `.open`, `.show`, `.visible`, `.mbn-active`
-- Component prefixes group related classes: `.catmgr-row`, `.catmgr-name-inp`, `.catmgr-chip`, `.catmgr-chip-del`
-- Marketing pages use semantic class names: `.hero`, `.hero-eyebrow`, `.nav-logo`, `.nav-cta`, `.mkt-footer`
-- Utility/modifier suffixes: `-light`, `-mid`, `-dark` for color variants; `-wrap` for containers
+---
 
-**CSS Custom Properties:**
-- Semantic tokens in `:root`: `--bg`, `--surface`, `--ink`, `--muted`, `--accent`, `--hairline`
-- Legacy aliases preserved for JS inline styles: `--sage`, `--danger`, `--success`, `--amber`, `--blue`
-- Component tokens: `--radius`, `--radius-sm`, `--shadow`, `--font-sans`, `--font-serif`
+## HTML Conventions
 
-## HTML Patterns
+### Document Structure
 
-**Static Marketing Pages:**
-- Hand-authored HTML at repo root and subdirectories: `index.html`, `features.html`, `pricing.html`, `compare/`, `blog/`
-- Each page is self-contained with full `<head>` block: charset, viewport, title, description, canonical, OG tags, Twitter card, JSON-LD structured data
-- Google Fonts loaded via `<link rel="preconnect">` pairs followed by the font `href`
-- Page-specific styles are written inline in `<style>` blocks within `<head>` rather than in separate files
-- Scripts loaded at end of `<body>` with no module type: `<script src="js/mkt.js"></script>`
+Every page follows this `<head>` order:
 
-**Templated Pages:**
-- Build system uses `scripts/templates/*.html` + `scripts/data/*.json` → generates output HTML
-- Template tokens use `{{TOKEN}}` syntax: `{{META_TITLE}}`, `{{CANONICAL_URL}}`, `{{FEATURE_NAME}}`
-- Partials use `{{> name}}` syntax: `{{> nav}}`, `{{> footer}}`, `{{> scripts}}`
-- `{{BASE}}` resolves to a relative path prefix based on output file depth (e.g. `../` for depth-1 pages)
-- Templates in `scripts/templates/`: `feature-page.html`, `competitor-alt.html`, `blog-post.html`, `niche-landing.html`, `use-case-page.html`, `blog-category.html`
-- Partials in `scripts/partials/`: `nav.html`, `footer.html`, `scripts.html`
+1. `<meta charset="UTF-8">` + viewport
+2. `<title>` — format: `Page Name — FincWin` (marketing) or standalone (app)
+3. `<meta name="description">` and `<meta name="robots">`
+4. `<link rel="canonical">` + optional `hreflang`
+5. Open Graph block (`og:type`, `og:url`, `og:title`, `og:description`, `og:image` with width/height/type)
+6. Twitter Card block
+7. Icons (`favicon.svg`, `favicon-32.png`, `apple-touch-icon`)
+8. Font preconnects + Google Fonts stylesheet link
+9. CSS link(s)
+10. JSON-LD `<script type="application/ld+json">` blocks
+11. Page-specific `<style>` block (inline, scoped to this page's unique components)
 
-**App HTML (`app.html`):**
-- Tab sections use `id="section-{name}"` pattern; tab buttons use `id="tab-{name}"`
-- Mobile bottom nav items use `id="mbn-{name}"` to mirror tab state
-- Modals use `.modal-overlay` class and `.open` class for visibility
-- Data-attribute delegation: `data-action="functionName"`, `data-arg="value"`, `data-stop-prop` to prevent bubbling
-- Aria attributes: `aria-current="page"` on active tabs, `aria-label` on icon-only buttons, `aria-hidden="true"` on decorative SVGs
+### OG Image
 
-## JavaScript Style
+All marketing pages share one OG image: `https://www.fincwin.com/og-image.png` (1200×630 PNG). Do not invent per-page OG images.
 
-**Module Style:**
-- No ES module syntax (`import`/`export`) in app JS — all files use plain browser globals
-- IIFEs (`(function(){...})()`) used to create local scope without polluting globals: confetti engine, PWA setup, swipe nav, install prompt, online/offline indicator
-- Firebase SDK loaded via dynamic `import()` inside async functions: `await import('./vendor/firebase/firebase-auth.js')`
-- Build/test scripts (`scripts/`, `styles/tests/`) use CommonJS (`require`) or ES module imports with Vitest
+### JSON-LD Schema
 
-**Async Patterns:**
-- `async/await` used consistently for all async operations in app code
-- Firebase auth wrapped in try/catch with empty catch blocks for non-fatal failures: `catch {}` or `catch(e) {}`
-- Promises used for IndexedDB wrappers: `new Promise((res) => { tx.oncomplete = res; })`
-- `Promise.all()` for parallel Firebase SDK imports: `await Promise.all([import(...), import(...)])`
-- Timeouts for deferred UI actions: `setTimeout(() => openScorecardModal(key), 400)`
+- Marketing pages include `SoftwareApplication` or `Article` + `BreadcrumbList` schemas.
+- Blog posts use `Article` schema with `datePublished`, `dateModified`, `author`, `publisher`.
+- Feature pages use `SoftwareApplication` + `BreadcrumbList`.
+- App page (`app.html`) has `noindex, nofollow` — no schema needed.
 
-**Error Handling:**
-- Auth errors mapped to human messages via lookup object in `_fbMsg(code)` in `js/signin.js`
-- Non-fatal async failures use empty catch: `catch {}` (Firestore writes, SW registration)
-- Fatal errors shown via `showToast('message', 'warn-t')` for user-facing failures
-- Crypto API absence shows a hardcoded banner element (boot guard in `js/boot.js`)
-- `try/catch/finally` used around IndexedDB operations in `js/state.js`
+### Robots
 
-**Code Density:**
-- App JS (especially `js/boot.js`, `js/state.js`) uses highly compressed single-line style with minimal whitespace in hot paths: `if(!_canvas){_canvas=document.getElementById('confettiCanvas');_ctx=_canvas.getContext('2d');}`
-- Auth/utility files (`js/signin.js`) use expanded, readable style with consistent indentation
-- Section headers use banner comments: `// ══════════════════════════════════════════════`
-- Subsection headers use lighter separators: `// ── SECTION NAME ──`
+- All marketing/SEO pages: `<meta name="robots" content="index, follow">`
+- App/account/admin pages: `<meta name="robots" content="noindex, nofollow">`
 
-**Event Delegation:**
-- `js/events.js` centralises event delegation via `data-action` and `data-change` attributes
-- Avoids inline `onclick` in HTML; delegates via a single listener on a parent element
-- `data-stop-prop` attribute used to stop event bubbling without a handler
+### Accessibility Patterns
 
-## CSS/Styling Approach
+- All inline SVG icons use `aria-hidden="true"` when decorative.
+- Buttons without visible text must have `aria-label`.
+- `role="navigation"` on secondary navs (e.g., `#blogSubNav`).
+- `aria-label` on `<nav>` elements beyond the main nav.
+- `aria-current="page"` set dynamically by `js/mkt.js` based on current pathname.
+- Live regions use `aria-live="polite"` (e.g., `#lockPinStatus`).
+- Skip-to-content link is injected by `js/mkt.js` — no per-page markup required.
 
-**Architecture:**
-- Global design tokens defined in `styles/base.css` using CSS custom properties on `:root`
-- App styles split across: `base.css` (tokens + reset), `components.css` (UI components), `layout.css` (page structure), `dark.css` (dark mode overrides), `themes.css` (theme variants)
-- Marketing stylesheet is separate: `styles/mkt.css`
-- Auth page uses: `styles/auth-tokens.css`
+---
 
-**Design System:**
-- "The Spread · Soft Sage" theme: sage green primary, warm neutrals, no shadows, square/near-square corners (`--radius: 3px`)
-- Two typefaces: `Hanken Grotesk` (sans, weights 200–600) and `Instrument Serif` (serif, italic variant)
-- Dark mode via `dark.css` overrides triggered by `.dark` class on `<body>`; `applyDark()` in `js/darkmode.js`
-- Theme variants in `themes.css` override token values per design
+## Template System
 
-**Inline Styles in JS:**
-- Dynamic/data-driven styles applied as inline `style` attributes from JS (e.g. progress bar width, color based on threshold)
-- References CSS custom properties by name: `color: var(--danger)`, `background: var(--sage-light)`
-- Hard-coded hex values in `index.html` hero section for marketing pages (not using tokens)
+### How It Works
 
-## Configuration Patterns
+Templated pages are generated by `scripts/generate-page.js` using:
 
-**Firebase Config:**
-- Template at `js/config.example.js`; runtime copy at `js/config.local.js` (gitignored)
-- Injected as `window.__FINCWIN_CONFIG__` — a plain object on the global scope
-- Consumed by lazy `import()` calls inside async functions, never required at parse time
-- CI/CD writes `config.local.js` from repo secrets at build time
+- **Templates** in `scripts/templates/*.html` — layout skeletons with `{{TOKEN}}` placeholders
+- **Partials** in `scripts/partials/*.html` — reusable fragments injected with `{{> partialName}}`
+- **Data files** in `scripts/data/*.json` — per-page content values
+- **Manifest** in `scripts/build-manifest.json` — maps template + data → output file
 
-**App State:**
-- Global mutable state object `S` in `js/state.js`, accessed directly across all modules
-- Current month key `CMK` is a separate global string
-- Persisted to IndexedDB (primary) with localStorage fallback
-- Encrypted at rest with AES-GCM when a PIN is set; key derived via PBKDF2
+Run `npm run build:pages` to regenerate all templated pages.
 
-**Build Config:**
-- Template build manifest at `scripts/build-manifest.json` — array of `{ template, data, out }` entries
-- No bundler; all scripts concatenated by `<script>` tags in HTML load order
+### Token Syntax
 
-## Documentation Style
+- `{{TOKEN_NAME}}` — replaced from the data JSON, e.g. `{{META_TITLE}}`, `{{CANONICAL_URL}}`
+- `{{> partialName}}` — replaced by the contents of `scripts/partials/partialName.html`
+- `{{BASE}}` — auto-computed depth prefix (e.g. `../` for depth-1 pages), resolves relative paths
 
-**Inline Comments:**
-- Section banners use box-drawing characters: `// ══════════════════════════════════`
-- Sub-section headers: `// ── SECTION NAME ──`
-- File identity comment at top of each app JS file: `// === filename.js ===`
-- Inline comments explain non-obvious behaviour: `// gravity`, `// spread upward`, `// fail-open offline`
-- Multi-line rationale comments appear before complex functions with no formal JSDoc
-- Test files use JSDoc-style block at top explaining purpose and scope
+The generator **fails with exit code 1** if any `{{TOKEN}}` or `{{> partial}}` marker remains unreplaced in the output. This is the primary build-time correctness guard.
 
-**Data-Attribute Conventions:**
-- `data-action` — function name to call on click
-- `data-change` — function name to call on change/input
-- `data-arg` — argument to pass to the action function
-- `data-stop-prop` — absorb click bubbling without triggering an action
-- `data-tab` — tab identifier for auth page tab switching
-- `data-switch-tab` — target tab for footer link navigation
+### Available Partials
 
-**No Linting Config:**
-- No `.eslintrc`, `.prettierrc`, or `biome.json` found in the repository
-- Code style is enforced by convention only, not tooling
+| Partial | File | Injects |
+|---------|------|---------|
+| `nav` | `scripts/partials/nav.html` | `<nav id="mainNav">` with `{{BASE}}`-prefixed hrefs |
+| `footer` | `scripts/partials/footer.html` | `<footer class="mkt-footer">` with full link columns |
+| `scripts` | `scripts/partials/scripts.html` | `<script src="{{BASE}}js/mkt.js" defer>` + consent script |
+
+### Available Templates
+
+| Template | Output Location | Purpose |
+|----------|-----------------|---------|
+| `competitor-alt` | `compare/*.html` | Competitor comparison landing pages |
+| `feature-page` | `features/*.html` | Individual feature deep-dives |
+| `blog-post` | `blog/posts/*.html` | Blog article pages |
+| `blog-category` | `blog/*/index.html` | Blog category index pages |
+| `use-case-page` | `use-cases/*.html` | Use-case landing pages |
+| `niche-landing` | root-level `*.html` | Niche SEO landing pages |
+
+### Adding a New Templated Page
+
+1. Create or reuse a data file in `scripts/data/` (e.g. `scripts/data/feature-newfeature.json`)
+2. Add an entry to `scripts/build-manifest.json`: `{ "template": "feature-page", "data": "scripts/data/...", "out": "features/newfeature.html" }`
+3. Run `npm run build:pages`
+4. The generator validates no markers remain — fix warnings before committing
+
+---
+
+## CSS Conventions
+
+### Design Tokens
+
+**Marketing layer** (`styles/mkt.css`):
+```css
+--sage:    #5a6e3f   /* primary brand green */
+--sage-lt: #dce8d4   /* light tint */
+--sage-dk: #3d4d2b   /* dark shade */
+--ink:     #111111   /* near-black text */
+--muted:   #6b7280   /* secondary text */
+--faint:   #f5f4f0   /* background tint */
+--border:  rgba(0,0,0,.08)
+--sans:    'Hanken Grotesk', sans-serif
+--serif:   'Instrument Serif', serif
+--r:       10px      /* border-radius */
+```
+
+**App layer** (`styles/base.css`):
+```css
+--bg:      #eef3ec   /* page canvas */
+--accent:  #5a6e3f
+--ink:     #222a22
+--muted:   #4e5a4a
+--radius:  3px       /* flat, square corners — NOT rounded like marketing */
+--shadow:  none      /* no box-shadows in app layer */
+```
+
+The app design system uses flat, sharp corners (`--radius: 3px`) and no shadows. The marketing layer uses rounded corners (`--r: 10px`, `border-radius: 50px` on buttons).
+
+### Class Naming
+
+**BEM-style, kebab-case** throughout. Pattern: `block-element` or `block__element` (the latter is rare — prefer flat kebab).
+
+**Marketing prefix conventions:**
+- `mkt-*` — marketing-layer shared components (`mkt-footer`)
+- `ft-*` — feature page components (`ft-hero`, `ft-section`, `ft-steps`)
+- `post-*` — blog post components (`post-wrap`, `post-title`, `post-body`, `post-callout`)
+- `cap-list` — capabilities list
+- `related-*` — related content grids
+- `nav-*` — navigation elements (`nav-logo`, `nav-links`, `nav-cta`, `nav-burger`)
+- `footer-*` — footer elements (`footer-inner`, `footer-top`, `footer-col`, `footer-brand`)
+- `btn-*` — button variants (`btn-primary`, `btn-ghost`, `btn-ghost-inv`, `btn-sage`)
+- `section-*` — section utility classes (`section-label`, `section-inner`)
+
+**App prefix conventions:**
+- `section-*` — major tab sections (`section-dashboard`, `section-expenses`)
+- `tab-*` — tab bar navigation
+- Modals identified by `id` (e.g. `#itemModal`, `#pinSetupModal`, `#loanModal`)
+
+### Responsive Breakpoints
+
+Marketing layer breakpoints (`styles/mkt.css`):
+- `@media (max-width: 900px)` — tablet
+- `@media (max-width: 768px)` — mobile (hamburger menu activates)
+- `@media (max-width: 600px)` — small mobile
+
+### Animation Pattern
+
+Marketing pages use CSS keyframe animations for entrance effects:
+```css
+@keyframes fadeUp  { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+```
+
+Elements start with `opacity: 0` and use `animation: fadeUp .7s .2s forwards` with staggered delays. Always include the `prefers-reduced-motion` override in `styles/mkt.css` — do not add animation-heavy styles without it.
+
+### Page-Scoped Inline Styles
+
+Each marketing page or template contains a `<style>` block in `<head>` with styles scoped to that page's unique layout components. Shared styles go in `styles/mkt.css`. The pattern is:
+- Global reusable: `styles/mkt.css`
+- Page-specific: inline `<style>` in the `<head>`
+
+---
+
+## JavaScript Conventions
+
+### Marketing JS
+
+Two files, always loaded with `defer` via the `scripts` partial:
+- `js/mkt.js` — nav scroll border, mobile hamburger, copyright year, skip-to-content link, active nav state. Wrapped in a self-executing IIFE. Written as ES5-compatible (`var`, `function`).
+- `js/consent.js` — GDPR/PECR cookie consent banner. Self-contained IIFE. Exposes `window.FincWinConsent` public API.
+
+Marketing JS is intentionally CSP-safe (no `eval`, no `inline` handlers beyond what's already in `mkt.css`/`consent.js`). No `<script>` tags inline in body except for small, self-contained page-specific blocks (e.g., `document.querySelectorAll('.copy-year')...`).
+
+### App JS
+
+- Written as plain ES5/ES6 module-style scripts loaded in dependency order via `<script>` tags in `app.html`.
+- All buttons use `data-action` + `data-arg` attributes; a single delegated event listener in `events.js` dispatches to handlers. Never attach `onclick` handlers inline.
+- State mutations go through `dispatch(type, payload)` in `js/state.js`.
+- Destructive state actions trigger an undo snapshot before mutation.
+- Module-level mutable state (`let S=null`, session keys, etc.) is kept in `js/state.js`. External modules must not hold direct references to the raw crypto key — use wrapper functions exposed by `state.js`.
+
+### Data Attributes (App Layer)
+
+The app uses a delegated event pattern. Interactive elements declare their intent via HTML attributes:
+```html
+<button data-action="openItemModal" data-arg="0">Add Item</button>
+<button data-action="lockKeyPress" data-arg="1">1</button>
+<button data-action="changeMonth" data-arg="-1">◀</button>
+```
+
+`data-action` = handler name, `data-arg` = parameter passed to that handler. Do not wire click listeners directly on elements.
+
+---
+
+## Shared Component Patterns
+
+### Nav/Footer Injection (Two Systems)
+
+**For templated pages** (built via `npm run build:pages`): partials are injected at build time via `{{> nav}}`, `{{> footer}}`, `{{> scripts}}` markers.
+
+**For bespoke marketing pages** (hand-authored): nav and footer are sync'd using `npm run sync-chrome`, which runs `scripts/sync-chrome.js`. This script rewrites `<nav id="mainNav">` and `<footer class="mkt-footer">` blocks in place using regex replacement. Run `sync-chrome` any time the shared nav or footer copy changes.
+
+Pages excluded from `sync-chrome`: `index.html`, `signin.html`, `privacy.html`, `terms.html`, `help.html`, `admin.html`, `account.html`.
+
+### Auth-Gated "App" Link
+
+The `App` nav link and footer link are hidden by default via CSS:
+```css
+html:not(.fw-authed) #mainNav .nav-links a[href$="app.html"]:not(.nav-cta) { display: none; }
+```
+`js/mkt.js` adds `.fw-authed` to `<html>` if `localStorage.getItem('fw_signed_in')` is set. This pattern is selector-based and works on already-built pages without modification.
+
+### CTA Buttons
+
+Two primary CTA variants in marketing templates, consistently linked to `{{BASE}}signin.html#register`:
+- `<a href="{{BASE}}signin.html#register" class="btn-primary">Get started free →</a>`
+- `<a href="{{BASE}}signin.html#register" class="btn-primary">Open FincWin free →</a>`
+
+### Copyright Year
+
+All pages include `<span class="copy-year">2026</span>` in the footer. `js/mkt.js` updates every `.copy-year` element with `new Date().getFullYear()` at runtime so the year stays current automatically.
+
+### Heading Typography
+
+Headings in marketing templates use the serif font with optional `<em>` accent:
+```html
+<h1>Track every <em>financial move</em></h1>
+<h2>How <em>Envelope Budgeting</em> works in FincWin</h2>
+```
+`em` inside headings is styled `font-style: normal; color: var(--sage)` — not italic.
+
+---
+
+## File Naming Conventions
+
+| Type | Pattern | Example |
+|------|---------|---------|
+| HTML pages | `kebab-case.html` | `features/ai-coach.html` |
+| HTML category pages | `index.html` inside named dir | `blog/budgeting/index.html` |
+| Templates | `kebab-case.html` | `scripts/templates/feature-page.html` |
+| Data files | `type-slug.json` | `scripts/data/feature-ai-coach.json` |
+| JS files | `kebab-case.js` | `js/crypto-core.js` |
+| CSS files | `kebab-case.css` | `styles/auth-tokens.css` |
+| Partials | `name.html` (no prefix) | `scripts/partials/footer.html` |
+
+---
+
+## SEO / Meta Conventions
+
+- Title format: `Keyword Phrase — FincWin` (em dash, not hyphen)
+- Canonical URLs are absolute (`https://www.fincwin.com/...`)
+- All templated pages include `hreflang="en"` alternate link
+- Blog posts include `datePublished` and `dateModified` in ISO format
+- `og:image` always points to the shared `og-image.png` (1200×630)
+- `og:image:width`, `og:image:height`, `og:image:type` are always present
+
+---
+
+*Convention analysis: 2026-06-10*
