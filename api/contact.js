@@ -63,7 +63,7 @@ export default async function handler(req) {
     },
     body: JSON.stringify({
       from: 'FincWin Contact <contact@fincwin.com>',
-      to: ['paul.haking@gmail.com'],
+      to: ['freetinz@gmail.com'],
       reply_to: email,
       subject: subjectLine,
       html,
