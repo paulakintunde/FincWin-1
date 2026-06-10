@@ -4,6 +4,14 @@
 (function () {
   'use strict';
 
+  // Reveal the "App" nav link only for signed-in users (hidden by default in
+  // mkt.css). fw_signed_in is set by the app entry guard / signin flow and
+  // cleared on sign-out, so a signed-in user who lands back on a marketing page
+  // still sees the way back into the app.
+  if (localStorage.getItem('fw_signed_in')) {
+    document.documentElement.classList.add('fw-authed');
+  }
+
   var nav = document.getElementById('mainNav');
   if (nav) {
     // Scroll border

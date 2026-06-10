@@ -33,7 +33,7 @@ body {
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 48px;
   background: rgba(255,255,255,.9);
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
   border-bottom: 1px solid transparent;
   transition: border-color .3s;
 }
@@ -53,6 +53,17 @@ body {
 .nav-links a { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; transition: color .2s; }
 .nav-links a:hover { color: var(--ink); }
 .nav-links a.active { color: var(--ink); font-weight: 500; }
+/* "App" links (nav + footer) are shown only to signed-in users. They stay
+   hidden while <html> lacks .fw-authed — the default before paint — so an
+   unauthenticated visitor never sees them (they get the "Get started free"
+   CTA, which routes through signin). mkt.js adds .fw-authed from the
+   fw_signed_in flag, set by the app entry guard / signin and cleared on
+   sign-out. Using :not(.fw-authed) on the hide rule means the reveal simply
+   restores each link's natural display (inline in the nav, block in the
+   footer) with no per-context override. Targeted by href so it works on
+   already-built pages too. */
+html:not(.fw-authed) #mainNav .nav-links a[href$="app.html"]:not(.nav-cta),
+html:not(.fw-authed) .mkt-footer a[href$="app.html"] { display: none; }
 .nav-cta {
   font-size: 13px; font-weight: 500; color: var(--white) !important;
   background: var(--ink); padding: 9px 22px; border-radius: 50px;
@@ -184,7 +195,7 @@ footer.mkt-footer { background: var(--ink); padding: 64px 48px 40px; }
   }
   #mainNav.nav-open .nav-links { display: flex; }
   .nav-links a { width: 100%; padding: 13px 0; font-size: 15px; }
-  .nav-cta { margin-top: 10px; padding: 11px 22px; }
+  .nav-cta { margin-top: 10px; padding: 11px 22px; display: flex; align-items: center; justify-content: center; text-align: center; }
   section { padding: 60px 20px; }
   footer.mkt-footer { padding: 48px 24px 36px; }
 }
