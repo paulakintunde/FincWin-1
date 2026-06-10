@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin â€” FincWin</title>
+  <title>Admin — FincWin</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +26,7 @@
     }
     html, body { min-height: 100%; font-family: var(--sans); font-weight: 300; color: var(--ink); background: var(--faint); -webkit-font-smoothing: antialiased; }
 
-    /* â”€â”€ AUTH SCREEN â”€â”€ */
+    /* ── AUTH SCREEN ── */
     #auth-screen {
       min-height: 100vh; display: flex; align-items: center; justify-content: center;
       background: var(--ink); padding: 24px;
@@ -65,7 +65,7 @@
       border: 1px solid #fecaca; color: var(--danger); border-radius: 8px; font-size: 13px;
     }
 
-    /* â”€â”€ DASHBOARD â”€â”€ */
+    /* ── DASHBOARD ── */
     #dashboard { display: none; min-height: 100vh; }
 
     /* Nav */
@@ -83,12 +83,22 @@
     }
     .nav-right { display: flex; align-items: center; gap: 16px; }
     .nav-meta { font-size: 12px; color: var(--muted); }
-    .btn-logout {
+    .btn-logout, .btn-refresh {
       padding: 7px 16px; background: none; border: 1px solid var(--border); border-radius: 50px;
       font-family: var(--sans); font-size: 12px; font-weight: 500; color: var(--muted);
       cursor: pointer; transition: border-color .15s, color .15s;
     }
-    .btn-logout:hover { border-color: var(--ink); color: var(--ink); }
+    .btn-logout:hover, .btn-refresh:hover { border-color: var(--ink); color: var(--ink); }
+    .btn-refresh:disabled { opacity: .5; cursor: default; }
+
+    /* LS notice */
+    #ls-notice { display: none; }
+    .ls-notice {
+      background: #fef3c7; border-bottom: 1px solid #fde68a;
+      padding: 10px 32px; font-size: 13px; color: #92400e;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ls-notice svg { flex-shrink: 0; }
 
     /* Layout */
     .dash-layout { display: grid; grid-template-columns: 192px 1fr; min-height: calc(100vh - 56px); }
@@ -172,6 +182,7 @@
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
     .table-title { font-size: 14px; font-weight: 500; color: var(--ink); }
+    .table-meta { font-size: 12px; color: var(--muted); }
     .search-input {
       padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px;
       font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--ink);
@@ -235,7 +246,7 @@
 </head>
 <body>
 
-  <!-- â”€â”€ AUTH SCREEN â”€â”€ -->
+  <!-- AUTH SCREEN -->
   <div id="auth-screen">
     <div class="auth-card">
       <div>
@@ -245,15 +256,15 @@
       <p class="auth-sub">Enter your admin token to continue.</p>
       <input
         type="password" id="token-input" class="auth-input"
-        placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
+        placeholder="••••••••••••••••"
         autocomplete="current-password"
       >
-      <button class="auth-btn" id="btn-unlock">Unlock dashboard â†’</button>
+      <button type="button" class="auth-btn" id="btn-unlock">Unlock dashboard →</button>
       <div id="auth-error" class="auth-error"></div>
     </div>
   </div>
 
-  <!-- â”€â”€ DASHBOARD â”€â”€ -->
+  <!-- DASHBOARD -->
   <div id="dashboard">
 
     <nav class="admin-nav">
@@ -262,69 +273,75 @@
         <span class="admin-chip">Admin</span>
       </div>
       <div class="nav-right">
-        <span class="nav-meta" id="nav-meta">Loadingâ€¦</span>
-        <button class="btn-logout" id="btn-logout">Sign out</button>
+        <span class="nav-meta" id="nav-meta">Loading…</span>
+        <button type="button" class="btn-refresh" id="btn-refresh">Refresh</button>
+        <button type="button" class="btn-logout" id="btn-logout">Sign out</button>
       </div>
     </nav>
+
+    <div id="ls-notice" class="ls-notice" style="display:none">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span id="ls-notice-msg"></span>
+    </div>
 
     <div class="dash-layout">
 
       <!-- Sidebar -->
       <aside class="dash-sidebar">
         <div class="sidebar-label">Analytics</div>
-        <button class="sidebar-btn active" data-view="overview">
+        <button type="button" class="sidebar-btn active" data-view="overview">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
           Overview
         </button>
-        <button class="sidebar-btn" data-view="licences">
+        <button type="button" class="sidebar-btn" data-view="licences">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
           Licences
         </button>
-        <button class="sidebar-btn" data-view="revenue">
+        <button type="button" class="sidebar-btn" data-view="revenue">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>
           Revenue
         </button>
         <div class="sidebar-label">Links</div>
-        <button class="sidebar-btn" id="btn-ls-link">
+        <button type="button" class="sidebar-btn" id="btn-ls-link">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Lemon Squeezy â†—
+          Lemon Squeezy ↗
         </button>
       </aside>
 
       <!-- Main -->
       <main class="dash-main">
 
-        <!-- â”€â”€ OVERVIEW â”€â”€ -->
+        <!-- ── OVERVIEW ── -->
         <div id="view-overview" class="view active">
           <h1 class="view-title">Overview</h1>
-          <p class="view-sub" id="overview-updated">Loading dataâ€¦</p>
+          <p class="view-sub" id="overview-updated">Loading data…</p>
 
           <div id="overview-loading" class="loading-state">
             <div class="loading-spin"></div>
-            Fetching data from Lemon Squeezyâ€¦
+            Fetching data from Lemon Squeezy…
           </div>
 
           <div id="overview-content" style="display:none">
             <div class="stat-grid">
               <div class="stat-card accent">
                 <div class="stat-lbl">Total Licences</div>
-                <div class="stat-num" id="st-total">â€”</div>
-                <div class="stat-detail" id="st-total-sub">â€”</div>
+                <div class="stat-num" id="st-total">—</div>
+                <div class="stat-detail" id="st-total-sub">—</div>
               </div>
               <div class="stat-card">
                 <div class="stat-lbl">Active</div>
-                <div class="stat-num" id="st-active">â€”</div>
-                <div class="stat-detail" id="st-active-sub">â€”</div>
+                <div class="stat-num" id="st-active">—</div>
+                <div class="stat-detail" id="st-active-sub">—</div>
               </div>
               <div class="stat-card">
                 <div class="stat-lbl">Expired / Inactive</div>
-                <div class="stat-num" id="st-bad">â€”</div>
-                <div class="stat-detail" id="st-bad-sub">â€”</div>
+                <div class="stat-num" id="st-bad">—</div>
+                <div class="stat-detail" id="st-bad-sub">—</div>
               </div>
               <div class="stat-card">
                 <div class="stat-lbl">Revenue</div>
-                <div class="stat-num" id="st-rev">â€”</div>
-                <div class="stat-detail" id="st-rev-sub">â€”</div>
+                <div class="stat-num" id="st-rev">—</div>
+                <div class="stat-detail" id="st-rev-sub">—</div>
               </div>
             </div>
 
@@ -336,7 +353,7 @@
             <div class="table-card">
               <div class="table-header">
                 <span class="table-title">Recent licences</span>
-                <span style="font-size:12px;color:var(--muted)">Last 10 activations</span>
+                <span class="table-meta">Last 10 activations</span>
               </div>
               <table>
                 <thead>
@@ -354,7 +371,7 @@
           </div>
         </div>
 
-        <!-- â”€â”€ LICENCES â”€â”€ -->
+        <!-- ── LICENCES ── -->
         <div id="view-licences" class="view">
           <h1 class="view-title">Licences</h1>
           <p class="view-sub">All issued licence keys.</p>
@@ -364,7 +381,7 @@
               <span class="table-title" id="lic-count">All licences</span>
               <input
                 type="search" id="search-input" class="search-input"
-                placeholder="Search email or keyâ€¦"
+                placeholder="Search email or key…"
               >
             </div>
             <table>
@@ -383,7 +400,7 @@
           </div>
         </div>
 
-        <!-- â”€â”€ REVENUE â”€â”€ -->
+        <!-- ── REVENUE ── -->
         <div id="view-revenue" class="view">
           <h1 class="view-title">Revenue</h1>
           <p class="view-sub">Sales processed through Lemon Squeezy.</p>
@@ -391,17 +408,17 @@
           <div class="rev-grid">
             <div class="stat-card accent">
               <div class="stat-lbl">Total Revenue</div>
-              <div class="stat-num" id="rev-total">â€”</div>
-              <div class="stat-detail" id="rev-orders">â€”</div>
+              <div class="stat-num" id="rev-total">—</div>
+              <div class="stat-detail" id="rev-orders">—</div>
             </div>
             <div class="stat-card">
               <div class="stat-lbl">Avg per Order</div>
-              <div class="stat-num" id="rev-avg">â€”</div>
+              <div class="stat-num" id="rev-avg">—</div>
               <div class="stat-detail">based on paid orders</div>
             </div>
             <div class="stat-card">
               <div class="stat-lbl">Active Rate</div>
-              <div class="stat-num" id="rev-rate">â€”</div>
+              <div class="stat-num" id="rev-rate">—</div>
               <div class="stat-detail">licences currently active</div>
             </div>
           </div>
@@ -419,6 +436,5 @@
   <div class="toast" id="toast"></div>
 
   <script src="js/admin.js"></script>
-  <script src="js/consent.js" defer></script>
 </body>
 </html>

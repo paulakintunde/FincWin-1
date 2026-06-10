@@ -482,7 +482,7 @@ function obFinish(){
 
   if(typeof normaliseState==='function')normaliseState();
   persist();
-  localStorage.setItem('finflow_onboarded','1');
+  localStorage.setItem('fincwin_onboarded','1');
   document.getElementById('demoBanner').style.display='none';
 
   // Update loan badge

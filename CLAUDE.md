@@ -26,7 +26,7 @@ Then replace the old hash value in `vercel.json`'s `Content-Security-Policy` hea
 
 - `script-src-attr 'none'` — all `onclick`/`onchange`/`oninput` HTML attributes are blocked. Use `data-action` delegation (handled by `js/events.js`) for app interactions, or delegated event listeners in the relevant JS file for marketing pages.
 - `style-src 'unsafe-inline'` — inline `<style>` blocks and `style=` attributes are allowed.
-- GTM domain is whitelisted in `connect-src` and `script-src-elem` but GA4 (`GA_MEASUREMENT_ID`) is not yet configured in `js/consent.js` — see Phase 3 backlog.
+- `https://www.googletagmanager.com` is whitelisted in `script-src` so gtag.js loads without CSP errors once GA4 is configured.
 
 ---
 
@@ -54,6 +54,47 @@ Per-endpoint limits:
 - `activate` — 10 req / 60 s per IP
 - `validate` — 30 req / 60 s per IP
 - `admin`    — 20 req / 60 s per IP
+
+---
+
+## GA4 Analytics
+
+GA4 is wired up in `js/consent.js` — analytics load only after the visitor grants consent (PECR-compliant). The Measurement ID placeholder is on line 32:
+
+```js
+var GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // TODO: replace with your GA4 Measurement ID
+```
+
+Replace `'G-XXXXXXXXXX'` with your actual `G-...` ID from Google Analytics → Admin → Data Streams.
+
+---
+
+## LemonSqueezy webhook
+
+`api/webhook.js` handles subscription cancellations and refunds. It verifies the `X-Signature` HMAC-SHA256 header using the `LEMON_SQUEEZY_WEBHOOK_SECRET` env var, then deactivates all licence instances via the LS API so the next `validate.js` call downgrades the user.
+
+**Setup steps:**
+1. In Vercel → Settings → Environment Variables, add `LEMON_SQUEEZY_WEBHOOK_SECRET` (any strong random string you choose).
+2. In LemonSqueezy → Settings → Webhooks, add your endpoint URL: `https://www.fincwin.com/api/webhook`
+3. Set the same secret in the LS webhook config.
+4. Subscribe to events: `order_refunded`, `subscription_expired`, `license_key_disabled`.
+
+**Events handled:**
+- `order_refunded` — immediately deactivates all licence instances for the order
+- `subscription_expired` — deactivates when the billing period ends
+- `license_key_disabled` — deactivates if manually disabled in LS dashboard
+- `subscription_cancelled` — no-op (key stays valid until period end; `validate.js` handles expiry on next app open)
+
+---
+
+## localStorage key namespace
+
+All user-facing localStorage/sessionStorage keys use the `fincwin_` prefix. A one-time migration function in `js/darkmode.js` (runs before any reads) renames legacy `finflow_*` keys from users who installed before the rebrand.
+
+**Do NOT rename these keys** — they are IDB identifiers and renaming would corrupt existing user data:
+- `SK = 'finflow_v5'` in `js/constants.js` (IDB store name)
+- `finflow_pin_hash`, `finflow_pin_lockout`, `finflow_pin_len` in `js/state.js` (IDB)
+- `finflow_salt_v1` in `js/state.js` (PIN hash salt — changing this would reset all user PINs)
 
 ---
 

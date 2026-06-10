@@ -5,7 +5,7 @@
 
 (function(){
 
-var FX_CACHE_KEY = 'finflow_fx_rates';
+var FX_CACHE_KEY = 'fincwin_fx_rates';
 var FX_TTL = 3600000; // 1 hour ms
 
 var _fxRates = null; // { base, rates: {CODE: rate}, fetched }

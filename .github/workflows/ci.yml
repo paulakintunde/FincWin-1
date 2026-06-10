@@ -30,7 +30,7 @@ jobs:
 
       - name: Verify required API endpoints exist
         run: |
-          for f in api/activate.js api/validate.js api/admin.js api/contact.js; do
+          for f in api/activate.js api/validate.js api/admin.js api/contact.js api/webhook.js; do
             if [ ! -f "$f" ]; then
               echo "ERROR: $f is missing"
               exit 1

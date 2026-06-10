@@ -877,8 +877,8 @@ document.addEventListener('keydown',function(e){
                   || !!window.navigator.standalone;
 
   // Increment session counter on each page load for the 3rd-session banner
-  var _sessionCount = parseInt(localStorage.getItem('finflow_session_count') || '0', 10) + 1;
-  localStorage.setItem('finflow_session_count', String(_sessionCount));
+  var _sessionCount = parseInt(localStorage.getItem('fincwin_session_count') || '0', 10) + 1;
+  localStorage.setItem('fincwin_session_count', String(_sessionCount));
 
   var _deferred = null;
 
@@ -900,7 +900,7 @@ document.addEventListener('keydown',function(e){
   }
 
   function _showBanner(){
-    if(localStorage.getItem('finflow_install_banner_dismissed')) return;
+    if(localStorage.getItem('fincwin_install_banner_dismissed')) return;
     if(document.getElementById('pwaInstallBanner')) return;
     var banner = document.createElement('div');
     banner.id = 'pwaInstallBanner';
@@ -916,7 +916,7 @@ document.addEventListener('keydown',function(e){
       document.documentElement.style.removeProperty('--banner-h');
     });
     banner.querySelector('.pwa-banner-dismiss').addEventListener('click', function(){
-      localStorage.setItem('finflow_install_banner_dismissed', '1');
+      localStorage.setItem('fincwin_install_banner_dismissed', '1');
       banner.remove();
       document.documentElement.style.removeProperty('--banner-h');
     });
@@ -1111,7 +1111,7 @@ async function resetAllData(){
     }
   }catch(e){}
   // Wipe localStorage
-  [SK,SK+'_migrated','finflow_onboarded',PIN_IDB_KEY,
+  [SK,SK+'_migrated','fincwin_onboarded',PIN_IDB_KEY,
    _CLAUDE_KEY,_OPENAI_KEY,_AI_PREF].forEach(k=>{
     try{localStorage.removeItem(k);}catch(e){}
   });
@@ -1275,7 +1275,7 @@ document.getElementById('btn-snowball').classList.toggle('active',S.strategy==='
   document.getElementById('loanBadge').textContent=S.loans.length;
   // Show demo banner or onboarding for first-time users
   checkDemoBanner();
-  if(!localStorage.getItem('finflow_onboarded')) showOnboarding();
+  if(!localStorage.getItem('fincwin_onboarded')) showOnboarding();
   // Wire ob-label divs to adjacent inputs with aria-labelledby (accessibility fix).
   // This runs once on boot for all static HTML labels without needing to change 30+
   // div→label tags in index.html.

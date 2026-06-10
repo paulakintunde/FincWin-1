@@ -22,7 +22,7 @@ function activateTheme(designIdOrEl, isDarkStr) {
   localStorage.setItem(_DESIGN_KEY, designId || '');
   // Apply dark mode
   document.body.classList.toggle('dark', isDark);
-  localStorage.setItem('finflow_dark_cache', isDark ? 'true' : 'false');
+  localStorage.setItem('fincwin_dark_cache', isDark ? 'true' : 'false');
   // Keep the old dark toggle button in sync (if present)
   var dkBtn = document.getElementById('darkToggleBtn');
   if (dkBtn) dkBtn.innerHTML = isDark ? icon('sun',{label:'Light mode'}) : icon('moon',{label:'Dark mode'});
@@ -101,9 +101,9 @@ function loadTheme(){
 }
 
 // ── AI provider key management ──
-var _CLAUDE_KEY='finflow_claude_key';
-var _OPENAI_KEY='finflow_openai_key';
-var _AI_PREF='finflow_ai_provider';
+var _CLAUDE_KEY='fincwin_claude_key';
+var _OPENAI_KEY='fincwin_openai_key';
+var _AI_PREF='fincwin_ai_provider';
 var _setupTab='claude'; // which tab is active in setup modal
 var _removeTarget=''; // which provider is being removed
 
@@ -973,13 +973,13 @@ function confirmDemoReset(){
 }
 
 function checkDemoBanner(){
-  if(!localStorage.getItem('finflow_onboarded')){
+  if(!localStorage.getItem('fincwin_onboarded')){
     document.getElementById('demoBanner').style.display='flex';
   }
 }
 
 function showOnboardingFromSettings(){
-  localStorage.removeItem('finflow_onboarded');
+  localStorage.removeItem('fincwin_onboarded');
   if(typeof showOnboarding==='function') showOnboarding();
 }
 

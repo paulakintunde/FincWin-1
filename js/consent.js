@@ -29,7 +29,8 @@
   // To enable: set your GA4 Measurement ID below, or define `window.FW_GA_ID`
   // before this script loads. Leave empty to disable analytics entirely — the
   // banner still works and simply records the choice with nothing to gate.
-  var GA_MEASUREMENT_ID = (typeof window.FW_GA_ID === 'string' && window.FW_GA_ID) || '';
+  // TODO: replace 'G-XXXXXXXXXX' with your GA4 Measurement ID from Google Analytics.
+  var GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
   var gaLoaded = false;
   function loadAnalytics() {
     if (gaLoaded || !GA_MEASUREMENT_ID) return;
