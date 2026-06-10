@@ -43,6 +43,7 @@ function searchAndCloseMenu(){_closeMobileSheet();openSearch();}
 function toggleDarkAndCloseMenu(){toggleDark();_closeMobileSheet();}
 function pinAndCloseMenu(){_closeMobileSheet();openPinSetup();}
 function healthAndCloseMenu(){_closeMobileSheet();openHealthModal();}
+function helpAndCloseMenu(){window.open('help.html','_blank');_closeMobileSheet();}
 
 // Keyboard shortcuts modal
 function openShortcutsModal(){var m=document.getElementById('shortcutsModal');if(!m)return;m.classList.add('open');if(typeof trapFocus==='function')trapFocus(m);}
@@ -86,7 +87,7 @@ var _ACTION_ALLOWLIST = new Set([
   'noop',
   // Tab & navigation
   'switchTab','switchToMonth','switchToExpensesTab','switchTabAndCloseMenu',
-  'searchAndCloseMenu','toggleDarkAndCloseMenu','pinAndCloseMenu','healthAndCloseMenu',
+  'searchAndCloseMenu','toggleDarkAndCloseMenu','pinAndCloseMenu','healthAndCloseMenu','helpAndCloseMenu',
   // Month management
   'changeMonth','confirmArchiveMonth','confirmDeleteMonth','closeDeleteMonthModal',
   'executeDeleteMonth','openNewMonthModal','closeNewMonthModal','createNewMonth',

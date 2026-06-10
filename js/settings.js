@@ -876,6 +876,7 @@ function renderSettings(){
       if (o.selected) found = true;
     });
     if (!found) alSel.value = '240';
+    alSel.addEventListener('change', function(){ saveAutoLockMins(this.value); });
     // Only show PIN-related rows if a PIN is set
     getPinHash().then(function(h){
       var row = document.getElementById('autoLockRow');

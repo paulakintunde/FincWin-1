@@ -81,6 +81,35 @@
     document.body.insertBefore(a, document.body.firstChild);
   })();
 
+  // ── Blog category filter (blog/index.html only)
+  (function () {
+    var catFilter = document.getElementById('catFilter');
+    if (!catFilter) return;
+    function filterCat(cat) {
+      catFilter.querySelectorAll('[data-cat]').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.cat === cat);
+      });
+      document.querySelectorAll('.blog-card').forEach(function (c) {
+        c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
+      });
+    }
+    catFilter.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-cat]');
+      if (btn) filterCat(btn.dataset.cat);
+    });
+    var qCat = (new URLSearchParams(location.search)).get('cat');
+    if (qCat && ['budgeting','debt','savings','tools','mindset'].indexOf(qCat) > -1) {
+      filterCat(qCat);
+    }
+  })();
+
+  // ── Cookie settings buttons (footer + cookie-policy page)
+  document.querySelectorAll('.footer-cookie-btn, [data-cookie-settings]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (window.FincWinConsent) FincWinConsent.open();
+    });
+  });
+
   // ── Active nav state (a11y) — mark the current page's nav link.
   // Normalises .html / clean-URL / index / trailing-slash so it works both
   // locally (file paths) and on the deployed clean-URL site.
