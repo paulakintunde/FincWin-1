@@ -196,8 +196,7 @@
     <div class="footer-bottom"><p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p><div class="footer-legal"><a href="../../privacy.html">Privacy</a><a href="../../terms.html">Terms</a><a href="../../cookie-policy.html">Cookies</a></div></div>
   </div>
 </footer>
-<script>const nav=document.getElementById('mainNav');window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>20),{passive:true});
-// Highlight active category in blog sub-nav
+<script>// Highlight active category in blog sub-nav
 (function(){var c=(document.querySelector('.post-cat')||{}).textContent||'';c=c.trim();var s=c==='Tools & Tech'?'tools':c.toLowerCase();var l=document.querySelector('.subnav-cat[data-cat="'+s+'"]');if(l)l.classList.add('active');})();
 </script>
 <script>document.querySelectorAll('.copy-year').forEach(function(e){e.textContent=new Date().getFullYear();});</script>
