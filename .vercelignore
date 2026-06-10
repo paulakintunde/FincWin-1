@@ -21,6 +21,7 @@ vitest.config.*
 
 # Planning & internal documentation
 docs/
+.planning/
 CONTENT-STRATEGY.md
 STRATEGY-GUIDE.md
 TEMPLATING-PLAN.md

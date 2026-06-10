@@ -87,16 +87,10 @@
   }
   </script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --sage: #5a6e3f; --sage-lt: #dce8d4; --sage-dk: #3d4d2b;
-      --ink: #111111; --muted: #6b7280; --faint: #f5f4f0;
-      --white: #ffffff; --border: rgba(0,0,0,.08);
-      --sans: 'Hanken Grotesk', sans-serif; --serif: 'Instrument Serif', serif;
-      --sidebar-w: 280px;
-    }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--sans); font-weight: 300; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; }
+
+
+
+
 
     /* NAV */
     /* Header/nav styled by the shared system in styles/mkt.css */
@@ -1122,13 +1116,24 @@
 <footer class="mkt-footer">
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-brand"><a href="index.html" class="footer-logo">Finc<span>Win</span></a><p>The personal finance dashboard for people who want clarity, not complexity.</p></div>
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">Finc<span>Win</span></a>
+        <p>The personal finance dashboard for people who want clarity, not complexity.</p>
+      </div>
       <div class="footer-col"><h4>Product</h4><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="compare.html">Compare</a><a href="use-cases.html">Use cases</a><a href="app.html">Open app</a></div>
       <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="changelog.html">Changelog</a><a href="contact.html">Contact</a></div>
       <div class="footer-col"><h4>Learn</h4><a href="blog/index.html">Blog</a><a href="help.html">Help guide</a><a href="budget-categories.html">Budget categories</a></div>
     </div>
     <hr class="footer-divider">
-    <div class="footer-bottom"><p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p><div class="footer-legal"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="cookie-policy.html">Cookies</a></div></div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="cookie-policy.html">Cookies</a>
+        <button type="button" class="footer-cookie-btn" onclick="window.FincWinConsent && FincWinConsent.open()">Cookie settings</button>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -1154,6 +1159,6 @@
 </script>
 <script>document.querySelectorAll('.copy-year').forEach(function(e){e.textContent=new Date().getFullYear();});</script>
 <script src="js/mkt.js" defer></script>
-  <script src="js/consent.js" defer></script>
+<script src="js/consent.js" defer></script>
 </body>
 </html>

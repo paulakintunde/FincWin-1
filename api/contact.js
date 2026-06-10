@@ -1,6 +1,7 @@
-﻿export const config = { runtime: 'edge' };
+export const config = { runtime: 'edge' };
 
 const ALLOWED_SUBJECTS = ['support', 'feature', 'billing', 'feedback', 'press', 'other'];
+const ALLOWED_ORIGIN   = 'https://www.fincwin.com';
 
 export default async function handler(req) {
   if (req.method === 'OPTIONS') {
@@ -9,6 +10,12 @@ export default async function handler(req) {
 
   if (req.method !== 'POST') {
     return json({ error: 'Method not allowed' }, 405);
+  }
+
+  // Origin check — rejects curl/bot submissions that don't come from the site
+  const origin = req.headers.get('origin') || '';
+  if (origin !== ALLOWED_ORIGIN) {
+    return json({ error: 'Forbidden' }, 403);
   }
 
   let body;
@@ -40,6 +47,9 @@ export default async function handler(req) {
     return json({ error: 'Email service not configured' }, 503);
   }
 
+  // CONTACT_TO_EMAIL env var — set in Vercel project settings
+  const toEmail = process.env.CONTACT_TO_EMAIL || 'support@fincwin.com';
+
   const subjectLine = `[FincWin Contact] ${subjectLabel} — ${name}`;
 
   const html = `
@@ -63,7 +73,7 @@ export default async function handler(req) {
     },
     body: JSON.stringify({
       from: 'FincWin Contact <contact@fincwin.com>',
-      to: ['freetinz@gmail.com'],
+      to: [toEmail],
       reply_to: email,
       subject: subjectLine,
       html,

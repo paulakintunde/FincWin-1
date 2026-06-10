@@ -24,10 +24,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/mkt.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --sage: #5a6e3f; --sage-lt: #dce8d4; --sage-dk: #3d4d2b; --ink: #111111; --muted: #6b7280; --faint: #f5f4f0; --white: #ffffff; --border: rgba(0,0,0,.08); --sans: 'Hanken Grotesk', sans-serif; --serif: 'Instrument Serif', serif; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--sans); font-weight: 300; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+
+
+
     /* Header/nav styled by the shared system in styles/mkt.css */
     .hero { min-height: 88vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 160px 24px 100px; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(90,110,63,.07) 0%, transparent 70%); pointer-events: none; }
@@ -87,7 +87,18 @@
   </style>
 </head>
 <body>
-  <nav id="mainNav"><a href="index.html" class="nav-logo">Finc<span>Win</span></a><div class="nav-links"><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="compare.html">Compare</a><a href="use-cases.html">Use cases</a><a href="blog/index.html">Blog</a><a href="app.html">App</a><a href="signin.html#register" class="nav-cta">Get started free</a></div></nav>
+  <nav id="mainNav">
+  <a href="index.html" class="nav-logo">Finc<span>Win</span></a>
+  <div class="nav-links">
+    <a href="features.html">Features</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="compare.html">Compare</a>
+    <a href="use-cases.html">Use cases</a>
+    <a href="blog/index.html">Blog</a>
+    <a href="app.html">App</a>
+    <a href="signin.html#register" class="nav-cta">Get started free</a>
+  </div>
+</nav>
 
   <section class="hero">
     <p class="hero-eyebrow">Budget Category — Transport</p>
@@ -190,6 +201,7 @@
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
         <a href="cookie-policy.html">Cookies</a>
+        <button type="button" class="footer-cookie-btn" onclick="window.FincWinConsent && FincWinConsent.open()">Cookie settings</button>
       </div>
     </div>
   </div>
@@ -199,7 +211,7 @@
     const reveals = document.querySelectorAll('.reveal'); const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }); reveals.forEach(el => io.observe(el));
   </script>
   <script src="js/mkt.js" defer></script>
-  <script src="js/consent.js" defer></script>
+<script src="js/consent.js" defer></script>
 </body>
 </html>
 

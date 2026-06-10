@@ -1,5 +1,4 @@
 // admin.js — FincWin admin dashboard logic
-// Extracted from inline script to comply with CSP script-src 'self' policy.
 
 const SESSION_KEY = 'fw_admin_token';
 let _data = null;
@@ -71,13 +70,31 @@ function hideAuthError() {
   try {
     const res = await fetch('/api/admin', { headers: { Authorization: `Bearer ${token}` } });
     if (!res.ok) {
-      // Only forget the token on a real auth failure — not on a transient 5xx.
       if (res.status === 401 || res.status === 403) sessionStorage.removeItem(SESSION_KEY);
       return;
     }
     renderDashboard(await res.json());
-  } catch { sessionStorage.removeItem(SESSION_KEY); }
+  } catch { /* network error — keep token, show auth screen */ }
 })();
+
+// ── Refresh ─────────────────────────────────────────────────────────────────
+async function refreshData() {
+  const token = getToken();
+  if (!token) return;
+  const btn = document.getElementById('btn-refresh');
+  if (btn) { btn.disabled = true; btn.textContent = 'Refreshing…'; }
+  try {
+    const res = await fetch('/api/admin', { headers: { Authorization: `Bearer ${token}` } });
+    if (res.status === 401 || res.status === 403) { logout(); return; }
+    if (res.ok) {
+      renderDashboard(await res.json());
+      showToast('Dashboard refreshed');
+    }
+  } catch { showToast('Network error — refresh failed'); }
+  finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Refresh'; }
+  }
+}
 
 // ── Render dashboard ────────────────────────────────────────────────────────
 function renderDashboard(data) {
@@ -86,6 +103,15 @@ function renderDashboard(data) {
 
   document.getElementById('auth-screen').style.display = 'none';
   document.getElementById('dashboard').style.display = 'block';
+
+  // Show LS notice if not configured or if LS returned an error
+  if (data.ls_configured === false) {
+    showLsNotice('Lemon Squeezy is not configured. Set LEMON_SQUEEZY_API_KEY in Vercel to enable licence and revenue data.');
+  } else if (data.ls_error) {
+    showLsNotice('Lemon Squeezy error: ' + data.ls_error);
+  } else {
+    hideLsNotice();
+  }
 
   const now = new Date().toLocaleString();
   document.getElementById('nav-meta').textContent =
@@ -97,8 +123,8 @@ function renderDashboard(data) {
   renderLicences(_allLicences);
   renderRevenue(data);
 
-  document.getElementById('overview-loading').style.display  = 'none';
-  document.getElementById('overview-content').style.display  = '';
+  document.getElementById('overview-loading').style.display = 'none';
+  document.getElementById('overview-content').style.display = 'block';
 }
 
 // ── Overview ────────────────────────────────────────────────────────────────
@@ -154,7 +180,7 @@ function recentRows(list) {
     </tr>`).join('');
 }
 
-// ── Licences ────────────────────────────────────────────────────────────────
+// ── Licences ─────────────────────────────────────────────────────────────────
 function renderLicences(list) {
   document.getElementById('lic-count').textContent = list.length + ' licence' + (list.length === 1 ? '' : 's');
   document.getElementById('licences-tbody').innerHTML = list.length
@@ -188,7 +214,7 @@ function filterLicences() {
   renderLicences(filtered);
 }
 
-// ── Revenue ─────────────────────────────────────────────────────────────────
+// ── Revenue ──────────────────────────────────────────────────────────────────
 function renderRevenue(data) {
   const r  = data.revenue;
   const s  = data.stats;
@@ -215,12 +241,21 @@ function renderRevenue(data) {
   document.getElementById('rev-plan-rows').innerHTML = rows || '<p style="font-size:13px;color:var(--muted)">No plan data.</p>';
 }
 
-// ── Helpers ─────────────────────────────────────────────────────────────────
+// ── Helpers ──────────────────────────────────────────────────────────────────
 function showView(name, btn) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('view-' + name).classList.add('active');
   btn.classList.add('active');
+}
+
+function showLsNotice(msg) {
+  document.getElementById('ls-notice-msg').textContent = msg;
+  document.getElementById('ls-notice').style.display = 'flex';
+}
+
+function hideLsNotice() {
+  document.getElementById('ls-notice').style.display = 'none';
 }
 
 function statusBadge(status) {
@@ -255,27 +290,23 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-// ── Event bindings (replaces all inline onclick/oninput/onkeydown) ────────────
+// ── Event bindings ────────────────────────────────────────────────────────────
 // Script is at end of body — DOM is fully ready, no DOMContentLoaded needed.
 
-// Auth screen
 document.getElementById('token-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') unlock();
 });
 document.getElementById('btn-unlock').addEventListener('click', unlock);
 
-// Dashboard nav
 document.getElementById('btn-logout').addEventListener('click', logout);
+document.getElementById('btn-refresh').addEventListener('click', refreshData);
 
-// Sidebar view buttons
 document.querySelectorAll('.sidebar-btn[data-view]').forEach(btn => {
   btn.addEventListener('click', () => showView(btn.dataset.view, btn));
 });
 
-// LemonSqueezy external link
 document.getElementById('btn-ls-link')?.addEventListener('click', () => {
   window.open('https://app.lemonsqueezy.com', '_blank');
 });
 
-// Licence search
 document.getElementById('search-input').addEventListener('input', filterLicences);

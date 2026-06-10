@@ -22,15 +22,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/mkt.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --sage: #5a6e3f; --sage-lt: #dce8d4; --sage-dk: #3d4d2b;
-      --ink: #111111; --muted: #6b7280; --faint: #f5f4f0;
-      --white: #ffffff; --border: rgba(0,0,0,.08);
-      --sans: 'Hanken Grotesk', sans-serif; --serif: 'Instrument Serif', serif;
-    }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--sans); font-weight: 300; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; }
+
+
+
+
 
     /* Header/nav styled by the shared system in styles/mkt.css */
 
@@ -183,12 +178,7 @@
   </div>
 </footer>
 
-  <script>
-    const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
-  </script>
-<script>document.querySelectorAll('.copy-year').forEach(function(e){e.textContent=new Date().getFullYear();});</script>
-<script src="js/mkt.js" defer></script>
+  <script src="js/mkt.js" defer></script>
 <script src="js/consent.js" defer></script>
 </body>
 </html>

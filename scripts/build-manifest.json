@@ -17,5 +17,19 @@
   { "template": "use-case-page", "data": "scripts/data/usecase-couples-shared-finances.json",  "out": "use-cases/couples-shared-finances.html" },
   { "template": "niche-landing", "data": "scripts/data/niche-offline-budget-app.json",  "out": "offline-budget-app.html" },
   { "template": "niche-landing", "data": "scripts/data/niche-no-bank-sync-budget.json", "out": "no-bank-sync-budget.html" },
-  { "template": "niche-landing", "data": "scripts/data/niche-private-finance-app.json", "out": "private-finance-app.html" }
+  { "template": "niche-landing", "data": "scripts/data/niche-private-finance-app.json", "out": "private-finance-app.html" },
+  { "template": "cat-page", "data": "scripts/data/cat-banking.json",       "out": "cat-banking.html" },
+  { "template": "cat-page", "data": "scripts/data/cat-telecom.json",       "out": "cat-telecom.html" },
+  { "template": "cat-page", "data": "scripts/data/cat-subscriptions.json", "out": "cat-subscriptions.html" },
+  { "template": "cat-page", "data": "scripts/data/cat-utilities.json",     "out": "cat-utilities.html" },
+  { "template": "cat-page", "data": "scripts/data/cat-transport.json",     "out": "cat-transport.html" },
+  { "template": "cat-page", "data": "scripts/data/cat-groceries.json",     "out": "cat-groceries.html" },
+  { "template": "cat-page", "data": "scripts/data/cat-healthcare.json",    "out": "cat-healthcare.html" },
+  { "template": "cat-page", "data": "scripts/data/cat-education.json",     "out": "cat-education.html" },
+  { "template": "cat-page", "data": "scripts/data/cat-housing.json",       "out": "cat-housing.html" },
+  { "template": "cat-page", "data": "scripts/data/cat-entertainment.json", "out": "cat-entertainment.html" },
+  { "template": "cat-page", "data": "scripts/data/cat-clothing.json",      "out": "cat-clothing.html" },
+  { "template": "cat-page", "data": "scripts/data/cat-dining.json",        "out": "cat-dining.html" },
+  { "template": "cat-page", "data": "scripts/data/cat-personal.json",      "out": "cat-personal.html" },
+  { "template": "cat-page", "data": "scripts/data/cat-other.json",         "out": "cat-other.html" }
 ]

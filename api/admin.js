@@ -40,7 +40,14 @@ export default async function handler(req, res) {
   if (!provided || provided !== adminToken) return res.status(401).json({ error: 'Unauthorized' });
 
   const apiKey = process.env.LEMON_SQUEEZY_API_KEY;
-  if (!apiKey) return res.status(500).json({ error: 'LEMON_SQUEEZY_API_KEY not set' });
+  if (!apiKey) {
+    return res.status(200).json({
+      ls_configured: false,
+      stats: { total: 0, active: 0, inactive: 0, expired: 0, disabled: 0, byPlan: {} },
+      licenses: [],
+      revenue: { total_usd: '0.00', orders_count: 0 },
+    });
+  }
 
   try {
     // `page[size]` is the JSON:API page param Lemon Squeezy expects (not `perPage`).
@@ -102,13 +109,14 @@ export default async function handler(req, res) {
       },
     });
   } catch (err) {
-    // Surface an actionable message instead of a bare 502.
-    if (err.status === 401 || err.status === 403) {
-      return res.status(502).json({
-        error: 'Lemon Squeezy rejected the API key (' + err.status + '). Check LEMON_SQUEEZY_API_KEY ' +
-               'in Vercel — it may be invalid, revoked, or missing read access.'
-      });
-    }
-    return res.status(502).json({ error: err.message || 'Upstream request failed' });
+    const lsMsg = (err.status === 401 || err.status === 403)
+      ? `Lemon Squeezy rejected the API key (${err.status}). Check LEMON_SQUEEZY_API_KEY in Vercel — it may be invalid, revoked, or missing read access.`
+      : (err.message || 'Upstream request failed');
+    return res.status(200).json({
+      ls_error: lsMsg,
+      stats: { total: 0, active: 0, inactive: 0, expired: 0, disabled: 0, byPlan: {} },
+      licenses: [],
+      revenue: { total_usd: '0.00', orders_count: 0 },
+    });
   }
 }

@@ -91,8 +91,9 @@
     .btn-logout:hover, .btn-refresh:hover { border-color: var(--ink); color: var(--ink); }
     .btn-refresh:disabled { opacity: .5; cursor: default; }
 
-    /* LS notice */
+    /* LS notice — hidden until JS reveals it */
     #ls-notice { display: none; }
+    #overview-content { display: none; }
     .ls-notice {
       background: #fef3c7; border-bottom: 1px solid #fde68a;
       padding: 10px 32px; font-size: 13px; color: #92400e;
@@ -279,7 +280,7 @@
       </div>
     </nav>
 
-    <div id="ls-notice" class="ls-notice" style="display:none">
+    <div id="ls-notice" class="ls-notice">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       <span id="ls-notice-msg"></span>
     </div>
@@ -321,7 +322,7 @@
             Fetching data from Lemon Squeezy…
           </div>
 
-          <div id="overview-content" style="display:none">
+          <div id="overview-content">
             <div class="stat-grid">
               <div class="stat-card accent">
                 <div class="stat-lbl">Total Licences</div>
