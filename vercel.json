@@ -27,7 +27,7 @@
     { "source": "/blog/posts/ynab-alternative", "destination": "/compare/ynab-alternative", "statusCode": 301 }
   ],
   "cleanUrls": true,
-  "trailingSlash": false,
+  "trailingSlash": true,
   "headers": [
     {
       "source": "/(.*)",

@@ -1130,7 +1130,10 @@ async function initState(){
   // Seed month = actual current month, not a hardcoded date
   const _seedNow=new Date();
   const _seedKey=mk(_seedNow.getMonth(),_seedNow.getFullYear());
-  S={loans:DL.map(l=>JSON.parse(JSON.stringify(l))),strategy:'avalanche',savings:JSON.parse(JSON.stringify(DSV)),budgets:{...BDFT},budgetRollover:{},financialGoals:[],customCategories:[],scheduledExpenses:[],darkMode:false,archiveThreshold:6,archivedMonths:{},currency:{symbol:'$',code:'USD',locale:'en-US'},fxRates:{rates:{},fetchedAt:0,base:'USD'},months:{[_seedKey]:{weeks:DW.map(w=>JSON.parse(JSON.stringify(w))),revenue:JSON.parse(JSON.stringify(DR))}},currentMonthKey:_seedKey,lastModified:Date.now(),lastSyncedAt:0,syncConfig:{cloudEnabled:false,fileEnabled:false}};
+  // _isDemo flags this as the seeded sample dataset. Gamification skips
+  // achievement evaluation while it's true so demo numbers can't unlock badges;
+  // obFinish() deletes it once the user replaces the demo data with their own.
+  S={_isDemo:true,loans:DL.map(l=>JSON.parse(JSON.stringify(l))),strategy:'avalanche',savings:JSON.parse(JSON.stringify(DSV)),budgets:{...BDFT},budgetRollover:{},financialGoals:[],customCategories:[],scheduledExpenses:[],darkMode:false,archiveThreshold:6,archivedMonths:{},currency:{symbol:'$',code:'USD',locale:'en-US'},fxRates:{rates:{},fetchedAt:0,base:'USD'},months:{[_seedKey]:{weeks:DW.map(w=>JSON.parse(JSON.stringify(w))),revenue:JSON.parse(JSON.stringify(DR))}},currentMonthKey:_seedKey,lastModified:Date.now(),lastSyncedAt:0,syncConfig:{cloudEnabled:false,fileEnabled:false}};
   CMK=_seedKey;
   // Sync savings contributions as expense items in seed month
   syncSavingsExpenses();

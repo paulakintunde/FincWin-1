@@ -38,8 +38,17 @@ body {
   transition: border-color .3s;
 }
 #mainNav.scrolled { border-color: var(--border); }
-.nav-logo { font-size: 17px; font-weight: 500; letter-spacing: -.3px; color: var(--ink); text-decoration: none; }
-.nav-logo span { color: var(--sage); }
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 22px; font-weight: 400; letter-spacing: -.5px;
+  color: var(--ink); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 3px; line-height: 1;
+}
+/* "Win" in a solid sage chip — matches the in-app logo */
+.nav-logo span {
+  background: var(--sage); color: #fff; font-weight: 700;
+  padding: 1px 9px 2px; border-radius: 7px;
+}
 .nav-links { display: flex; align-items: center; gap: 32px; }
 .nav-links a { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; transition: color .2s; }
 .nav-links a:hover { color: var(--ink); }
@@ -115,12 +124,12 @@ h2.serif {
   font-family: var(--serif); font-size: clamp(32px, 4.5vw, 54px);
   font-weight: 400; line-height: 1.1; color: var(--ink);
 }
-h2.serif em { font-style: italic; color: var(--sage); }
+h2.serif em { font-style: normal; color: var(--sage); }
 h2.serif-inv {
   font-family: var(--serif); font-size: clamp(32px, 4.5vw, 54px);
   font-weight: 400; line-height: 1.1; color: var(--white);
 }
-h2.serif-inv em { font-style: italic; color: #a8c48a; }
+h2.serif-inv em { font-style: normal; color: #a8c48a; }
 
 /* ── ANIMATIONS ───────────────────────────────────────────────── */
 @keyframes fadeUp  { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }

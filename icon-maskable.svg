@@ -1,6 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- Full bleed background — fills any adaptive icon mask shape -->
-  <rect width="512" height="512" fill="#5C7A6B"/>
-  <!-- Icon content constrained to the inner 80% safe zone (410x410 centred at 256,256) -->
-  <text y="340" font-size="280" text-anchor="middle" x="256" fill="white" font-family="serif">$</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" shape-rendering="geometricPrecision">
+  <!-- Maskable variant of favicon.svg: full-bleed sage background (fills any
+       adaptive-icon mask) with the F + dot scaled into the inner ~80% safe zone. -->
+  <rect width="512" height="512" fill="#5a6e3f"/>
+  <g transform="translate(256 256) scale(13.1) translate(-16 -16)">
+    <rect x="9" y="8" width="14" height="2.5" rx="1" fill="#ffffff"/>
+    <rect x="9" y="14.5" width="10" height="2.5" rx="1" fill="#ffffff"/>
+    <rect x="9" y="8" width="2.8" height="16" rx="1" fill="#ffffff"/>
+    <circle cx="24" cy="24.5" r="2.8" fill="#d4a853"/>
+  </g>
 </svg>

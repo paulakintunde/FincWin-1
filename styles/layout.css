@@ -27,8 +27,19 @@
   letter-spacing: -0.5px;
   white-space: nowrap;
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  line-height: 1;
 }
-.logo span { color: var(--accent); }
+/* "Win" lives in a solid sage chip (concept #14) */
+.logo span {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  padding: 1px 9px 2px;
+  border-radius: 7px;
+}
 
 .topbar-center { flex: 1; display: flex; align-items: center; justify-content: center; }
 .topbar-right { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }

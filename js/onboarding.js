@@ -470,6 +470,16 @@ function obFinish(){
   S.savings=_obSavings.map(g=>Object.assign({},g));
 
   S.activeBackend = _obStoragePref === 'local' ? null : _obStoragePref;
+
+  // Demo data has just been replaced with the user's own (or emptied). Any
+  // gamification progress was auto-awarded against the demo numbers, so reset
+  // it — the real account starts fresh. Clearing _isDemo re-enables achievement
+  // evaluation from here on.
+  delete S._isDemo;
+  S.achievements = [];
+  S.xp = 0;
+  S.monthChallenge = {};
+
   if(typeof normaliseState==='function')normaliseState();
   persist();
   localStorage.setItem('finflow_onboarded','1');

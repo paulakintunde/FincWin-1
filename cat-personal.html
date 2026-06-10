@@ -23,14 +23,14 @@
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(90,110,63,.07) 0%, transparent 70%); pointer-events: none; }
     .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 24px; opacity: 0; animation: fadeUp .6s .1s forwards; }
     .hero h1 { font-family: var(--serif); font-size: clamp(40px, 6vw, 80px); font-weight: 400; line-height: 1.08; letter-spacing: -.5px; color: var(--ink); max-width: 800px; opacity: 0; animation: fadeUp .7s .2s forwards; }
-    .hero h1 em { font-style: italic; color: var(--sage); }
+    .hero h1 em { font-style: normal; color: var(--sage); }
     .hero-sub { margin-top: 24px; font-size: clamp(16px, 2vw, 19px); font-weight: 300; color: var(--muted); max-width: 500px; line-height: 1.65; opacity: 0; animation: fadeUp .7s .35s forwards; }
     .hero-actions { margin-top: 40px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fadeUp .7s .5s forwards; }
     .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 50px; background: var(--ink); color: var(--white); font-family: var(--sans); font-size: 14px; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: background .2s, transform .15s; } .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
     .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 50px; background: transparent; color: var(--ink); font-family: var(--sans); font-size: 14px; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: border-color .2s, transform .15s; } .btn-ghost:hover { border-color: var(--ink); transform: translateY(-1px); }
     section { padding: 100px 48px; } .section-inner { max-width: 1060px; margin: 0 auto; }
     .section-label { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 20px; }
-    h2 { font-family: var(--serif); font-size: clamp(32px, 4.5vw, 52px); font-weight: 400; line-height: 1.1; color: var(--ink); } h2 em { font-style: italic; color: var(--sage); }
+    h2 { font-family: var(--serif); font-size: clamp(32px, 4.5vw, 52px); font-weight: 400; line-height: 1.1; color: var(--ink); } h2 em { font-style: normal; color: var(--sage); }
     .section-sub { margin-top: 18px; font-size: 17px; font-weight: 300; color: var(--muted); max-width: 520px; line-height: 1.65; }
     .pain-section { background: var(--ink); } .pain-section .section-label { color: rgba(255,255,255,.35); } .pain-section h2 { color: white; } .pain-section h2 em { color: #a8c48a; }
     .pain-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 56px; border: 1px solid rgba(255,255,255,.06); border-radius: 12px; overflow: hidden; }
@@ -174,6 +174,7 @@
     const nav = document.getElementById('nav'); window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
     const reveals = document.querySelectorAll('.reveal'); const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }); reveals.forEach(el => io.observe(el));
   </script>
+  <script src="js/consent.js" defer></script>
 </body>
 </html>
 

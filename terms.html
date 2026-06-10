@@ -31,6 +31,15 @@
     nav.scrolled { border-color: var(--border); }
     .nav-logo { font-size: 17px; font-weight: 500; letter-spacing: -.3px; color: var(--ink); text-decoration: none; }
     .nav-logo span { color: var(--sage); }
+    /* New chip logo — header only (footer keeps its own .footer-brand styling) */
+    nav .nav-logo {
+      font-family: 'Instrument Serif', serif; font-size: 22px; font-weight: 400; letter-spacing: -.5px;
+      display: inline-flex; align-items: center; gap: 3px; line-height: 1;
+    }
+    nav .nav-logo span {
+      background: var(--sage); color: #fff; font-weight: 700;
+      padding: 1px 9px 2px; border-radius: 7px;
+    }
     .nav-links { display: flex; align-items: center; gap: 32px; }
     .nav-links a { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; transition: color .2s; }
     .nav-links a:hover { color: var(--ink); }
@@ -40,7 +49,7 @@
     .page-wrap { max-width: 720px; margin: 0 auto; padding: 160px 48px 100px; }
     .page-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 24px; }
     .page-title { font-family: var(--serif); font-size: clamp(36px, 5vw, 60px); font-weight: 400; line-height: 1.1; color: var(--ink); margin-bottom: 16px; }
-    .page-title em { font-style: italic; color: var(--sage); }
+    .page-title em { font-style: normal; color: var(--sage); }
     .page-date { font-size: 13px; color: var(--muted); margin-bottom: 64px; }
 
     .policy-section { margin-bottom: 56px; }
@@ -81,6 +90,7 @@
       footer { padding: 48px 24px 28px; }
     }
   </style>
+  <link rel="stylesheet" href="styles/footer.css">
 </head>
 <body>
 
@@ -182,37 +192,18 @@
     </div>
   </div>
 
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="index.html" class="nav-logo">Finc<span>Win</span></a>
-        <p>The personal finance dashboard for people who want clarity, not complexity.</p>
-      </div>
-      <div class="footer-cols">
-        <div>
-          <h4>Product</h4>
-          <a href="features.html">Features</a>
-          <a href="pricing.html">Pricing</a>
-          <a href="compare.html">Compare</a>
-          <a href="use-cases.html">Use cases</a>
-          <a href="app.html">Open app</a>
-        </div>
-        <div>
-          <h4>Company</h4>
-          <a href="about.html">About</a>
-          <a href="changelog.html">Changelog</a>
-          <a href="contact.html">Contact</a>
-        </div>
-        <div>
-          <h4>Learn</h4>
-          <a href="blog/index.html">Blog</a>
-          <a href="help.html">Help guide</a>
-        </div>
-        
-      </div>
+  <footer class="mkt-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><a href="index.html" class="footer-logo">Finc<span>Win</span></a><p>The personal finance dashboard for people who want clarity, not complexity.</p></div>
+      <div class="footer-col"><h4>Product</h4><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="compare.html">Compare</a><a href="use-cases.html">Use cases</a><a href="app.html">Open app</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="changelog.html">Changelog</a><a href="contact.html">Contact</a></div>
+      <div class="footer-col"><h4>Learn</h4><a href="blog/index.html">Blog</a><a href="help.html">Help guide</a></div>
     </div>
+    <hr class="footer-divider">
     <div class="footer-bottom"><p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p><div class="footer-legal"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="cookie-policy.html">Cookies</a></div></div>
-  </footer>
+  </div>
+</footer>
 
   <script>
     const nav = document.getElementById('mainNav');
@@ -220,5 +211,6 @@
   </script>
 <script>document.querySelectorAll('.copy-year').forEach(function(e){e.textContent=new Date().getFullYear();});</script>
 <script src="js/mkt.js" defer></script>
+  <script src="js/consent.js" defer></script>
 </body>
 </html>

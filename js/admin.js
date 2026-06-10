@@ -32,7 +32,9 @@ async function unlock() {
       return;
     }
     if (!res.ok) {
-      showAuthError('Server error (' + res.status + '). Try again shortly.');
+      let msg = 'Server error (' + res.status + '). Try again shortly.';
+      try { const e = await res.json(); if (e && e.error) msg = e.error; } catch (_) {}
+      showAuthError(msg);
       btn.disabled = false; btn.textContent = 'Unlock dashboard →';
       return;
     }
@@ -68,7 +70,11 @@ function hideAuthError() {
   if (!token) return;
   try {
     const res = await fetch('/api/admin', { headers: { Authorization: `Bearer ${token}` } });
-    if (!res.ok) { sessionStorage.removeItem(SESSION_KEY); return; }
+    if (!res.ok) {
+      // Only forget the token on a real auth failure — not on a transient 5xx.
+      if (res.status === 401 || res.status === 403) sessionStorage.removeItem(SESSION_KEY);
+      return;
+    }
     renderDashboard(await res.json());
   } catch { sessionStorage.removeItem(SESSION_KEY); }
 })();

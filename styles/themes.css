@@ -318,11 +318,13 @@ body[data-design="glass"] .tab.active {
   border-bottom-color: var(--accent);
 }
 body[data-design="glass"] .logo { font-size: 20px; font-weight: 700; letter-spacing: -.5px; }
+/* "Win" chip uses the glass blue→teal gradient as its fill (concept #14) */
 body[data-design="glass"] .logo span {
   background: linear-gradient(135deg,#5b8def,#1d7a90);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
 }
 body[data-design="glass"] .month-nav button { border-radius: 8px; }
 body[data-design="glass"] .month-nav button:hover { background: var(--accent); border-color: var(--accent); color: #fff; }

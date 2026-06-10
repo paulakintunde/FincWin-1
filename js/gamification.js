@@ -214,6 +214,20 @@ function unlockAchievement(id, _skipRender) {
 }
 
 function checkAchievements() {
+  // Guard: never evaluate against seed/demo data, and never against a
+  // completely empty dataset. Both produce vacuously-true conditions
+  // (e.g. "all categories under cap" with zero expenses) that would unlock
+  // badges the user has not actually earned. Still refresh the shelf/XP bar
+  // so locked badges render correctly.
+  if (S && S._isDemo) { renderAchievementShelf(); renderXPBar(); return; }
+  var _hasData = Object.values(S.months || {}).some(function(m){
+      return m.weeks.some(function(w){ return w.items.length > 0; })
+        || (m.revenue && m.revenue.length > 0);
+    })
+    || (S.loans && S.loans.length > 0)
+    || (S.savings && S.savings.length > 0)
+    || (S.investments && S.investments.length > 0);
+  if (!_hasData) { renderAchievementShelf(); renderXPBar(); return; }
   var ids = Array.from(arguments);
   var earnedSet = new Set((S.achievements || []).map(function(e){ return (e && typeof e === 'object') ? e.id : e; }));
   ids.forEach(function(id) {
@@ -244,11 +258,15 @@ function checkAchievements() {
     } else if (id === 'budget_boss') {
       var cats = Object.keys(S.budgets || BDFT);
       var totals = {};
+      var bbItems = 0;
       cw().forEach(function(w){ w.items.forEach(function(i){
+        bbItems++;
         var c = CAT_LABELS[getCat(i.name)];
         totals[c] = (totals[c]||0) + i.amount;
       }); });
-      ok = cats.length > 0 && cats.every(function(cat){
+      // Require real spend this month — "all categories under cap" is vacuously
+      // true with zero expenses and must not unlock the badge.
+      ok = bbItems > 0 && cats.length > 0 && cats.every(function(cat){
         var spent = totals[cat] || 0;
         var cap = (S.budgets&&S.budgets[cat])||BDFT[cat]||500;
         return spent <= cap;
@@ -264,11 +282,15 @@ function checkAchievements() {
     } else if (id === 'budget_keeper') {
       var bkCats = Object.keys(S.budgets || BDFT);
       var bkTotals = {};
+      var bkItems = 0;
       cw().forEach(function(w){ w.items.forEach(function(i){
+        bkItems++;
         var c = getCatLabel(getCat(i.name));
         bkTotals[c] = (bkTotals[c]||0) + i.amount;
       }); });
-      ok = bkCats.length > 0 && bkCats.every(function(cat){
+      // Require real spend this month — staying "within budget" with no
+      // expenses logged is vacuous and must not unlock the badge.
+      ok = bkItems > 0 && bkCats.length > 0 && bkCats.every(function(cat){
         return (bkTotals[cat]||0) <= ((S.budgets&&S.budgets[cat])||BDFT[cat]||500);
       });
     } else if (id === 'streak_starter') {
@@ -459,6 +481,13 @@ var _challengeWasMet = false;
 function renderChallengeCard() {
   var el = document.getElementById('d-challenge-card');
   if (!el) return;
+  // Empty-state guard: with no expenses and no income for the month there is
+  // nothing meaningful to challenge. Hide the card and don't generate/persist
+  // one — otherwise a phantom "Keep <category> under budget" appears on a
+  // brand-new account with zero data.
+  var _hasMonthData = cw().some(function(w){ return w.items.length > 0; })
+    || (typeof cr === 'function' && cr().length > 0);
+  if (!_hasMonthData) { el.style.display = 'none'; return; }
   generateMonthChallenge(CMK);
   var ch = S.monthChallenge && S.monthChallenge[CMK];
   if (!ch) { el.style.display = 'none'; return; }

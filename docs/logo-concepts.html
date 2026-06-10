@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FincWin — Lettermark Logo Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#eef3ec; --ink:#222a22; --muted:#4e5a4a; --accent:#5a6e3f;
+    --gold:#9a7b35; --hairline:rgba(34,42,34,.14);
+    --dark:#14181f; --paper:#fff;
+    --serif:'Instrument Serif',Georgia,serif;
+    --sans:'Hanken Grotesk',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:56px 32px 96px}
+
+  /* ── Masthead ── */
+  header{border-bottom:1px solid var(--hairline);padding-bottom:36px;margin-bottom:48px}
+  .kicker{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:var(--accent);margin-bottom:14px}
+  h1{font-family:var(--serif);font-weight:400;font-size:52px;line-height:1.05;letter-spacing:-.5px;margin-bottom:16px}
+  h1 span{color:var(--accent)}
+  .lead{max-width:680px;color:var(--muted);font-size:16px}
+  .meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:24px;font-size:13px;color:var(--muted)}
+  .meta b{color:var(--ink);font-weight:700}
+
+  /* ── How to choose ── */
+  .howto{background:var(--paper);border:1px solid var(--hairline);border-radius:14px;padding:24px 28px;margin-bottom:56px}
+  .howto h2{font-family:var(--serif);font-weight:400;font-size:24px;margin-bottom:10px}
+  .howto ol{margin:8px 0 0 20px}
+  .howto li{margin-bottom:6px;color:var(--muted)}
+  .howto code{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:rgba(34,42,34,.06);padding:1px 6px;border-radius:5px;color:var(--ink)}
+
+  /* ── Section labels ── */
+  .section-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin:48px 0 20px;padding-bottom:10px;border-bottom:1px solid var(--hairline)}
+
+  /* ── Grid ── */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px}
+  .card{background:var(--paper);border:1px solid var(--hairline);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s}
+  .card:hover{box-shadow:0 14px 40px rgba(40,55,40,.12);transform:translateY(-2px)}
+  .card-id{display:flex;align-items:baseline;gap:10px;padding:18px 22px 4px}
+  .card-id .num{font-family:var(--serif);font-size:30px;color:var(--accent);line-height:1}
+  .card-id .name{font-weight:700;font-size:15px}
+  .card-desc{padding:2px 22px 16px;color:var(--muted);font-size:13px;min-height:58px}
+
+  /* ── Swatch trio ── */
+  .swatches{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid var(--hairline)}
+  .sw{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:18px}
+  .sw svg{width:72px;height:72px;display:block}
+  .sw.light{background:var(--bg);color:var(--ink)}
+  .sw.dark{background:var(--dark);color:#f3f5f2}
+  .sw.accent{background:var(--accent);color:#fff}
+
+  /* ── Wordmark lockup row ── */
+  .lock{display:flex;align-items:center;gap:12px;padding:18px 22px;border-top:1px solid var(--hairline);background:var(--paper)}
+  .lock svg{width:34px;height:34px;color:var(--accent);flex-shrink:0}
+  .lock .wm{font-family:var(--serif);font-size:26px;letter-spacing:-.5px;color:var(--ink)}
+  .lock .wm em{font-style:normal;color:var(--accent)}
+  .lock .tag{margin-left:auto;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+
+  /* ── Wordmark-only cards ── */
+  .wmcard{background:var(--paper);border:1px solid var(--hairline);border-radius:16px;padding:30px 28px;display:flex;flex-direction:column;gap:18px}
+  .wmcard .big{font-size:40px}
+  .wmrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .wmrow.on-dark{background:var(--dark);border-radius:10px;padding:18px 20px}
+  .wmrow.on-dark .wm{color:#f3f5f2}
+
+  footer{margin-top:64px;border-top:1px solid var(--hairline);padding-top:28px;color:var(--muted);font-size:13px}
+  footer code{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:rgba(34,42,34,.06);padding:1px 6px;border-radius:5px}
+  .pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .pill{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(90,110,63,.12);color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Brand · Identity Exploration</div>
+  <h1>FincWin <span>Lettermark</span> Concepts</h1>
+  <p class="lead">Twelve directions for a distinctive <b>lettermark</b> built from the brand initials — <b>F</b>, <b>W</b>, or the <b>FW</b> monogram — each leaning on the product story: finance that you <em>win</em> at. Pick one to replace the current text logo in the app topbar.</p>
+  <div class="meta">
+    <span><b>Wordmark:</b> FincWin</span>
+    <span><b>Typeface:</b> Instrument Serif</span>
+    <span><b>Accent:</b> Sage #5A6E3F</span>
+    <span><b>Format:</b> Inline SVG (themeable via <code>currentColor</code>)</span>
+  </div>
+</header>
+
+<div class="howto">
+  <h2>How to read &amp; choose</h2>
+  <ol>
+    <li>Each concept is shown in three real contexts: <b>light</b> chrome, <b>dark</b> mode, and on the <b>accent</b> fill (app-icon use).</li>
+    <li>Below each mark is its <b>wordmark lockup</b> — how it pairs with the “FincWin” text in the topbar.</li>
+    <li>All marks are single-color vector and inherit <code>currentColor</code>, so they adapt to every theme (sage, glass, clay, dark) with zero extra assets.</li>
+    <li>Reply with the <b>number</b> you want (e.g. “Go with #4”). I’ll cut the final SVG, wire it into <code>index.html</code> / <code>layout.css</code>, and add a matching <code>favicon</code> + PWA icon.</li>
+  </ol>
+</div>
+
+<!-- CURRENT, FOR REFERENCE -->
+<div class="section-label">Current logo — for reference</div>
+<div class="wmcard">
+  <div class="wmrow"><span class="wm big">Finc<em>Win</em></span><span class="tag" style="margin-left:auto">Today — pure text, serif</span></div>
+  <p style="color:var(--muted);font-size:13px">Clean but generic: it reads as set type, has no standalone mark for the favicon / app icon / social avatar, and nothing signals “finance” or “win.” The concepts below each add a reusable symbol.</p>
+</div>
+
+<!-- ======================= MONOGRAM (FW) ======================= -->
+<div class="section-label">Group A · FW Monogram marks</div>
+<div class="grid">
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="card-id"><span class="num">01</span><span class="name">Serif Ligature FW</span></div>
+    <div class="card-desc">The two initials kerned into a single ligature — the F’s lower arm flows into the W. Editorial, premium, true to the Instrument Serif wordmark.</div>
+    <div class="swatches">
+      <div class="sw light">
+        <svg viewBox="0 0 100 100"><text x="50" y="50" dominant-baseline="central" text-anchor="middle" font-family="Instrument Serif,serif" font-size="62" fill="currentColor" letter-spacing="-6">FW</text></svg>
+      </div>
+      <div class="sw dark">
+        <svg viewBox="0 0 100 100"><text x="50" y="50" dominant-baseline="central" text-anchor="middle" font-family="Instrument Serif,serif" font-size="62" fill="currentColor" letter-spacing="-6">FW</text></svg>
+      </div>
+      <div class="sw accent">
+        <svg viewBox="0 0 100 100"><text x="50" y="50" dominant-baseline="central" text-anchor="middle" font-family="Instrument Serif,serif" font-size="62" fill="currentColor" letter-spacing="-6">FW</text></svg>
+      </div>
+    </div>
+    <div class="lock">
+      <svg viewBox="0 0 100 100"><text x="50" y="54" dominant-baseline="central" text-anchor="middle" font-family="Instrument Serif,serif" font-size="80" fill="currentColor" letter-spacing="-8">FW</text></svg>
+      <span class="wm">Finc<em>Win</em></span><span class="tag">Refined</span>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="card-id"><span class="num">02</span><span class="name">Monoline Interlock</span></div>
+    <div class="card-desc">Geometric monoline FW that shares one stroke — the F’s stem doubles as the W’s opening rise. Modern, fintech, scales to 16px favicon.</div>
+    <div class="swatches">
+      <div class="sw light">
+        <svg viewBox="0 0 110 100" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 14 H58 M16 14 V86 M16 50 H46"/>
+          <polyline points="44,30 56,86 73,46 90,86 100,30"/>
+        </svg>
+      </div>
+      <div class="sw dark">
+        <svg viewBox="0 0 110 100" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 14 H58 M16 14 V86 M16 50 H46"/>
+          <polyline points="44,30 56,86 73,46 90,86 100,30"/>
+        </svg>
+      </div>
+      <div class="sw accent">
+        <svg viewBox="0 0 110 100" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 14 H58 M16 14 V86 M16 50 H46"/>
+          <polyline points="44,30 56,86 73,46 90,86 100,30"/>
+        </svg>
+      </div>
+    </div>
+    <div class="lock">
+      <svg viewBox="0 0 110 100" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path d="M16 14 H58 M16 14 V86 M16 50 H46"/><polyline points="44,30 56,86 73,46 90,86 100,30"/></svg>
+      <span class="wm">Finc<em>Win</em></span><span class="tag">Fintech</span>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="card-id"><span class="num">03</span><span class="name">Coin Monogram</span></div>
+    <div class="card-desc">FW set inside a coin ring — the most literal “money” cue. Reads beautifully as a circular avatar / app icon.</div>
+    <div class="swatches">
+      <div class="sw light">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="43" fill="none" stroke="currentColor" stroke-width="5"/><circle cx="50" cy="50" r="36" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".5"/><text x="50" y="52" dominant-baseline="central" text-anchor="middle" font-family="Instrument Serif,serif" font-size="40" fill="currentColor" letter-spacing="-4">FW</text></svg>
+      </div>
+      <div class="sw dark">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="43" fill="none" stroke="currentColor" stroke-width="5"/><circle cx="50" cy="50" r="36" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".5"/><text x="50" y="52" dominant-baseline="central" text-anchor="middle" font-family="Instrument Serif,serif" font-size="40" fill="currentColor" letter-spacing="-4">FW</text></svg>
+      </div>
+      <div class="sw accent">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="43" fill="none" stroke="currentColor" stroke-width="5"/><circle cx="50" cy="50" r="36" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".5"/><text x="50" y="52" dominant-baseline="central" text-anchor="middle" font-family="Instrument Serif,serif" font-size="40" fill="currentColor" letter-spacing="-4">FW</text></svg>
+      </div>
+    </div>
+    <div class="lock">
+      <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="43" fill="none" stroke="currentColor" stroke-width="6"/><text x="50" y="52" dominant-baseline="central" text-anchor="middle" font-family="Instrument Serif,serif" font-size="40" fill="currentColor" letter-spacing="-4">FW</text></svg>
+      <span class="wm">Finc<em>Win</em></span><span class="tag">Avatar-ready</span>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="card-id"><span class="num">04</span><span class="name">Rounded Badge (knockout F)</span></div>
+    <div class="card-desc">Solid sage tile with the F knocked out and a rising notch — the bold app-icon play. Fixed two-color (works as the PWA / home-screen icon).</div>
+    <div class="swatches">
+      <div class="sw light">
+        <svg viewBox="0 0 100 100"><rect x="6" y="6" width="88" height="88" rx="24" fill="#5a6e3f"/><path d="M34 28 H68 M34 28 V72 M34 50 H58" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/><circle cx="70" cy="68" r="6" fill="#cfe0c2"/></svg>
+      </div>
+      <div class="sw dark">
+        <svg viewBox="0 0 100 100"><rect x="6" y="6" width="88" height="88" rx="24" fill="#5a6e3f"/><path d="M34 28 H68 M34 28 V72 M34 50 H58" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/><circle cx="70" cy="68" r="6" fill="#cfe0c2"/></svg>
+      </div>
+      <div class="sw accent">
+        <svg viewBox="0 0 100 100"><rect x="6" y="6" width="88" height="88" rx="24" fill="#fff"/><path d="M34 28 H68 M34 28 V72 M34 50 H58" fill="none" stroke="#5a6e3f" stroke-width="9" stroke-linecap="round"/><circle cx="70" cy="68" r="6" fill="#5a6e3f"/></svg>
+      </div>
+    </div>
+    <div class="lock">
+      <svg viewBox="0 0 100 100"><rect x="6" y="6" width="88" height="88" rx="24" fill="#5a6e3f"/><path d="M34 28 H68 M34 28 V72 M34 50 H58" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/></svg>
+      <span class="wm">Finc<em>Win</em></span><span class="tag">App icon</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ======================= "WIN" MARKS (W + growth) ======================= -->
+<div class="section-label">Group B · The “Win” marks — growth &amp; victory</div>
+<div class="grid">
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="card-id"><span class="num">05</span><span class="name">Growth W</span></div>
+    <div class="card-desc">The W drawn as an ascending zig-zag that breaks upward into an arrow — a stock-chart climbing. “Win” = your money going up.</div>
+    <div class="swatches">
+      <div class="sw light">
+        <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><polyline points="10,56 34,88 60,50 84,80 110,26"/><polyline points="92,24 110,26 108,46"/></svg>
+      </div>
+      <div class="sw dark">
+        <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><polyline points="10,56 34,88 60,50 84,80 110,26"/><polyline points="92,24 110,26 108,46"/></svg>
+      </div>
+      <div class="sw accent">
+        <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><polyline points="10,56 34,88 60,50 84,80 110,26"/><polyline points="92,24 110,26 108,46"/></svg>
+      </div>
+    </div>
+    <div class="lock">
+      <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"><polyline points="10,56 34,88 60,50 84,80 110,26"/><polyline points="92,24 110,26 108,46"/></svg>
+      <span class="wm">Finc<em>Win</em></span><span class="tag">Signature</span>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="card-id"><span class="num">06</span><span class="name">F + Win Check</span></div>
+    <div class="card-desc">A serif-weight F whose middle arm becomes a checkmark — completion, “paid,” a goal won. Ties straight to the app’s ✓-everything ritual.</div>
+    <div class="swatches">
+      <div class="sw light">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M30 14 H74 M30 14 V86"/><polyline points="30,52 46,70 84,26"/></svg>
+      </div>
+      <div class="sw dark">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M30 14 H74 M30 14 V86"/><polyline points="30,52 46,70 84,26"/></svg>
+      </div>
+      <div class="sw accent">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M30 14 H74 M30 14 V86"/><polyline points="30,52 46,70 84,26"/></svg>
+      </div>
+    </div>
+    <div class="lock">
+      <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"><path d="M30 14 H74 M30 14 V86"/><polyline points="30,52 46,70 84,26"/></svg>
+      <span class="wm">Finc<em>Win</em></span><span class="tag">On-brand ✓</span>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="card-id"><span class="num">07</span><span class="name">Ascending Bars</span></div>
+    <div class="card-desc">Four bars climbing into a W rhythm, capped with an up-arrow. The pure data-viz mark — instantly “budget / growth,” no letters needed.</div>
+    <div class="swatches">
+      <div class="sw light">
+        <svg viewBox="0 0 100 100" fill="currentColor"><rect x="10" y="64" width="15" height="26" rx="3"/><rect x="31" y="48" width="15" height="42" rx="3"/><rect x="52" y="32" width="15" height="58" rx="3"/><rect x="73" y="16" width="15" height="74" rx="3"/><path d="M70 18 L80 6 L90 18 Z"/></svg>
+      </div>
+      <div class="sw dark">
+        <svg viewBox="0 0 100 100" fill="currentColor"><rect x="10" y="64" width="15" height="26" rx="3"/><rect x="31" y="48" width="15" height="42" rx="3"/><rect x="52" y="32" width="15" height="58" rx="3"/><rect x="73" y="16" width="15" height="74" rx="3"/><path d="M70 18 L80 6 L90 18 Z"/></svg>
+      </div>
+      <div class="sw accent">
+        <svg viewBox="0 0 100 100" fill="currentColor"><rect x="10" y="64" width="15" height="26" rx="3"/><rect x="31" y="48" width="15" height="42" rx="3"/><rect x="52" y="32" width="15" height="58" rx="3"/><rect x="73" y="16" width="15" height="74" rx="3"/><path d="M70 18 L80 6 L90 18 Z"/></svg>
+      </div>
+    </div>
+    <div class="lock">
+      <svg viewBox="0 0 100 100" fill="currentColor"><rect x="10" y="64" width="15" height="26" rx="3"/><rect x="31" y="48" width="15" height="42" rx="3"/><rect x="52" y="32" width="15" height="58" rx="3"/><rect x="73" y="16" width="15" height="74" rx="3"/><path d="M70 18 L80 6 L90 18 Z"/></svg>
+      <span class="wm">Finc<em>Win</em></span><span class="tag">Data-viz</span>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="card-id"><span class="num">08</span><span class="name">Shield W</span></div>
+    <div class="card-desc">A W cradled in a shield — security + winning. Speaks to the “your data stays private, encrypted locally” promise of the product.</div>
+    <div class="swatches">
+      <div class="sw light">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"><path d="M50 8 L86 22 V52 C86 74 70 86 50 94 C30 86 14 74 14 52 V22 Z"/><polyline points="30,42 40,64 50,46 60,64 70,42" stroke-width="8" stroke-linecap="round"/></svg>
+      </div>
+      <div class="sw dark">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"><path d="M50 8 L86 22 V52 C86 74 70 86 50 94 C30 86 14 74 14 52 V22 Z"/><polyline points="30,42 40,64 50,46 60,64 70,42" stroke-width="8" stroke-linecap="round"/></svg>
+      </div>
+      <div class="sw accent">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"><path d="M50 8 L86 22 V52 C86 74 70 86 50 94 C30 86 14 74 14 52 V22 Z"/><polyline points="30,42 40,64 50,46 60,64 70,42" stroke-width="8" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+    <div class="lock">
+      <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"><path d="M50 8 L86 22 V52 C86 74 70 86 50 94 C30 86 14 74 14 52 V22 Z"/><polyline points="30,42 40,64 50,46 60,64 70,42" stroke-width="8" stroke-linecap="round"/></svg>
+      <span class="wm">Finc<em>Win</em></span><span class="tag">Trust</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ======================= F MARKS ======================= -->
+<div class="section-label">Group C · Single-letter F marks</div>
+<div class="grid">
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="card-id"><span class="num">09</span><span class="name">Flag F</span></div>
+    <div class="card-desc">An F whose arms fold into a planted flag — “reach the goal / claim the win.” Confident, ownable single-letter mark.</div>
+    <div class="swatches">
+      <div class="sw light">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M30 12 V90"/><path d="M30 16 H78 L66 32 H30" fill="currentColor" stroke="none"/><path d="M30 44 H66 L56 56 H30" fill="currentColor" stroke="none"/></svg>
+      </div>
+      <div class="sw dark">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M30 12 V90"/><path d="M30 16 H78 L66 32 H30" fill="currentColor" stroke="none"/><path d="M30 44 H66 L56 56 H30" fill="currentColor" stroke="none"/></svg>
+      </div>
+      <div class="sw accent">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M30 12 V90"/><path d="M30 16 H78 L66 32 H30" fill="currentColor" stroke="none"/><path d="M30 44 H66 L56 56 H30" fill="currentColor" stroke="none"/></svg>
+      </div>
+    </div>
+    <div class="lock">
+      <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M30 12 V90"/><path d="M30 16 H78 L66 32 H30" fill="currentColor" stroke="none"/><path d="M30 44 H66 L56 56 H30" fill="currentColor" stroke="none"/></svg>
+      <span class="wm">Finc<em>Win</em></span><span class="tag">Bold mark</span>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="card-id"><span class="num">10</span><span class="name">Serif Drop-Cap F</span></div>
+    <div class="card-desc">A single high-contrast serif F in a hairline circle — the “editorial monogram.” Quiet, expensive, magazine-grade.</div>
+    <div class="swatches">
+      <div class="sw light">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="2"/><text x="50" y="54" dominant-baseline="central" text-anchor="middle" font-family="Instrument Serif,serif" font-size="62" fill="currentColor">F</text></svg>
+      </div>
+      <div class="sw dark">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="2"/><text x="50" y="54" dominant-baseline="central" text-anchor="middle" font-family="Instrument Serif,serif" font-size="62" fill="currentColor">F</text></svg>
+      </div>
+      <div class="sw accent">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="2"/><text x="50" y="54" dominant-baseline="central" text-anchor="middle" font-family="Instrument Serif,serif" font-size="62" fill="currentColor">F</text></svg>
+      </div>
+    </div>
+    <div class="lock">
+      <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="3"/><text x="50" y="55" dominant-baseline="central" text-anchor="middle" font-family="Instrument Serif,serif" font-size="62" fill="currentColor">F</text></svg>
+      <span class="wm">Finc<em>Win</em></span><span class="tag">Editorial</span>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="card">
+    <div class="card-id"><span class="num">11</span><span class="name">Coin-Slot F</span></div>
+    <div class="card-desc">F where the top arm is a coin dropping into the stem (a slot/piggy-bank cue). Playful, memorable, savings-forward.</div>
+    <div class="swatches">
+      <div class="sw light">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M34 26 V88 M34 56 H58"/><circle cx="62" cy="26" r="14" fill="currentColor" stroke="none"/><rect x="34" y="20" width="34" height="6" rx="3" fill="currentColor" stroke="none"/></svg>
+      </div>
+      <div class="sw dark">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M34 26 V88 M34 56 H58"/><circle cx="62" cy="26" r="14" fill="currentColor" stroke="none"/><rect x="34" y="20" width="34" height="6" rx="3" fill="currentColor" stroke="none"/></svg>
+      </div>
+      <div class="sw accent">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M34 26 V88 M34 56 H58"/><circle cx="62" cy="26" r="14" fill="currentColor" stroke="none"/><rect x="34" y="20" width="34" height="6" rx="3" fill="currentColor" stroke="none"/></svg>
+      </div>
+    </div>
+    <div class="lock">
+      <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M34 26 V88 M34 56 H58"/><circle cx="62" cy="26" r="14" fill="currentColor" stroke="none"/></svg>
+      <span class="wm">Finc<em>Win</em></span><span class="tag">Playful</span>
+    </div>
+  </div>
+
+  <!-- 12 -->
+  <div class="card">
+    <div class="card-id"><span class="num">12</span><span class="name">Upward Chevron F</span></div>
+    <div class="card-desc">F arms swept into rising chevrons (a fast-forward / level-up feel). Pairs naturally with the app’s XP &amp; streak gamification.</div>
+    <div class="swatches">
+      <div class="sw light">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M32 12 V88"/><polyline points="32,20 72,20 60,34"/><polyline points="32,52 64,52 54,64"/></svg>
+      </div>
+      <div class="sw dark">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M32 12 V88"/><polyline points="32,20 72,20 60,34"/><polyline points="32,52 64,52 54,64"/></svg>
+      </div>
+      <div class="sw accent">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M32 12 V88"/><polyline points="32,20 72,20 60,34"/><polyline points="32,52 64,52 54,64"/></svg>
+      </div>
+    </div>
+    <div class="lock">
+      <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M32 12 V88"/><polyline points="32,20 72,20 60,34"/><polyline points="32,52 64,52 54,64"/></svg>
+      <span class="wm">Finc<em>Win</em></span><span class="tag">Gamified</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ======================= WORDMARK REFRESHES ======================= -->
+<div class="section-label">Group D · Wordmark refreshes (no symbol — just better type)</div>
+<div class="grid">
+  <div class="wmcard">
+    <div class="card-id" style="padding:0 0 4px"><span class="num">13</span><span class="name">Weight contrast</span></div>
+    <div class="wmrow"><span class="wm big" style="font-family:var(--sans);font-weight:400">Finc<em style="font-weight:800">Win</em></span></div>
+    <p style="color:var(--muted);font-size:13px">Drop the serif; set in Hanken Grotesk with “Finc” light and “Win” extra-bold accent. Sharper, more app-native than the current serif.</p>
+  </div>
+  <div class="wmcard">
+    <div class="card-id" style="padding:0 0 4px"><span class="num">14</span><span class="name">Win highlight</span></div>
+    <div class="wmrow"><span class="wm big">Finc<em style="background:#5a6e3f;color:#fff;padding:0 8px;border-radius:6px">Win</em></span></div>
+    <p style="color:var(--muted);font-size:13px">“Win” lives in a sage chip — turns the brand promise into the visual hook. Great for marketing pages and social cards.</p>
+  </div>
+  <div class="wmcard">
+    <div class="card-id" style="padding:0 0 4px"><span class="num">15</span><span class="name">Underscore rise</span></div>
+    <div class="wmrow"><span class="wm big" style="border-bottom:4px solid #5a6e3f;padding-bottom:2px;display:inline-block">Finc<em>Win</em><span style="display:inline-block;transform:translateY(-6px);color:#9a7b35">↗</span></span></div>
+    <p style="color:var(--muted);font-size:13px">Serif wordmark with a rising baseline + a small gold up-tick. Minimal change to today’s logo, but adds motion and the “up” story.</p>
+  </div>
+</div>
+
+<footer>
+  <p><b>Recommended shortlist:</b> for a logo that does the most brand work I’d lead with <b>#05 Growth W</b> (signature mark), <b>#06 F + Win Check</b> (most on-brand to the app’s ✓ ritual), or <b>#04 Rounded Badge</b> (if a strong app/PWA icon is the priority).</p>
+  <div class="pillrow">
+    <span class="pill">All marks are single-path SVG</span>
+    <span class="pill">Inherit currentColor → theme-safe</span>
+    <span class="pill">Crisp from 16px favicon to splash</span>
+  </div>
+  <p style="margin-top:16px">Once you pick a number, I’ll: ① finalize the chosen SVG (optical tweaks at small sizes), ② replace the text logo in <code>index.html</code> + <code>layout.css</code> <code>.logo</code>, ③ generate matching <code>favicon.svg</code> and the PWA <code>manifest.json</code> icons, and ④ keep the “FincWin” wordmark beside it for the topbar lockup.</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -89,14 +89,15 @@ async function handleSignin(e) {
       try {
         const { doc, getDoc } = await import('./vendor/firebase/firebase-firestore.js');
         const snap = await getDoc(doc(_fbDb, 'users', user.uid));
-        if (snap.exists() && snap.data().licenseKey) {
-          _applyFirestoreDoc(snap.data());
-          window.location.href = 'account.html'; return;
+        if (snap.exists()) {
+          const d = snap.data();
+          if (d.licenseKey) { _applyFirestoreDoc(d); window.location.href = 'account.html'; return; }
+          if (d.profile)    localStorage.setItem('fw_profile', JSON.stringify(d.profile));
         }
       } catch {}
-      // Signed in but no key on any device — move to activation step
-      btn.textContent = 'Sign in'; btn.disabled = false;
-      switchTab('activate');
+      // Signed in as a Free user (no licence key) — go to the account hub.
+      // account.html renders the Free-plan view; no forced licence activation.
+      window.location.href = 'account.html';
       return;
     }
     window.location.href = 'account.html';

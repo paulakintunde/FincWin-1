@@ -2,27 +2,39 @@
 // Extracted from inline script to comply with CSP script-src 'self' policy.
 
 // ── Auth ────────────────────────────────────────────────────────────────────
-// let so Firestore restoration can update them (new-device flow)
+// Account-first freemium model: ANY signed-in user may view this page.
+//   • Pro users (licence key present)        → full licence / device management.
+//   • Free users (signed in, no licence key) → Free-plan view + upgrade CTA.
+// We redirect to sign-in ONLY when there is no licence key AND no Firebase session.
+// (let, so Firestore restoration can update them on the new-device flow.)
 let AUTH_KEY  = localStorage.getItem('fw_license_key');
 let AUTH_INST = localStorage.getItem('fw_instance_id');
+let IS_FREE   = false;  // true once we confirm a signed-in user with no licence key
+let _signedIn = false;  // set when onAuthStateChanged confirms a Firebase session
+let _redirectTimer = null;
 
-// Fast redirect when there is clearly no session and no Firebase config
-if (!AUTH_KEY && !window.__FINCWIN_CONFIG__) {
+function _gotoSignin() {
+  if (_redirectTimer) { clearTimeout(_redirectTimer); _redirectTimer = null; }
   window.location.replace('signin.html');
 }
 
-// Fallback: if Firebase is configured but auth takes too long, redirect after 4 s
-if (!AUTH_KEY) {
-  setTimeout(() => {
-    if (!localStorage.getItem('fw_license_key')) window.location.replace('signin.html');
-  }, 4000);
+// No licence key AND no Firebase config → no possible session; leave at once.
+if (!AUTH_KEY && !window.__FINCWIN_CONFIG__) {
+  _gotoSignin();
+} else if (!AUTH_KEY) {
+  // Firebase is configured but the session may still be restoring. Give it a
+  // window to confirm before bouncing — cancelled the moment a user is found.
+  _redirectTimer = setTimeout(() => {
+    if (!localStorage.getItem('fw_license_key') && !_signedIn) _gotoSignin();
+  }, 5000);
 }
 
-// Firebase auth check — runs in background; handles new-device key restoration
+// Firebase auth check — runs in background; restores a Pro key for returning
+// devices, and renders the Free state for signed-in users without a key.
 (async function _firebaseAuthGuard() {
   const cfg = window.__FINCWIN_CONFIG__;
   if (!cfg) {
-    if (!AUTH_KEY) window.location.replace('signin.html');
+    if (!AUTH_KEY) _gotoSignin();
     return;
   }
   try {
@@ -44,37 +56,50 @@ if (!AUTH_KEY) {
 
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
-        // No Firebase session — if also no local key, redirect
-        if (!localStorage.getItem('fw_license_key')) {
-          window.location.replace('signin.html');
-        }
+        _signedIn = false;
+        // Not signed in: only allowed to stay if an offline Pro key is cached.
+        if (!localStorage.getItem('fw_license_key')) _gotoSignin();
         return;
       }
-      // Firebase user authenticated — restore key from Firestore if missing locally
-      if (!localStorage.getItem('fw_license_key')) {
-        try {
-          const snap = await getDoc(doc(db, 'users', user.uid));
-          if (snap.exists() && snap.data().licenseKey) {
-            const d = snap.data();
-            localStorage.setItem('fw_license_key',   d.licenseKey);
-            localStorage.setItem('fw_instance_id',   d.instanceId || '');
-            localStorage.setItem('fw_plan',          d.plan || 'Pro');
-            if (d.profile) localStorage.setItem('fw_profile', JSON.stringify(d.profile));
-            AUTH_KEY  = d.licenseKey;
-            AUTH_INST = d.instanceId || '';
-            loadAccountData(); // render now that we have the key
-          } else {
-            // User account exists but no key stored yet
-            window.location.replace('signin.html');
+
+      // Signed in (free or pro) — the user belongs on this page. Stop the bounce.
+      _signedIn = true;
+      if (_redirectTimer) { clearTimeout(_redirectTimer); _redirectTimer = null; }
+
+      // Pro path already rendered from the cached key (see boot at end of file).
+      if (localStorage.getItem('fw_license_key')) return;
+
+      // No local key — restore a Pro licence from Firestore, else render Free.
+      try {
+        const snap = await getDoc(doc(db, 'users', user.uid));
+        if (snap.exists() && snap.data().licenseKey) {
+          const d = snap.data();
+          localStorage.setItem('fw_license_key', d.licenseKey);
+          localStorage.setItem('fw_instance_id', d.instanceId || '');
+          localStorage.setItem('fw_plan',        d.plan || 'Pro');
+          if (d.profile) localStorage.setItem('fw_profile', JSON.stringify(d.profile));
+          AUTH_KEY  = d.licenseKey;
+          AUTH_INST = d.instanceId || '';
+          IS_FREE   = false;
+          loadAccountData(); // render now that we have the key
+        } else {
+          // Signed-in FREE user — no licence key anywhere. Show the Free view.
+          if (snap.exists() && snap.data().profile) {
+            localStorage.setItem('fw_profile', JSON.stringify(snap.data().profile));
           }
-        } catch {
-          window.location.replace('signin.html');
+          IS_FREE = true;
+          renderFreeState();
         }
+      } catch {
+        // On a read error, still let the signed-in user in on a Free view
+        // rather than bounce them to sign-in.
+        IS_FREE = true;
+        renderFreeState();
       }
     });
   } catch (err) {
     console.warn('[account] Firebase auth guard failed:', err);
-    if (!AUTH_KEY) window.location.replace('signin.html');
+    if (!AUTH_KEY) _gotoSignin();
   }
 })();
 
@@ -153,6 +178,95 @@ function renderAll(data) {
   renderPlan(data);
   renderKeyMeta(data);
   renderDevices(data);
+  renderProfile();
+}
+
+// ── Free-plan state ───────────────────────────────────────────────────────────
+// Rendered for a signed-in user who has no licence key. Mirrors renderAll() but
+// frames everything around the Free tier and surfaces the Pro upgrade.
+function renderFreeState() {
+  updateGreeting();
+  const checkIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+
+  // Overview stats
+  document.getElementById('ov-plan').textContent       = 'Free';
+  document.getElementById('ov-plan-sub').textContent   = 'FincWin Free';
+  document.getElementById('ov-devices').textContent    = 'This device';
+  document.getElementById('ov-key-status').textContent = 'Free plan';
+  document.getElementById('ov-expires').textContent    = 'No expiry';
+
+  const freeFeatures = [
+    { label: 'Budget Envelopes',  on: true  },
+    { label: 'Loan Calculator',   on: true  },
+    { label: 'CSV Import',         on: true  },
+    { label: 'Basic Export',       on: true  },
+    { label: 'On-device Backup',   on: true  },
+    { label: 'Cloud Sync',         on: false },
+    { label: 'AI Coach',           on: false },
+    { label: 'Advanced Reports',   on: false },
+    { label: 'Multi-device',       on: false },
+  ];
+  document.getElementById('ov-features').innerHTML = freeFeatures.map(f =>
+    `<div class="feature-row${f.on ? '' : ' off'}">${checkIcon} ${esc(f.label)}</div>`
+  ).join('');
+
+  // Plan & billing
+  const badge = document.getElementById('plan-badge');
+  badge.className = 'plan-badge free';
+  document.getElementById('plan-badge-text').textContent = 'Free';
+  document.getElementById('plan-name').textContent       = 'FincWin Free';
+  document.getElementById('plan-note').textContent =
+    'Your data stays on this device. Upgrade to Pro for cloud sync across all your devices.';
+  document.getElementById('plan-card-sub').textContent = 'Free forever — no card, no expiry.';
+
+  ['chip-custom-cats', 'chip-5-devices', 'chip-desktop'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.className = 'feature-chip';
+  });
+
+  // Upgrade box → Pro (not Lifetime) for free users
+  const upBox = document.getElementById('upgrade-box');
+  if (upBox) {
+    upBox.style.display = '';
+    const strong = upBox.querySelector('strong');
+    const firstP = upBox.querySelector('p');
+    if (strong) strong.textContent = 'Upgrade to Pro — $39/year';
+    if (firstP) firstP.textContent = 'Cloud sync across devices, AI coach, advanced reports, and automated backups.';
+  }
+  const creditNote = document.getElementById('upgrade-credit-note'); if (creditNote) creditNote.style.display = 'none';
+  const expiredBox = document.getElementById('expired-box');         if (expiredBox) expiredBox.style.display = 'none';
+  const subNote    = document.getElementById('billing-sub-note');    if (subNote)    subNote.style.display    = 'none';
+
+  // Licence key section → free messaging (no key yet)
+  const keyDisplay = document.getElementById('key-display');
+  if (keyDisplay) { keyDisplay.textContent = 'No licence key — Free plan'; keyDisplay.classList.remove('masked'); }
+  document.getElementById('key-card-sub').textContent =
+    'You’re on the Free plan. Upgrade to Pro to get a licence key, cloud sync, and multi-device access.';
+  document.getElementById('key-status-el').textContent = 'Status: Free';
+  document.getElementById('key-activations').textContent = 'No licence key';
+  document.getElementById('key-expires').textContent = 'Expires: Never';
+  document.getElementById('key-plan-el').textContent = 'Plan: Free';
+
+  // Devices
+  document.getElementById('devices-subtitle').textContent =
+    'Cloud sync is a Pro feature — the Free plan keeps your data on this device.';
+  const devName = localStorage.getItem('fw_instance_name') || 'This device';
+  document.getElementById('device-list').innerHTML = `
+    <div class="device-item">
+      <div class="device-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+      </div>
+      <div class="device-info">
+        <div class="device-name">${esc(devName)}</div>
+        <div class="device-meta">Local — data stored on this device</div>
+      </div>
+      <span class="device-current">This device</span>
+    </div>`;
+  const devUpgrade = document.getElementById('devices-upgrade-link');
+  if (devUpgrade) {
+    devUpgrade.style.display = '';
+    devUpgrade.innerHTML = 'Want your budget on every device? <a href="pricing.html" class="link-sage">Upgrade to Pro</a> for cloud sync.';
+  }
+
   renderProfile();
 }
 
@@ -329,12 +443,14 @@ function renderProfile() {
 // ── Key show / copy ─────────────────────────────────────────────────────────
 let keyVisible = false;
 function toggleKeyVisibility() {
+  if (!AUTH_KEY) { showToast('No licence key on the Free plan — upgrade to Pro to get one'); return; }
   keyVisible = !keyVisible;
   const el = document.getElementById('key-display');
   el.textContent = keyVisible ? AUTH_KEY : '•••• - •••• - •••• - ••••';
   el.classList.toggle('masked', !keyVisible);
 }
 function copyKey() {
+  if (!AUTH_KEY) { showToast('No licence key on the Free plan — upgrade to Pro to get one'); return; }
   navigator.clipboard.writeText(AUTH_KEY).then(() => showToast('Licence key copied'));
 }
 function copyKeyFull() {

@@ -7,27 +7,30 @@ function rateOk(ip) {
   return e.n < 20;
 }
 
-async function lsPages(startUrl, apiKey) {
+// Fetch every page of a Lemon Squeezy REST collection, following JSON:API
+// `links.next`. Throws a descriptive error (with .status) on a non-2xx reply so
+// the handler can distinguish an auth problem from a transient upstream error.
+async function lsPages(startUrl, apiKey, label) {
   const items = [];
-  const included = [];
   let url = startUrl;
   while (url) {
     const r = await fetch(url, {
       headers: { Authorization: `Bearer ${apiKey}`, Accept: 'application/vnd.api+json' },
     });
-    if (!r.ok) throw new Error(`LS API ${r.status} at ${url}`);
+    if (!r.ok) {
+      let detail = '';
+      try { const e = await r.json(); detail = e?.errors?.[0]?.detail || ''; } catch (_) {}
+      const err = new Error(
+        `Lemon Squeezy ${label} request failed (${r.status})` + (detail ? `: ${detail}` : '')
+      );
+      err.status = r.status;
+      throw err;
+    }
     const j = await r.json();
     items.push(...(j.data || []));
-    included.push(...(j.included || []));
     url = j.links?.next ?? null;
   }
-  return { items, included };
-}
-
-function buildMap(included) {
-  const m = {};
-  for (const x of included) m[`${x.type}:${x.id}`] = x;
-  return m;
+  return items;
 }
 
 export default async function handler(req, res) {
@@ -47,32 +50,31 @@ export default async function handler(req, res) {
   if (!apiKey) return res.status(500).json({ error: 'LEMON_SQUEEZY_API_KEY not set' });
 
   try {
-    const [lkResult, ordersResult] = await Promise.all([
-      lsPages(
-        'https://api.lemonsqueezy.com/v1/license-keys?perPage=100&include=variant,order',
-        apiKey
-      ),
-      lsPages('https://api.lemonsqueezy.com/v1/orders?perPage=100', apiKey),
+    // `page[size]` is the JSON:API page param Lemon Squeezy expects (not `perPage`).
+    // No `include` — we cross-reference orders ourselves, which avoids 400s from
+    // invalid include paths and keeps the request robust.
+    const [licenseKeys, orders] = await Promise.all([
+      lsPages('https://api.lemonsqueezy.com/v1/license-keys?page[size]=100', apiKey, 'license-keys'),
+      lsPages('https://api.lemonsqueezy.com/v1/orders?page[size]=100', apiKey, 'orders'),
     ]);
 
-    const incMap = buildMap(lkResult.included);
+    // Index orders by id so each licence can resolve its customer + plan.
+    const orderMap = {};
+    for (const o of orders) orderMap[o.id] = o.attributes || {};
 
     const stats = { total: 0, active: 0, inactive: 0, expired: 0, disabled: 0, byPlan: {} };
 
-    const licenses = lkResult.items.map(l => {
-      const a = l.attributes;
+    const licenses = licenseKeys.map(l => {
+      const a = l.attributes || {};
       const status = a.status || 'unknown';
       stats.total++;
       if (status in stats) stats[status]++;
 
-      const variantId = l.relationships?.variant?.data?.id;
-      const variant = variantId ? incMap[`variants:${variantId}`] : null;
-      const plan = variant?.attributes?.name || a.variant_name || 'Pro';
-      stats.byPlan[plan] = (stats.byPlan[plan] || 0) + 1;
-
       const orderId = l.relationships?.order?.data?.id;
-      const order = orderId ? incMap[`orders:${orderId}`] : null;
-      const oa = order?.attributes || {};
+      const oa = (orderId && orderMap[orderId]) || {};
+      // LS order attributes carry `first_order_item.variant_name` for the plan.
+      const plan = oa.first_order_item?.variant_name || a.variant_name || 'Pro';
+      stats.byPlan[plan] = (stats.byPlan[plan] || 0) + 1;
 
       return {
         id:                l.id,
@@ -92,8 +94,8 @@ export default async function handler(req, res) {
 
     let revCents = 0;
     let paidCount = 0;
-    for (const o of ordersResult.items) {
-      if (o.attributes.status !== 'paid') continue;
+    for (const o of orders) {
+      if (o.attributes?.status !== 'paid') continue;
       revCents += o.attributes.total ?? 0;
       paidCount++;
     }
@@ -107,6 +109,13 @@ export default async function handler(req, res) {
       },
     });
   } catch (err) {
-    return res.status(502).json({ error: err.message });
+    // Surface an actionable message instead of a bare 502.
+    if (err.status === 401 || err.status === 403) {
+      return res.status(502).json({
+        error: 'Lemon Squeezy rejected the API key (' + err.status + '). Check LEMON_SQUEEZY_API_KEY ' +
+               'in Vercel — it may be invalid, revoked, or missing read access.'
+      });
+    }
+    return res.status(502).json({ error: err.message || 'Upstream request failed' });
   }
 }

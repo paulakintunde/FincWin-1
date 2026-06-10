@@ -1,4 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="20" fill="#5C7A6B"/>
-  <text y="70" font-size="60" text-anchor="middle" x="50" fill="white" font-family="serif">$</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="geometricPrecision">
+  <!-- Matches favicon.svg — sage rounded square, white serif "F", gold accent dot -->
+  <rect width="32" height="32" rx="7" fill="#5a6e3f"/>
+  <rect x="9" y="8" width="14" height="2.5" rx="1" fill="#ffffff"/>
+  <rect x="9" y="14.5" width="10" height="2.5" rx="1" fill="#ffffff"/>
+  <rect x="9" y="8" width="2.8" height="16" rx="1" fill="#ffffff"/>
+  <circle cx="24" cy="24.5" r="2.8" fill="#d4a853"/>
 </svg>
