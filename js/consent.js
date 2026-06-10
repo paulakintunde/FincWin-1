@@ -23,6 +23,27 @@
   // This script's own resolved URL — used to locate the site root reliably.
   var SELF_SRC = (document.currentScript && document.currentScript.src) || '';
 
+  // ── Analytics (GA4) ──────────────────────────────────────────────────────────
+  // Loads Google Analytics ONLY after the visitor grants analytics consent
+  // (privacy-first / PECR-compliant: no tag fires until opt-in).
+  // To enable: set your GA4 Measurement ID below, or define `window.FW_GA_ID`
+  // before this script loads. Leave empty to disable analytics entirely — the
+  // banner still works and simply records the choice with nothing to gate.
+  var GA_MEASUREMENT_ID = (typeof window.FW_GA_ID === 'string' && window.FW_GA_ID) || '';
+  var gaLoaded = false;
+  function loadAnalytics() {
+    if (gaLoaded || !GA_MEASUREMENT_ID) return;
+    gaLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_MEASUREMENT_ID);
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+  }
+
   // ── Storage ────────────────────────────────────────────────────────────────
   function read() {
     try {
@@ -48,6 +69,7 @@
       document.cookie = 'fw_consent=' + v + '; Max-Age=' + (EXPIRY_DAYS * 86400) + '; Path=/; SameSite=Lax';
     } catch (e) {}
     window.__fwConsent = rec;
+    if (rec.analytics) loadAnalytics();
     try { document.dispatchEvent(new CustomEvent('fincwin:consent', { detail: rec })); } catch (e) {}
     return rec;
   }
@@ -201,7 +223,11 @@
   function init() {
     injectStyles();  // always present, so `.fw-btn` / re-open controls are styled everywhere
     var existing = read();
-    if (existing) { window.__fwConsent = existing; return; } // already decided
+    if (existing) {                       // already decided on a previous visit
+      window.__fwConsent = existing;
+      if (existing.analytics) loadAnalytics();
+      return;
+    }
     build();
   }
 

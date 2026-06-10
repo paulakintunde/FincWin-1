@@ -20,7 +20,10 @@ describe('generate-page.js', () => {
     const html = fs.readFileSync(out, 'utf8');
     expect(html).toContain('id="mainNav"');            // nav partial
     expect(html).toContain('class="mkt-footer"');      // footer partial
-    expect(html).toContain('src="/js/mkt.js"');        // scripts partial (external, CSP-safe)
+    // scripts partial (external, CSP-safe). Paths are {{BASE}}-relative, so a
+    // depth-1 page resolves to "../js/...". Assert both scripts are injected.
+    expect(html).toMatch(/src="(\.\.\/)*js\/mkt\.js"/);
+    expect(html).toMatch(/src="(\.\.\/)*js\/consent\.js"/);
   });
 
   it('leaves no unreplaced {{TOKEN}} or {{> partial}} markers', () => {

@@ -126,6 +126,8 @@
     <div class="nav-links">
       <a href="features.html">Features</a>
       <a href="pricing.html">Pricing</a>
+      <a href="compare.html">Compare</a>
+      <a href="use-cases.html">Use cases</a>
       <a href="blog/index.html">Blog</a><a href="app.html">App</a>
       <a href="app.html" class="nav-cta">Get started free</a>
     </div>
@@ -264,7 +266,7 @@
 
   <footer>
     <div class="footer-inner">
-      <div class="footer-brand"><a href="index.html" class="nav-logo">Finc<span>Win</span></a><p>Personal finance clarity, offline and private.</p></div>
+      <div class="footer-brand"><a href="index.html" class="nav-logo">Finc<span>Win</span></a><p>The personal finance dashboard for people who want clarity, not complexity.</p></div>
       <div class="footer-cols">
         <div><h4>Product</h4><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="compare.html">Compare</a><a href="use-cases.html">Use cases</a><a href="app.html">Open app</a></div>
         <div><h4>Company</h4><a href="about.html">About</a><a href="changelog.html">Changelog</a><a href="contact.html">Contact</a></div>
@@ -282,6 +284,7 @@
     const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     reveals.forEach(el => io.observe(el));
   </script>
+  <script src="js/mkt.js" defer></script>
   <script src="js/consent.js" defer></script>
 </body>
 </html>
