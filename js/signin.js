@@ -269,13 +269,27 @@ async function showForgot(e) {
     document.getElementById('si-email').focus();
     return;
   }
+  // Self-hosted reset (api/forgot-password.js) sends the email from fincwin.com
+  // via Resend with a clean subject and a fincwin.com/reset link. The endpoint
+  // always returns a generic success so it can't be used to probe which emails
+  // have accounts — so we show the same confirmation regardless of the outcome.
   try {
-    await _initFirebase();
-    const { sendPasswordResetEmail } = await import('./vendor/firebase/firebase-auth.js');
-    await sendPasswordResetEmail(_fbAuth, email);
-    _showStatus(statusEl, 'info', 'Password reset email sent to ' + email + '. Check your inbox (and spam folder).');
+    const res  = await fetch('/api/forgot-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    if (res.status === 429) {
+      _showStatus(statusEl, 'error', 'Too many attempts — please try again in a minute.');
+      return;
+    }
+    if (!res.ok) {
+      _showStatus(statusEl, 'error', 'Could not send the reset email. Please try again.');
+      return;
+    }
+    _showStatus(statusEl, 'info', 'If an account exists for ' + email + ', a password reset link is on its way. Check your inbox (and spam folder).');
   } catch (err) {
-    _showStatus(statusEl, 'error', _fbMsg(err.code));
+    _showStatus(statusEl, 'error', 'Network error. Check your connection and try again.');
   }
 }
 

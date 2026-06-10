@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset password — FincWin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/auth-tokens.css">
+  <script src="js/config.local.js" onerror="void 0"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      min-height: 100%; font-family: var(--sans); font-weight: 300;
+      color: var(--ink); background: var(--faint);
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 36px 24px;
+    }
+    .auth-box { width: 100%; max-width: 400px; }
+
+    .mobile-logo {
+      display: inline-flex; align-items: center; gap: 3px; line-height: 1;
+      font-family: 'Instrument Serif', serif; font-size: 22px; font-weight: 400; letter-spacing: -.5px;
+      color: var(--ink); text-decoration: none; margin-bottom: 32px;
+    }
+    .mobile-logo span { background: var(--sage); color: #fff; font-weight: 700; padding: 1px 9px 2px; border-radius: 7px; }
+
+    .auth-heading { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--ink); margin-bottom: 6px; }
+    .auth-sub { font-size: 13px; color: var(--muted); margin-bottom: 32px; line-height: 1.5; }
+
+    .form-group { margin-bottom: 18px; }
+    label {
+      display: block; font-size: 11px; font-weight: 500; letter-spacing: .8px;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+    }
+    .input-wrap { position: relative; }
+    input[type="text"], input[type="password"] {
+      width: 100%; padding: 13px 16px 13px 16px; padding-right: 44px;
+      background: var(--faint); border: 1px solid var(--border); border-radius: 10px;
+      font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--ink);
+      outline: none; transition: border-color .15s, background .15s; -webkit-appearance: none;
+    }
+    input:focus { border-color: var(--sage); background: white; }
+    input::placeholder { color: #c4c9d4; }
+    .input-hint { font-size: 11px; color: var(--muted); margin-top: 6px; }
+
+    .btn-pw-toggle {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; padding: 4px; color: var(--muted);
+      display: flex; align-items: center; line-height: 0; transition: color .15s;
+    }
+    .btn-pw-toggle:hover { color: var(--ink); }
+    .btn-pw-toggle .icon-eye-off { display: none; }
+    .btn-pw-toggle.visible .icon-eye { display: none; }
+    .btn-pw-toggle.visible .icon-eye-off { display: block; }
+
+    .btn-submit {
+      width: 100%; padding: 14px; border-radius: 50px; background: var(--ink); color: white;
+      font-family: var(--sans); font-size: 14px; font-weight: 500; border: none; cursor: pointer;
+      margin-top: 8px; transition: background .2s, transform .15s;
+    }
+    .btn-submit:hover:not(:disabled) { background: var(--sage); transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: .55; cursor: not-allowed; }
+
+    .status-msg {
+      display: none; font-size: 13px; border-radius: 8px; line-height: 1.45;
+      padding: 11px 14px; margin-bottom: 20px; border: 1px solid transparent;
+    }
+    .status-msg.show { display: block; }
+    .status-msg.error { background: #fef2f2; border-color: #fecaca; color: var(--danger); }
+    .status-msg.info  { background: #f0fdf4; border-color: #bbf7d0; color: #15803d; }
+
+    .auth-footer { text-align: center; margin-top: 28px; font-size: 13px; color: var(--muted); }
+    .auth-footer a { color: var(--sage); text-decoration: none; }
+    .auth-footer a:hover { text-decoration: underline; }
+
+    #reset-done { display: none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="auth-box">
+      <a href="index.html" class="mobile-logo">Finc<span>Win</span></a>
+
+      <h2 class="auth-heading">Choose a new password</h2>
+      <p class="auth-sub">Pick a strong password you don't use anywhere else. You'll use it to sign in on any device.</p>
+
+      <div class="status-msg" id="reset-status"></div>
+
+      <form id="form-reset" novalidate>
+        <div class="form-group">
+          <label for="rs-pass">New password</label>
+          <div class="input-wrap">
+            <input type="password" id="rs-pass" placeholder="At least 6 characters" autocomplete="new-password" minlength="6" required>
+            <button type="button" class="btn-pw-toggle" aria-label="Show password" data-target="rs-pass">
+              <svg class="icon-eye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="icon-eye-off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" x2="23" y1="1" y2="23"/></svg>
+            </button>
+          </div>
+          <p class="input-hint">Minimum 6 characters.</p>
+        </div>
+        <button type="submit" class="btn-submit" id="btn-reset">Set new password</button>
+      </form>
+
+      <div id="reset-done">
+        <div class="status-msg info show">Your password has been reset. You can now sign in with your new password.</div>
+        <a class="btn-submit" href="signin.html" style="display:block;text-align:center;text-decoration:none">Go to sign in</a>
+      </div>
+
+      <p class="auth-footer"><a href="signin.html">Back to sign in</a></p>
+    </div>
+  </div>
+
+  <script src="js/reset.js"></script>
+</body>
+</html>

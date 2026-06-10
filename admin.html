@@ -81,17 +81,18 @@
       font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
       background: var(--ink); color: white; padding: 3px 9px; border-radius: 20px;
     }
-    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
     .nav-meta { font-size: 12px; color: var(--muted); }
-    .btn-logout, .btn-refresh {
+    .btn-logout, .btn-refresh, .btn-nav {
       padding: 7px 16px; background: none; border: 1px solid var(--border); border-radius: 50px;
       font-family: var(--sans); font-size: 12px; font-weight: 500; color: var(--muted);
       cursor: pointer; transition: border-color .15s, color .15s;
     }
-    .btn-logout:hover, .btn-refresh:hover { border-color: var(--ink); color: var(--ink); }
+    .btn-logout:hover, .btn-refresh:hover, .btn-nav:hover { border-color: var(--ink); color: var(--ink); }
     .btn-refresh:disabled { opacity: .5; cursor: default; }
+    .btn-nav.active { background: var(--ink); color: white; border-color: var(--ink); }
 
-    /* LS notice — hidden until JS reveals it */
+    /* LS notice */
     #ls-notice { display: none; }
     #overview-content { display: none; }
     .ls-notice {
@@ -102,7 +103,7 @@
     .ls-notice svg { flex-shrink: 0; }
 
     /* Layout */
-    .dash-layout { display: grid; grid-template-columns: 192px 1fr; min-height: calc(100vh - 56px); }
+    .dash-layout { display: grid; grid-template-columns: 200px 1fr; min-height: calc(100vh - 56px); }
 
     /* Sidebar */
     .dash-sidebar {
@@ -147,6 +148,11 @@
     .stat-card.accent .stat-num { color: white; }
     .stat-detail { font-size: 12px; color: var(--muted); margin-top: 6px; }
     .stat-card.accent .stat-detail { color: rgba(255,255,255,.4); }
+    .stat-delta {
+      display: inline-flex; align-items: center; gap: 3px;
+      font-size: 11px; font-weight: 600; color: var(--sage);
+      background: var(--sage-lt); padding: 2px 7px; border-radius: 20px; margin-left: 6px;
+    }
 
     /* Status badge */
     .badge {
@@ -158,6 +164,10 @@
     .badge.inactive { background: #f3f4f6; color: var(--muted); }
     .badge.expired  { background: #fef3c7; color: #92400e; }
     .badge.disabled { background: #fee2e2; color: var(--danger); }
+    .badge.paused   { background: #fef3c7; color: #92400e; }
+    .badge.cancelled { background: #fee2e2; color: var(--danger); }
+    .badge.past_due  { background: #fee2e2; color: var(--danger); }
+    .badge.trial     { background: #ede9fe; color: #5b21b6; }
 
     /* Plan breakdown */
     .plan-breakdown {
@@ -165,9 +175,7 @@
       padding: 22px 24px; margin-bottom: 24px;
     }
     .plan-breakdown-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 16px; }
-    .plan-row-item {
-      display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
-    }
+    .plan-row-item { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
     .plan-row-item:last-child { margin-bottom: 0; }
     .plan-name { font-size: 13px; color: var(--ink); min-width: 100px; }
     .plan-bar-wrap { flex: 1; background: var(--faint); border-radius: 20px; height: 8px; overflow: hidden; }
@@ -179,10 +187,12 @@
       background: white; border-radius: 14px; border: 1px solid var(--border); overflow: hidden;
     }
     .table-header {
-      padding: 18px 24px; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 16px 24px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
     }
-    .table-title { font-size: 14px; font-weight: 500; color: var(--ink); }
+    .table-header-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .table-header-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .table-title { font-size: 14px; font-weight: 500; color: var(--ink); white-space: nowrap; }
     .table-meta { font-size: 12px; color: var(--muted); }
     .search-input {
       padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px;
@@ -196,20 +206,253 @@
       padding: 11px 16px; font-size: 11px; font-weight: 600; letter-spacing: .7px;
       text-transform: uppercase; color: var(--muted); text-align: left; white-space: nowrap;
     }
+    th.sortable { cursor: pointer; user-select: none; }
+    th.sortable:hover { color: var(--ink); }
+    th.sort-asc::after  { content: ' ↑'; color: var(--sage); }
+    th.sort-desc::after { content: ' ↓'; color: var(--sage); }
     td {
       padding: 13px 16px; font-size: 13px; color: var(--ink); border-top: 1px solid var(--border);
       vertical-align: middle;
     }
-    tr:hover td { background: rgba(0,0,0,.016); }
+    tr.clickable { cursor: pointer; }
+    tr.clickable:hover td { background: rgba(90,110,63,.04); }
+    tr:not(.clickable):hover td { background: rgba(0,0,0,.016); }
     .td-key { font-family: monospace; font-size: 12px; letter-spacing: 1px; color: var(--muted); }
     .td-email { color: var(--muted); font-size: 12px; }
     .td-devices { font-size: 13px; }
     .td-devices .full { color: var(--danger); font-weight: 500; }
     .td-date { font-size: 12px; color: var(--muted); white-space: nowrap; }
     .td-empty { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; }
+    .td-actions { white-space: nowrap; }
 
     /* Revenue section */
-    .rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px; }
+    .rev-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+
+    /* ── STATUS TABS ── */
+    .status-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+    .status-tab {
+      padding: 5px 12px; border-radius: 6px; border: none; background: var(--faint);
+      font-family: var(--sans); font-size: 12px; font-weight: 500; color: var(--muted);
+      cursor: pointer; transition: background .12s, color .12s; white-space: nowrap;
+    }
+    .status-tab:hover { background: #e5e7eb; color: var(--ink); }
+    .status-tab.active { background: var(--ink); color: white; }
+
+    /* ── QUICK ACTIONS ── */
+    .quick-actions { display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; }
+    .btn-quick {
+      padding: 9px 18px; border-radius: 50px; border: 1px solid var(--border);
+      background: white; color: var(--ink); font-family: var(--sans); font-size: 13px;
+      font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 7px;
+      transition: background .15s, border-color .15s, color .15s;
+    }
+    .btn-quick:hover { background: var(--ink); color: white; border-color: var(--ink); }
+
+    /* ── BUTTONS ── */
+    .btn-outline {
+      padding: 7px 14px; border: 1px solid var(--border); border-radius: 8px;
+      background: white; font-family: var(--sans); font-size: 12px; font-weight: 500;
+      color: var(--muted); cursor: pointer; white-space: nowrap;
+      transition: border-color .12s, color .12s;
+    }
+    .btn-outline:hover { border-color: var(--ink); color: var(--ink); }
+    .btn-primary {
+      padding: 10px 24px; background: var(--ink); color: white; border: none;
+      border-radius: 50px; font-family: var(--sans); font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: background .2s; white-space: nowrap;
+    }
+    .btn-primary:hover { background: var(--sage); }
+    .btn-primary:disabled { opacity: .5; cursor: default; }
+    .btn-secondary {
+      padding: 10px 20px; background: var(--faint); color: var(--muted);
+      border: 1px solid var(--border); border-radius: 50px; font-family: var(--sans);
+      font-size: 13px; cursor: pointer; transition: background .12s;
+    }
+    .btn-secondary:hover { background: #e5e7eb; color: var(--ink); }
+    .btn-save-sm {
+      padding: 5px 12px; border-radius: 6px; background: var(--ink); color: white; border: none;
+      font-family: var(--sans); font-size: 12px; font-weight: 500; cursor: pointer;
+      transition: background .2s; white-space: nowrap;
+    }
+    .btn-save-sm:hover { background: var(--sage); }
+    .btn-save-sm:disabled { opacity: .5; cursor: default; }
+    .btn-muted-sm {
+      padding: 5px 12px; border-radius: 6px; background: var(--faint); color: var(--muted);
+      border: 1px solid var(--border); font-family: var(--sans); font-size: 12px;
+      cursor: pointer; transition: background .12s; white-space: nowrap;
+    }
+    .btn-muted-sm:hover { background: #e5e7eb; color: var(--ink); }
+    .btn-danger-sm {
+      padding: 4px 10px; border-radius: 6px; border: 1px solid #fecaca; background: white;
+      color: var(--danger); font-family: var(--sans); font-size: 11px; font-weight: 500;
+      cursor: pointer; white-space: nowrap; transition: background .12s;
+    }
+    .btn-danger-sm:hover { background: #fef2f2; }
+    .btn-action-sm {
+      padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: white;
+      color: var(--muted); font-family: var(--sans); font-size: 11px; cursor: pointer;
+      white-space: nowrap; transition: border-color .12s, color .12s;
+    }
+    .btn-action-sm:hover { border-color: var(--ink); color: var(--ink); }
+    .btn-icon {
+      flex-shrink: 0; width: 28px; height: 28px; border-radius: 6px;
+      background: white; border: 1px solid var(--border); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .12s; color: var(--muted);
+    }
+    .btn-icon:hover { border-color: var(--ink); color: var(--ink); }
+
+    /* ── KEY DRAWER ── */
+    .drawer-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.35);
+      z-index: 200; opacity: 0; pointer-events: none; transition: opacity .25s;
+    }
+    .drawer-overlay.open { opacity: 1; pointer-events: all; }
+    .key-drawer {
+      position: fixed; top: 0; right: 0; height: 100vh; width: 420px;
+      background: white; border-left: 1px solid var(--border);
+      z-index: 201; transform: translateX(100%);
+      transition: transform .25s cubic-bezier(.4,0,.2,1);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .key-drawer.open { transform: translateX(0); }
+    .drawer-header {
+      padding: 16px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+      flex-shrink: 0;
+    }
+    .drawer-title { font-size: 14px; font-weight: 500; color: var(--ink); }
+    .drawer-title-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .drawer-close {
+      flex-shrink: 0; width: 28px; height: 28px; border-radius: 6px; background: var(--faint);
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: var(--muted); transition: background .12s;
+    }
+    .drawer-close:hover { background: #e5e7eb; color: var(--ink); }
+    .drawer-body { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+    .drawer-section-title {
+      font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 10px;
+    }
+    .drawer-key-row {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--faint); border-radius: 8px; padding: 10px 12px; margin-bottom: 12px;
+    }
+    .drawer-key-code {
+      font-family: monospace; font-size: 12px; letter-spacing: .5px;
+      color: var(--ink); flex: 1; word-break: break-all; line-height: 1.5;
+    }
+    .drawer-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .drawer-meta-item { background: var(--faint); border-radius: 8px; padding: 10px 12px; }
+    .drawer-meta-label {
+      display: block; font-size: 10px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 4px;
+    }
+    .drawer-meta-val { font-size: 13px; color: var(--ink); }
+    .drawer-action-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+    .btn-disable {
+      flex: 1; padding: 9px 12px; border-radius: 8px; border: 1px solid #fecaca;
+      background: #fef2f2; color: var(--danger); font-family: var(--sans); font-size: 12px;
+      font-weight: 500; cursor: pointer; transition: background .12s; white-space: nowrap;
+    }
+    .btn-disable:hover { background: #fee2e2; }
+    .btn-enable {
+      flex: 1; padding: 9px 12px; border-radius: 8px; border: 1px solid #bbf7d0;
+      background: #f0fdf4; color: #166534; font-family: var(--sans); font-size: 12px;
+      font-weight: 500; cursor: pointer; transition: background .12s; white-space: nowrap;
+    }
+    .btn-enable:hover { background: #dcfce7; }
+    .btn-ls-open {
+      flex: 1; padding: 9px 12px; border-radius: 8px; border: 1px solid var(--border);
+      background: white; color: var(--muted); font-family: var(--sans); font-size: 12px;
+      font-weight: 400; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      transition: border-color .12s, color .12s;
+    }
+    .btn-ls-open:hover { border-color: var(--ink); color: var(--ink); }
+    .drawer-field-label {
+      display: block; font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 6px;
+    }
+    .drawer-stepper { display: flex; align-items: center; gap: 6px; }
+    .stepper-btn {
+      width: 28px; height: 28px; border-radius: 6px; background: var(--faint);
+      border: 1px solid var(--border); cursor: pointer; font-size: 16px; color: var(--ink);
+      display: flex; align-items: center; justify-content: center; transition: background .12s;
+    }
+    .stepper-btn:hover { background: #e5e7eb; }
+    .stepper-val { min-width: 28px; text-align: center; font-size: 15px; font-weight: 500; color: var(--ink); }
+    .drawer-expiry-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .drawer-date-input {
+      flex: 1; min-width: 120px; padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px;
+      font-family: var(--sans); font-size: 13px; color: var(--ink); outline: none;
+      transition: border-color .15s; background: var(--faint);
+    }
+    .drawer-date-input:focus { border-color: var(--sage); background: white; }
+    .instance-list { display: flex; flex-direction: column; gap: 8px; }
+    .instance-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      background: var(--faint); border-radius: 8px; padding: 10px 12px;
+    }
+    .instance-name { font-size: 13px; color: var(--ink); }
+    .instance-date { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .loading-small { font-size: 13px; color: var(--muted); padding: 8px 0; }
+    .empty-small { font-size: 13px; color: var(--muted); padding: 12px 0; text-align: center; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.5);
+      z-index: 300; display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .2s; padding: 24px;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-card {
+      background: white; border-radius: 20px; padding: 32px 36px;
+      max-width: 480px; width: 100%; max-height: 90vh; overflow-y: auto;
+    }
+    .modal-title { font-family: var(--serif); font-size: 22px; color: var(--ink); margin-bottom: 4px; }
+    .modal-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+    .form-field { margin-bottom: 14px; }
+    .form-label { display: block; font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 6px; }
+    .form-input, .form-select {
+      width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px;
+      font-family: var(--sans); font-size: 13px; color: var(--ink); background: var(--faint); outline: none;
+      transition: border-color .15s;
+    }
+    .form-input:focus, .form-select:focus { border-color: var(--sage); background: white; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-check { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+    .form-check label { font-size: 13px; color: var(--ink); cursor: pointer; }
+    .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px; }
+    .modal-result {
+      display: none; background: var(--faint); border-radius: 10px; padding: 16px;
+      margin-top: 16px;
+    }
+    .modal-result.show { display: block; }
+    .modal-result-label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .modal-result-url {
+      font-family: monospace; font-size: 12px; color: var(--ink); word-break: break-all;
+      line-height: 1.5; margin-bottom: 10px;
+    }
+
+    /* ── CHART CARD ── */
+    .chart-card {
+      background: white; border-radius: 14px; border: 1px solid var(--border);
+      padding: 22px 24px; margin-bottom: 24px;
+    }
+    .chart-card-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 18px; }
+    .chart-wrap { position: relative; height: 200px; }
+
+    /* ── WEBHOOKS ── */
+    .webhook-events { display: flex; flex-wrap: wrap; gap: 4px; }
+    .event-chip {
+      font-size: 10px; font-weight: 500; background: var(--faint); color: var(--muted);
+      padding: 2px 7px; border-radius: 4px; white-space: nowrap;
+    }
+    .form-events-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px;
+    }
+    .event-check { display: flex; align-items: center; gap: 6px; }
+    .event-check label { font-size: 12px; color: var(--ink); cursor: pointer; }
 
     /* Loading / error states */
     .loading-state {
@@ -232,7 +475,7 @@
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     /* Responsive */
-    @media (max-width: 960px) {
+    @media (max-width: 1100px) {
       .stat-grid { grid-template-columns: repeat(2, 1fr); }
       .rev-grid  { grid-template-columns: repeat(2, 1fr); }
     }
@@ -242,6 +485,9 @@
       .sidebar-label { display: none; }
       .dash-main { padding: 20px 16px; }
       .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .rev-grid  { grid-template-columns: 1fr 1fr; }
+      .key-drawer { width: 100%; }
+      .form-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -275,6 +521,7 @@
       </div>
       <div class="nav-right">
         <span class="nav-meta" id="nav-meta">Loading…</span>
+        <button type="button" class="btn-nav" id="btn-auto-refresh">Auto-refresh: Off</button>
         <button type="button" class="btn-refresh" id="btn-refresh">Refresh</button>
         <button type="button" class="btn-logout" id="btn-logout">Sign out</button>
       </div>
@@ -302,6 +549,25 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>
           Revenue
         </button>
+
+        <div class="sidebar-label">Management</div>
+        <button type="button" class="sidebar-btn" data-view="customers">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Customers
+        </button>
+        <button type="button" class="sidebar-btn" data-view="subscriptions">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          Subscriptions
+        </button>
+        <button type="button" class="sidebar-btn" data-view="discounts">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          Discounts
+        </button>
+        <button type="button" class="sidebar-btn" data-view="webhooks">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          Webhooks
+        </button>
+
         <div class="sidebar-label">Links</div>
         <button type="button" class="sidebar-btn" id="btn-ls-link">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -323,6 +589,18 @@
           </div>
 
           <div id="overview-content">
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+              <button type="button" class="btn-quick" data-action="open-gift-modal">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                Gift Licence
+              </button>
+              <button type="button" class="btn-quick" data-action="open-discount-modal">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                Create Discount
+              </button>
+            </div>
+
             <div class="stat-grid">
               <div class="stat-card accent">
                 <div class="stat-lbl">Total Licences</div>
@@ -375,25 +653,34 @@
         <!-- ── LICENCES ── -->
         <div id="view-licences" class="view">
           <h1 class="view-title">Licences</h1>
-          <p class="view-sub">All issued licence keys.</p>
+          <p class="view-sub">Click any row to manage the key.</p>
 
           <div class="table-card">
             <div class="table-header">
-              <span class="table-title" id="lic-count">All licences</span>
-              <input
-                type="search" id="search-input" class="search-input"
-                placeholder="Search email or key…"
-              >
+              <div class="table-header-left">
+                <span class="table-title" id="lic-count">All licences</span>
+                <div class="status-tabs" id="status-tabs">
+                  <button type="button" class="status-tab active" data-status="all">All</button>
+                  <button type="button" class="status-tab" data-status="active">Active</button>
+                  <button type="button" class="status-tab" data-status="expired">Expired</button>
+                  <button type="button" class="status-tab" data-status="disabled">Disabled</button>
+                  <button type="button" class="status-tab" data-status="inactive">Inactive</button>
+                </div>
+              </div>
+              <div class="table-header-right">
+                <input type="search" id="search-input" class="search-input" placeholder="Search email or key…">
+                <button type="button" class="btn-outline" id="btn-export-csv">Export CSV</button>
+              </div>
             </div>
             <table>
               <thead>
                 <tr>
-                  <th>Customer</th>
-                  <th>Plan</th>
-                  <th>Status</th>
-                  <th>Devices</th>
+                  <th class="sortable" data-sort="customer_name">Customer</th>
+                  <th class="sortable" data-sort="plan">Plan</th>
+                  <th class="sortable" data-sort="status">Status</th>
+                  <th class="sortable" data-sort="activations_count">Devices</th>
                   <th>Key</th>
-                  <th>Issued</th>
+                  <th class="sortable sort-desc" data-sort="created_at">Issued</th>
                 </tr>
               </thead>
               <tbody id="licences-tbody"></tbody>
@@ -422,20 +709,345 @@
               <div class="stat-num" id="rev-rate">—</div>
               <div class="stat-detail">licences currently active</div>
             </div>
+            <div class="stat-card">
+              <div class="stat-lbl">Refunded</div>
+              <div class="stat-num" id="rev-refunded">—</div>
+              <div class="stat-detail" id="rev-refunded-sub">—</div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-card-title">Monthly revenue (last 12 months)</div>
+            <div class="chart-wrap">
+              <canvas id="revenue-chart"></canvas>
+            </div>
           </div>
 
           <div class="plan-breakdown">
             <div class="plan-breakdown-title">Revenue by plan (licence count)</div>
             <div id="rev-plan-rows"></div>
           </div>
+
+          <div class="table-card">
+            <div class="table-header">
+              <span class="table-title">Monthly breakdown</span>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Orders</th>
+                  <th>Revenue</th>
+                </tr>
+              </thead>
+              <tbody id="monthly-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ── CUSTOMERS ── -->
+        <div id="view-customers" class="view">
+          <h1 class="view-title">Customers</h1>
+          <p class="view-sub">All customers with portal link access.</p>
+
+          <div class="table-card">
+            <div class="table-header">
+              <div class="table-header-left">
+                <span class="table-title" id="cust-count">Customers</span>
+              </div>
+              <div class="table-header-right">
+                <input type="search" id="cust-search" class="search-input" placeholder="Search name or email…">
+              </div>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Customer</th>
+                  <th>Country</th>
+                  <th>Licences</th>
+                  <th>Since</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="customers-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ── SUBSCRIPTIONS ── -->
+        <div id="view-subscriptions" class="view">
+          <h1 class="view-title">Subscriptions</h1>
+          <p class="view-sub">Active and historical subscription records.</p>
+
+          <div class="table-card">
+            <div class="table-header">
+              <span class="table-title" id="sub-count">Subscriptions</span>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Customer</th>
+                  <th>Plan</th>
+                  <th>Status</th>
+                  <th>Renews</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="subscriptions-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ── DISCOUNTS ── -->
+        <div id="view-discounts" class="view">
+          <h1 class="view-title">Discounts</h1>
+          <p class="view-sub">Active discount codes and redemption history.</p>
+
+          <div class="table-card">
+            <div class="table-header">
+              <span class="table-title" id="disc-count">Discounts</span>
+              <button type="button" class="btn-outline" data-action="open-discount-modal">+ New discount</button>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Amount</th>
+                  <th>Redeemed</th>
+                  <th>Expires</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="discounts-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ── WEBHOOKS ── -->
+        <div id="view-webhooks" class="view">
+          <h1 class="view-title">Webhooks</h1>
+          <p class="view-sub">Manage event endpoints for your Lemon Squeezy store.</p>
+
+          <div class="table-card" style="margin-bottom:24px">
+            <div class="table-header">
+              <span class="table-title" id="hook-count">Webhooks</span>
+              <button type="button" class="btn-outline" data-action="open-webhook-modal">+ New webhook</button>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Endpoint URL</th>
+                  <th>Events</th>
+                  <th>Created</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="webhooks-tbody"></tbody>
+            </table>
+          </div>
         </div>
 
       </main>
     </div>
-  </div>
+
+    <!-- ── KEY DRAWER ── -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="key-drawer" id="key-drawer" aria-label="Licence key details">
+      <div class="drawer-header">
+        <div>
+          <div class="drawer-title" id="drawer-customer-name">—</div>
+          <div class="drawer-title-sub" id="drawer-customer-email">—</div>
+        </div>
+        <button type="button" class="drawer-close" data-action="close-drawer">✕</button>
+      </div>
+      <div class="drawer-body">
+
+        <div>
+          <div class="drawer-section-title">Licence Key</div>
+          <div class="drawer-key-row">
+            <code class="drawer-key-code" id="drawer-key-code">—</code>
+            <button type="button" class="btn-icon" data-action="copy-key" title="Copy key">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+          <div class="drawer-meta-grid">
+            <div class="drawer-meta-item">
+              <span class="drawer-meta-label">Plan</span>
+              <span class="drawer-meta-val" id="drawer-plan">—</span>
+            </div>
+            <div class="drawer-meta-item">
+              <span class="drawer-meta-label">Status</span>
+              <span class="drawer-meta-val" id="drawer-status">—</span>
+            </div>
+            <div class="drawer-meta-item">
+              <span class="drawer-meta-label">Issued</span>
+              <span class="drawer-meta-val" id="drawer-issued">—</span>
+            </div>
+            <div class="drawer-meta-item">
+              <span class="drawer-meta-label">Expires</span>
+              <span class="drawer-meta-val" id="drawer-expires">—</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="drawer-section-title">Actions</div>
+          <div class="drawer-action-row">
+            <button type="button" class="btn-disable" id="drawer-toggle-btn" data-action="toggle-key">Disable Key</button>
+            <a class="btn-ls-open" id="drawer-ls-link" href="#" target="_blank" rel="noopener noreferrer">
+              Open in LS ↗
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <label class="drawer-field-label">Device limit</label>
+          <div class="drawer-stepper">
+            <button type="button" class="stepper-btn" data-action="decrement-limit">−</button>
+            <span class="stepper-val" id="drawer-limit-val">3</span>
+            <button type="button" class="stepper-btn" data-action="increment-limit">+</button>
+            <button type="button" class="btn-save-sm" id="btn-save-limit" data-action="save-limit">Save</button>
+          </div>
+        </div>
+
+        <div>
+          <label class="drawer-field-label">Expiry date</label>
+          <div class="drawer-expiry-row">
+            <input type="date" class="drawer-date-input" id="drawer-expiry-input">
+            <button type="button" class="btn-save-sm" data-action="save-expiry">Save</button>
+            <button type="button" class="btn-muted-sm" data-action="clear-expiry">Clear</button>
+          </div>
+        </div>
+
+        <div>
+          <div class="drawer-section-title">Active Devices</div>
+          <div id="drawer-instances"><div class="loading-small">Loading devices…</div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── GIFT LICENCE MODAL ── -->
+    <div class="modal-overlay" id="gift-modal">
+      <div class="modal-card">
+        <div class="modal-title">Gift a Licence</div>
+        <p class="modal-sub">Creates a $0 checkout URL for the recipient. They complete checkout normally and receive a real licence key.</p>
+
+        <div id="gift-form">
+          <div class="form-field">
+            <label class="form-label" for="gift-variant">Plan</label>
+            <select class="form-select" id="gift-variant"></select>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="gift-email">Recipient email (optional — pre-fills checkout)</label>
+            <input type="email" class="form-input" id="gift-email" placeholder="recipient@example.com">
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn-secondary" data-action="close-gift-modal">Cancel</button>
+            <button type="button" class="btn-primary" id="btn-generate-gift" data-action="submit-gift">Generate link →</button>
+          </div>
+        </div>
+
+        <div class="modal-result" id="gift-result">
+          <div class="modal-result-label">Checkout URL — copy and send to recipient</div>
+          <div class="modal-result-url" id="gift-url"></div>
+          <div style="display:flex;gap:8px">
+            <button type="button" class="btn-primary" data-action="copy-gift-url">Copy URL</button>
+            <button type="button" class="btn-secondary" data-action="close-gift-modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DISCOUNT MODAL ── -->
+    <div class="modal-overlay" id="discount-modal">
+      <div class="modal-card">
+        <div class="modal-title">Create Discount</div>
+        <p class="modal-sub">Discount codes apply at checkout in Lemon Squeezy.</p>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="disc-name">Name (internal label)</label>
+            <input type="text" class="form-input" id="disc-name" placeholder="Summer sale">
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="disc-code">Code</label>
+            <input type="text" class="form-input" id="disc-code" placeholder="SUMMER20" style="text-transform:uppercase">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="disc-type">Type</label>
+            <select class="form-select" id="disc-type">
+              <option value="percent">Percentage (%)</option>
+              <option value="fixed">Fixed amount ($)</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="disc-amount" id="disc-amount-label">Amount (1–100)</label>
+            <input type="number" class="form-input" id="disc-amount" placeholder="20" min="1">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="disc-expires">Expires (optional)</label>
+            <input type="date" class="form-input" id="disc-expires">
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="disc-max">Max redemptions</label>
+            <input type="number" class="form-input" id="disc-max" placeholder="Unlimited" min="1">
+            <div class="form-check" style="margin-top:6px">
+              <input type="checkbox" id="disc-limit-check">
+              <label for="disc-limit-check">Limit redemptions</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" data-action="close-discount-modal">Cancel</button>
+          <button type="button" class="btn-primary" id="btn-create-discount" data-action="submit-discount">Create discount →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── WEBHOOK MODAL ── -->
+    <div class="modal-overlay" id="webhook-modal">
+      <div class="modal-card">
+        <div class="modal-title">Add Webhook</div>
+        <p class="modal-sub">Lemon Squeezy will POST events to this URL.</p>
+
+        <div class="form-field">
+          <label class="form-label" for="hook-url">Endpoint URL</label>
+          <input type="url" class="form-input" id="hook-url" placeholder="https://yourdomain.com/api/webhook">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="hook-secret">Signing secret</label>
+          <input type="text" class="form-input" id="hook-secret" placeholder="A strong random string">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Events to subscribe</label>
+          <div class="form-events-grid">
+            <div class="event-check"><input type="checkbox" id="ev-order-created" value="order_created"><label for="ev-order-created">order_created</label></div>
+            <div class="event-check"><input type="checkbox" id="ev-order-refunded" value="order_refunded" checked><label for="ev-order-refunded">order_refunded</label></div>
+            <div class="event-check"><input type="checkbox" id="ev-sub-created" value="subscription_created"><label for="ev-sub-created">subscription_created</label></div>
+            <div class="event-check"><input type="checkbox" id="ev-sub-expired" value="subscription_expired" checked><label for="ev-sub-expired">subscription_expired</label></div>
+            <div class="event-check"><input type="checkbox" id="ev-sub-cancelled" value="subscription_cancelled"><label for="ev-sub-cancelled">subscription_cancelled</label></div>
+            <div class="event-check"><input type="checkbox" id="ev-lk-created" value="license_key_created"><label for="ev-lk-created">license_key_created</label></div>
+            <div class="event-check"><input type="checkbox" id="ev-lk-disabled" value="license_key_disabled" checked><label for="ev-lk-disabled">license_key_disabled</label></div>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" data-action="close-webhook-modal">Cancel</button>
+          <button type="button" class="btn-primary" id="btn-create-webhook" data-action="submit-webhook">Add webhook →</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /#dashboard -->
 
   <div class="toast" id="toast"></div>
 
+  <script src="js/vendor/chart.min.js"></script>
   <script src="js/admin.js"></script>
 </body>
 </html>

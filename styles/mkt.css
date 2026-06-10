@@ -129,7 +129,7 @@ section { padding: 96px 48px; }
 }
 .section-label-inv {
   font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-  color: rgba(255,255,255,.35); margin-bottom: 20px; display: block;
+  color: rgba(255,255,255,.6); margin-bottom: 20px; display: block;
 }
 h2.serif {
   font-family: var(--serif); font-size: clamp(32px, 4.5vw, 54px);
@@ -164,18 +164,18 @@ footer.mkt-footer { background: var(--ink); padding: 64px 48px 40px; }
 .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
 .footer-brand .footer-logo { font-size: 17px; font-weight: 500; color: var(--white); text-decoration: none; display: block; margin-bottom: 12px; }
 .footer-brand .footer-logo span { color: #a8c48a; }
-.footer-brand p { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.7; max-width: 220px; }
-.footer-col h4 { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 16px; }
-.footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,.38); text-decoration: none; margin-bottom: 10px; transition: color .2s; }
-.footer-col a:hover { color: rgba(255,255,255,.75); }
-.footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.07); margin-bottom: 28px; }
+.footer-brand p { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.7; max-width: 220px; }
+.footer-col h4 { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 16px; }
+.footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,.65); text-decoration: none; margin-bottom: 10px; transition: color .2s; }
+.footer-col a:hover { color: rgba(255,255,255,.9); }
+.footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.12); margin-bottom: 28px; }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.footer-copy { font-size: 12px; color: rgba(255,255,255,.28); }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,.5); }
 .footer-legal { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-.footer-legal a { font-size: 12px; color: rgba(255,255,255,.28); text-decoration: none; transition: color .2s; }
-.footer-legal a:hover { color: rgba(255,255,255,.6); }
-.footer-cookie-btn { font-size: 12px; color: rgba(255,255,255,.28); background: none; border: none; padding: 0; cursor: pointer; font-family: inherit; transition: color .2s; }
-.footer-cookie-btn:hover { color: rgba(255,255,255,.6); }
+.footer-legal a { font-size: 12px; color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
+.footer-legal a:hover { color: rgba(255,255,255,.8); }
+.footer-cookie-btn { font-size: 12px; color: rgba(255,255,255,.5); background: none; border: none; padding: 0; cursor: pointer; font-family: inherit; transition: color .2s; }
+.footer-cookie-btn:hover { color: rgba(255,255,255,.8); }
 
 /* ── RESPONSIVE ───────────────────────────────────────────────── */
 @media (max-width: 900px) {

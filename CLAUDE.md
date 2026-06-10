@@ -59,11 +59,7 @@ Per-endpoint limits:
 
 ## GA4 Analytics
 
-GA4 is wired up in `js/consent.js` — analytics load only after the visitor grants consent (PECR-compliant). The Measurement ID placeholder is on line 32:
-
-```js
-var GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // TODO: replace with your GA4 Measurement ID
-```
+GA4 is wired up in `js/consent.js` — analytics load only after the visitor grants consent (PECR-compliant). Measurement ID: `G-Y6VE3LV949`.
 
 Replace `'G-XXXXXXXXXX'` with your actual `G-...` ID from Google Analytics → Admin → Data Streams.
 
@@ -101,3 +97,24 @@ All user-facing localStorage/sessionStorage keys use the `fincwin_` prefix. A on
 ## Firestore rules guard
 
 `.github/workflows/ci.yml` runs on every push/PR and fails the build if `firestore.rules` contains `allow read, write: if true`. Never loosen that rule without re-reviewing the CI check.
+
+---
+
+## Password reset (self-hosted)
+
+Password resets do **not** use Firebase's client-side `sendPasswordResetEmail()` (that sends from `*.firebaseapp.com` → spam, ugly subject, `firebaseapp.com` link). Instead:
+
+- `js/signin.js` `showForgot()` POSTs the email to `api/forgot-password.js`.
+- `api/forgot-password.js` (Node runtime) uses the **Firebase Admin SDK** `generatePasswordResetLink()` to mint the `oobCode`, rewrites the link to `https://www.fincwin.com/reset?oobCode=…`, and sends a branded email via **Resend** from `noreply@fincwin.com` (authenticated domain → inbox, not spam). It always returns a generic `{ok:true}` so the endpoint can't enumerate accounts.
+- `reset.html` + `js/reset.js` read the `oobCode`, call `verifyPasswordResetCode` → `confirmPasswordReset` with the vendored Firebase Auth SDK, then send the user to sign in. Routed via `/reset` rewrite in `vercel.json`.
+
+**Required Vercel env vars:**
+
+| Variable | Where to find it |
+|---|---|
+| `FIREBASE_SERVICE_ACCOUNT` | Firebase Console → Project Settings → Service accounts → Generate new private key. Paste the **entire JSON** as a single env var value. |
+| `RESEND_API_KEY` | Already set (shared with `api/contact.js`). |
+
+`firebase-admin` is a runtime `dependency` in `package.json`. After adding it, run `npm install` to update `package-lock.json`.
+
+**To polish the email further** (sender name, layout), edit `emailHtml()` / `emailText()` in `api/forgot-password.js`. No Firebase Console template changes are needed anymore — the old Authentication → Templates → Password reset email is no longer used.
