@@ -1,11 +1,4 @@
-const _rateMap = new Map();
-function rateOk(ip) {
-  const now = Date.now();
-  const e = _rateMap.get(ip) || { n: 0, reset: now + 60_000 };
-  if (now > e.reset) { e.n = 0; e.reset = now + 60_000; }
-  _rateMap.set(ip, { n: e.n + 1, reset: e.reset });
-  return e.n < 20;
-}
+import { checkRateLimit } from '../lib/rate-limit.js';
 
 // Fetch every page of a Lemon Squeezy REST collection, following JSON:API
 // `links.next`. Throws a descriptive error (with .status) on a non-2xx reply so
@@ -38,7 +31,7 @@ export default async function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
 
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
-  if (!rateOk(ip)) return res.status(429).json({ error: 'rate_limited' });
+  if (!await checkRateLimit(ip, 'admin', { limit: 20, windowSecs: 60 })) return res.status(429).json({ error: 'rate_limited' });
 
   const adminToken = process.env.ADMIN_TOKEN;
   if (!adminToken) return res.status(503).json({ error: 'Admin not configured — set ADMIN_TOKEN env var' });

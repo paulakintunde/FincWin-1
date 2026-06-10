@@ -1,19 +1,11 @@
-const _rateMap = new Map();
-function checkRateLimit(ip) {
-  const now = Date.now();
-  const entry = _rateMap.get(ip) || { count: 0, resetAt: now + 60_000 };
-  if (now > entry.resetAt) { entry.count = 0; entry.resetAt = now + 60_000; }
-  entry.count++;
-  _rateMap.set(ip, entry);
-  return entry.count <= 30;
-}
+import { checkRateLimit } from '../lib/rate-limit.js';
 
 export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
-  if (!checkRateLimit(ip)) {
+  if (!await checkRateLimit(ip, 'validate', { limit: 30, windowSecs: 60 })) {
     return res.status(429).json({ valid: false, reason: 'rate_limited' });
   }
 
