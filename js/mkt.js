@@ -110,6 +110,25 @@
     });
   });
 
+  // ── Scroll reveal — fade/slide `.reveal` elements in as they enter the viewport.
+  // Centralised here (CSP-safe, served from 'self') to replace the per-page inline
+  // <script> blocks that the strict CSP (script-src 'self') was blocking — those
+  // blocks left every `.reveal` section stuck at opacity:0. Idempotent.
+  (function () {
+    var reveals = document.querySelectorAll('.reveal');
+    if (!reveals.length) return;
+    if (!('IntersectionObserver' in window)) {
+      reveals.forEach(function (el) { el.classList.add('visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function (el) { io.observe(el); });
+  })();
+
   // ── Active nav state (a11y) — mark the current page's nav link.
   // Normalises .html / clean-URL / index / trailing-slash so it works both
   // locally (file paths) and on the deployed clean-URL site.
