@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -20,16 +20,21 @@
   <meta name="twitter:title" content="Banking Budget Category  |  FincWin">
   <meta name="twitter:description" content="Track every banking fee, account charge, and financial service cost. FincWin's Banking envelope keeps your financial infrastructure lean and visible.">
   <meta name="twitter:image" content="https://www.fincwin.com/og-image.png">
-  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/mkt.css">
   <style>
-
-
-
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sage: #5a6e3f; --sage-lt: #dce8d4; --sage-dk: #3d4d2b;
+      --ink: #111111; --muted: #6b7280; --faint: #f5f4f0;
+      --white: #ffffff; --border: rgba(0,0,0,.08);
+      --sans: 'Hanken Grotesk', sans-serif; --serif: 'Instrument Serif', serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); font-weight: 300; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
     /* Header/nav styled by the shared system in styles/mkt.css */
 
@@ -77,7 +82,6 @@
     .mock-panel-badge { font-size: 10px; font-weight: 500; padding: 4px 10px; border-radius: 20px; background: var(--sage-lt); color: var(--sage); }
     .mock-env-name { font-size: 22px; font-weight: 200; color: var(--ink); margin-bottom: 6px; }
     .mock-env-amounts { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
-    .mock-env-amounts strong { color: var(--ink); font-weight: 500; }
     .mock-bar-wrap { height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
     .mock-bar-fill { height: 100%; border-radius: 4px; background: var(--sage); transition: width 1s; }
     .mock-bar-fill.warn { background: #b7791f; }
@@ -124,19 +128,14 @@
     .reveal.visible { opacity: 1; transform: none; }
 
     @media (max-width: 768px) {
-      
-      
       section, .pain-section, .gamification-section, .final-cta-section, .cat-nav { padding: 72px 24px; }
       .pain-grid, .cards-grid { grid-template-columns: 1fr; }
-      
-      
-      
     }
   </style>
 </head>
 <body>
 
-  <nav id="mainNav">
+<nav id="mainNav">
   <a href="/" class="nav-logo">Finc<span>Win</span></a>
   <div class="nav-links">
     <a href="/features">Features</a>
@@ -220,11 +219,7 @@
         <div class="mock-env-amounts">57% used &nbsp;·&nbsp; $26 remaining</div>
         <div class="mock-bar-wrap"><div class="mock-bar-fill" style="width:57%"></div></div>
         <div class="mock-env-status">Day 14 of 30 &nbsp;·&nbsp; On pace to finish at $62</div>
-        <div class="mock-rows">
-          <div class="mock-row"><span class="mock-row-name">Monthly maintenance fee</span><div style="display:flex;gap:8px;align-items:center;"><span class="mock-row-amount">$12.00</span><span class="mock-pill g">Recurring</span></div></div>
-          <div class="mock-row"><span class="mock-row-name">ATM fee × 3</span><div style="display:flex;gap:8px;align-items:center;"><span class="mock-row-amount">$10.50</span><span class="mock-pill a">Variable</span></div></div>
-          <div class="mock-row"><span class="mock-row-name">International transfer fee</span><div style="display:flex;gap:8px;align-items:center;"><span class="mock-row-amount">$11.50</span><span class="mock-pill a">One-off</span></div></div>
-        </div>
+        <div class="mock-rows"><div class="mock-row"><span class="mock-row-name">Monthly maintenance fee</span><div style="display:flex;gap:8px;align-items:center;"><span class="mock-row-amount">$12.00</span><span class="mock-pill g">Recurring</span></div></div><div class="mock-row"><span class="mock-row-name">ATM fee × 3</span><div style="display:flex;gap:8px;align-items:center;"><span class="mock-row-amount">$10.50</span><span class="mock-pill a">Variable</span></div></div><div class="mock-row"><span class="mock-row-name">International transfer fee</span><div style="display:flex;gap:8px;align-items:center;"><span class="mock-row-amount">$11.50</span><span class="mock-pill a">One-off</span></div></div></div>
       </div>
     </div>
   </section>
@@ -262,26 +257,11 @@
   <div class="cat-nav">
     <div class="cat-nav-inner">
       <h4>Browse all 14 categories</h4>
-      <div class="cat-nav-grid">
-        <a href="/cat-banking" class="cat-link active">Banking</a>
-        <a href="/cat-telecom" class="cat-link">Telecom</a>
-        <a href="/cat-subscriptions" class="cat-link">Subscriptions</a>
-        <a href="/cat-utilities" class="cat-link">Utilities</a>
-        <a href="/cat-transport" class="cat-link">Transport</a>
-        <a href="/cat-groceries" class="cat-link">Groceries</a>
-        <a href="/cat-healthcare" class="cat-link">Healthcare</a>
-        <a href="/cat-education" class="cat-link">Education</a>
-        <a href="/cat-housing" class="cat-link">Housing</a>
-        <a href="/cat-entertainment" class="cat-link">Entertainment</a>
-        <a href="/cat-clothing" class="cat-link">Clothing</a>
-        <a href="/cat-dining" class="cat-link">Dining</a>
-        <a href="/cat-personal" class="cat-link">Personal</a>
-        <a href="/cat-other" class="cat-link">Other</a>
-      </div>
+      <div class="cat-nav-grid"><a href="cat-banking.html" class="cat-link active">Banking</a><a href="cat-telecom.html" class="cat-link">Telecom</a><a href="cat-subscriptions.html" class="cat-link">Subscriptions</a><a href="cat-utilities.html" class="cat-link">Utilities</a><a href="cat-transport.html" class="cat-link">Transport</a><a href="cat-groceries.html" class="cat-link">Groceries</a><a href="cat-healthcare.html" class="cat-link">Healthcare</a><a href="cat-education.html" class="cat-link">Education</a><a href="cat-housing.html" class="cat-link">Housing</a><a href="cat-entertainment.html" class="cat-link">Entertainment</a><a href="cat-clothing.html" class="cat-link">Clothing</a><a href="cat-dining.html" class="cat-link">Dining</a><a href="cat-personal.html" class="cat-link">Personal</a><a href="cat-other.html" class="cat-link">Other</a></div>
     </div>
   </div>
 
-  <footer class="mkt-footer">
+<footer class="mkt-footer">
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
@@ -305,9 +285,7 @@
   </div>
 </footer>
 
-  <script src="js/mkt.js" defer></script>
+<script src="js/mkt.js" defer></script>
 <script src="js/consent.js" defer></script>
 </body>
 </html>
-
-

@@ -1,7 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
   <title>Housing Budget Category — FincWin</title>
   <meta name="description" content="Track rent, mortgage, HOA, maintenance, and home insurance. FincWin's Housing envelope keeps your biggest expense under your closest attention.">
@@ -19,16 +20,24 @@
   <meta name="twitter:title" content="Housing Budget Category  |  FincWin">
   <meta name="twitter:description" content="Track rent, mortgage, HOA, maintenance, and home insurance. FincWin's Housing envelope keeps your biggest expense under your closest attention.">
   <meta name="twitter:image" content="https://www.fincwin.com/og-image.png">
-  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/mkt.css">
   <style>
-
-
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sage: #5a6e3f; --sage-lt: #dce8d4; --sage-dk: #3d4d2b;
+      --ink: #111111; --muted: #6b7280; --faint: #f5f4f0;
+      --white: #ffffff; --border: rgba(0,0,0,.08);
+      --sans: 'Hanken Grotesk', sans-serif; --serif: 'Instrument Serif', serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); font-weight: 300; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
     /* Header/nav styled by the shared system in styles/mkt.css */
+
     .hero { min-height: 88vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 160px 24px 100px; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(90,110,63,.07) 0%, transparent 70%); pointer-events: none; }
     .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 24px; opacity: 0; animation: fadeUp .6s .1s forwards; }
@@ -36,58 +45,97 @@
     .hero h1 em { font-style: normal; color: var(--sage); }
     .hero-sub { margin-top: 24px; font-size: clamp(16px, 2vw, 19px); font-weight: 300; color: var(--muted); max-width: 500px; line-height: 1.65; opacity: 0; animation: fadeUp .7s .35s forwards; }
     .hero-actions { margin-top: 40px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fadeUp .7s .5s forwards; }
-    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 50px; background: var(--ink); color: var(--white); font-family: var(--sans); font-size: 14px; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: background .2s, transform .15s; } .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
-    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 50px; background: transparent; color: var(--ink); font-family: var(--sans); font-size: 14px; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: border-color .2s, transform .15s; } .btn-ghost:hover { border-color: var(--ink); transform: translateY(-1px); }
-    section { padding: 100px 48px; } .section-inner { max-width: 1060px; margin: 0 auto; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 50px; background: var(--ink); color: var(--white); font-family: var(--sans); font-size: 14px; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: background .2s, transform .15s; }
+    .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 50px; background: transparent; color: var(--ink); font-family: var(--sans); font-size: 14px; font-weight: 400; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: border-color .2s, transform .15s; }
+    .btn-ghost:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+    section { padding: 100px 48px; }
+    .section-inner { max-width: 1060px; margin: 0 auto; }
     .section-label { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 20px; }
-    h2 { font-family: var(--serif); font-size: clamp(32px, 4.5vw, 52px); font-weight: 400; line-height: 1.1; color: var(--ink); } h2 em { font-style: normal; color: var(--sage); }
+    h2 { font-family: var(--serif); font-size: clamp(32px, 4.5vw, 52px); font-weight: 400; line-height: 1.1; color: var(--ink); }
+    h2 em { font-style: normal; color: var(--sage); }
     .section-sub { margin-top: 18px; font-size: 17px; font-weight: 300; color: var(--muted); max-width: 520px; line-height: 1.65; }
-    .pain-section { background: var(--ink); } .pain-section .section-label { color: rgba(255,255,255,.35); } .pain-section h2 { color: white; } .pain-section h2 em { color: #a8c48a; }
+
+    .pain-section { background: var(--ink); }
+    .pain-section .section-label { color: rgba(255,255,255,.35); }
+    .pain-section h2 { color: white; }
+    .pain-section h2 em { color: #a8c48a; }
     .pain-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 56px; border: 1px solid rgba(255,255,255,.06); border-radius: 12px; overflow: hidden; }
-    .pain-item { padding: 40px 32px; background: rgba(255,255,255,.03); border-right: 1px solid rgba(255,255,255,.06); } .pain-item:last-child { border-right: none; }
+    .pain-item { padding: 40px 32px; background: rgba(255,255,255,.03); border-right: 1px solid rgba(255,255,255,.06); }
+    .pain-item:last-child { border-right: none; }
     .pain-num { font-size: 11px; font-weight: 500; letter-spacing: 2px; color: rgba(255,255,255,.2); margin-bottom: 20px; }
     .pain-item h3 { font-family: var(--serif); font-size: 21px; font-weight: 400; color: white; line-height: 1.3; margin-bottom: 12px; }
     .pain-item p { font-size: 14px; font-weight: 300; color: rgba(255,255,255,.42); line-height: 1.65; }
+
     .features-section { background: var(--faint); }
     .cards-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 52px; }
     .feature-card { background: white; border-radius: 16px; border: 1px solid var(--border); padding: 36px 32px; }
     .feature-card-icon { font-size: 28px; margin-bottom: 16px; }
     .feature-card h3 { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 12px; line-height: 1.2; }
     .feature-card p { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.65; }
+
     .mock-section { background: var(--white); }
     .mock-panel { max-width: 520px; margin: 48px auto 0; background: var(--faint); border-radius: 20px; border: 1px solid var(--border); padding: 32px; box-shadow: 0 8px 40px rgba(0,0,0,.06); }
     .mock-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-    .mock-panel-title { font-size: 13px; font-weight: 600; color: var(--ink); }
+    .mock-panel-title { font-size: 13px; font-weight: 600; letter-spacing: .5px; color: var(--ink); }
     .mock-panel-badge { font-size: 10px; font-weight: 500; padding: 4px 10px; border-radius: 20px; background: var(--sage-lt); color: var(--sage); }
     .mock-env-name { font-size: 22px; font-weight: 200; color: var(--ink); margin-bottom: 6px; }
     .mock-env-amounts { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
     .mock-bar-wrap { height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
-    .mock-bar-fill { height: 100%; border-radius: 4px; background: var(--sage); }
+    .mock-bar-fill { height: 100%; border-radius: 4px; background: var(--sage); transition: width 1s; }
+    .mock-bar-fill.warn { background: #b7791f; }
     .mock-env-status { font-size: 11px; color: var(--muted); margin-bottom: 24px; }
     .mock-rows { display: flex; flex-direction: column; gap: 10px; }
     .mock-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; padding: 10px 14px; background: white; border-radius: 8px; border: 1px solid var(--border); }
+    .mock-row-name { color: var(--ink); font-weight: 400; }
+    .mock-row-amount { color: var(--muted); font-size: 12px; }
     .mock-pill { font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 20px; }
-    .mock-pill.g { background: #d1fae5; color: #065f46; } .mock-pill.a { background: #fef3c7; color: #92400e; }
+    .mock-pill.g { background: #d1fae5; color: #065f46; }
+    .mock-pill.a { background: #fef3c7; color: #92400e; }
+    .mock-pill.r { background: #fee2e2; color: #991b1b; }
+
     .gamification-section { background: var(--ink); text-align: center; padding: 100px 48px; }
-    .gamification-section .section-label { color: rgba(255,255,255,.35); } .gamification-section h2 { color: white; max-width: 600px; margin: 0 auto 20px; } .gamification-section h2 em { color: #a8c48a; }
+    .gamification-section .section-label { color: rgba(255,255,255,.35); }
+    .gamification-section h2 { color: white; max-width: 600px; margin: 0 auto 20px; }
+    .gamification-section h2 em { color: #a8c48a; }
     .badge-showcase { display: inline-flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 48px; background: rgba(255,255,255,.05); border-radius: 20px; border: 1px solid rgba(255,255,255,.08); padding: 40px 60px; }
-    .badge-icon { font-size: 56px; } .badge-name { font-size: 18px; font-weight: 500; color: white; } .badge-xp { font-size: 13px; color: rgba(255,255,255,.4); }
+    .badge-icon { font-size: 56px; }
+    .badge-name { font-size: 18px; font-weight: 500; color: white; }
+    .badge-xp { font-size: 13px; color: rgba(255,255,255,.4); }
     .badge-desc { font-size: 14px; font-weight: 300; color: rgba(255,255,255,.5); max-width: 320px; text-align: center; line-height: 1.6; }
     .xp-strip { display: flex; gap: 32px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
-    .xp-item { text-align: center; } .xp-number { font-family: var(--serif); font-size: 36px; color: #a8c48a; } .xp-label { font-size: 12px; color: rgba(255,255,255,.35); margin-top: 4px; }
-    .final-cta-section { background: var(--faint); text-align: center; padding: 120px 48px; } .final-cta-section h2 { max-width: 560px; margin: 0 auto 20px; } .final-cta-section .section-sub { margin: 0 auto 40px; text-align: center; max-width: 440px; }
-    .cat-nav { background: var(--white); padding: 60px 48px; border-top: 1px solid var(--border); } .cat-nav-inner { max-width: 1060px; margin: 0 auto; }
+    .xp-item { text-align: center; }
+    .xp-number { font-family: var(--serif); font-size: 36px; color: #a8c48a; }
+    .xp-label { font-size: 12px; color: rgba(255,255,255,.35); margin-top: 4px; }
+
+    .final-cta-section { background: var(--faint); text-align: center; padding: 120px 48px; }
+    .final-cta-section h2 { max-width: 560px; margin: 0 auto 20px; }
+    .final-cta-section .section-sub { margin: 0 auto 40px; text-align: center; max-width: 440px; }
+
+    .cat-nav { background: var(--white); padding: 60px 48px; border-top: 1px solid var(--border); }
+    .cat-nav-inner { max-width: 1060px; margin: 0 auto; }
     .cat-nav h4 { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
     .cat-nav-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-    .cat-link { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; padding: 7px 16px; border: 1px solid var(--border); border-radius: 50px; transition: all .2s; } .cat-link:hover { border-color: var(--sage); color: var(--sage); } .cat-link.active { background: var(--sage); color: white; border-color: var(--sage); }
+    .cat-link { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; padding: 7px 16px; border: 1px solid var(--border); border-radius: 50px; transition: all .2s; }
+    .cat-link:hover { border-color: var(--sage); color: var(--sage); }
+    .cat-link.active { background: var(--sage); color: white; border-color: var(--sage); }
+
     /* Footer styled by the shared system in styles/mkt.css */
+
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; } .reveal.visible { opacity: 1; transform: none; }
-    @media (max-width: 768px) {   section, .pain-section, .gamification-section, .final-cta-section, .cat-nav { padding: 72px 24px; } .pain-grid, .cards-grid { grid-template-columns: 1fr; }    }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      section, .pain-section, .gamification-section, .final-cta-section, .cat-nav { padding: 72px 24px; }
+      .pain-grid, .cards-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-  <nav id="mainNav">
+
+<nav id="mainNav">
   <a href="/" class="nav-logo">Finc<span>Win</span></a>
   <div class="nav-links">
     <a href="/features">Features</a>
@@ -115,9 +163,21 @@
       <p class="section-label reveal">The real cost</p>
       <h2 class="reveal">Housing costs are more than<br><em>just your rent or mortgage.</em></h2>
       <div class="pain-grid reveal">
-        <div class="pain-item"><div class="pain-num">01</div><h3>Maintenance surprises that wipe your savings</h3><p>The water heater breaks in November. The AC fails in July. Home repairs average $3,000–$5,000/year. Without a housing maintenance budget, every repair is a crisis.</p></div>
-        <div class="pain-item"><div class="pain-num">02</div><h3>HOA fees that creep up every year</h3><p>Your HOA was $250/month when you moved in. It's $340 now. Special assessments add hundreds more without warning. If it's not tracked, it quietly grows into a significant expense.</p></div>
-        <div class="pain-item"><div class="pain-num">03</div><h3>The true cost of homeownership is never just the mortgage</h3><p>Property tax, home insurance, PMI, maintenance reserve — homeowners routinely underestimate total housing costs by $400–$600/month. The envelope reveals the real number.</p></div>
+        <div class="pain-item">
+          <div class="pain-num">01</div>
+          <h3>Maintenance surprises that wipe your savings</h3>
+          <p>The water heater breaks in November. The AC fails in July. Home repairs average $3,000–$5,000/year. Without a housing maintenance budget, every repair is a crisis.</p>
+        </div>
+        <div class="pain-item">
+          <div class="pain-num">02</div>
+          <h3>HOA fees that creep up every year</h3>
+          <p>Your HOA was $250/month when you moved in. It's $340 now. Special assessments add hundreds more without warning. If it's not tracked, it quietly grows into a significant expense.</p>
+        </div>
+        <div class="pain-item">
+          <div class="pain-num">03</div>
+          <h3>The true cost of homeownership is never just the mortgage</h3>
+          <p>Property tax, home insurance, PMI, maintenance reserve — homeowners routinely underestimate total housing costs by $400–$600/month. The envelope reveals the real number.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -127,9 +187,21 @@
       <p class="section-label reveal">How FincWin helps</p>
       <h2 class="reveal">The Housing envelope:<br><em>see the complete picture of home.</em></h2>
       <div class="cards-grid reveal">
-        <div class="feature-card"><div class="feature-card-icon">🏠</div><h3>Total housing cost view</h3><p>Mortgage or rent, plus insurance, HOA, and property tax — all in one envelope. See your true monthly housing cost, not just the payment on the box the realtor showed you.</p></div>
-        <div class="feature-card"><div class="feature-card-icon">🔧</div><h3>Maintenance reserve tracking</h3><p>Set aside a monthly maintenance budget as a recurring envelope allocation. When the water heater finally fails, you have a plan — not a panic.</p></div>
-        <div class="feature-card"><div class="feature-card-icon">📊</div><h3>Housing as % of income</h3><p>FincWin shows your housing spend as a percentage of your monthly income. Know immediately whether you're in the healthy 28–35% range or whether housing is crowding everything else out.</p></div>
+        <div class="feature-card">
+          <div class="feature-card-icon">🏠</div>
+          <h3>Total housing cost view</h3>
+          <p>Mortgage or rent, plus insurance, HOA, and property tax — all in one envelope. See your true monthly housing cost, not just the payment on the box the realtor showed you.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-icon">🔧</div>
+          <h3>Maintenance reserve tracking</h3>
+          <p>Set aside a monthly maintenance budget as a recurring envelope allocation. When the water heater finally fails, you have a plan — not a panic.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-icon">📊</div>
+          <h3>Housing as % of income</h3>
+          <p>FincWin shows your housing spend as a percentage of your monthly income. Know immediately whether you're in the healthy 28–35% range or whether housing is crowding everything else out.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -139,17 +211,15 @@
       <p class="section-label reveal">Live envelope view</p>
       <h2 class="reveal">Housing: your complete cost picture.</h2>
       <div class="mock-panel reveal">
-        <div class="mock-panel-header"><div class="mock-panel-title">Housing — Jun 2026</div><div class="mock-panel-badge">On pace</div></div>
+        <div class="mock-panel-header">
+          <div class="mock-panel-title">Housing — Jun 2026</div>
+          <div class="mock-panel-badge">On pace</div>
+        </div>
         <div class="mock-env-name">$1,890 <span style="font-size:14px;color:#9ca3af;">/ $2,200 cap</span></div>
         <div class="mock-env-amounts">86% used &nbsp;·&nbsp; $310 remaining</div>
         <div class="mock-bar-wrap"><div class="mock-bar-fill" style="width:86%"></div></div>
         <div class="mock-env-status">Day 14 of 30 &nbsp;·&nbsp; 36% of monthly income</div>
-        <div class="mock-rows">
-          <div class="mock-row"><span style="color:var(--ink);">Mortgage (Chase)</span><div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--muted);font-size:12px;">$1,420.00</span><span class="mock-pill g">Paid</span></div></div>
-          <div class="mock-row"><span style="color:var(--ink);">Home insurance</span><div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--muted);font-size:12px;">$125.00</span><span class="mock-pill g">Recurring</span></div></div>
-          <div class="mock-row"><span style="color:var(--ink);">HOA fees</span><div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--muted);font-size:12px;">$275.00</span><span class="mock-pill g">Monthly</span></div></div>
-          <div class="mock-row"><span style="color:var(--ink);">Maintenance reserve</span><div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--muted);font-size:12px;">$70.00</span><span class="mock-pill g">Budgeted</span></div></div>
-        </div>
+        <div class="mock-rows"><div class="mock-row"><span class="mock-row-name">Mortgage (Chase)</span><div style="display:flex;gap:8px;align-items:center;"><span class="mock-row-amount">$1,420.00</span><span class="mock-pill g">Paid</span></div></div><div class="mock-row"><span class="mock-row-name">Home insurance</span><div style="display:flex;gap:8px;align-items:center;"><span class="mock-row-amount">$125.00</span><span class="mock-pill g">Recurring</span></div></div><div class="mock-row"><span class="mock-row-name">HOA fees</span><div style="display:flex;gap:8px;align-items:center;"><span class="mock-row-amount">$275.00</span><span class="mock-pill g">Monthly</span></div></div><div class="mock-row"><span class="mock-row-name">Maintenance reserve</span><div style="display:flex;gap:8px;align-items:center;"><span class="mock-row-amount">$70.00</span><span class="mock-pill g">Budgeted</span></div></div></div>
       </div>
     </div>
   </section>
@@ -159,7 +229,9 @@
       <p class="section-label reveal">Gamification</p>
       <h2 class="reveal">Earn XP every time you log a<br><em>Housing expense.</em></h2>
       <div class="badge-showcase reveal">
-        <div class="badge-icon">🏡</div><div class="badge-name">Home Owner Mindset</div><div class="badge-xp">+200 XP · Epic badge</div>
+        <div class="badge-icon">🏡</div>
+        <div class="badge-name">Home Owner Mindset</div>
+        <div class="badge-xp">+200 XP · Epic badge</div>
         <div class="badge-desc">Track all housing costs — mortgage/rent, insurance, and maintenance — for 3 consecutive months. You know the true cost of your home and you're managing it like a pro.</div>
       </div>
       <div class="xp-strip reveal">
@@ -182,9 +254,14 @@
     </div>
   </section>
 
-  <div class="cat-nav"><div class="cat-nav-inner"><h4>Browse all 14 categories</h4><div class="cat-nav-grid"><a href="/cat-banking" class="cat-link">Banking</a><a href="/cat-telecom" class="cat-link">Telecom</a><a href="/cat-subscriptions" class="cat-link">Subscriptions</a><a href="/cat-utilities" class="cat-link">Utilities</a><a href="/cat-transport" class="cat-link">Transport</a><a href="/cat-groceries" class="cat-link">Groceries</a><a href="/cat-healthcare" class="cat-link">Healthcare</a><a href="/cat-education" class="cat-link">Education</a><a href="/cat-housing" class="cat-link active">Housing</a><a href="/cat-entertainment" class="cat-link">Entertainment</a><a href="/cat-clothing" class="cat-link">Clothing</a><a href="/cat-dining" class="cat-link">Dining</a><a href="/cat-personal" class="cat-link">Personal</a><a href="/cat-other" class="cat-link">Other</a></div></div></div>
+  <div class="cat-nav">
+    <div class="cat-nav-inner">
+      <h4>Browse all 14 categories</h4>
+      <div class="cat-nav-grid"><a href="cat-banking.html" class="cat-link">Banking</a><a href="cat-telecom.html" class="cat-link">Telecom</a><a href="cat-subscriptions.html" class="cat-link">Subscriptions</a><a href="cat-utilities.html" class="cat-link">Utilities</a><a href="cat-transport.html" class="cat-link">Transport</a><a href="cat-groceries.html" class="cat-link">Groceries</a><a href="cat-healthcare.html" class="cat-link">Healthcare</a><a href="cat-education.html" class="cat-link">Education</a><a href="cat-housing.html" class="cat-link active">Housing</a><a href="cat-entertainment.html" class="cat-link">Entertainment</a><a href="cat-clothing.html" class="cat-link">Clothing</a><a href="cat-dining.html" class="cat-link">Dining</a><a href="cat-personal.html" class="cat-link">Personal</a><a href="cat-other.html" class="cat-link">Other</a></div>
+    </div>
+  </div>
 
-  <footer class="mkt-footer">
+<footer class="mkt-footer">
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
@@ -207,9 +284,8 @@
     </div>
   </div>
 </footer>
-  <script src="js/mkt.js" defer></script>
+
+<script src="js/mkt.js" defer></script>
 <script src="js/consent.js" defer></script>
 </body>
 </html>
-
-
