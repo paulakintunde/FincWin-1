@@ -4,12 +4,17 @@
 (function () {
   'use strict';
 
-  // Reveal the "App" nav link only for signed-in users (hidden by default in
-  // mkt.css). fw_signed_in is set by the app entry guard / signin flow and
-  // cleared on sign-out, so a signed-in user who lands back on a marketing page
-  // still sees the way back into the app.
-  if (localStorage.getItem('fw_signed_in')) {
+  // Auth-aware nav/footer link routing.
+  // Marketing pages default the "App" / "Open app" links to /signin.
+  // If the user is already signed in, upgrade those links to /app so they
+  // land directly in the dashboard instead of seeing the sign-in screen.
+  // Elements opt-in via data-auth-href="/app" on the <a> tag.
+  var isAuthed = !!(localStorage.getItem('fw_signed_in') || localStorage.getItem('fw_license_key'));
+  if (isAuthed) {
     document.documentElement.classList.add('fw-authed');
+    document.querySelectorAll('a[data-auth-href]').forEach(function (a) {
+      a.href = a.getAttribute('data-auth-href');
+    });
   }
 
   var nav = document.getElementById('mainNav');

@@ -6,16 +6,19 @@
 
   // Single-source pricing — update these when prices change.
   var PRICES = {
-    annualInt:      '39',
-    monthlyInt:     '4',
-    monthlyCents:   '.99',
-    annualYrLabel:  '$39/yr',
-    monthlyMoLabel: '$4.99/mo',
-    altAnnual:      '$39/year',
-    altMonthly:     '$4.99/month',
+    annualInt:       '39',
+    monthlyInt:      '4',
+    monthlyCents:    '.99',
+    annualYrLabel:   '$39/yr',
+    monthlyMoLabel:  '$4.99/mo',
+    altAnnual:       '$39/year',
+    altMonthly:      '$4.99/month',
+    // LemonSqueezy checkout URLs — replace before going live
+    checkoutAnnual:  'https://REPLACE_WITH_LS_PRO_ANNUAL_CHECKOUT_URL',
+    checkoutMonthly: 'https://REPLACE_WITH_LS_PRO_MONTHLY_CHECKOUT_URL',
   };
 
-  // Billing toggle — updates Pro card price, tagline, period, and CTA
+  // Billing toggle — updates Pro card price, tagline, period, CTA text, and CTA href
   document.querySelectorAll('.btog-opt').forEach(function (btn) {
     btn.addEventListener('click', function () {
       document.querySelectorAll('.btog-opt').forEach(function (b) { b.classList.remove('active'); });
@@ -33,12 +36,14 @@
         tagEl.textContent    = 'Full access, billed annually';
         periodEl.textContent = 'Or ' + PRICES.altMonthly + '. Cancel anytime.';
         ctaEl.textContent    = 'Get Pro — ' + PRICES.annualYrLabel;
+        ctaEl.href           = PRICES.checkoutAnnual;
         saveEl.style.opacity = '1';
       } else {
         amountEl.innerHTML   = '<sup>$</sup>' + PRICES.monthlyInt + '<span class="price-cents">' + PRICES.monthlyCents + '</span>';
         tagEl.textContent    = 'Full access, billed monthly';
         periodEl.textContent = 'Or ' + PRICES.altAnnual + ' — save 35%.';
         ctaEl.textContent    = 'Get Pro — ' + PRICES.monthlyMoLabel;
+        ctaEl.href           = PRICES.checkoutMonthly;
         saveEl.style.opacity = '0';
       }
     });

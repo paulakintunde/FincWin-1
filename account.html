@@ -200,6 +200,8 @@
     }
     .key-copy-instructions { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
     .mt-12 { margin-top: 12px; }
+    .initially-hidden { display: none; }
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
 
     /* ── DEVICES ── */
     .device-list { display: flex; flex-direction: column; gap: 12px; }
@@ -528,7 +530,7 @@
                   <p>5 devices, all future features, desktop app when released. One payment, forever.</p>
                   <p id="upgrade-credit-note" class="upgrade-credit-note">Pro subscribers: email us and we'll credit your remaining months — you pay the difference only.</p>
                 </div>
-                <a href="#TODO-LIFETIME-CHECKOUT-URL" class="btn-upgrade">Upgrade now</a>
+                <a href="https://REPLACE_WITH_LS_LIFETIME_CHECKOUT_URL" class="btn-upgrade" target="_blank" rel="noopener">Upgrade to Lifetime →</a>
               </div>
               <div class="expired-box" id="expired-box">
                 <strong>Your Pro subscription has expired</strong>
@@ -538,6 +540,25 @@
                   <span class="btn-free-info">Free plan: unlimited access, no expiry</span>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <!-- KEY ACTIVATION FOR FREE USERS — shown by JS only when IS_FREE -->
+          <div class="card initially-hidden" id="free-activate-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Already purchased? Activate your key</div>
+                <div class="card-subtitle">Enter your Pro or Lifetime licence key to unlock paid features on this device.</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-success" id="free-key-success">Key activated! Reloading…</div>
+              <div class="form-group">
+                <label for="free-key-input">Licence key <span class="label-hint">(emailed to you after purchase)</span></label>
+                <input type="text" id="free-key-input" class="input-key" placeholder="XXXX-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false" maxlength="19">
+              </div>
+              <button type="button" id="btn-activate-free-key" class="btn-save">Activate licence key</button>
+              <p class="field-hint mt-12">Haven't purchased yet? <a href="https://REPLACE_WITH_LS_PRO_ANNUAL_CHECKOUT_URL" class="link-sage" target="_blank" rel="noopener">Get Pro — $39/year →</a></p>
             </div>
           </div>
 
@@ -691,15 +712,44 @@
 
           <div class="card">
             <div class="card-header">
-              <div><div class="card-title">Manage Subscription</div><div class="card-subtitle">Update billing, email, or password at Lemon Squeezy.</div></div>
+              <div><div class="card-title">Change Password</div><div class="card-subtitle">Update your FincWin sign-in password.</div></div>
+            </div>
+            <div class="card-body">
+              <div class="form-success" id="pw-change-success">Password updated successfully.</div>
+              <div class="error-banner initially-hidden" id="pw-change-error"></div>
+              <div class="form-group">
+                <label for="pw-current">Current password</label>
+                <input type="password" id="pw-current" autocomplete="current-password">
+              </div>
+              <div class="form-group">
+                <label for="pw-new">New password</label>
+                <input type="password" id="pw-new" autocomplete="new-password">
+                <p class="field-hint">At least 6 characters.</p>
+              </div>
+              <div class="form-group">
+                <label for="pw-confirm">Confirm new password</label>
+                <input type="password" id="pw-confirm" autocomplete="new-password">
+              </div>
+              <button type="button" id="btn-change-pw" class="btn-save">Update password</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div><div class="card-title">Manage Subscription</div><div class="card-subtitle">View orders, receipts, and manage billing at Lemon Squeezy.</div></div>
             </div>
             <div class="card-body">
               <p class="card-body-text">
-                Your FincWin account is tied to your Lemon Squeezy purchase. Visit the customer portal to update your email address, change your password, or download receipts.
+                Your purchase history, receipts, and subscription management are in the Lemon Squeezy customer portal.
               </p>
-              <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener noreferrer" class="btn-save">
-                Open Lemon Squeezy portal ↗
-              </a>
+              <div class="btn-row">
+                <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener noreferrer" class="btn-save">
+                  View invoices &amp; orders ↗
+                </a>
+                <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener noreferrer" class="btn-ghost">
+                  Manage subscription ↗
+                </a>
+              </div>
             </div>
           </div>
         </div>

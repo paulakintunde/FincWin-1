@@ -1,6 +1,11 @@
 ﻿// account.js — FincWin account page logic
 // Extracted from inline script to comply with CSP script-src 'self' policy.
 
+// ── Checkout URLs — replace with your real LemonSqueezy variant URLs ────────
+var LS_PRO_ANNUAL_URL  = 'https://REPLACE_WITH_LS_PRO_ANNUAL_CHECKOUT_URL';
+var LS_PRO_MONTHLY_URL = 'https://REPLACE_WITH_LS_PRO_MONTHLY_CHECKOUT_URL';
+var LS_LIFETIME_URL    = 'https://REPLACE_WITH_LS_LIFETIME_CHECKOUT_URL';
+
 // ── Auth ────────────────────────────────────────────────────────────────────
 // Account-first freemium model: ANY signed-in user may view this page.
 //   • Pro users (licence key present)        → full licence / device management.
@@ -227,10 +232,12 @@ function renderFreeState() {
   const upBox = document.getElementById('upgrade-box');
   if (upBox) {
     upBox.style.display = '';
-    const strong = upBox.querySelector('strong');
-    const firstP = upBox.querySelector('p');
+    const strong  = upBox.querySelector('strong');
+    const firstP  = upBox.querySelector('p');
+    const upBtn   = upBox.querySelector('.btn-upgrade');
     if (strong) strong.textContent = 'Upgrade to Pro — $39/year';
     if (firstP) firstP.textContent = 'Cloud sync across devices, AI coach, advanced reports, and automated backups.';
+    if (upBtn)  { upBtn.href = LS_PRO_ANNUAL_URL; upBtn.target = '_blank'; upBtn.rel = 'noopener'; upBtn.textContent = 'Upgrade to Pro →'; }
   }
   const creditNote = document.getElementById('upgrade-credit-note'); if (creditNote) creditNote.style.display = 'none';
   const expiredBox = document.getElementById('expired-box');         if (expiredBox) expiredBox.style.display = 'none';
@@ -264,8 +271,12 @@ function renderFreeState() {
   const devUpgrade = document.getElementById('devices-upgrade-link');
   if (devUpgrade) {
     devUpgrade.style.display = '';
-    devUpgrade.innerHTML = 'Want your budget on every device? <a href="pricing.html" class="link-sage">Upgrade to Pro</a> for cloud sync.';
+    devUpgrade.innerHTML = 'Want your budget on every device? <a href="' + LS_PRO_ANNUAL_URL + '" class="link-sage" target="_blank" rel="noopener">Upgrade to Pro</a> for cloud sync across all devices.';
   }
+
+  // Show the key activation card so Free users with a purchased key can activate
+  const freeActivateCard = document.getElementById('free-activate-card');
+  if (freeActivateCard) freeActivateCard.style.display = '';
 
   renderProfile();
 }
@@ -351,7 +362,15 @@ function renderPlan(data) {
   document.getElementById('chip-desktop').className     = 'feature-chip' + (isLife ? ' on' : '');
 
   // upgrade-box: hide for Lifetime and expired (expired gets its own box)
-  document.getElementById('upgrade-box').style.display  = isLife || isExpired ? 'none' : '';
+  const upBoxEl  = document.getElementById('upgrade-box');
+  const upBtnEl  = upBoxEl ? upBoxEl.querySelector('.btn-upgrade') : null;
+  upBoxEl.style.display = isLife || isExpired ? 'none' : '';
+  if (upBtnEl && !isLife && !isExpired) {
+    upBtnEl.href    = LS_LIFETIME_URL;
+    upBtnEl.target  = '_blank';
+    upBtnEl.rel     = 'noopener';
+    upBtnEl.textContent = 'Upgrade to Lifetime →';
+  }
   // credit note: only visible for active Pro subscription users
   const creditNote = document.getElementById('upgrade-credit-note');
   if (creditNote) creditNote.style.display = isSub && !isExpired ? '' : 'none';
@@ -428,7 +447,13 @@ function renderDevices(data) {
   }
 
   document.getElementById('device-list').innerHTML = html;
-  document.getElementById('devices-upgrade-link').style.display = limit >= 5 ? 'none' : '';
+  const devUpgradeEl = document.getElementById('devices-upgrade-link');
+  if (devUpgradeEl) {
+    devUpgradeEl.style.display = limit >= 5 ? 'none' : '';
+    if (limit < 5) {
+      devUpgradeEl.innerHTML = 'Need more activations? <a href="' + LS_LIFETIME_URL + '" class="link-sage" target="_blank" rel="noopener">Upgrade to Lifetime</a> for 5 devices.';
+    }
+  }
 }
 
 // ── Profile ─────────────────────────────────────────────────────────────────
@@ -508,14 +533,13 @@ function otherDeviceNote() {
   showToast('Sign in on the other device and deactivate it from there.');
 }
 
-// ── Activate a different key (Pro → Lifetime upgrade path) ─────────────────
-async function activateNewKey() {
-  const newKey = (document.getElementById('new-key-input').value || '').trim().toUpperCase();
-  if (!newKey) { showToast('Enter your new licence key'); return; }
+// ── Shared key activation helper ────────────────────────────────────────────
+// Used by both "activate different key" (Pro→Lifetime) and free-user activation.
+async function _activateKey(newKey, btnEl, successEl, resetLabel) {
+  if (!newKey)            { showToast('Enter your licence key'); return; }
   if (newKey === AUTH_KEY) { showToast('That is already your active key'); return; }
 
-  const btn = document.getElementById('btn-activate-new');
-  btn.disabled = true; btn.textContent = 'Activating…';
+  btnEl.disabled = true; btnEl.textContent = 'Activating…';
 
   try {
     const instanceName = localStorage.getItem('fw_instance_name')
@@ -531,11 +555,11 @@ async function activateNewKey() {
 
     if (!actData.activated) {
       showToast('Could not activate: ' + (actData.error || 'invalid key'));
-      btn.disabled = false; btn.textContent = 'Activate new key';
+      btnEl.disabled = false; btnEl.textContent = resetLabel;
       return;
     }
 
-    // Deactivate the old key silently — best effort
+    // Deactivate the old key silently if there is one (Pro → Lifetime path)
     if (AUTH_KEY && AUTH_INST) {
       fetch('/api/deactivate', {
         method: 'POST',
@@ -554,12 +578,99 @@ async function activateNewKey() {
     AUTH_KEY  = newKey;
     AUTH_INST = actData.instance?.id || '';
 
-    document.getElementById('new-key-success').style.display = 'block';
+    successEl.style.display = 'block';
     setTimeout(() => window.location.reload(), 1800);
   } catch {
     showToast('Network error — please try again');
-    btn.disabled = false; btn.textContent = 'Activate new key';
+    btnEl.disabled = false; btnEl.textContent = resetLabel;
   }
+}
+
+// ── Activate a different key (Pro → Lifetime upgrade path) ─────────────────
+async function activateNewKey() {
+  const newKey = (document.getElementById('new-key-input').value || '').trim().toUpperCase();
+  await _activateKey(
+    newKey,
+    document.getElementById('btn-activate-new'),
+    document.getElementById('new-key-success'),
+    'Activate new key'
+  );
+}
+
+// ── Activate key for Free users (Free → Pro / Lifetime) ────────────────────
+async function activateFreeKey() {
+  const newKey = (document.getElementById('free-key-input').value || '').trim().toUpperCase();
+  await _activateKey(
+    newKey,
+    document.getElementById('btn-activate-free-key'),
+    document.getElementById('free-key-success'),
+    'Activate licence key'
+  );
+}
+
+// ── Change password ──────────────────────────────────────────────────────────
+async function changePassword() {
+  const currentPw = document.getElementById('pw-current').value;
+  const newPw     = document.getElementById('pw-new').value;
+  const confirmPw = document.getElementById('pw-confirm').value;
+  const successEl = document.getElementById('pw-change-success');
+  const errorEl   = document.getElementById('pw-change-error');
+  const btn       = document.getElementById('btn-change-pw');
+
+  successEl.style.display = 'none';
+  errorEl.style.display   = 'none';
+
+  if (!currentPw || !newPw || !confirmPw) { errorEl.textContent = 'All three fields are required.'; errorEl.style.display = 'block'; return; }
+  if (newPw.length < 6)                   { errorEl.textContent = 'New password must be at least 6 characters.'; errorEl.style.display = 'block'; return; }
+  if (newPw !== confirmPw)                { errorEl.textContent = 'New passwords do not match.'; errorEl.style.display = 'block'; return; }
+
+  btn.disabled = true; btn.textContent = 'Updating…';
+
+  try {
+    const cfg = window.__FINCWIN_CONFIG__;
+    if (!cfg) throw new Error('no-config');
+
+    const [
+      { initializeApp, getApps, getApp },
+      { getAuth, reauthenticateWithCredential, updatePassword, EmailAuthProvider },
+    ] = await Promise.all([
+      import('./vendor/firebase/firebase-app.js'),
+      import('./vendor/firebase/firebase-auth.js'),
+    ]);
+
+    const app  = getApps().length > 0 ? getApp() : initializeApp(cfg);
+    const auth = getAuth(app);
+    const user = auth.currentUser;
+
+    if (!user || !user.email) {
+      errorEl.textContent = 'You must be signed in to change your password. Please sign out and sign back in first.';
+      errorEl.style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Update password';
+      return;
+    }
+
+    const cred = EmailAuthProvider.credential(user.email, currentPw);
+    await reauthenticateWithCredential(user, cred);
+    await updatePassword(user, newPw);
+
+    document.getElementById('pw-current').value = '';
+    document.getElementById('pw-new').value     = '';
+    document.getElementById('pw-confirm').value = '';
+    successEl.style.display = 'block';
+    setTimeout(() => { successEl.style.display = 'none'; }, 4000);
+  } catch (err) {
+    const msgs = {
+      'auth/wrong-password':         'Current password is incorrect.',
+      'auth/invalid-credential':     'Current password is incorrect.',
+      'auth/too-many-requests':      'Too many attempts — please try again in a few minutes.',
+      'auth/requires-recent-login':  'Please sign out and sign back in before changing your password.',
+      'no-config':                   'Password change requires a signed-in account.',
+    };
+    errorEl.textContent = msgs[err.code || err.message] || 'Could not update password. Please try again.';
+    errorEl.style.display = 'block';
+  }
+
+  btn.disabled = false; btn.textContent = 'Update password';
 }
 
 // ── Clear account data ──────────────────────────────────────────────────────
@@ -632,6 +743,13 @@ document.getElementById('btn-activate-new')?.addEventListener('click', activateN
 
 // Profile form
 document.getElementById('profile-form')?.addEventListener('submit', saveProfile);
+
+// Password change
+document.getElementById('btn-change-pw')?.addEventListener('click', changePassword);
+
+// Free-user key activation
+document.getElementById('btn-activate-free-key')?.addEventListener('click', activateFreeKey);
+document.getElementById('free-key-input')?.addEventListener('input', function () { formatKey(this); });
 
 // Danger zone
 document.getElementById('btn-deactivate-all')?.addEventListener('click', deactivateDevice);
