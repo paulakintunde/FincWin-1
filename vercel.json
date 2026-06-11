@@ -23,7 +23,25 @@
     { "source": "/privacy",       "destination": "/privacy.html" },
     { "source": "/terms",         "destination": "/terms.html" },
     { "source": "/contact",       "destination": "/contact.html" },
-    { "source": "/cookie-policy", "destination": "/cookie-policy.html" }
+    { "source": "/cookie-policy",        "destination": "/cookie-policy.html" },
+    { "source": "/budget-categories",    "destination": "/budget-categories.html" },
+    { "source": "/no-bank-sync-budget",  "destination": "/no-bank-sync-budget.html" },
+    { "source": "/offline-budget-app",   "destination": "/offline-budget-app.html" },
+    { "source": "/private-finance-app",  "destination": "/private-finance-app.html" },
+    { "source": "/cat-banking",          "destination": "/cat-banking.html" },
+    { "source": "/cat-clothing",         "destination": "/cat-clothing.html" },
+    { "source": "/cat-dining",           "destination": "/cat-dining.html" },
+    { "source": "/cat-education",        "destination": "/cat-education.html" },
+    { "source": "/cat-entertainment",    "destination": "/cat-entertainment.html" },
+    { "source": "/cat-groceries",        "destination": "/cat-groceries.html" },
+    { "source": "/cat-healthcare",       "destination": "/cat-healthcare.html" },
+    { "source": "/cat-housing",          "destination": "/cat-housing.html" },
+    { "source": "/cat-other",            "destination": "/cat-other.html" },
+    { "source": "/cat-personal",         "destination": "/cat-personal.html" },
+    { "source": "/cat-subscriptions",    "destination": "/cat-subscriptions.html" },
+    { "source": "/cat-telecom",          "destination": "/cat-telecom.html" },
+    { "source": "/cat-transport",        "destination": "/cat-transport.html" },
+    { "source": "/cat-utilities",        "destination": "/cat-utilities.html" }
   ],
   "redirects": [
     { "source": "/blog/posts/ynab-alternative", "destination": "/compare/ynab-alternative", "statusCode": 301 }
