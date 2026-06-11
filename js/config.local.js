@@ -12,5 +12,6 @@ window.__FINCWIN_CONFIG__ = {
   storageBucket: "fincwin.firebasestorage.app",
   messagingSenderId: "36594855417",
   appId: "1:36594855417:web:0fd97107697550fb24a128",
-  googleClientId: "812943954808-da0enpo3g2d1c687rtu5695t9r7nd3da.apps.googleusercontent.com"
+  googleClientId: "812943954808-da0enpo3g2d1c687rtu5695t9r7nd3da.apps.googleusercontent.com",
+  FIREBASE_GOOGLE_CLIENT_ID: "36594855417-nvq9ieq7pga1m0cvjvo93f394logj173.apps.googleusercontent.com"
 };
