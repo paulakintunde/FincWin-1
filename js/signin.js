@@ -38,7 +38,7 @@ function _applyFirestoreDoc(d) {
       // Any signed-in user belongs in the app. Restore a cached licence first so
       // the app boots into the correct tier, then route straight to app.html.
       if (localStorage.getItem('fw_license_key')) {
-        window.location.href = 'app.html'; return;
+        window.location.href = '/app'; return;
       }
       try {
         const { doc, getDoc } = await import('./vendor/firebase/firebase-firestore.js');
@@ -48,7 +48,7 @@ function _applyFirestoreDoc(d) {
           else if (snap.data().profile) localStorage.setItem('fw_profile', JSON.stringify(snap.data().profile));
         }
       } catch {}
-      window.location.href = 'app.html';
+      window.location.href = '/app';
     });
   } catch {}
 })();
@@ -95,16 +95,16 @@ async function handleSignin(e) {
         const snap = await getDoc(doc(_fbDb, 'users', user.uid));
         if (snap.exists()) {
           const d = snap.data();
-          if (d.licenseKey) { _applyFirestoreDoc(d); window.location.href = 'app.html'; return; }
+          if (d.licenseKey) { _applyFirestoreDoc(d); window.location.href = '/app'; return; }
           if (d.profile)    localStorage.setItem('fw_profile', JSON.stringify(d.profile));
         }
       } catch {}
       // Signed in as a Free user (no licence key) — go straight into the app.
       // The app boots the Free tier; paid features gate themselves via requirePlan().
-      window.location.href = 'app.html';
+      window.location.href = '/app';
       return;
     }
-    window.location.href = 'app.html';
+    window.location.href = '/app';
   } catch (err) {
     btn.textContent = 'Sign in'; btn.disabled = false;
     _showStatus(statusEl, 'error', _fbMsg(err.code));
@@ -167,7 +167,7 @@ async function handleRegister(e) {
 
     // No key provided — show success then redirect to account
     _showStatus(statusEl, 'info', 'Account created! Taking you into FincWin…');
-    setTimeout(() => { window.location.href = 'app.html'; }, 1500);
+    setTimeout(() => { window.location.href = '/app'; }, 1500);
   } catch (err) {
     btn.textContent = 'Create account'; btn.disabled = false;
     _showStatus(statusEl, 'error', _fbMsg(err.code));
