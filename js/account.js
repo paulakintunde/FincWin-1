@@ -71,6 +71,12 @@ if (!AUTH_KEY && !window.__FINCWIN_CONFIG__) {
       _signedIn = true;
       if (_redirectTimer) { clearTimeout(_redirectTimer); _redirectTimer = null; }
 
+      // Email change requires a Firebase session — reveal the card now that we
+      // have confirmed one. Key-only Pro users never reach this branch so the
+      // card stays hidden for them (verifyBeforeUpdateEmail would fail anyway).
+      const emailCard = document.getElementById('email-change-card');
+      if (emailCard) emailCard.style.display = '';
+
       // Pro path already rendered from the cached key (see boot at end of file).
       if (localStorage.getItem('fw_license_key')) return;
 
@@ -274,6 +280,18 @@ function renderFreeState() {
     devUpgrade.innerHTML = 'Want your budget on every device? <a href="' + LS_PRO_ANNUAL_URL + '" class="link-sage" target="_blank" rel="noopener">Upgrade to Pro</a> for cloud sync across all devices.';
   }
 
+  // Show the Lifetime card for Free users too — they can skip Pro entirely.
+  // Adjust the subtitle so the copy makes sense for someone not yet on Pro.
+  const lifetimeCardFree = document.getElementById('lifetime-upgrade-card');
+  if (lifetimeCardFree) {
+    lifetimeCardFree.style.display = '';
+    const sub = lifetimeCardFree.querySelector('.lifetime-card-sub');
+    if (sub) sub.textContent = 'Skip Pro entirely — pay once and own every feature forever.';
+    // Credit note is irrelevant for Free users; hide just that heading
+    const creditHeading = document.getElementById('upgrade-credit-note');
+    if (creditHeading) creditHeading.style.display = 'none';
+  }
+
   // Show the key activation card so Free users with a purchased key can activate
   const freeActivateCard = document.getElementById('free-activate-card');
   if (freeActivateCard) freeActivateCard.style.display = '';
@@ -361,27 +379,56 @@ function renderPlan(data) {
   document.getElementById('chip-5-devices').className   = 'feature-chip' + (isLife ? ' on' : '');
   document.getElementById('chip-desktop').className     = 'feature-chip' + (isLife ? ' on' : '');
 
-  // upgrade-box: hide for Lifetime and expired (expired gets its own box)
+  // upgrade-box (inline teaser inside Current Plan card): hide for Lifetime/expired
   const upBoxEl  = document.getElementById('upgrade-box');
   const upBtnEl  = upBoxEl ? upBoxEl.querySelector('.btn-upgrade') : null;
-  upBoxEl.style.display = isLife || isExpired ? 'none' : '';
+  if (upBoxEl) upBoxEl.style.display = isLife || isExpired ? 'none' : '';
   if (upBtnEl && !isLife && !isExpired) {
     upBtnEl.href    = LS_LIFETIME_URL;
     upBtnEl.target  = '_blank';
     upBtnEl.rel     = 'noopener';
     upBtnEl.textContent = 'Upgrade to Lifetime →';
   }
-  // credit note: only visible for active Pro subscription users
+
+  // Rich Lifetime upgrade card: show only for active Pro users
+  const lifetimeCard = document.getElementById('lifetime-upgrade-card');
+  if (lifetimeCard) lifetimeCard.style.display = (!isLife && !isExpired) ? '' : 'none';
+
+  // Credit note inside Lifetime card: highlight for annual subscribers
   const creditNote = document.getElementById('upgrade-credit-note');
-  if (creditNote) creditNote.style.display = isSub && !isExpired ? '' : 'none';
+  if (creditNote) creditNote.style.fontWeight = isSub && !isExpired ? '600' : '400';
 
   // expired-box: only for expired keys
   const expiredBox = document.getElementById('expired-box');
   if (expiredBox) expiredBox.style.display = isExpired ? '' : 'none';
 
-  // billing sub note: visible for active or expired subscriptions
+  // Subscription manage card: show for active or expired subscribers, hide for Lifetime/one-time
+  const subManageCard = document.getElementById('subscription-manage-card');
+  if (subManageCard) {
+    const showSubCard = isSub || isExpired;
+    subManageCard.style.display = showSubCard ? '' : 'none';
+    if (showSubCard) {
+      const renewLabel = document.getElementById('sub-renew-label');
+      const renewDesc  = document.getElementById('sub-renew-desc');
+      const renewBtn   = document.getElementById('sub-renew-btn');
+      const subSub     = document.getElementById('sub-manage-sub');
+      if (isExpired) {
+        if (renewLabel) renewLabel.textContent = 'Renew your subscription';
+        if (renewDesc)  renewDesc.textContent  = 'Your Pro subscription has lapsed. Renew to restore cloud sync, AI coach, and all paid features.';
+        if (renewBtn)   renewBtn.textContent   = 'Renew Pro ↗';
+        if (subSub)     subSub.textContent     = 'Your subscription has expired — renew to restore Pro access.';
+      } else {
+        const renewDate = data?.expires_at ? new Date(data.expires_at).toLocaleDateString() : '';
+        if (renewLabel) renewLabel.textContent = 'Renewal' + (renewDate ? ' · ' + renewDate : '');
+        if (renewDesc)  renewDesc.textContent  = 'Your Pro subscription renews automatically' + (renewDate ? ' on ' + renewDate : '') + '. Manage or change your billing cycle at the portal.';
+        if (renewBtn)   renewBtn.textContent   = 'Manage billing ↗';
+      }
+    }
+  }
+
+  // billing sub note (legacy hidden element — keep hidden, card above replaces it)
   const subNote = document.getElementById('billing-sub-note');
-  if (subNote) subNote.style.display = isSub || isExpired ? '' : 'none';
+  if (subNote) subNote.style.display = 'none';
 }
 
 // ── Key meta ────────────────────────────────────────────────────────────────
@@ -608,6 +655,73 @@ async function activateFreeKey() {
   );
 }
 
+// ── Change email ─────────────────────────────────────────────────────────────
+async function changeEmail() {
+  const newEmail  = document.getElementById('email-new').value.trim();
+  const currentPw = document.getElementById('email-pw').value;
+  const successEl = document.getElementById('email-change-success');
+  const errorEl   = document.getElementById('email-change-error');
+  const btn       = document.getElementById('btn-change-email');
+
+  successEl.style.display = 'none';
+  errorEl.style.display   = 'none';
+
+  if (!newEmail)   { errorEl.textContent = 'Enter a new email address.'; errorEl.style.display = 'block'; return; }
+  if (!currentPw)  { errorEl.textContent = 'Enter your current password to confirm.'; errorEl.style.display = 'block'; return; }
+
+  btn.disabled = true; btn.textContent = 'Sending…';
+
+  try {
+    const cfg = window.__FINCWIN_CONFIG__;
+    if (!cfg) throw new Error('no-config');
+
+    const [
+      { initializeApp, getApps, getApp },
+      { getAuth, reauthenticateWithCredential, verifyBeforeUpdateEmail, EmailAuthProvider },
+    ] = await Promise.all([
+      import('./vendor/firebase/firebase-app.js'),
+      import('./vendor/firebase/firebase-auth.js'),
+    ]);
+
+    const app  = getApps().length > 0 ? getApp() : initializeApp(cfg);
+    const auth = getAuth(app);
+    const user = auth.currentUser;
+
+    if (!user || !user.email) {
+      errorEl.textContent = 'You must be signed in to change your email.';
+      errorEl.style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Send verification email';
+      return;
+    }
+
+    const cred = EmailAuthProvider.credential(user.email, currentPw);
+    await reauthenticateWithCredential(user, cred);
+    await verifyBeforeUpdateEmail(user, newEmail);
+
+    // Update the local profile cache with the pending new email
+    const p = getProfile();
+    setProfile({ ...p, pendingEmail: newEmail });
+
+    document.getElementById('email-new').value = '';
+    document.getElementById('email-pw').value  = '';
+    successEl.style.display = 'block';
+  } catch (err) {
+    const msgs = {
+      'auth/wrong-password':         'Current password is incorrect.',
+      'auth/invalid-credential':     'Current password is incorrect.',
+      'auth/email-already-in-use':   'That email address is already in use by another account.',
+      'auth/invalid-email':          'Please enter a valid email address.',
+      'auth/too-many-requests':      'Too many attempts — please try again in a few minutes.',
+      'auth/requires-recent-login':  'Please sign out and sign back in before changing your email.',
+      'no-config':                   'Email change requires a signed-in account.',
+    };
+    errorEl.textContent = msgs[err.code || err.message] || 'Could not update email. Please try again.';
+    errorEl.style.display = 'block';
+  }
+
+  btn.disabled = false; btn.textContent = 'Send verification email';
+}
+
 // ── Change password ──────────────────────────────────────────────────────────
 async function changePassword() {
   const currentPw = document.getElementById('pw-current').value;
@@ -743,6 +857,9 @@ document.getElementById('btn-activate-new')?.addEventListener('click', activateN
 
 // Profile form
 document.getElementById('profile-form')?.addEventListener('submit', saveProfile);
+
+// Email change
+document.getElementById('btn-change-email')?.addEventListener('click', changeEmail);
 
 // Password change
 document.getElementById('btn-change-pw')?.addEventListener('click', changePassword);

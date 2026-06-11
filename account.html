@@ -202,6 +202,83 @@
     .mt-12 { margin-top: 12px; }
     .initially-hidden { display: none; }
     .btn-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .billing-action-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; flex-wrap: wrap; margin-bottom: 16px;
+    }
+    .billing-action-label { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+    .billing-action-desc  { font-size: 12px; color: var(--muted); line-height: 1.5; max-width: 360px; }
+    .billing-divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+    /* ── LIFETIME UPGRADE CARD ── */
+    .lifetime-card {
+      background: var(--ink); border-radius: 14px; border: 1px solid var(--ink);
+      overflow: hidden; margin-bottom: 20px;
+    }
+    .lifetime-card-header {
+      padding: 28px 32px 24px; border-bottom: 1px solid rgba(255,255,255,.08);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+    }
+    .lifetime-card-eyebrow {
+      font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      color: #a8c48a; margin-bottom: 8px;
+    }
+    .lifetime-card-title {
+      font-family: var(--serif); font-size: 26px; font-weight: 400;
+      color: white; line-height: 1.15; margin-bottom: 4px;
+    }
+    .lifetime-card-sub { font-size: 13px; color: rgba(255,255,255,.45); }
+    .lifetime-badge {
+      flex-shrink: 0; background: #a8c48a; color: var(--ink);
+      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 20px; white-space: nowrap; margin-top: 4px;
+    }
+    .lifetime-card-body { padding: 28px 32px 32px; }
+    .lifetime-pricing-row {
+      display: flex; align-items: flex-end; gap: 24px; margin-bottom: 28px; flex-wrap: wrap;
+    }
+    .lifetime-price-block { line-height: 1; }
+    .lifetime-price-amount {
+      font-family: var(--serif); font-size: 52px; color: white; letter-spacing: -1px;
+    }
+    .lifetime-price-amount sup { font-family: var(--sans); font-size: 22px; font-weight: 300; vertical-align: super; }
+    .lifetime-price-label { font-size: 12px; color: rgba(255,255,255,.4); margin-top: 5px; }
+    .lifetime-vs-block {
+      padding: 10px 16px; background: rgba(255,255,255,.06);
+      border-radius: 10px; border: 1px solid rgba(255,255,255,.1);
+    }
+    .lifetime-vs-block p { font-size: 12px; color: rgba(255,255,255,.5); margin-bottom: 3px; }
+    .lifetime-vs-block strong { font-size: 13px; color: #a8c48a; font-weight: 500; }
+    .lifetime-features-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px;
+    }
+    .lifetime-feat {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: rgba(255,255,255,.7); line-height: 1.4;
+    }
+    .lifetime-feat svg { flex-shrink: 0; margin-top: 1px; color: #a8c48a; }
+    .lifetime-divider { height: 1px; background: rgba(255,255,255,.08); margin: 24px 0; }
+    .lifetime-credit-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; flex-wrap: wrap;
+    }
+    .lifetime-credit-text { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.6; }
+    .lifetime-credit-text strong { color: white; display: block; margin-bottom: 2px; }
+    .btn-lifetime {
+      flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; background: white; color: var(--ink);
+      border-radius: 50px; font-family: var(--sans); font-size: 14px; font-weight: 500;
+      text-decoration: none; border: none; cursor: pointer; white-space: nowrap;
+      transition: background .15s, transform .15s;
+    }
+    .btn-lifetime:hover { background: #a8c48a; transform: translateY(-1px); }
+    .link-inv { color: rgba(255,255,255,.6); }
+    @media (max-width: 600px) {
+      .lifetime-features-grid { grid-template-columns: 1fr; }
+      .lifetime-card-header { flex-direction: column; }
+      .lifetime-credit-row { flex-direction: column; align-items: flex-start; }
+      .lifetime-card-header, .lifetime-card-body { padding: 22px 20px; }
+    }
 
     /* ── DEVICES ── */
     .device-list { display: flex; flex-direction: column; gap: 12px; }
@@ -526,9 +603,8 @@
               </div>
               <div class="upgrade-box" id="upgrade-box">
                 <div>
-                  <strong>Upgrade to Lifetime — $149</strong>
-                  <p>5 devices, all future features, desktop app when released. One payment, forever.</p>
-                  <p id="upgrade-credit-note" class="upgrade-credit-note">Pro subscribers: email us and we'll credit your remaining months — you pay the difference only.</p>
+                  <strong id="upgrade-box-title">Upgrade to Lifetime — $149</strong>
+                  <p id="upgrade-box-desc">One payment. All future features. No renewals — ever.</p>
                 </div>
                 <a href="https://REPLACE_WITH_LS_LIFETIME_CHECKOUT_URL" class="btn-upgrade" target="_blank" rel="noopener">Upgrade to Lifetime →</a>
               </div>
@@ -540,6 +616,75 @@
                   <span class="btn-free-info">Free plan: unlimited access, no expiry</span>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <!-- LIFETIME UPGRADE CARD — shown by JS for active Pro users only -->
+          <div class="lifetime-card initially-hidden" id="lifetime-upgrade-card">
+            <div class="lifetime-card-header">
+              <div>
+                <div class="lifetime-card-eyebrow">Limited time offer</div>
+                <div class="lifetime-card-title">Own FincWin forever.<br>Pay once.</div>
+                <div class="lifetime-card-sub">Upgrade from Pro to Lifetime and never think about renewals again.</div>
+              </div>
+              <span class="lifetime-badge">Lifetime</span>
+            </div>
+            <div class="lifetime-card-body">
+
+              <!-- Pricing -->
+              <div class="lifetime-pricing-row">
+                <div class="lifetime-price-block">
+                  <div class="lifetime-price-amount"><sup>$</sup>149</div>
+                  <div class="lifetime-price-label">one-time payment · no renewals</div>
+                </div>
+                <div class="lifetime-vs-block">
+                  <p>Compared to $39/yr Pro</p>
+                  <strong>Pays for itself in under 4 years</strong>
+                </div>
+              </div>
+
+              <!-- Features beyond Pro -->
+              <div class="lifetime-features-grid">
+                <div class="lifetime-feat">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Everything in Pro, forever
+                </div>
+                <div class="lifetime-feat">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  All future features — no extra charge
+                </div>
+                <div class="lifetime-feat">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  5 device activations (you have 3 now)
+                </div>
+                <div class="lifetime-feat">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Unlimited custom budget categories
+                </div>
+                <div class="lifetime-feat">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Desktop app (Tauri) when released
+                </div>
+                <div class="lifetime-feat">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Early access to every beta release
+                </div>
+              </div>
+
+              <div class="lifetime-divider"></div>
+
+              <!-- CTA + credit note -->
+              <div class="lifetime-credit-row">
+                <div class="lifetime-credit-text">
+                  <strong id="upgrade-credit-note">Already on an annual plan?</strong>
+                  Email <a href="mailto:support@fincwin.com" class="link-inv">support@fincwin.com</a> and we'll credit your remaining months — you only pay the difference.
+                </div>
+                <a href="https://REPLACE_WITH_LS_LIFETIME_CHECKOUT_URL" class="btn-lifetime" target="_blank" rel="noopener">
+                  Get Lifetime — $149
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+              </div>
+
             </div>
           </div>
 
@@ -564,24 +709,40 @@
 
           <div class="card">
             <div class="card-header">
-              <div><div class="card-title">Billing &amp; Receipts</div><div class="card-subtitle">View orders, download receipts, and manage your subscription.</div></div>
+              <div><div class="card-title">Invoices &amp; Purchase History</div><div class="card-subtitle">View receipts and download invoices from Lemon Squeezy.</div></div>
             </div>
             <div class="card-body">
-              <div class="billing-portal">
-                <p>
-                  Your purchase history and receipts are available in the Lemon Squeezy customer portal.
-                  Payments are processed securely by <strong>Lemon Squeezy</strong>.
-                </p>
-                <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener noreferrer" class="btn-save">
-                  Open billing portal ↗
-                </a>
+              <div class="billing-action-row">
+                <div>
+                  <div class="billing-action-label">Purchase history &amp; receipts</div>
+                  <div class="billing-action-desc">All orders, invoices, and payment receipts for your FincWin account.</div>
+                </div>
+                <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener noreferrer" class="btn-save">View invoices ↗</a>
               </div>
-              <p class="billing-note billing-sub-note" id="billing-sub-note">
-                To cancel your Pro subscription or change your billing cycle, visit the billing portal above. Cancellation takes effect at the end of your current period.
-              </p>
-              <p class="billing-note">
-                For billing disputes contact <a href="mailto:support@fincwin.com" class="link-sage">support@fincwin.com</a>.
-              </p>
+              <p class="billing-note">Payments are processed securely by <strong>Lemon Squeezy</strong>. For billing disputes contact <a href="mailto:support@fincwin.com" class="link-sage">support@fincwin.com</a>.</p>
+            </div>
+          </div>
+
+          <div class="card initially-hidden" id="subscription-manage-card">
+            <div class="card-header">
+              <div><div class="card-title">Subscription</div><div class="card-subtitle" id="sub-manage-sub">Manage your Pro subscription — renew, cancel, or change billing cycle.</div></div>
+            </div>
+            <div class="card-body">
+              <div class="billing-action-row">
+                <div>
+                  <div class="billing-action-label" id="sub-renew-label">Renew subscription</div>
+                  <div class="billing-action-desc" id="sub-renew-desc">Keep Pro active by renewing at the billing portal.</div>
+                </div>
+                <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener noreferrer" class="btn-save" id="sub-renew-btn">Renew now ↗</a>
+              </div>
+              <div class="billing-divider"></div>
+              <div class="billing-action-row">
+                <div>
+                  <div class="billing-action-label">Cancel subscription</div>
+                  <div class="billing-action-desc">Cancel at any time. You keep Pro access until the end of your current billing period — nothing is deleted.</div>
+                </div>
+                <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener noreferrer" class="btn-danger" id="btn-cancel-sub">Cancel ↗</a>
+              </div>
             </div>
           </div>
         </div>
@@ -707,6 +868,26 @@
                 </div>
                 <button type="submit" class="btn-save">Save changes</button>
               </form>
+            </div>
+          </div>
+
+          <div class="card initially-hidden" id="email-change-card">
+            <div class="card-header">
+              <div><div class="card-title">Change Email</div><div class="card-subtitle">Update your FincWin sign-in email address.</div></div>
+            </div>
+            <div class="card-body">
+              <div class="form-success" id="email-change-success">Verification email sent. Click the link in your inbox to confirm the change.</div>
+              <div class="error-banner initially-hidden" id="email-change-error"></div>
+              <div class="form-group">
+                <label for="email-new">New email address</label>
+                <input type="email" id="email-new" autocomplete="email">
+              </div>
+              <div class="form-group">
+                <label for="email-pw">Current password <span class="label-hint">(to confirm it's you)</span></label>
+                <input type="password" id="email-pw" autocomplete="current-password">
+              </div>
+              <button type="button" id="btn-change-email" class="btn-save">Send verification email</button>
+              <p class="field-hint mt-12">A verification link is sent to your new address — the change only takes effect after you click it. Your Lemon Squeezy billing email is separate; update it at the <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener" class="link-sage">billing portal ↗</a></p>
             </div>
           </div>
 
