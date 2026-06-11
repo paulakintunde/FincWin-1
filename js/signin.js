@@ -317,19 +317,70 @@ function _hideStatus(el) {
   el.className = 'status-msg';
 }
 
+// ── Google sign-in / sign-up ───────────────────────────────────────────────────
+async function handleGoogleSignIn(statusElId, btnId) {
+  const statusEl = document.getElementById(statusElId);
+  const btn      = document.getElementById(btnId);
+  _hideStatus(statusEl);
+  const span = btn.querySelector('span');
+  const orig = span.textContent;
+  span.textContent = 'Connecting…';
+  btn.disabled = true;
+
+  try {
+    await _initFirebase();
+    const { GoogleAuthProvider, signInWithPopup } = await import('./vendor/firebase/firebase-auth.js');
+    const provider = new GoogleAuthProvider();
+    const { user } = await signInWithPopup(_fbAuth, provider);
+    localStorage.setItem('fw_signed_in', '1');
+
+    if (!localStorage.getItem('fw_license_key')) {
+      try {
+        const { doc, getDoc, setDoc } = await import('./vendor/firebase/firebase-firestore.js');
+        const snap = await getDoc(doc(_fbDb, 'users', user.uid));
+        if (snap.exists()) {
+          const d = snap.data();
+          if (d.licenseKey) { _applyFirestoreDoc(d); window.location.href = '/app'; return; }
+          if (d.profile)    localStorage.setItem('fw_profile', JSON.stringify(d.profile));
+        } else {
+          // New Google user — seed Firestore profile from Google account data
+          const parts   = (user.displayName || '').split(' ');
+          const profile = {
+            fname:   parts[0] || '',
+            lname:   parts.slice(1).join(' ') || '',
+            display: parts[0] || user.email || '',
+            email:   user.email || '',
+          };
+          await setDoc(doc(_fbDb, 'users', user.uid), { profile }, { merge: true });
+          localStorage.setItem('fw_profile', JSON.stringify(profile));
+        }
+      } catch {}
+    }
+    window.location.href = '/app';
+  } catch (err) {
+    btn.disabled = false;
+    span.textContent = orig;
+    // User-dismissed popups are silent
+    if (err.code === 'auth/popup-closed-by-user' || err.code === 'auth/cancelled-popup-request') return;
+    _showStatus(statusEl, 'error', _fbMsg(err.code));
+  }
+}
+
 // ── Firebase error code → human message ───────────────────────────────────────
 function _fbMsg(code) {
   return ({
-    'auth/invalid-email':             'Invalid email address.',
-    'auth/user-not-found':            'No account found with that email.',
-    'auth/wrong-password':            'Incorrect password.',
-    'auth/invalid-credential':        'Incorrect email or password.',
-    'auth/email-already-in-use':      'An account with that email already exists.',
-    'auth/weak-password':             'Password must be at least 6 characters.',
-    'auth/too-many-requests':         'Too many attempts — please try again in a few minutes.',
-    'auth/network-request-failed':    'Network error. Check your connection and try again.',
-    'auth/user-disabled':             'This account has been disabled.',
-    'auth/credential-already-in-use': 'These credentials are already linked to another account.',
+    'auth/invalid-email':                          'Invalid email address.',
+    'auth/user-not-found':                         'No account found with that email.',
+    'auth/wrong-password':                         'Incorrect password.',
+    'auth/invalid-credential':                     'Incorrect email or password.',
+    'auth/email-already-in-use':                   'An account with that email already exists.',
+    'auth/weak-password':                          'Password must be at least 6 characters.',
+    'auth/too-many-requests':                      'Too many attempts — please try again in a few minutes.',
+    'auth/network-request-failed':                 'Network error. Check your connection and try again.',
+    'auth/user-disabled':                          'This account has been disabled.',
+    'auth/credential-already-in-use':              'These credentials are already linked to another account.',
+    'auth/popup-blocked':                          'Pop-up was blocked by your browser. Please allow pop-ups for this site and try again.',
+    'auth/account-exists-with-different-credential': 'An account already exists with this email. Sign in with your password instead.',
   })[code] || 'Something went wrong. Please try again.';
 }
 
@@ -367,6 +418,10 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.key-input').forEach(inp => {
     inp.addEventListener('input', () => formatKey(inp));
   });
+
+  // Google sign-in buttons
+  document.getElementById('btn-google-signin')?.addEventListener('click', () => handleGoogleSignIn('signin-status', 'btn-google-signin'));
+  document.getElementById('btn-google-register')?.addEventListener('click', () => handleGoogleSignIn('reg-status', 'btn-google-register'));
 
   // Hash-based initial tab routing
   if (window.location.hash === '#register') switchTab('register');
