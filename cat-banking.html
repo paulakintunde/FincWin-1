@@ -305,15 +305,6 @@
   </div>
 </footer>
 
-  <script>
-    // scroll border handled by js/mkt.js via #mainNav
-    
-    const reveals = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(el => io.observe(el));
-  </script>
   <script src="js/mkt.js" defer></script>
 <script src="js/consent.js" defer></script>
 </body>
