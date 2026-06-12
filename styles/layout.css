@@ -886,7 +886,7 @@ input[type=range]::-moz-range-track {
 .qnav-btn { flex: 1; display: flex; align-items: center; justify-content: center; border: none; background: none; cursor: pointer; font-size: 20px; color: var(--muted); min-height: 44px; padding: 0; transition: color .15s; -webkit-tap-highlight-color: transparent; }
 .qnav-btn.active { color: var(--accent); }
 .qnav-btn:active { opacity: .65; }
-.mbn-items { display: flex; align-items: stretch; justify-content: space-around; gap: 10px; }
+.mbn-items { display: flex; align-items: stretch; justify-content: space-around; gap: 10px; padding-left: 10px; }
 .mbn-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 2px 20px; border: none; background: none; cursor: pointer; font: inherit; font-size: 11px; font-weight: 500; letter-spacing: 0.01em; color: var(--muted); transition: color .18s ease; min-height: 78px; -webkit-tap-highlight-color: transparent; min-width: 0; position: relative; }
 .mbn-item .nav-icon-lg { width: 22px; height: 22px; }
 .mbn-item::after { content: ""; position: absolute; bottom: 0; width: 28px; height: 3px; border-radius: 2px; background: var(--accent); opacity: 0; transform: scaleX(0.4); transition: opacity .18s ease, transform .18s ease; }
