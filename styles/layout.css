@@ -992,7 +992,8 @@ input[type=range]::-moz-range-track {
   .fr { grid-template-columns: 1fr; }
   .debt-item-hdr { flex-direction: column; gap: 8px; }
   .envelopes-grid { grid-template-columns: repeat(2, 1fr); }
-  .savings-grid { grid-template-columns: repeat(2, 1fr); }
+  .savings-grid { grid-template-columns: 1fr; }
+  .goals-grid { grid-template-columns: 1fr; }
   .loan-grid { grid-template-columns: 1fr; }
   #section-loans .section-hdr > div:last-child > div:first-child { width: 100%; }
   .hero-net { font-size: 52px !important; letter-spacing: -1px; }
@@ -1017,7 +1018,7 @@ input[type=range]::-moz-range-track {
   .month-manager > * { width: 100%; }
 
   /* Tag filter bar: horizontal scroll, no wrapping */
-  .tag-filter-bar { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; scrollbar-width: none; }
+  .tag-filter-bar { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
   .tag-filter-bar::-webkit-scrollbar { display: none; }
 
   /* Bulk action bar: full width, stack buttons */
