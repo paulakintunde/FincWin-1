@@ -64,6 +64,17 @@ body {
    already-built pages too. */
 html:not(.fw-authed) #mainNav .nav-links a[href$="app.html"]:not(.nav-cta),
 html:not(.fw-authed) .mkt-footer a[href$="app.html"] { display: none; }
+/* Account icon — only shown to signed-in users; hidden (display:none via :not rule) until fw-authed is set */
+html:not(.fw-authed) .nav-account { display: none; }
+.nav-account {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px;
+  border: 1.5px solid var(--border); border-radius: 50%;
+  color: var(--muted) !important; text-decoration: none;
+  transition: color .2s, border-color .2s; flex-shrink: 0;
+}
+.nav-account:hover { color: var(--ink) !important; border-color: rgba(0,0,0,.25); }
+.nav-account-label { display: none; }
 .nav-cta {
   font-size: 13px; font-weight: 500; color: var(--white) !important;
   background: var(--ink); padding: 9px 22px; border-radius: 50px;
@@ -197,6 +208,8 @@ footer.mkt-footer { background: var(--ink); padding: 64px 48px 40px; }
   }
   #mainNav.nav-open .nav-links { display: flex; }
   .nav-links a { width: 100%; padding: 13px 0; font-size: 15px; }
+  .nav-account { width: 100% !important; height: auto !important; border: none !important; border-radius: 0 !important; padding: 13px 0; font-size: 15px; justify-content: flex-start; gap: 8px; }
+  .nav-account-label { display: inline; }
   .nav-cta { margin-top: 10px; padding: 11px 22px; display: flex; align-items: center; justify-content: center; text-align: center; }
   section { padding: 60px 20px; }
   footer.mkt-footer { padding: 48px 24px 36px; }
