@@ -203,6 +203,12 @@ tr:hover .del-btn, .del-btn:focus { opacity: 1; }
 }
 .pmodal input:focus, .pmodal select:focus, .pmodal textarea:focus { border-color: var(--accent); }
 
+/* Bulk add: pin to top on mobile so keyboard doesn't bury the inputs */
+@media (max-width: 600px) {
+  #bulkAddModal { align-items: flex-start; padding: 0; }
+  #bulkAddModal .pmodal { max-width: 100%; width: 100%; max-height: 100vh; border-radius: 0 0 10px 10px; padding-top: calc(16px + env(safe-area-inset-top, 0px)); }
+}
+
 /* Button row */
 .btn-row { display: flex; gap: 8px; margin-top: 4px; }
 .btn-p {
