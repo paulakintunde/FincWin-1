@@ -1018,6 +1018,15 @@ tr.bulk-sel td { background: var(--sage-light) !important; }
 }
 .fab-btn:hover { background: var(--accent-dark, var(--accent)); }
 .fab-btn:active { transform: scale(.92); }
+@media (max-width: 600px) {
+  .fab-btn {
+    bottom: calc(100px + env(safe-area-inset-bottom));
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+}
 
 /* ── DUPLICATE DETECTION BADGES ── */
 .bi-dup-badge {

@@ -30,9 +30,9 @@ async function getFirebaseInstances() {
     { getAuth, signInAnonymously, onAuthStateChanged, linkWithCredential, EmailAuthProvider, signInWithEmailAndPassword },
     { getFirestore, doc, getDoc, setDoc, deleteDoc, onSnapshot }
   ] = await Promise.all([
-    import('./vendor/firebase/firebase-app.js'),
-    import('./vendor/firebase/firebase-auth.js'),
-    import('./vendor/firebase/firebase-firestore.js')
+    import('../vendor/firebase/firebase-app.js'),
+    import('../vendor/firebase/firebase-auth.js'),
+    import('../vendor/firebase/firebase-firestore.js')
   ]);
   _firebaseApp = initializeApp(firebaseConfig);
   _auth = getAuth(_firebaseApp);
