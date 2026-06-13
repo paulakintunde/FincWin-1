@@ -459,7 +459,7 @@
 .bdd-urgent { background: var(--danger-light); color: var(--danger); }
 .bdd-soon { background: var(--amber-light); color: var(--amber); }
 .bdd-ok { background: var(--success-light); color: var(--success); }
-.bill-row .bn { font-size: 13px; font-weight: 500; flex: 1; color: var(--ink); }
+.bill-row .bn { font-size: 20px; font-weight: 500; flex: 1; color: var(--ink); }
 .bill-row .ba {
   font-family: var(--font-serif) !important;
   font-size: 15px; color: var(--muted);
@@ -512,7 +512,7 @@
   padding: 8px 12px; color: var(--muted);
   border-bottom: 2px solid rgba(34,42,34,0.10);
 }
-.week-table td { padding: 12px 12px; font-size: 13px; vertical-align: middle; }
+.week-table td { padding: 12px 12px; font-size: 20px; vertical-align: middle; }
 .week-table tbody tr {
   position: relative; transition: background .1s;
   border-left: 2px solid transparent;
@@ -520,7 +520,7 @@
 }
 .week-table tbody tr:last-child { border-bottom: none; }
 .week-table tbody tr:hover { background: var(--surface); }
-.week-table .item-name { font-size: 13px; font-weight: 500; cursor: text; outline: none; display: block; line-height: 1.3; word-break: break-word; color: var(--ink); }
+.week-table .item-name { font-size: 20px; font-weight: 500; cursor: text; outline: none; display: block; line-height: 1.3; word-break: break-word; color: var(--ink); }
 .week-table .item-meta { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin-top: 3px; }
 .week-table .item-col { max-width: 0; width: 100%; }
 .week-table .amt-col {
