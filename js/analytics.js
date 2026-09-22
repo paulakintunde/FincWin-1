@@ -619,7 +619,7 @@ function dismissDashAlerts(){
 }
 
 function renderExpSumChart(){
-  const _esData={labels:['Wk 1','Wk 2','Wk 3','Wk 4','Revenue'],datasets:[{data:[...cw().map(w=>w.items.reduce((s,i)=>s+i.amount,0)),totalRev()],backgroundColor:['#5C7A6B','#5C7A6B','#5C7A6B','#5C7A6B','#B8860B'],borderRadius:3}]};
+  const _esData={labels:['Wk 1','Wk 2','Wk 3','Wk 4','Revenue'],datasets:[{data:[...cw().map(w=>w.items.reduce((s,i)=>s+_cvt(i.amount,i.currency,CMK),0)),totalRev()],backgroundColor:['#5C7A6B','#5C7A6B','#5C7A6B','#5C7A6B','#B8860B'],borderRadius:3}]};
   uc('es',_esData,{type:'bar',options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{ticks:{callback:v=>fmtK(v),font:{size:9}}}}}});
 }
 function renderIncomeChart(){

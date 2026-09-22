@@ -1292,9 +1292,11 @@ document.getElementById('btn-snowball').classList.toggle('active',S.strategy==='
   // Fetch live FX rates after boot so multi-currency totals are accurate (E6)
   if(typeof fetchFXRates==='function'){
     fetchFXRates(getCurrency().code).then(function(){
-      // Refresh the dashboard KPI row after rates load (if already rendered)
+      // Re-render whatever is on screen so rows and totals pick up the new rates
       if(typeof _dashDirty!=='undefined'){_dashDirty=true;}
-      if(typeof renderDash==='function')renderDash();
+      var _as=document.querySelector('.section.active');
+      if(_as&&typeof renderSection==='function')renderSection(_as.id.replace('section-',''));
+      else if(typeof renderDash==='function')renderDash();
     }).catch(function(){});
   }
 })();

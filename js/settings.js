@@ -689,9 +689,8 @@ function executeReset() {
 }
 
 // ══════════════════════════════════════════════
-// MULTI-CURRENCY & EXCHANGE RATES
-// Uses open.er-api.com (free, no key required)
-// Rates cached 24h in S.fxRates
+// MULTI-CURRENCY
+// Exchange-rate fetching and conversion live in js/fx.js
 // ══════════════════════════════════════════════
 const CURRENCY_MAP={
   USD:{symbol:'$',locale:'en-US'},CAD:{symbol:'$',locale:'en-CA'},
@@ -705,43 +704,6 @@ const CURRENCY_MAP={
   NGN:{symbol:'₦',locale:'en-NG'},KES:{symbol:'KSh',locale:'sw-KE'},
   GHS:{symbol:'₵',locale:'en-GH'}
 };
-
-async function fetchFXRates(base){
-  showToast('Fetching exchange rates…');
-  const now=Date.now();
-  if(S.fxRates&&S.fxRates.base===base&&now-S.fxRates.fetchedAt<86400000){
-    return S.fxRates.rates; // cached
-  }
-  try{
-    const r=await fetch('https://open.er-api.com/v6/latest/'+base);
-    const data=await r.json();
-    if(data.result==='success'){
-      S.fxRates={rates:data.rates,fetchedAt:now,base};
-      persist(false);
-      return data.rates;
-    }
-  }catch(e){}
-  return (S.fxRates&&S.fxRates.rates)||{};
-}
-
-function convertAmount(amount,fromCode,toCode,rates){
-  if(!fromCode||fromCode===toCode||!rates)return amount;
-  const fromRate=rates[fromCode]||1;
-  const toRate=rates[toCode]||1;
-  return amount*(toRate/fromRate);
-}
-
-function fmtFX(amount,itemCurrency){
-  // If item has a different currency, show original + converted
-  const cur=getCurrency();
-  const base=cur.code;
-  if(!itemCurrency||itemCurrency===base)return fmt(amount);
-  const rates=(S.fxRates&&S.fxRates.rates)||{};
-  const converted=convertAmount(amount,itemCurrency,base,rates);
-  const origSym=(CURRENCY_MAP[itemCurrency]&&CURRENCY_MAP[itemCurrency].symbol)||itemCurrency+' ';
-  return origSym+Math.abs(amount).toLocaleString(cur.locale,{minimumFractionDigits:2,maximumFractionDigits:2})+
-         ' <span style="font-size:9px;color:var(--text-muted);">('+fmt(converted)+')</span>';
-}
 
 
 // ══════════════════════════════════════════════

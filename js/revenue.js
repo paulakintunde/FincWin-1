@@ -15,7 +15,7 @@ function renderRevenue(){
     tr.dataset.action='openRevModal';tr.dataset.arg=i;
     tr.title='Click to edit';
     tr.innerHTML=`<td style="font-weight:500;">${esc(item.name)}${item.note?'<div style="font-size:10px;color:var(--text-muted);margin-top:1px;">'+esc(item.note)+'</div>':''}</td>
-      <td class="acol" style="font-family:'Instrument Serif',serif;font-weight:400;">${typeof fmtItemAmount==='function'?fmtItemAmount(amt(item.amount),item.currency):fmt(amt(item.amount))}</td>
+      <td class="acol" style="font-family:'Instrument Serif',serif;font-weight:400;">${typeof fmtItemAmount==='function'?fmtItemAmount(amt(item.amount),item.currency,{monthKey:CMK}):fmt(amt(item.amount))}</td>
       <td class="scol"><button class="stog ${item.received?'paid':'pending'}" data-action="toggleRev" data-arg="${i}" data-stop-prop aria-label="Toggle ${esc(item.name)} received status">${item.received?icon('check',{label:'Received'}):icon('circle',{label:'Pending'})}</button></td>
       <td class="no-print"><button class="del-btn" data-action="openRevModal" data-arg="${i}" data-stop-prop title="Edit income source" aria-label="Edit income source">${icon('edit',{label:'Edit'})}</button></td>`;
     tbody.appendChild(tr);

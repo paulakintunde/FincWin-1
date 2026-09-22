@@ -260,8 +260,8 @@ function _renderExpensesImpl(){
   const today=isCurMonth?new Date().getDate():0; // only flag overdue in current real month
   const grid=document.getElementById('weeksGrid');grid.innerHTML='';
   cw().forEach((week,wi)=>{
-    const wTotal=week.items.reduce((s,i)=>s+_cvt(i.amount,i.currency),0);
-    const wPaid=week.items.filter(i=>i.paid).reduce((s,i)=>s+_cvt(i.amount,i.currency),0);
+    const wTotal=week.items.reduce((s,i)=>s+_cvt(i.amount,i.currency,CMK),0);
+    const wPaid=week.items.filter(i=>i.paid).reduce((s,i)=>s+_cvt(i.amount,i.currency,CMK),0);
     const wPend=wTotal-wPaid;
     const allItemsPaid=week.items.length>0&&week.items.every(i=>i.paid);
     const hasOverdue=week.items.some(i=>i.dueDay&&!i.paid&&i.dueDay<today);
@@ -304,7 +304,7 @@ function _renderExpensesImpl(){
             ${metaRow}
             ${noteHtml}
           </td>
-          <td class="amt-col" style="cursor:pointer;"><span class="ea" data-action="editAmt" data-arg="${wi}" data-arg2="${ii}" data-arg-self title="Click to edit amount inline">${typeof fmtItemAmount==='function'?fmtItemAmount(amt(item.amount),item.currency):fmt(amt(item.amount))}</span></td>
+          <td class="amt-col" style="cursor:pointer;"><span class="ea" data-action="editAmt" data-arg="${wi}" data-arg2="${ii}" data-arg-self title="Click to edit amount inline">${typeof fmtItemAmount==='function'?fmtItemAmount(amt(item.amount),item.currency,{monthKey:CMK}):fmt(amt(item.amount))}</span></td>
           ${!_bulkMode?`<td class="status-col"><button class="stog ${item.paid?'paid':'pending'}" data-action="toggleExp" data-arg="${wi}" data-arg2="${ii}" aria-label="${item.paid?'Paid — click to mark as pending':'Pending — click to mark as paid'}" title="${item.paid?'Paid — click to mark as pending':'Pending — click to mark as paid'}">${item.paid?icon('check',{label:'Paid'}):icon('circle',{label:'Unpaid'})}<span class="stog-lbl">${item.paid?'Paid':'Due'}</span></button></td>`:''}
           ${!_bulkMode?`<td class="action-col no-print">
             <button class="del-btn" data-action="openItemModal" data-arg="${wi}" data-arg2="${ii}" data-stop-prop title="Edit item">${icon('edit',{label:'Edit'})}</button>
@@ -394,8 +394,8 @@ function updateExpRowSurgical(wi, ii){
 
   // 2. Recompute week totals
   const week = cw()[wi];
-  const wTotal = week.items.reduce((s,i)=>s+_cvt(i.amount,i.currency),0);
-  const wPaid  = week.items.filter(i=>i.paid).reduce((s,i)=>s+_cvt(i.amount,i.currency),0);
+  const wTotal = week.items.reduce((s,i)=>s+_cvt(i.amount,i.currency,CMK),0);
+  const wPaid  = week.items.filter(i=>i.paid).reduce((s,i)=>s+_cvt(i.amount,i.currency,CMK),0);
   const wPend  = wTotal - wPaid;
   const allItemsPaid = week.items.length>0 && week.items.every(i=>i.paid);
 

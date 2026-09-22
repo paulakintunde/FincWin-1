@@ -777,16 +777,17 @@ function cr(){return cm().revenue;}
 function cwSafe(wi){const w=cw();return(wi>=0&&wi<w.length)?w[wi]:null;}
 function cm(){return S.months[CMK]||{weeks:[{items:[]},{items:[]},{items:[]},{items:[]}],revenue:[]};}
 
-function _cvt(amount,currency){
-  // Convert amount to home currency for totals (E6). Gracefully no-ops if fx not loaded.
+function _cvt(amount,currency,mk){
+  // Convert amount to home currency for totals (E6). `mk` picks that month's frozen rate.
+  // Foreign amounts with no available rate count as 0 — never as raw home-currency value.
   if(!currency||currency===getCurrency().code)return amt(amount);
-  if(typeof convertToHome==='function'){var r=convertToHome(amt(amount),currency);return r.value;}
-  return amt(amount);
+  if(typeof convertToHome==='function'){var r=convertToHome(amt(amount),currency,mk);return r.noRate?0:r.value;}
+  return 0;
 }
-function totalExp(k){const w=(k?S.months[k]:cm()).weeks;return Math.round(w.reduce((s,wk)=>s+wk.items.reduce((a,i)=>a+_cvt(i.amount,i.currency),0),0)*100)/100;}
-function paidExp(){return Math.round(cw().reduce((s,w)=>s+w.items.filter(i=>i.paid).reduce((a,i)=>a+_cvt(i.amount,i.currency),0),0)*100)/100;}
+function totalExp(k){const mk=k||CMK;const w=(k?S.months[k]:cm()).weeks;return Math.round(w.reduce((s,wk)=>s+wk.items.reduce((a,i)=>a+_cvt(i.amount,i.currency,mk),0),0)*100)/100;}
+function paidExp(){return Math.round(cw().reduce((s,w)=>s+w.items.filter(i=>i.paid).reduce((a,i)=>a+_cvt(i.amount,i.currency,CMK),0),0)*100)/100;}
 function pendExp(){return Math.round((totalExp()-paidExp())*100)/100;}
-function totalRev(k){return Math.round((k?S.months[k]:cm()).revenue.reduce((s,i)=>s+_cvt(i.amount,i.currency),0)*100)/100;}
+function totalRev(k){const mk=k||CMK;return Math.round((k?S.months[k]:cm()).revenue.reduce((s,i)=>s+_cvt(i.amount,i.currency,mk),0)*100)/100;}
 function totalDebt(){return Math.round(S.loans.reduce((s,l)=>s+_cvt(l.amount,l.currency),0)*100)/100;}
 function minPmts(){return Math.round(S.loans.reduce((s,l)=>{
   const mp=_cvt(l.minPayment,l.currency);
@@ -1035,6 +1036,7 @@ function normaliseState(){
   if(S.archiveThreshold===undefined)S.archiveThreshold=6;
   if(!S.currency||!S.currency.code)S.currency={symbol:'$',code:'USD',locale:'en-US'};
   if(!S.fxRates)S.fxRates={rates:{},fetchedAt:0,base:'USD'};
+  if(!S.fxHistory||typeof S.fxHistory!=='object')S.fxHistory={};
   if(S.autoLockMins===undefined)S.autoLockMins=240;
   if(!S.budgetRollover)S.budgetRollover={};
   if(!S.financialGoals)S.financialGoals=[];
