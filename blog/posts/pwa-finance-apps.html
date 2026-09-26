@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PWA Finance Apps: Why Browser-Based Is More Secure — FincWin</title>
-  <meta name="description" content="Progressive Web Apps run in your browser, install to your home screen, and work offline. For personal finance, that architecture is more private and more portable than a native app. Here's why.">
+  <title>PWA Finance Apps: What Browser-Based Means for Your Data — FincWin</title>
+  <meta name="description" content="Progressive Web Apps run in your browser and install to your home screen without an app store. What that architecture means for a personal finance app, and how FincWin uses it.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.fincwin.com/blog/posts/pwa-finance-apps">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.fincwin.com/blog/posts/pwa-finance-apps">
-  <meta property="og:title" content="PWA Finance Apps: Why Browser-Based Is More Secure — FincWin">
-  <meta property="og:description" content="Progressive Web Apps run in your browser, install to your home screen, and work offline. For personal finance, that architecture is more private than a native app.">
+  <meta property="og:title" content="PWA Finance Apps: What Browser-Based Means for Your Data — FincWin">
+  <meta property="og:description" content="Progressive Web Apps run in your browser and install to your home screen without an app store. What that means for a personal finance app.">
   <meta property="og:image" content="https://www.fincwin.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:type" content="image/png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="PWA Finance Apps: Why Browser-Based Is More Secure">
-  <meta name="twitter:description" content="For personal finance, a PWA architecture is more private and more portable than a native app.">
+  <meta name="twitter:title" content="PWA Finance Apps: What Browser-Based Means for Your Data">
+  <meta name="twitter:description" content="How a PWA architecture works for a personal finance app, and how FincWin uses it.">
   <meta name="twitter:image" content="https://www.fincwin.com/og-image.png">
   <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,8 +26,8 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "PWA Finance Apps: Why Browser-Based Is More Secure",
-  "description": "Progressive Web Apps run in your browser, install to your home screen, and work offline. For personal finance, that architecture is more private and more portable than a native app. Here’s why.",
+  "headline": "PWA Finance Apps: What Browser-Based Means for Your Data",
+  "description": "Progressive Web Apps run in your browser and install to your home screen without an app store. What that architecture means for a personal finance app, and how FincWin uses it.",
   "author": {
     "@type": "Organization",
     "name": "FincWin",
@@ -101,8 +101,8 @@
     <span>Tools & Tech</span>
   </nav>
   <span class="post-cat">Tools &amp; Tech</span>
-  <h1 class="post-title">PWA Finance Apps: Why Browser-Based Is Better</h1>
-  <p class="post-intro">A Progressive Web App works in your browser, installs to any device's home screen, and runs offline — all without an App Store, without platform-specific code, and without the privacy trade-offs most native finance apps make. Here's what that means for your financial data.</p>
+  <h1 class="post-title">PWA Finance Apps: What Browser-Based Means for Your Data</h1>
+  <p class="post-intro">A Progressive Web App works in your browser and installs to any device’s home screen — without an app store and without platform-specific code. Here’s what that architecture means for a personal finance app.</p>
   <div class="post-meta">June 2026 · 5 min read</div>
   <div class="post-hero">
     <img src="../../assets/images/blog/mobile-finance-pwa.webp" alt="PWA Finance Apps — personal finance tips on FincWin" class="post-hero-img" loading="lazy" width="1200" height="628">
@@ -129,16 +129,16 @@
     <h3>Transparent code</h3>
     <p>Web app code runs client-side, which means it's inspectable. Anyone can open Developer Tools and see exactly what JavaScript is running, what network requests are being made, and where data is being sent. Native apps are compiled — their code is opaque unless explicitly decompiled.</p>
 
-    <p>This transparency is meaningful for a finance app. You can verify that FincWin's transaction data isn't being sent to a server. The network panel will show you exactly what leaves your device.</p>
+    <p>This transparency is meaningful for a finance app. The network panel shows every request the app makes and where it goes, so you can see which services a web app talks to.</p>
 
-    <h3>Local storage, verifiably</h3>
-    <p>FincWin stores all financial data in your browser's localStorage — on your device, accessible only by fincwin.com. You can verify this directly: open your browser's application storage inspector and see exactly what's stored and by whom. No black box, no "trust us."</p>
+    <h3>Where the data lives</h3>
+    <p>A PWA can keep data in the browser, in an online account, or both. For FincWin, your data lives in your own account, not on your phone alone. FincWin keeps every household’s records isolated from every other household, and lets you export or permanently delete your data at any time.</p>
 
     <h3>No App Store data collection</h3>
     <p>Both the App Store and Google Play require apps to disclose what data they collect — but they can't enforce honesty beyond disclosure. A PWA doesn't go through either store, which also means no mandatory data collection for "analytics" or "crash reporting" required by either platform.</p>
 
     <div class="post-callout">
-      <p><strong>How to install FincWin as a PWA:</strong> On iOS (Safari), visit the app URL and tap "Share → Add to Home Screen." On Android (Chrome), tap the menu and select "Add to Home Screen." On desktop (Chrome/Edge), look for the install icon in the address bar. The app then works exactly like a native app — full screen, offline capable, home screen icon.</p>
+      <p><strong>How to install FincWin as a PWA:</strong> On iOS (Safari), visit the app URL and tap "Share → Add to Home Screen." On Android (Chrome), tap the menu and select "Add to Home Screen." On desktop (Chrome/Edge), look for the install icon in the address bar. The app then works like a native app — full screen, with a home screen icon.</p>
     </div>
 
     <h2>PWA limitations worth knowing</h2>
@@ -153,20 +153,20 @@
 
     <h2>FincWin as a PWA</h2>
 
-    <p>FincWin is a PWA from the ground up — not a native app with a web view. It caches all assets on first load, so subsequent opens are instant even offline. All financial data is stored in localStorage. The service worker handles offline functionality: entering transactions, viewing your budget, checking savings goals, and tracking loan balances all work without any internet connection.</p>
+    <p>FincWin is a PWA from the ground up — not a native app with a web view. The service worker caches the app’s files on first load, so later opens are quick. You sign in to your FincWin account, and the same budget, savings goals and loan balances are there on each device you sign in from.</p>
 
-    <p>The optional Google Drive backup sends an AES-256 encrypted blob — not raw data — to your personal Drive account. FincWin's servers never see the content. Even the Google Drive backup is encrypted with a key that never leaves your device.</p>
+    <p>Your records are stored in your FincWin account and isolated to your household. You can export them or permanently delete them at any time.</p>
 
     <div class="post-cta">
       <h3>Install FincWin to your home screen — <em>no download needed.</em></h3>
-      <p>Open the app URL in your browser, tap "Add to Home Screen," and you have a full finance app that works offline. Free plan, no account required.</p>
+      <p>Open the app URL in your browser, create your account, and tap “Add to Home Screen.” Free plan, no bank login.</p>
       <a href="/signin#register" class="btn-primary">Open FincWin free →</a>
     </div>
 
     <div class="related-posts">
       <h4>Related posts</h4>
       <div class="related-grid">
-        <a href="/blog/posts/offline-personal-finance-apps" class="related-link"><span>Tools &amp; Tech</span><p>Best Offline Personal Finance Apps (No Account Required)</p></a>
+        <a href="/blog/posts/offline-personal-finance-apps" class="related-link"><span>Tools &amp; Tech</span><p>Offline Personal Finance Apps: What to Know Before You Choose</p></a>
         <a href="/compare/ynab-alternative" class="related-link"><span>Tools &amp; Tech</span><p>Best YNAB Alternative in 2026</p></a>
         <a href="/blog/posts/import-bank-statements" class="related-link"><span>Tools &amp; Tech</span><p>How to Import Bank Statements</p></a>
         <a href="/blog/posts/ai-financial-coach" class="related-link"><span>Tools &amp; Tech</span><p>AI Financial Coach: What BYOK Means for Privacy</p></a>
@@ -188,7 +188,7 @@
     </div>
     <hr class="footer-divider">
     <div class="footer-bottom">
-      <p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p>
+      <p class="footer-copy">© <span class="copy-year">2026</span> FincWin. FincWin is a product of Lead Strategy Canada Inc.</p>
       <div class="footer-legal">
         <a href="/privacy">Privacy</a>
         <a href="/terms">Terms</a>

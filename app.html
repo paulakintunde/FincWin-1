@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>FincWin — Financial Win Dashboard</title>
-<meta name="description" content="FincWin is a private, offline-first personal finance dashboard. Track bills, income, loans, and savings — all data stays in your browser.">
+<meta name="description" content="FincWin is a personal finance dashboard. Track bills, income, loans, and savings in your own account.">
 <meta name="robots" content="noindex, nofollow">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="FincWin — Financial Win Dashboard">
-<meta property="og:description" content="Private, offline-first personal finance dashboard. Track bills, income, loans, and savings — all data stays in your browser.">
+<meta property="og:description" content="Personal finance dashboard. Track bills, income, loans, and savings in your own account.">
 <meta property="og:image" content="./icon-180.png">
 <meta property="og:image:alt" content="FincWin logo">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FincWin — Financial Win Dashboard">
-<meta name="twitter:description" content="Private, offline-first personal finance dashboard. Track bills, income, loans, and savings — all data stays in your browser.">
+<meta name="twitter:description" content="Personal finance dashboard. Track bills, income, loans, and savings in your own account.">
 <meta name="twitter:image" content="./icon-180.png">
 <link rel="manifest" href="manifest.json">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' blob:; script-src 'self' 'sha256-ieEn92sbm3d5ynC5UAuzysHSqmki48Th1Nn3lCzbIsI=' https://accounts.google.com https://apis.google.com; script-src-elem 'self' 'sha256-ieEn92sbm3d5ynC5UAuzysHSqmki48Th1Nn3lCzbIsI=' https://accounts.google.com https://apis.google.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.anthropic.com https://api.openai.com https://open.er-api.com https://*.googleapis.com wss://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://identitytoolkit.googleapis.com https://accounts.google.com; frame-src 'self' https://fincwin.firebaseapp.com https://accounts.google.com; object-src 'none'; base-uri 'self'; form-action 'self';">
@@ -205,7 +205,7 @@
     <!-- Step 0: Welcome -->
     <div id="obStep0">
       <div class="ob-h" id="obStepHeading0">Welcome to Financial Win</div>
-      <div class="ob-sub">Your personal finance dashboard — track bills, income, loans, and savings. Everything lives privately in your browser.</div>
+      <div class="ob-sub">Your personal finance dashboard — track bills, income, loans, and savings.</div>
       <button class="ob-btn-primary" data-action="obGoTo" data-arg="1">Get Started &rarr;</button>
       <button class="ob-btn-ghost" data-action="obLoadDemoAndClose" style="margin-top:10px;width:100%;">Explore with demo data &rarr;</button>
       <div style="margin-top:8px;font-size:11.5px;color:var(--text-muted);text-align:center;">See every feature with a rich sample profile — Alex Rivera, Senior Engineer</div>
@@ -464,8 +464,8 @@
 
     <!-- Step 7: Save your data locally -->
     <div id="obStep7" style="display:none;">
-      <div class="ob-h" id="obStepHeading7">Save your data locally</div>
-      <div class="ob-sub">Your data stays on this device — no account or internet needed. In Chrome or Edge you can pick a folder (e.g. Documents) for automatic saving. Other browsers will download a backup file you can keep anywhere.</div>
+      <div class="ob-h" id="obStepHeading7">Save a backup file</div>
+      <div class="ob-sub">Keep your own copy of your data. In Chrome or Edge you can pick a folder (e.g. Documents) for automatic saving. Other browsers will download a backup file you can keep anywhere.</div>
 
       <div class="ob-sync-card ob-sync-active" id="obLocalCard" data-action="obSelectStorage" data-arg="local" style="cursor:pointer;">
         <div class="ob-sync-card-header">
@@ -1534,7 +1534,7 @@
       <div class="settings-row">
         <div>
           <div class="settings-row-label">PIN Lock</div>
-          <div class="settings-row-sub">6-digit PIN protects your data on device</div>
+          <div class="settings-row-sub">6-digit PIN locks FincWin on this device</div>
         </div>
         <div class="settings-row-right">
           <button class="tbtn" data-action="openPinSetup" style="font-size:12px;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="7" width="10" height="8" rx="1"/><path d="M5 7V5a3 3 0 016 0v2"/></svg> Set / Change PIN</button>
@@ -2542,7 +2542,7 @@
   <div class="pmodal" style="max-width:380px;">
     <button class="close-btn" data-action="closeCloudSyncSetup" title="Close" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" y1="4" x2="4" y2="12"/><line x1="4" y1="4" x2="12" y2="12"/></svg></button>
     <h4 id="cloudSyncSetupTitle">Set up Cloud Sync</h4>
-    <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Choose a passphrase to encrypt your data before it's stored in the cloud. <strong>Write it down — it cannot be recovered.</strong> Your data is encrypted on your device; we never see it.</p>
+    <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Choose a passphrase for Cloud Sync. <strong>Write it down — it cannot be recovered.</strong></p>
     <div style="margin-bottom:10px;">
       <label for="cloudPassphraseInput" style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">Passphrase (8+ characters)</label>
       <div style="display:flex;gap:6px;">

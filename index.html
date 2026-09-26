@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free Personal Finance App — FincWin</title>
-  <meta name="description" content="Free budget app that brings income, spending, debt and savings into one view. No bank login, no subscription. Data stays on your device.">
+  <meta name="description" content="Free budget app that brings income, spending, debt and savings into one view. No bank login, no subscription. Your data lives in your own account.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.fincwin.com/">
   <link rel="alternate" hreflang="en" href="https://www.fincwin.com/">
@@ -33,7 +33,7 @@
     "@type": "WebSite",
     "name": "FincWin",
     "url": "https://www.fincwin.com/",
-    "description": "Free personal finance dashboard — budget tracking, debt payoff, savings goals, AI coaching. No bank login. Offline-first.",
+    "description": "Free personal finance dashboard — budget tracking, debt payoff, savings goals, AI coaching. No bank login.",
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
@@ -384,6 +384,7 @@
       font-weight: 400; line-height: 1.1; color: var(--ink);
     }
     .data-header h2 em { font-style: normal; color: var(--sage); }
+    .data-header .data-lead { margin-top: 20px; font-size: 16px; font-weight: 300; color: var(--muted); line-height: 1.7; }
     .data-panels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
     .data-panel {
       border: 1px solid var(--border); border-radius: 14px; padding: 32px 28px;
@@ -590,8 +591,8 @@
         <div class="free-item-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
         </div>
-        <h3>PIN-protected</h3>
-        <p>Your data locked to your device. AES-256 encryption available on all plans.</p>
+        <h3>Your own account</h3>
+        <p>Your data lives in your own account, not on your phone alone. Lock the app with a PIN, and export or permanently delete your data at any time.</p>
       </div>
     </div>
     <p class="free-anchor"><strong>No trial period. No expiry.</strong> Start using FincWin today and upgrade only if you want more.</p>
@@ -871,7 +872,6 @@
           <span class="amount pro-price" id="proPrice">$39</span><span class="period" id="proPeriod">/year</span>
         </div>
         <div class="card-tagline">Full access, billed annually. <span id="proAltPrice" style="color:var(--muted)">Or $4.99/month.</span></div>
-        <a href="https://REPLACE_WITH_LS_PRO_ANNUAL_CHECKOUT_URL" class="card-cta pro-cta" id="proCtaBtn" target="_blank" rel="noopener">Get Pro — $39/yr</a>
         <ul class="card-features">
           <li class="section-head">Everything in Free, plus:</li>
           <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited history</li>
@@ -894,7 +894,6 @@
           <span class="amount">$149</span>
         </div>
         <div class="card-tagline">One payment. All future features. No renewals.</div>
-        <a href="https://REPLACE_WITH_LS_LIFETIME_CHECKOUT_URL" class="card-cta life-cta" target="_blank" rel="noopener">Get Lifetime — $149</a>
         <ul class="card-features">
           <li class="section-head">Everything in Pro, plus:</li>
           <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> All future features included</li>
@@ -910,7 +909,7 @@
     <div class="pricing-trust">
       <span>30-day refund — no questions asked</span>
       <span>Secure payment via Lemon Squeezy</span>
-      <span>Your budgets &amp; expenses stay on your device — Pro sync is end-to-end encrypted</span>
+      <span>Export or permanently delete your data at any time</span>
     </div>
   </div>
 </section>
@@ -920,29 +919,30 @@
   <div class="section-inner">
     <div class="data-header">
       <span class="section-label">Your data — plainly explained</span>
-      <h2>What stays on your device.<br><em>What doesn't. And why.</em></h2>
+      <h2>Where your data lives.<br><em>And what you control.</em></h2>
+      <p class="data-lead">Your data lives in your own account, not on your phone alone. FincWin keeps every household’s records isolated from every other household, and lets you export or permanently delete your data at any time.</p>
     </div>
     <div class="data-panels">
       <div class="data-panel">
-        <div class="data-panel-icon device">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        <div class="data-panel-icon cloud">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
         </div>
-        <h3>Financial data — stays local</h3>
-        <p>Your budgets, expenses, loan details, savings goals — everything financial — lives in your browser's local storage. It is never transmitted to FincWin or any backend. We can't see it. We don't have it.</p>
+        <h3>Held in your account</h3>
+        <p>Your budgets, expenses, loan details and savings goals are stored in FincWin’s database, operated by Lead Strategy Canada Inc, and tied to your sign-in. FincWin does not connect to your bank; every record is one you enter or import yourself.</p>
       </div>
       <div class="data-panel">
         <div class="data-panel-icon account">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
         </div>
-        <h3>Account data — external, minimal</h3>
-        <p>To restore your licence on a new device, we store your email address, licence key, display name, and plan in a secure database. This is the minimum needed to manage your account. It contains nothing financial.</p>
+        <h3>Isolated by household</h3>
+        <p>Every household’s records are kept separate from every other household’s. Alongside them, FincWin holds your email address, display name, licence key and plan, which it needs to run your account.</p>
       </div>
       <div class="data-panel">
-        <div class="data-panel-icon cloud">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+        <div class="data-panel-icon device">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         </div>
-        <h3>Cloud sync (Pro) — encrypted, optional</h3>
-        <p>Pro adds cloud sync across your devices. Your financial data is encrypted on your device before it reaches Google Drive — neither Google nor FincWin can read it, only your licence key can decrypt it. The Free plan stays fully local.</p>
+        <h3>Export or delete, any time</h3>
+        <p>Download a copy of your data whenever you like, or delete it permanently.</p>
       </div>
     </div>
     <p class="data-anchor">No advertising. No data brokering. No selling your usage patterns. <em>FincWin is a product you pay for, not a product you are.</em></p>
@@ -976,7 +976,7 @@
     </div>
     <hr class="footer-divider">
     <div class="footer-bottom">
-      <p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p>
+      <p class="footer-copy">© <span class="copy-year">2026</span> FincWin. FincWin is a product of Lead Strategy Canada Inc.</p>
       <div class="footer-legal">
         <a href="/privacy">Privacy</a>
         <a href="/terms">Terms</a>

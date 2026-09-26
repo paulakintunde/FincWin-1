@@ -4,9 +4,10 @@
 (function () {
   'use strict';
 
-  // LemonSqueezy checkout URLs — replace with real variant URLs before going live
-  var LS_PRO_ANNUAL  = 'https://REPLACE_WITH_LS_PRO_ANNUAL_CHECKOUT_URL';
-  var LS_PRO_MONTHLY = 'https://REPLACE_WITH_LS_PRO_MONTHLY_CHECKOUT_URL';
+  // LemonSqueezy checkout URLs. The Pro button is omitted from index.html
+  // until these are set; re-add <a id="proCtaBtn" class="card-cta pro-cta">.
+  var LS_PRO_ANNUAL  = '';
+  var LS_PRO_MONTHLY = '';
 
   // Billing toggle
   function setBilling(type) {

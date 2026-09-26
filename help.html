@@ -43,7 +43,7 @@
       { "@type": "HowToStep", "position": 5, "name": "Add loans and debts", "text": "Add any outstanding loans with balance, interest rate, and minimum payment. Skip if you have none." },
       { "@type": "HowToStep", "position": 6, "name": "Add savings goals", "text": "Add savings accounts or goals with target amount, current balance, and monthly contribution." },
       { "@type": "HowToStep", "position": 7, "name": "Set a PIN", "text": "Set a 6-digit PIN and an optional recovery passphrase to protect your financial data." },
-      { "@type": "HowToStep", "position": 8, "name": "Choose data storage", "text": "Choose where your data lives: Local File (default), Google Drive, or Firebase cloud sync." },
+      { "@type": "HowToStep", "position": 8, "name": "Choose a storage option", "text": "Pick one of the storage options shown (Local File, Google Drive or Cloud Sync). You can change this any time in Settings." },
       { "@type": "HowToStep", "position": 9, "name": "Open dashboard", "text": "Click Open Dashboard. Your dashboard is ready with this month pre-populated." }
     ]
   }
@@ -56,17 +56,17 @@
       {
         "@type": "Question",
         "name": "Is my data safe? Does FincWin send it anywhere?",
-        "acceptedAnswer": { "@type": "Answer", "text": "By default, all data lives entirely in your browser's local storage and IndexedDB. Nothing is sent to any server. Cloud Sync (Firebase) and Google Drive sync are opt-in and encrypt all data before it ever leaves your device. AI Coach calls send only a financial summary — never raw transaction names." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Your data lives in your own account, not on your phone alone. FincWin keeps every household’s records isolated from every other household, and lets you export or permanently delete your data at any time. AI Coach calls send only a financial summary — never raw transaction names — directly to the AI provider you choose." }
       },
       {
         "@type": "Question",
         "name": "I forgot my PIN — how do I get back in?",
-        "acceptedAnswer": { "@type": "Answer", "text": "If you set a recovery passphrase when creating the PIN, use the Forgot PIN? Use recovery passphrase option on the lock screen (appears after 10 failed attempts). If not, you'll need to clear app data from your browser settings (this erases all FincWin data). This is why regular JSON backups are important." }
+        "acceptedAnswer": { "@type": "Answer", "text": "If you set a recovery passphrase when creating the PIN, use the Forgot PIN? Use recovery passphrase option on the lock screen (appears after 10 failed attempts). If not, you’ll need to clear FincWin’s site data in your browser settings, which removes the PIN from that browser, then sign in again. Regular JSON exports give you your own copy of your data." }
       },
       {
         "@type": "Question",
-        "name": "Can I use FincWin offline?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. FincWin is a Progressive Web App (PWA) with a service worker that caches all assets. After your first visit, it works fully offline. Install it to your home screen for the best experience." }
+        "name": "Does FincWin need an internet connection?",
+        "acceptedAnswer": { "@type": "Answer", "text": "FincWin is a Progressive Web App (PWA) with a service worker that caches the app’s files, so it opens quickly after your first visit. Your records are stored in your FincWin account, and changes sync to your account when you’re connected. Install it to your home screen for the best experience." }
       },
       {
         "@type": "Question",
@@ -76,7 +76,7 @@
       {
         "@type": "Question",
         "name": "Will my data transfer if I clear my browser?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Clearing browser storage will erase local FincWin data. Always download a JSON backup before clearing. If you use Google Drive or Firebase Cloud Sync, your data is safe in the cloud and will re-sync on next open." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Your records are stored in your FincWin account, not only in your browser. After clearing your browser, sign in again to see your data. Download a JSON backup regularly if you want your own copy." }
       },
       {
         "@type": "Question",
@@ -250,7 +250,7 @@
       <div class="sidebar-heading">Data &amp; Privacy</div>
       <a href="#sync">Cloud, Drive &amp; File Sync</a>
       <a href="#archive">Archive &amp; Months</a>
-      <a href="#security">PIN &amp; Encryption</a>
+      <a href="#security">PIN &amp; Passphrase</a>
       <a href="#backup">Backup &amp; Export</a>
     </div>
     <div class="sidebar-section">
@@ -274,7 +274,7 @@
     <div class="help-hero">
       <div class="eyebrow">User Guide · All Features</div>
       <h1>Everything FincWin does,<br><em>explained.</em></h1>
-      <p>This guide covers every feature with step-by-step instructions. Use the sidebar to jump to any section. All your data stays on your device — no account required.</p>
+      <p>This guide covers every feature with step-by-step instructions. Use the sidebar to jump to any section. Your data lives in your own account, not on your phone alone. FincWin keeps every household’s records isolated from every other household, and lets you export or permanently delete your data at any time.</p>
     </div>
 
     <!-- ── GETTING STARTED ────────────────────────────────────────────── -->
@@ -294,7 +294,7 @@
             <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Step 4 — Loans &amp; debts.</strong> Add any outstanding loans with balance, interest rate, and minimum payment. Skip if you have none.</div></div>
             <div class="step"><div class="step-num">6</div><div class="step-text"><strong>Step 5 — Savings goals.</strong> Add savings accounts or goals with target amount, current balance, and monthly contribution.</div></div>
             <div class="step"><div class="step-num">7</div><div class="step-text"><strong>Step 6 — Protect your data.</strong> Set a 6-digit PIN and an optional recovery passphrase. You can skip this and enable it later in Settings.</div></div>
-            <div class="step"><div class="step-num">8</div><div class="step-text"><strong>Step 7 — Save your data locally.</strong> Choose where your data lives: Local File (default), Google Drive, or Firebase cloud sync. You can change this any time in Settings.</div></div>
+            <div class="step"><div class="step-num">8</div><div class="step-text"><strong>Step 7 — Storage option.</strong> Pick one of the storage options shown (Local File, Google Drive or Cloud Sync). You can change this any time in Settings.</div></div>
             <div class="step"><div class="step-num">9</div><div class="step-text">Click <strong>Open Dashboard</strong>. Your dashboard is ready with this month pre-populated.</div></div>
           </div>
           <div class="tip"><div class="tip-icon">💡</div><div class="tip-text"><strong>Skip the wizard.</strong> On the welcome screen, click <strong>"Explore with demo data →"</strong> to load a rich sample profile instantly and see every feature in action.</div></div>
@@ -760,8 +760,8 @@
     <!-- ── AI COACH ───────────────────────────────────────────────────── -->
     <section class="help-section" id="ai-coach">
       <div class="section-badge">14 — AI Finance Coach</div>
-      <h2>Your personal <em>finance advisor</em></h2>
-      <p class="section-intro">FincWin integrates with Claude (Anthropic) and GPT-4o (OpenAI) so you can ask plain-English questions about your finances. The AI Coach lives in the Analytics tab. You supply your own API key — no data leaves your device through FincWin's servers.</p>
+      <h2>Ask questions about <em>your finances</em></h2>
+      <p class="section-intro">FincWin integrates with Claude (Anthropic) and GPT-4o (OpenAI) so you can ask plain-English questions about your finances. The AI Coach lives in the Analytics tab. You supply your own API key, and requests go directly from the app to the AI provider.</p>
 
       <div class="feature-grid">
         <div class="feature-card"><div class="feature-card-name">General Insights</div><div class="feature-card-desc">A broad overview of your financial health and key opportunities.</div></div>
@@ -778,7 +778,7 @@
           <div class="steps">
             <div class="step"><div class="step-num">1</div><div class="step-text">Go to the <strong>Analytics</strong> tab and scroll to the <strong>AI Financial Coach</strong> section.</div></div>
             <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>Connect Claude</strong> or <strong>connect GPT-4o</strong>.</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">Paste your API key. Keys are stored encrypted in your browser's IndexedDB — never in plain localStorage.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Paste your API key. It’s used only to call the AI provider you chose.</div></div>
             <div class="step"><div class="step-num">4</div><div class="step-text">Click one of the <strong>Quick Analysis</strong> mode buttons, or type a free-form question in the text field and click <strong>Ask</strong>.</div></div>
           </div>
           <div class="tip"><div class="tip-icon">💡</div><div class="tip-text">The AI coach receives a <strong>summary of your financial data</strong> as context — your totals, loan balances, and category spend — but never raw transaction names. Your privacy is protected.</div></div>
@@ -790,7 +790,7 @@
     <section class="help-section" id="sync">
       <div class="section-badge">15 — Cloud, Drive &amp; File Sync</div>
       <h2>Your data, <em>everywhere</em></h2>
-      <p class="section-intro">By default FincWin stores data in your browser. For multi-device access choose from three sync options: a Local Folder (auto-save to disk), Google Drive (OAuth), or Firebase Cloud Sync (encrypted). All three are in Settings → Cloud &amp; File.</p>
+      <p class="section-intro">Your records are stored in your FincWin account. Settings → Cloud &amp; File also offers three further options: a Local Folder (auto-save a copy to disk), Google Drive (OAuth) and Cloud Sync.</p>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">How to link a local folder (Chrome / Edge)</div></div>
@@ -820,10 +820,10 @@
         <div class="howto-body">
           <div class="steps">
             <div class="step"><div class="step-num">1</div><div class="step-text">Go to <strong>Settings → Cloud &amp; File → Cloud Sync</strong> and click <strong>Set up</strong>.</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Enter a <strong>passphrase</strong>. All data is encrypted with this passphrase before leaving your device. <em>You must remember this — it cannot be recovered.</em></div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Enter a <strong>passphrase</strong>. You’ll need the same passphrase on every device you set up. <em>You must remember this — it cannot be recovered.</em></div></div>
             <div class="step"><div class="step-num">3</div><div class="step-text">On a second device, open FincWin → Settings → Cloud &amp; File, enable cloud sync, and enter the <strong>same passphrase</strong>. Your data will sync automatically.</div></div>
           </div>
-          <div class="warn"><div class="warn-icon">⚠️</div><div class="warn-text"><strong>Remember your passphrase.</strong> If you forget it, your cloud data cannot be decrypted by anyone — including us. Store it safely.</div></div>
+          <div class="warn"><div class="warn-icon">⚠️</div><div class="warn-text"><strong>Remember your passphrase.</strong> It can’t be recovered, and you’ll need it to set up Cloud Sync on another device. Store it safely.</div></div>
         </div>
       </div>
     </section>
@@ -867,9 +867,9 @@
 
     <!-- ── SECURITY ───────────────────────────────────────────────────── -->
     <section class="help-section" id="security">
-      <div class="section-badge">17 — PIN &amp; Encryption</div>
+      <div class="section-badge">17 — PIN &amp; Passphrase</div>
       <h2>Protecting <em>your data</em></h2>
-      <p class="section-intro">FincWin uses a 6-digit PIN lock and AES-GCM encryption. Your PIN is the key — enable it in Settings or via the lock icon in the top bar. A session token means you won't be re-asked on every page refresh within the same tab session.</p>
+      <p class="section-intro">FincWin offers an optional 6-digit PIN lock with an optional recovery passphrase. Enable it in Settings or via the lock icon in the top bar. A session token means you won't be re-asked on every page refresh within the same tab session.</p>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">How to set a PIN</div></div>
@@ -1075,17 +1075,17 @@
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">Is my data safe? Does FincWin send it anywhere?</div></div>
-        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">By default, all data lives entirely in your browser's local storage and IndexedDB. Nothing is sent to any server. Cloud Sync (Firebase) and Google Drive sync are opt-in and encrypt all data before it ever leaves your device. AI Coach calls send only a financial summary — never raw transaction names.</p></div>
+        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">Your data lives in your own account, not on your phone alone. FincWin keeps every household’s records isolated from every other household, and lets you export or permanently delete your data at any time. AI Coach calls send only a financial summary — never raw transaction names — directly to the AI provider you choose.</p></div>
       </div>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">I forgot my PIN — how do I get back in?</div></div>
-        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">If you set a recovery passphrase when creating the PIN, use the <strong>Forgot PIN? Use recovery passphrase</strong> option on the lock screen (appears after 10 failed attempts). If not, you'll need to clear app data from your browser settings (this erases all FincWin data). This is why regular JSON backups are important.</p></div>
+        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">If you set a recovery passphrase when creating the PIN, use the <strong>Forgot PIN? Use recovery passphrase</strong> option on the lock screen (appears after 10 failed attempts). If not, you’ll need to clear FincWin’s site data in your browser settings, which removes the PIN from that browser, then sign in again. Regular JSON exports give you your own copy of your data.</p></div>
       </div>
 
       <div class="howto">
-        <div class="howto-header"><div class="howto-title">Can I use FincWin offline?</div></div>
-        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">Yes. FincWin is a Progressive Web App (PWA) with a service worker that caches all assets. After your first visit, it works fully offline. Install it to your home screen for the best experience.</p></div>
+        <div class="howto-header"><div class="howto-title">Does FincWin need an internet connection?</div></div>
+        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">FincWin is a Progressive Web App (PWA) with a service worker that caches the app’s files, so it opens quickly after your first visit. Your records are stored in your FincWin account, and changes sync to your account when you’re connected. Install it to your home screen for the best experience.</p></div>
       </div>
 
       <div class="howto">
@@ -1101,12 +1101,12 @@
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">Will my data transfer if I clear my browser?</div></div>
-        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">Clearing browser storage will erase local FincWin data. Always download a JSON backup before clearing. If you use Google Drive or Firebase Cloud Sync, your data is safe in the cloud and will re-sync on next open.</p></div>
+        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">Your records are stored in your FincWin account, not only in your browser. After clearing your browser, sign in again to see your data. Download a JSON backup regularly if you want your own copy.</p></div>
       </div>
 
       <div class="howto">
         <div class="howto-header"><div class="howto-title">Why does my PIN get asked every time I refresh?</div></div>
-        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">FincWin uses a session token in <code>sessionStorage</code> so the PIN is only required once per tab session. If you're still prompted on every refresh, go to <strong>Settings → Security → Skip PIN on page refresh</strong> and toggle it on. When that setting is off, the encrypted DEK is not persisted between loads, providing higher security at the cost of convenience.</p></div>
+        <div class="howto-body"><p style="font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;">FincWin uses a session token in <code>sessionStorage</code> so the PIN is only required once per tab session. If you're still prompted on every refresh, go to <strong>Settings → Security → Skip PIN on page refresh</strong> and toggle it on. When that setting is off, you’ll be asked for your PIN after each reload.</p></div>
       </div>
     </section>
 
@@ -1126,7 +1126,7 @@
     </div>
     <hr class="footer-divider">
     <div class="footer-bottom">
-      <p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p>
+      <p class="footer-copy">© <span class="copy-year">2026</span> FincWin. FincWin is a product of Lead Strategy Canada Inc.</p>
       <div class="footer-legal">
         <a href="/privacy">Privacy</a>
         <a href="/terms">Terms</a>

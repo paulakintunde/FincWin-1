@@ -1,7 +1,7 @@
 {
   "name": "Financial Win — Personal Finance",
   "short_name": "FincWin",
-  "description": "Private, offline-first personal finance dashboard — track bills, income, loans and savings.",
+  "description": "Personal finance dashboard — track bills, income, loans and savings in your own account.",
   "start_url": "/app",
   "scope": "/",
   "id": "/app",

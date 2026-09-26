@@ -2,9 +2,10 @@
 // Extracted from inline script to comply with CSP script-src 'self' policy.
 
 // ── Checkout URLs — replace with your real LemonSqueezy variant URLs ────────
-var LS_PRO_ANNUAL_URL  = 'https://REPLACE_WITH_LS_PRO_ANNUAL_CHECKOUT_URL';
-var LS_PRO_MONTHLY_URL = 'https://REPLACE_WITH_LS_PRO_MONTHLY_CHECKOUT_URL';
-var LS_LIFETIME_URL    = 'https://REPLACE_WITH_LS_LIFETIME_CHECKOUT_URL';
+// Upgrade links stay hidden while these are empty. Set real LemonSqueezy URLs to enable them.
+var LS_PRO_ANNUAL_URL  = '';
+var LS_PRO_MONTHLY_URL = '';
+var LS_LIFETIME_URL    = '';
 
 // ── Auth ────────────────────────────────────────────────────────────────────
 // Account-first freemium model: ANY signed-in user may view this page.
@@ -211,7 +212,7 @@ function renderFreeState() {
     { label: 'Loan Calculator',   on: true  },
     { label: 'CSV Import',         on: true  },
     { label: 'Basic Export',       on: true  },
-    { label: 'On-device Backup',   on: true  },
+    { label: 'Backup & Restore',   on: true  },
     { label: 'Cloud Sync',         on: false },
     { label: 'AI Coach',           on: false },
     { label: 'Advanced Reports',   on: false },
@@ -227,7 +228,7 @@ function renderFreeState() {
   document.getElementById('plan-badge-text').textContent = 'Free';
   document.getElementById('plan-name').textContent       = 'FincWin Free';
   document.getElementById('plan-note').textContent =
-    'Your data stays on this device. Upgrade to Pro for cloud sync across all your devices.';
+    'Upgrade to Pro to use FincWin across all your devices.';
   document.getElementById('plan-card-sub').textContent = 'Free forever — no card, no expiry.';
 
   ['chip-custom-cats', 'chip-5-devices', 'chip-desktop'].forEach(id => {
@@ -237,7 +238,7 @@ function renderFreeState() {
   // Upgrade box → Pro (not Lifetime) for free users
   const upBox = document.getElementById('upgrade-box');
   if (upBox) {
-    upBox.style.display = '';
+    upBox.style.display = LS_PRO_ANNUAL_URL ? '' : 'none';
     const strong  = upBox.querySelector('strong');
     const firstP  = upBox.querySelector('p');
     const upBtn   = upBox.querySelector('.btn-upgrade');
@@ -275,7 +276,7 @@ function renderFreeState() {
       <span class="device-current">This device</span>
     </div>`;
   const devUpgrade = document.getElementById('devices-upgrade-link');
-  if (devUpgrade) {
+  if (devUpgrade && LS_PRO_ANNUAL_URL) {
     devUpgrade.style.display = '';
     devUpgrade.innerHTML = 'Want your budget on every device? <a href="' + LS_PRO_ANNUAL_URL + '" class="link-sage" target="_blank" rel="noopener">Upgrade to Pro</a> for cloud sync across all devices.';
   }
@@ -382,7 +383,7 @@ function renderPlan(data) {
   // upgrade-box (inline teaser inside Current Plan card): hide for Lifetime/expired
   const upBoxEl  = document.getElementById('upgrade-box');
   const upBtnEl  = upBoxEl ? upBoxEl.querySelector('.btn-upgrade') : null;
-  if (upBoxEl) upBoxEl.style.display = isLife || isExpired ? 'none' : '';
+  if (upBoxEl) upBoxEl.style.display = isLife || isExpired || !LS_LIFETIME_URL ? 'none' : '';
   if (upBtnEl && !isLife && !isExpired) {
     upBtnEl.href    = LS_LIFETIME_URL;
     upBtnEl.target  = '_blank';
@@ -496,7 +497,7 @@ function renderDevices(data) {
   document.getElementById('device-list').innerHTML = html;
   const devUpgradeEl = document.getElementById('devices-upgrade-link');
   if (devUpgradeEl) {
-    devUpgradeEl.style.display = limit >= 5 ? 'none' : '';
+    devUpgradeEl.style.display = limit >= 5 || !LS_LIFETIME_URL ? 'none' : '';
     if (limit < 5) {
       devUpgradeEl.innerHTML = 'Need more activations? <a href="' + LS_LIFETIME_URL + '" class="link-sage" target="_blank" rel="noopener">Upgrade to Lifetime</a> for 5 devices.';
     }

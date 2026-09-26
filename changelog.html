@@ -56,7 +56,7 @@
     <ul class="cl-items">
       <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>PWA install banner:</strong> Smart install prompt above the top bar — appears on first visit and dismisses permanently once installed or declined.</span></li>
       <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag fix">Fix</span></span><span><strong>Achievement badge displacement:</strong> Badges were misaligning in the gamification panel after a page refresh. Now stable on all screen sizes.</span></li>
-      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag fix">Fix</span></span><span><strong>PIN on every refresh:</strong> Encrypted users were being asked for PIN on every page load. Root cause was non-extractable DEK; resolved — PIN now fires correctly on session open only.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag fix">Fix</span></span><span><strong>PIN on every refresh:</strong> Users with a PIN lock were being asked for their PIN on every page load. Resolved — the PIN prompt now appears on session open only.</span></li>
       <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag fix">Fix</span></span><span><strong>Demo profile investment values:</strong> Investment balances in demo profiles were displaying as zero due to a field name mismatch. Corrected.</span></li>
       <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag improve">Improve</span></span><span><strong>Dashboard layout:</strong> Smart Insights moved to the left column below Monthly Net Flow chart — better visual hierarchy and context.</span></li>
     </ul>
@@ -69,7 +69,7 @@
       <span class="cl-tag new">New</span>
     </div>
     <ul class="cl-items">
-      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>AI coaching (BYOK):</strong> Connect your OpenAI or Anthropic API key and ask questions about your own financial data. All conversations go directly from your browser to the AI provider — FincWin never handles the content.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>AI coaching (BYOK):</strong> Connect your OpenAI or Anthropic API key and ask questions about your own financial data. Requests go directly from the app to the AI provider you choose.</span></li>
       <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Health score v2:</strong> Rebuilt the financial health score with six weighted dimensions. Score now updates in real time as data changes and shows per-dimension breakdown.</span></li>
       <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Lifetime plan:</strong> One-time $149 payment for permanent Pro access. No annual renewal, no price increases.</span></li>
       <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag improve">Improve</span></span><span><strong>CSV import (Pro):</strong> Column mapping step added to handle bank-specific CSV formats. Now supports date format selection and debit/credit split columns.</span></li>
@@ -103,7 +103,7 @@
       <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Multi-currency support:</strong> Set a base currency, log income and expenses in any currency with exchange rate entry, view consolidated totals in base currency.</span></li>
       <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag improve">Improve</span></span><span><strong>Envelope UI:</strong> Redesigned budget envelopes with animated progress bars, remaining amount display, and colour indicators (green / amber / red) based on percentage used.</span></li>
       <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag improve">Improve</span></span><span><strong>Income frequency:</strong> Added semi-monthly as a 5th income frequency alongside weekly, biweekly, monthly, and custom.</span></li>
-      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag fix">Fix</span></span><span><strong>Offline sync queue:</strong> Transactions logged offline were occasionally duplicating on reconnect. Resolved with idempotency key on the sync queue.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag fix">Fix</span></span><span><strong>Sync queue:</strong> Transactions logged during a lost connection were occasionally duplicating on reconnect. Resolved with an idempotency key on the sync queue.</span></li>
     </ul>
   </div>
 
@@ -115,7 +115,7 @@
     </div>
     <ul class="cl-items">
       <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Complete UI redesign:</strong> New design system with Hanken Grotesk + Instrument Serif, sage colour palette, and refined data visualisations.</span></li>
-      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>AES-256 encryption:</strong> Optional full encryption of local data with a PIN-derived key. Drive backups encrypted end-to-end.</span></li>
+      <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Passphrase lock:</strong> Optional passphrase protection for your data.</span></li>
       <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Pro plan launch:</strong> $39/year Pro with CSV import, loan payoff planner, AI coaching, and full investment tracking. Free plan remains unlimited on core features.</span></li>
       <li class="cl-item"><span class="cl-item-tag"><span class="cl-tag new">New</span></span><span><strong>Loan snowball/avalanche:</strong> Multi-loan payoff planner with strategy comparison and real-time extra payment modelling.</span></li>
     </ul>
@@ -140,7 +140,7 @@
     </div>
     <hr class="footer-divider">
     <div class="footer-bottom">
-      <p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p>
+      <p class="footer-copy">© <span class="copy-year">2026</span> FincWin. FincWin is a product of Lead Strategy Canada Inc.</p>
       <div class="footer-legal">
         <a href="/privacy">Privacy</a>
         <a href="/terms">Terms</a>

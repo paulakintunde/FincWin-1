@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Financial Coach: What BYOK Means for Privacy — FincWin</title>
-  <meta name="description" content="FincWin's AI coaching uses BYOK — Bring Your Own Key. Your OpenAI or Anthropic key connects directly to the AI. FincWin never handles your conversations or stores your financial questions.">
+  <meta name="description" content="FincWin's AI coaching uses BYOK — Bring Your Own Key. Your OpenAI or Anthropic key connects directly to the AI provider, and requests go from the app straight to that provider.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.fincwin.com/blog/posts/ai-financial-coach">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.fincwin.com/blog/posts/ai-financial-coach">
   <meta property="og:title" content="AI Financial Coach: What BYOK Means for Privacy — FincWin">
-  <meta property="og:description" content="FincWin's AI coaching uses BYOK — Bring Your Own Key. Your key connects directly to the AI. FincWin never handles your conversations or stores your financial questions.">
+  <meta property="og:description" content="FincWin's AI coaching uses BYOK — Bring Your Own Key. Your key connects directly to the AI provider, and requests go from the app straight to that provider.">
   <meta property="og:image" content="https://www.fincwin.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -27,7 +27,7 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "AI Financial Coach: What BYOK Means for Privacy",
-  "description": "FincWin’s AI coaching uses BYOK — Bring Your Own Key. Your OpenAI or Anthropic key connects directly to the AI. FincWin never handles your conversations or stores your financial questions.",
+  "description": "FincWin’s AI coaching uses BYOK — Bring Your Own Key. Your OpenAI or Anthropic key connects directly to the AI provider, and requests go from the app straight to that provider.",
   "author": {
     "@type": "Organization",
     "name": "FincWin",
@@ -102,7 +102,7 @@
   </nav>
   <span class="post-cat">Tools &amp; Tech</span>
   <h1 class="post-title">AI Financial Coach: What BYOK Means for Privacy</h1>
-  <p class="post-intro">Most "AI financial advice" features pipe your financial data through the app provider's server to an AI model. FincWin's AI coaching uses BYOK — Bring Your Own Key — so conversations go directly from your browser to OpenAI or Anthropic. FincWin never sees them.</p>
+  <p class="post-intro">Most "AI financial advice" features pipe your financial data through the app provider's server to an AI model. FincWin's AI coaching uses BYOK — Bring Your Own Key — so questions go directly from the app to OpenAI or Anthropic, under your own agreement with that provider.</p>
   <div class="post-meta">June 2026 · 6 min read</div>
   <div class="post-hero">
     <img src="../../assets/images/blog/ai-finance-coach.webp" alt="AI Financial Coach — personal finance tips on FincWin" class="post-hero-img" loading="lazy" width="1200" height="628">
@@ -119,9 +119,9 @@
 
     <div class="flow-steps">
       <div class="flow-step"><div class="step-num">1</div><div class="step-body"><h4>You create an API key</h4><p>Log in to your OpenAI or Anthropic account and generate an API key. This key is the credential that authenticates requests to the AI model.</p></div></div>
-      <div class="flow-step"><div class="step-num">2</div><div class="step-body"><h4>You add the key in FincWin settings</h4><p>FincWin stores your key in your browser's localStorage — on your device. It never transmits your key to FincWin's servers.</p></div></div>
+      <div class="flow-step"><div class="step-num">2</div><div class="step-body"><h4>You add the key in FincWin settings</h4><p>You paste the key into FincWin’s AI settings. It’s used only to call the AI provider you chose.</p></div></div>
       <div class="flow-step"><div class="step-num">3</div><div class="step-body"><h4>When you ask a question, the request goes directly to OpenAI or Anthropic</h4><p>Your browser sends the request directly to the AI provider's API. FincWin's servers are not in this path. The conversation goes from you → OpenAI/Anthropic → you.</p></div></div>
-      <div class="flow-step"><div class="step-num">4</div><div class="step-body"><h4>FincWin adds your budget context</h4><p>FincWin appends a summary of your financial data to the request — income, expense categories, loan balances, savings goal progress — so the AI can give contextual answers. This context is assembled locally and sent directly to the AI, not to FincWin.</p></div></div>
+      <div class="flow-step"><div class="step-num">4</div><div class="step-body"><h4>FincWin adds your budget context</h4><p>FincWin appends a summary of your financial data to the request — income, expense categories, loan balances, savings goal progress — so the AI can give contextual answers. This context is assembled in the app and sent with your question directly to the AI provider.</p></div></div>
     </div>
 
     <h2>Why this matters for financial conversations</h2>
@@ -175,9 +175,9 @@
     <div class="related-posts">
       <h4>Related posts</h4>
       <div class="related-grid">
-        <a href="/blog/posts/pwa-finance-apps" class="related-link"><span>Tools &amp; Tech</span><p>PWA Finance Apps: Why Browser-Based Is More Secure</p></a>
+        <a href="/blog/posts/pwa-finance-apps" class="related-link"><span>Tools &amp; Tech</span><p>PWA Finance Apps: What Browser-Based Means for Your Data</p></a>
         <a href="/blog/posts/financial-health-score" class="related-link"><span>Mindset</span><p>Your Financial Health Score: What It Means</p></a>
-        <a href="/blog/posts/offline-personal-finance-apps" class="related-link"><span>Tools &amp; Tech</span><p>Best Offline Personal Finance Apps</p></a>
+        <a href="/blog/posts/offline-personal-finance-apps" class="related-link"><span>Tools &amp; Tech</span><p>Offline Personal Finance Apps: What to Know Before You Choose</p></a>
         <a href="/compare/ynab-alternative" class="related-link"><span>Tools &amp; Tech</span><p>Best YNAB Alternative in 2026</p></a>
       </div>
     </div>
@@ -197,7 +197,7 @@
     </div>
     <hr class="footer-divider">
     <div class="footer-bottom">
-      <p class="footer-copy">© <span class="copy-year">2026</span> FincWin.</p>
+      <p class="footer-copy">© <span class="copy-year">2026</span> FincWin. FincWin is a product of Lead Strategy Canada Inc.</p>
       <div class="footer-legal">
         <a href="/privacy">Privacy</a>
         <a href="/terms">Terms</a>
